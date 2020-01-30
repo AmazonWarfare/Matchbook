@@ -13,8 +13,10 @@
   transition-duration: .2s;
   background: $orange-red;
   color: $white;
+  cursor: pointer;
 }
 
 .button:active {
   background: $red;
+  cursor: pointer;
 }

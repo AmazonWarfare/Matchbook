@@ -11,7 +11,7 @@ const Fade = (WrappedComponent) => {
                     transitionName="fade"
                     transitionAppear={true}
                     transitionAppearTimeout={500}
-                    transitionLeaveTimeout={1000}>
+                    transitionLeaveTimeout={500}>
                     <WrappedComponent {...this.props} key={1}/>
                 </CSSTransitionGroup>
             );

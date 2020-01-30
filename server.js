@@ -7,6 +7,7 @@ const app = express();
 //add body parser middleware to server
 app.use(body_parser.json());
 
+// serve frontend app at index url
 app.use(express.static('ui/build'));
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'ui', 'build', 'index.html'))

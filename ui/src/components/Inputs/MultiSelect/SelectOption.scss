@@ -13,11 +13,13 @@
   transition-duration: .2s;
   background: $orange-red;
   color: $white;
+  cursor: pointer;
 }
 
 .option:active {
   transition-duration: .1s;
   background-color: $red;
+  cursor: pointer;
 }
 
 .selected {

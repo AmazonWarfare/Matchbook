@@ -65,9 +65,9 @@ class App extends Component {
     }
 
     nextQuestion() {
-        this.setState({
+        setTimeout(() => {this.setState({
             current_question: questions.shift()
-        });
+        });}, 250)
     }
 
     render() {

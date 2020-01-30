@@ -26,7 +26,7 @@ class QuestionCard extends Component {
     render() {
         return (
             <div>
-                <Container className={`question-card-component`}>
+                <Container className={`question-card-component`} >
                     <div className="question-text">
                         {this.props.question.text}
                     </div>
