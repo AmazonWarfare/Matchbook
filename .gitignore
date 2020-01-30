@@ -1,5 +1,5 @@
 *.idea
 
-/mockup/node_modules
+node_modules
 
-/mockup/build
+ui/build

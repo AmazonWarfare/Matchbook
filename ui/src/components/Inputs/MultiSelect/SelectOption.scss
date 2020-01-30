@@ -10,16 +10,18 @@
 }
 
 .option:hover {
+  transition-duration: .2s;
   background: $orange-red;
   color: $white;
 }
 
 .option:active {
-  background-color: $dark-charcoal;
+  transition-duration: .1s;
+  background-color: $red;
 }
 
 .selected {
-  background: $charcoal;
+  background: $dark-charcoal !important;
   color: $white;
 }
 

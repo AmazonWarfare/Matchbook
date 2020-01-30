@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './QuestionCard.scss';
 import ButtonList from "../Inputs/ButtonList/ButtonList";
 import MultiSelect from "../Inputs/MultiSelect/MultiSelect";
-
 import {INPUT_TYPES} from "../../config";
 
 class QuestionCard extends Component {
@@ -22,17 +21,18 @@ class QuestionCard extends Component {
                 options={this.props.question.options}
             />
         }
-
     }
 
     render() {
-        return(
-            <Container className="question-card-component">
-                <div className="question-text">
-                    {this.props.question.text}
-                </div>
-                {this.renderInputs()}
-            </Container>
+        return (
+            <div>
+                <Container className={`question-card-component`}>
+                    <div className="question-text">
+                        {this.props.question.text}
+                    </div>
+                    {this.renderInputs()}
+                </Container>
+            </div>
         );
     }
 }

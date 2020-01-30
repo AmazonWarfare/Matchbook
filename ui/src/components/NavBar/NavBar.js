@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import {
     Navbar,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    NavbarText
+    NavbarBrand
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.scss';
