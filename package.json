@@ -7,7 +7,7 @@
     "start-server": "nodemon  server.js",
     "start-ui": "npm run start --prefix ui",
     "start-dev": "concurrently \"npm run start-server\" \"npm run start-ui\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test --prefix ui"
   },
   "author": "",
   "license": "ISC",
