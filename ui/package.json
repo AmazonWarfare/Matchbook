@@ -9,7 +9,6 @@
     "bootstrap": "^4.4.1",
     "chai": "^4.2.0",
     "chance": "^1.1.4",
-    "cross-env": "^7.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "node-sass": "^4.13.1",
@@ -23,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cross-env CI=true react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
