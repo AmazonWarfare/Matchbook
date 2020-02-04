@@ -9,7 +9,8 @@
 ## Get the code:
 - clone git repo
 - install node.js, npm
-- run `npm install-all` from the root to install all dependencies for both the server and UI
+- run `npm install` from the root to install server dependencies
+- cd into `/ui` and run `npm install` to install UI dependencies
 
 ## Run the server:
 This starts the server at localhost:5000 - which you can reach via web browser by typing that in as the URL. This is not a live version of the app - it is the static version in `/ui/build`. This is how the code would be executed when deployed to a webserver. However, any changes to the server-side code will update and restart the app as soon as they are saved.
