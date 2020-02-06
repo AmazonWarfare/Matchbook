@@ -3,6 +3,7 @@ import reportlab
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.pdfgen import canvas
 
 file_name = str(input())
 input_file = open(file_name, "rb")
@@ -16,10 +17,16 @@ split = new_split[0:new_split.rfind("\n")]
 append = new_split[new_split.rfind("\n")]
 while (split) and (count < 60):
     new_filename = "pdf_collect/" + file_name + str(count) + ".pdf"
+    
+    #c = canvas.Canvas(new_filename)
+    #c.setTitle(file_name)
+    #c.setAuthor("Fantasy")
+    #c.save()
     doc = SimpleDocTemplate(str(new_filename),  \
                         rightMargin=40, leftMargin=40, \
                         topMargin=40, bottomMargin=25, \
-                        pageSize=A4)
+                        pageSize=A4, title=file_name, genre="Fantasy")
+    
     #doc.pagesize = portrait(A4)
     elements = []
     split_paragraphs = split.split("\n")
