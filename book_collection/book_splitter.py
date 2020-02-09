@@ -1,9 +1,16 @@
 import sys
+import os
 import reportlab
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen import canvas
+
+if not os.path.exists("pdf_collect"):
+    os.mkdir("pdf_collect")
+    print("Directory pdf_collect folder created storing split book there")
+else:    
+    print("Directory  pdf_collect already exists storing split book there")
 
 file_name = str(sys.argv[1])
 input_file = open(file_name, "rb")
@@ -12,7 +19,6 @@ count = 0
 stylesheet = getSampleStyleSheet()
 
 new_split = input_file.read(50000)
-print(new_split.rfind("\n"))
 split = new_split[0:new_split.rfind("\n")]
 append = new_split[new_split.rfind("\n")]
 while (split) and (count < 100):
@@ -32,3 +38,4 @@ while (split) and (count < 100):
     append = new_split[new_split.rfind("\n")]
     count += 1
 input_file.close()
+print("Split into " + str(count) + " pdf files")
