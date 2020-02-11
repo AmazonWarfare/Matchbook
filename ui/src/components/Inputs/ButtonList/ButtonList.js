@@ -6,16 +6,35 @@ import Button from './Button'
 
 class ButtonList extends Component {
     renderButtons() {
+        if(this.props.custom_responses) {
+            return (
+                <div>
+                    {this.props.buttons.map((text, ind) => {
+                            return <Button
+                                key={ind}
+                                text={text}
+                                onClick={this.props.nextQuestion}
+                            />
+                        }
+                    )}
+                </div>
+            );
+        }
+
         return (
             <div>
-                {this.props.buttons.map((text, ind) => {
-                        return <Button
-                            key={ind}
-                            text={text}
-                            onClick={this.props.nextQuestion}
-                        />
-                    }
-                )}
+                <Button
+                    text={"Negative"}
+                    onClick={() => this.props.nextQuestion(-1)}
+                />
+                <Button
+                    text={"Neutral"}
+                    onClick={() => this.props.nextQuestion(0)}
+                />
+                <Button
+                    text={"Positive"}
+                    onClick={() => this.props.nextQuestion(1)}
+                />
             </div>
         );
     }
