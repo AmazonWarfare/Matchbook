@@ -49,7 +49,7 @@ function WatsonQueryingService() {
                     } else {
                         this.questionType = 10; //Arbitrary value to indicate recommendation stage to front end
                         let rec = {
-                            text: this.giveRecommendation(),
+                            text: this.giveRecommendation(queryResponse),
                             type: this.questionType
                         };
                         console.log('recommending');
@@ -73,7 +73,7 @@ function WatsonQueryingService() {
 
     ////////////////// Recommendation Function /////////////////////
     this.giveRecommendation = (queryResponse) => {
-        console.log(queryResponse.result.results[0].extracted_metadata.title);
+        console.log(queryResponse.result.results);
         return "Congratulations! We have a match! : " + queryResponse.result.results[0].extracted_metadata.title;
     };
 
