@@ -17,7 +17,7 @@ let startup_cards = [
             "Next"
         ]
     }, {
-        text: "We will ask you a series of questions to gauge you interest in topics from our library books",
+        text: "We will ask you a series of questions to gauge your interest in topics from our library of books",
         input_type: INPUT_TYPES.BUTTON_LIST,
         custom_responses: true,
         options: [
@@ -58,13 +58,24 @@ class App extends Component {
             axios
                 .get('/question')
                 .then((res) => {
-                    this.setState({
-                        current_question: {
-                            text: res.data,
-                            input_type: INPUT_TYPES.BUTTON_LIST,
-                            custom_responses: false
-                        }
-                    })
+                    if(res.data.type === 0) {
+                        this.setState({
+                            current_question: {
+                                text: res.data.text,
+                                input_type: INPUT_TYPES.BUTTON_LIST,
+                                custom_responses: false
+                            }
+                        })
+                    } else {
+                        this.setState({
+                            current_question: {
+                                text: res.data.text,
+                                input_type: INPUT_TYPES.BUTTON_LIST,
+                                custom_responses: true,
+                                options: []
+                            }
+                        })
+                    }
                 });
         }
     }

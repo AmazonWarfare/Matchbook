@@ -8,7 +8,7 @@ class ButtonList extends Component {
     renderButtons() {
         if(this.props.custom_responses) {
             return (
-                <div>
+                <div className="button-list">
                     {this.props.buttons.map((text, ind) => {
                             return <Button
                                 key={ind}
@@ -22,7 +22,7 @@ class ButtonList extends Component {
         }
 
         return (
-            <div>
+            <div className="button-list">
                 <Button
                     text={"Negative"}
                     onClick={() => this.props.nextQuestion(-1)}
@@ -41,7 +41,7 @@ class ButtonList extends Component {
 
     render() {
         return (
-            <div className="button-list">
+            <div >
                 {this.renderButtons()}
             </div>
         );

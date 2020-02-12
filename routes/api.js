@@ -16,8 +16,17 @@ let wqs = new WatsonQueryingService();
     Responds with question text as plaintext string
  */
 router.get('/question', (req, res) => {
-    let question_text = wqs.generateQuestion();
-    res.send(question_text);
+    let question_promise = wqs.generateQuestion();
+
+    question_promise.then((question) => {
+            let {text, type} = question;
+            res.send(JSON.stringify({text, type}));
+        })
+        .catch((err) => {
+                console.log(err);
+            }
+        )
+
 });
 
 /*
