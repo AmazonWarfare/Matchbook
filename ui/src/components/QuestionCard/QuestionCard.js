@@ -14,6 +14,7 @@ class QuestionCard extends Component {
             return <ButtonList
                 nextQuestion={this.props.nextQuestion} // gets applied to each button
                 buttons={this.props.question.options} //list of text for buttons
+                custom_responses={this.props.question.custom_responses} //decides if we use custom responses in button list or just -1,0,1
             />
         } else if(this.props.question.input_type === INPUT_TYPES.MULTISELECT) {
             return <MultiSelect
