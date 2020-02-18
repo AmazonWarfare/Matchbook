@@ -6,68 +6,78 @@ import NavBar from "./components/NavBar/NavBar";
 import Fade from "./HigherOrderComponents/Fade";
 import {INPUT_TYPES} from "./config";
 
-let questions = [
+import axios from "axios";
+
+let startup_cards = [
     {
-        text: "I want...",
+        text: "Welcome to Matchbook",
         input_type: INPUT_TYPES.BUTTON_LIST,
+        custom_responses: true,
         options: [
-            "A recommendation based off previous books I've read",
-            "A recommendation based off my genre preferences"
+            "Next"
         ]
-    },
-    {
-        text: "What reading level are you looking for?",
+    }, {
+        text: "We will ask you a series of questions to gauge your interest in topics from our library of books",
         input_type: INPUT_TYPES.BUTTON_LIST,
+        custom_responses: true,
         options: [
-            "Adult",
-            "Young Adult",
-            "Children"
+            "Next"
         ]
-    },
-    {
-        text: "What type of book are you looking for?",
+    }, {
+        text: "Each answer will gather information about your preferences to tune our recommendation!",
         input_type: INPUT_TYPES.BUTTON_LIST,
+        custom_responses: true,
         options: [
-            "Fiction",
-            "Non-fiction",
-            "I don't care."
+            "Let's get started!"
         ]
-    },
-    {
-        text: "What genres are you interested in?",
-        input_type: INPUT_TYPES.MULTISELECT,
-        options: [
-            "Romance",
-            "Science Fiction",
-            "Fantasy",
-            "Horror",
-            "Historical",
-            "Mystery",
-            "Adventure",
-            "Thriller",
-            "Self-help",
-            "Biographical",
-        ]
-    },
-    {
-        text: "I recommend: Pride and Prejudice"
     }
 ];
+
+let get_initial_axios_question = false;
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current_question: questions.shift(),
+            current_question: startup_cards.shift(),
             question_change_scheduled: false
         };
         this.nextQuestion = this.nextQuestion.bind(this);
     }
 
-    nextQuestion() {
-        setTimeout(() => {this.setState({
-            current_question: questions.shift()
-        });}, 250)
+    nextQuestion(answer) {
+        if (startup_cards.length > 0) {
+            this.setState({current_question: startup_cards.shift()});
+        } else {
+            if ([-1,0,1].includes(answer)) {
+                axios
+                    .post('/answer', {answer})
+                    .then(() => console.log('answer sent from UI'));
+            }
+
+            axios
+                .get('/question')
+                .then((res) => {
+                    if(res.data.type === 0) {
+                        this.setState({
+                            current_question: {
+                                text: res.data.text,
+                                input_type: INPUT_TYPES.BUTTON_LIST,
+                                custom_responses: false
+                            }
+                        })
+                    } else {
+                        this.setState({
+                            current_question: {
+                                text: res.data.text,
+                                input_type: INPUT_TYPES.BUTTON_LIST,
+                                custom_responses: true,
+                                options: []
+                            }
+                        })
+                    }
+                });
+        }
     }
 
     render() {
