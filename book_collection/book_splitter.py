@@ -14,7 +14,8 @@ else:
 
 file_name = str(sys.argv[1])
 input_file = open(file_name, "rb")
-Author = str(sys.argv[2])
+title = str(sys.argv[2])
+Author = str(sys.argv[3])
 count = 0
 stylesheet = getSampleStyleSheet()
 
@@ -26,7 +27,7 @@ while (split) and (count < 100):
     doc = SimpleDocTemplate(str(new_filename),  \
                         rightMargin=40, leftMargin=40, \
                         topMargin=40, bottomMargin=25, \
-                        pageSize=A4, title=file_name, author=Author)
+                        pageSize=A4, title=title, author=Author)
     elements = []
     split_paragraphs = split.split("\n")
     for para in split_paragraphs:  
