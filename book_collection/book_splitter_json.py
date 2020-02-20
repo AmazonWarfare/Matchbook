@@ -1,3 +1,4 @@
+#python book_splitter_json.py filename title author genre
 import sys
 import os
 import reportlab
