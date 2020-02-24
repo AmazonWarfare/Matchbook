@@ -50,8 +50,7 @@ class WatsonQueryingService{
     processQuery(queryResponse, resolve, reject){
         
         this.#matchingResults = queryResponse.result.matching_results;
-        console.log(this.#matchingResults);
-        console.log(this.matchingResults);
+        
         if (this.#matchingResults > RECOMMENDATION_THRESHOLD) { //Continue questioning if there are more than 5 matches
             if (this.#currentQuestionType === QUESTION_TYPES.CATEGORY) {
                 let question = {
