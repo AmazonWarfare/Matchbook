@@ -1,4 +1,5 @@
 const Discovery = require('./discoveryConfig.js');
+const StringFormat = require('./stringFormat.js');
 
 const QUESTION_TYPES = {
     CATEGORY: 0,
@@ -7,31 +8,10 @@ const QUESTION_TYPES = {
     RECOMMENDATION: 10
 };
 
-
 const RECOMMENDATION_THRESHOLD = 5;
 
 
-function formatAuthors(authorList){
-    for(var i = 0; i < authorList.length; i++){
-        authorList[i] = formatDisplayName(authorList[i]);
-    }
-    var authorsJoined = authorList.join(", ");
-    var lastCommaPos = authorsJoined.lastIndexOf(',');
-    if(lastCommaPos >= 0){
-        authorsJoined = authorsJoined.substring(0,lastCommaPos) + " &" + authorsJoined.substring(lastCommaPos + 1);
-    } 
-    return authorsJoined;
-}
 
-function formatDisplayName(str) 
-{
-    str = str.replace("_", " ");
-    str = str.split(" ");
-    for (var i = 0, x = str.length; i < x; i++) {
-        str[i] = str[i][0].toUpperCase() + str[i].substr(1);
-    }
-    return str.join(" ");
-}
 
 function WatsonQueryingService(){
 
@@ -111,9 +91,9 @@ function WatsonQueryingService(){
     ////////////////// Recommendation Function /////////////////////
     var giveRecommendation = function(queryResponse){
         //console.log(queryResponse.result.results);
-        let title = formatDisplayName(queryResponse.result.results[0].extracted_metadata.title);
+        let title = StringFormat.formatDisplayName(queryResponse.result.results[0].extracted_metadata.title);
         console.log(queryResponse.result.results[0].extracted_metadata);
-        let author = formatDisplayName(queryResponse.result.results[0].extracted_metadata.author[0]);
+        let author = StringFormat.formatAuthors(queryResponse.result.results[0].extracted_metadata.author);
         let rec = {
             text: "Based on your preferences, you might like: " + title + " by " + author,
             type: QUESTION_TYPES.RECOMMENDATION
@@ -140,7 +120,7 @@ function WatsonQueryingService(){
         if (!foundNewLabel) { //When there are no more categories
             return 0;
         }
-        currentLabel = formatDisplayName(label.substring(label.lastIndexOf("/") + 1));
+        currentLabel = StringFormat.formatDisplayName(label.substring(label.lastIndexOf("/") + 1));
         usedCateg.add(label);
 
         let question = {
