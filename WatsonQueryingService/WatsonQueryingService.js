@@ -1,3 +1,5 @@
+const Discovery = require('./discoveryConfig.js');
+
 const QUESTION_TYPES = {
     CATEGORY: 0,
     GENRE: 1,
@@ -5,69 +7,86 @@ const QUESTION_TYPES = {
     RECOMMENDATION: 10
 };
 
+
 const RECOMMENDATION_THRESHOLD = 5;
 
-const DiscoveryV1 = require('ibm-watson/discovery/v1');
-const {IamAuthenticator} = require('ibm-watson/auth');
-const environment_id = "0235fa72-912f-4f3d-a606-bb40a3643e40";
-const collection_id = "5ee93bfe-ad6b-4928-9616-3df44af86c86";
+
+function formatAuthors(authorList){
+    for(var i = 0; i < authorList.length; i++){
+        authorList[i] = formatDisplayName(authorList[i]);
+    }
+    var authorsJoined = authorList.join(", ");
+    var lastCommaPos = authorsJoined.lastIndexOf(',');
+    if(lastCommaPos >= 0){
+        authorsJoined = authorsJoined.substring(0,lastCommaPos) + " &" + authorsJoined.substring(lastCommaPos + 1);
+    } 
+    return authorsJoined;
+}
+
+function formatDisplayName(str) 
+{
+    str = str.replace("_", " ");
+    str = str.split(" ");
+    for (var i = 0, x = str.length; i < x; i++) {
+        str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+    }
+    return str.join(" ");
+}
 
 function WatsonQueryingService(){
 
     // Declare private members
     var currentLabel = ""; //The value to add to the query
     var usedCateg = new Set(); //So that category questions won't be repeated
-    var matchingResults = Number.MAX_SAFE_INTEGER; //The number of books returned by the querying (PROBLEM: duplicate results?)
     var currentQuestionType = QUESTION_TYPES.CATEGORY; //category:0, recommendation:10
     var currentQueryParams = {
-        environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
-        collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
+        environmentId: Discovery.environment_id,
+        collectionId: Discovery.collection_id,
         count: 10,
         query: "",
         _return: "",
         aggregation: "term(enriched_text.categories.label)"
         
     }
-        ///////////// Instantialize Discovery ///////////////
-        
-    var discoveryService = new DiscoveryV1({
-        version: '2019-04-30',
-        authenticator: new IamAuthenticator({
-            apikey: '9U_r_MDwsKMpLghmLBgihOMuFJ0-c-NB3SfFZq3PF63H',
-        }),
-        url: 'https://api.us-south.discovery.watson.cloud.ibm.com/instances/aafddb55-662a-48d2-9e31-f69eb609386f',
-    });
+    console.log(Discovery);
+    console.log(JSON.stringify(currentQueryParams));
+    ///////////// Instantialize Discovery ///////////////
+    var discoveryService = Discovery.discoveryService;
     
     
 
     var processQuery = function(queryResponse, resolve, reject){
         
-        matchingResults = queryResponse.result.matching_results;
+        var matchingResults = queryResponse.result.matching_results;
+        if(matchingResults < RECOMMENDATION_THRESHOLD){
+            currentQuestionType = QUESTION_TYPES.RECOMMENDATION;
+        }
+        let question = createNewQuestion(queryResponse);
+        resolve(question);
         
-        if (matchingResults > RECOMMENDATION_THRESHOLD) { //Continue questioning if there are more than 5 matches
-            if (currentQuestionType === QUESTION_TYPES.CATEGORY) {
-                let question = {
-                    text: generateCategoryQuestion(queryResponse),
-                    type: currentQuestionType
-                };
-                resolve(question);
-            } else {
-                let question = {
-                    text: generateCategoryQuestion(queryResponse.result.aggregations[0].results),
-                    type: currentQuestionType
-                }; //placeholder for other question types
-                resolve(question)
+    }
+    var createNewQuestion = function(queryResponse){
+        let question;
+        while(true){
+            switch(currentQuestionType){
+                case QUESTION_TYPES.CATEGORY:
+                    question = generateCategoryQuestion(queryResponse)
+                    break;
+                case QUESTION_TYPES.RECOMMENDATION:
+                    question = giveRecommendation(queryResponse)
+                    break;
+                default:
+                    break;
             }
-        } else {
-            currentQuestionType = QUESTION_TYPES.RECOMMENDATION; //Arbitrary value to indicate recommendation stage to front end
-            let rec = {
-                text: giveRecommendation(queryResponse),
-                type: currentQuestionType
-            };
-            console.log('recommending');
-            resolve(rec)
+            if(question === 0){
+                currentQuestionType = 10;
+                continue;
+            } else {
+                break;
+            }
         }
         
+        return question;
     }
     ///////////// Question Generation Function /////////////////////
     this.generateQuestion = function(){
@@ -92,33 +111,44 @@ function WatsonQueryingService(){
     ////////////////// Recommendation Function /////////////////////
     var giveRecommendation = function(queryResponse){
         //console.log(queryResponse.result.results);
-        
-        return "Congratulations! We have a match! : " + queryResponse.result.results[0].extracted_metadata.title;
+        let title = formatDisplayName(queryResponse.result.results[0].extracted_metadata.title);
+        console.log(queryResponse.result.results[0].extracted_metadata);
+        let author = formatDisplayName(queryResponse.result.results[0].extracted_metadata.author[0]);
+        let rec = {
+            text: "Based on your preferences, you might like: " + title + " by " + author,
+            type: QUESTION_TYPES.RECOMMENDATION
+        };
+        return rec;
 
     }
 
     /////////////////////// Category Question Generation Function /////////////////////
     var generateCategoryQuestion = function(queryResponse){
         let categories = queryResponse.result.aggregations[0].results;
-        let label = categories[0].key;
-        let categCounter = 1;
+        let foundNewLabel = false;
+        let label;
 
         console.log(categories);
-
-        while (usedCateg.has(label) && categCounter < categories.length) { //Get unused category
-            label = categories[categCounter].key;
-            categCounter++;
+        for(var i = 0; i < categories.length; i++){
+            label = categories[i].key;
+            if(!usedCateg.has(label)){
+                foundNewLabel = true;
+                break;
+            }
         }
-
-        if (usedCateg.has(label)) { //When there are no more categories
-            currentQuestionType = 10;
-            return giveRecommendation(queryResponse)
+        
+        if (!foundNewLabel) { //When there are no more categories
+            return 0;
         }
-
-        currentLabel = label.substring(label.lastIndexOf("/") + 1);
+        currentLabel = formatDisplayName(label.substring(label.lastIndexOf("/") + 1));
         usedCateg.add(label);
 
-        return "How do you feel about the concept of \"" + currentLabel + "\" in books?";
+        let question = {
+            text: "How do you feel about the concept of \"" + currentLabel + "\" in books?",
+            type: currentQuestionType
+        };
+
+        return question;
     }
 
     //////////////////// Category Update Query Function ////////////////////
@@ -161,6 +191,7 @@ function WatsonQueryingService(){
                 console.log('error:', err);
             });
     }
+
 }
 
 
