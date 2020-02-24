@@ -13,12 +13,20 @@ const environment_id = "0235fa72-912f-4f3d-a606-bb40a3643e40";
 const collection_id = "5ee93bfe-ad6b-4928-9616-3df44af86c86";
 
 class WatsonQueryingService{
+    // Declare private instance fields
+    #currentLabel;
+    #matchingResults;
+    #usedCateg;
+    #currentQuestionType;
+    #currentQueryParams;
+    #discoveryService;
+
     constructor(){
-        this.currentLabel = ""; //The value to add to the query
-        this.usedCateg = new Set(); //So that category questions won't be repeated
-        this.matchingResults = Number.MAX_SAFE_INTEGER; //The number of books returned by the querying (PROBLEM: duplicate results?)
-        this.questionType = QUESTION_TYPES.CATEGORY; //category:0, recommendation:10
-        this.queryParams = {
+        this.#currentLabel = ""; //The value to add to the query
+        this.#usedCateg = new Set(); //So that category questions won't be repeated
+        this.#matchingResults = Number.MAX_SAFE_INTEGER; //The number of books returned by the querying (PROBLEM: duplicate results?)
+        this.#currentQuestionType = QUESTION_TYPES.CATEGORY; //category:0, recommendation:10
+        this.#currentQueryParams = {
             environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
             collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
             count: 10,
@@ -29,7 +37,7 @@ class WatsonQueryingService{
 
         ///////////// Instantialize Discovery ///////////////
         
-        this.discovery = new DiscoveryV1({
+        this.#discoveryService = new DiscoveryV1({
             version: '2019-04-30',
             authenticator: new IamAuthenticator({
                 apikey: '9U_r_MDwsKMpLghmLBgihOMuFJ0-c-NB3SfFZq3PF63H',
@@ -41,26 +49,28 @@ class WatsonQueryingService{
 
     processQuery(queryResponse, resolve, reject){
         
-        this.matchingResults = queryResponse.result.matching_results;
-        if (this.matchingResults > RECOMMENDATION_THRESHOLD) { //Continue questioning if there are more than 5 matches
-            if (this.questionType === QUESTION_TYPES.CATEGORY) {
+        this.#matchingResults = queryResponse.result.matching_results;
+        console.log(this.#matchingResults);
+        console.log(this.matchingResults);
+        if (this.#matchingResults > RECOMMENDATION_THRESHOLD) { //Continue questioning if there are more than 5 matches
+            if (this.#currentQuestionType === QUESTION_TYPES.CATEGORY) {
                 let question = {
                     text: this.generateCategoryQuestion(queryResponse),
-                    type: this.questionType
+                    type: this.#currentQuestionType
                 };
                 resolve(question);
             } else {
                 let question = {
                     text: this.generateCategoryQuestion(queryResponse.result.aggregations[0].results),
-                    type: this.questionType
+                    type: this.#currentQuestionType
                 }; //placeholder for other question types
                 resolve(question)
             }
         } else {
-            this.questionType = QUESTION_TYPES.RECOMMENDATION; //Arbitrary value to indicate recommendation stage to front end
+            this.#currentQuestionType = QUESTION_TYPES.RECOMMENDATION; //Arbitrary value to indicate recommendation stage to front end
             let rec = {
                 text: this.giveRecommendation(queryResponse),
-                type: this.questionType
+                type: this.#currentQuestionType
             };
             console.log('recommending');
             resolve(rec)
@@ -70,7 +80,7 @@ class WatsonQueryingService{
     ///////////// Question Generation Function /////////////////////
     generateQuestion(){
         return new Promise((resolve, reject) => {
-            this.discovery.query(this.queryParams)
+            this.#discoveryService.query(this.#currentQueryParams)
                 .then(queryResponse => this.processQuery(queryResponse, resolve, reject))
                 .catch(err => {
                     reject(err);
@@ -80,7 +90,7 @@ class WatsonQueryingService{
 
     ///////////////// Query Update Function //////////////////////
     provideAnswer(ans){
-        if (this.questionType === 0) {
+        if (this.#currentQuestionType === QUESTION_TYPES.CATEGORY) {
             this.provideCategoryAnswer(ans);
         } else {
             this.provideCategoryAnswer(ans); //Placeholder for other question types
@@ -90,7 +100,11 @@ class WatsonQueryingService{
     ////////////////// Recommendation Function /////////////////////
     giveRecommendation(queryResponse){
         //console.log(queryResponse.result.results);
+        console.log(this.#currentLabel);
+        console.log(this.currentLabel);
+
         return "Congratulations! We have a match! : " + queryResponse.result.results[0].extracted_metadata.title;
+
     }
 
     /////////////////////// Category Question Generation Function /////////////////////
@@ -101,26 +115,26 @@ class WatsonQueryingService{
 
         console.log(categories);
 
-        while (this.usedCateg.has(label) && categCounter < categories.length) { //Get unused category
+        while (this.#usedCateg.has(label) && categCounter < categories.length) { //Get unused category
             label = categories[categCounter].key;
             categCounter++;
         }
 
-        if (this.usedCateg.has(label)) { //When there are no more categories
-            this.questionType = 10;
+        if (this.#usedCateg.has(label)) { //When there are no more categories
+            this.#currentQuestionType = 10;
             return this.giveRecommendation(queryResponse)
         }
 
-        this.currentLabel = label.substring(label.lastIndexOf("/") + 1);
-        this.usedCateg.add(label);
+        this.#currentLabel = label.substring(label.lastIndexOf("/") + 1);
+        this.#usedCateg.add(label);
 
-        return "How do you feel about the concept of \"" + this.currentLabel + "\" in books?";
+        return "How do you feel about the concept of \"" + this.#currentLabel + "\" in books?";
     }
 
     //////////////////// Category Update Query Function ////////////////////
     provideCategoryAnswer(ans){
         var queryConcat = "";
-        if (this.queryParams.query) { //If the query isn't empty
+        if (this.#currentQueryParams.query) { //If the query isn't empty
             queryConcat = queryConcat.concat(", ");
         }
         queryConcat = queryConcat.concat("enriched_text.categories.label");
@@ -130,9 +144,9 @@ class WatsonQueryingService{
             queryConcat = queryConcat.concat(":!");
         }
 
-        this.queryParams = { //Update query
-            ...this.queryParams,
-            query: this.queryParams.query + queryConcat + this.currentLabel
+        this.#currentQueryParams = { //Update query
+            ...this.#currentQueryParams,
+            query: this.#currentQueryParams.query + queryConcat + this.#currentLabel
         };
 
     }
@@ -149,7 +163,7 @@ class WatsonQueryingService{
             collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
             aggregation: "max(enriched_text.emotion.document.emotion." + this.emotion[this.emotionCounter] + ")"
         };
-        discovery.query(this.queryParams)
+        discovery.query(this.#currentQueryParams)
             .then(queryResponse => {
                 var max = queryResponse.result.aggregations[0].value;
             })
