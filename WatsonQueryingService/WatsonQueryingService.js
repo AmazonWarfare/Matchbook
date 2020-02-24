@@ -7,34 +7,39 @@ const QUESTION_TYPES = {
 
 const RECOMMENDATION_THRESHOLD = 5;
 
-function WatsonQueryingService() {
-    this.currentLabel = ""; //The value to add to the query
-    this.usedCateg = new Set(); //So that category questions won't be repeated
-    this.matchingResults = Number.MAX_SAFE_INTEGER; //The number of books returned by the querying (PROBLEM: duplicate results?)
-    this.questionType = QUESTION_TYPES.CATEGORY; //category:0, recommendation:10
-    this.queryParams = {
-        environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
-        collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
-        count: 10,
-        query: "",
-        _return: "",
-        aggregation: "term(enriched_text.categories.label)"
-    };
+const DiscoveryV1 = require('ibm-watson/discovery/v1');
+const {IamAuthenticator} = require('ibm-watson/auth');
+const environment_id = "0235fa72-912f-4f3d-a606-bb40a3643e40";
+const collection_id = "5ee93bfe-ad6b-4928-9616-3df44af86c86";
 
-    ///////////// Instantialize Discovery ///////////////
-    const DiscoveryV1 = require('ibm-watson/discovery/v1');
-    const {IamAuthenticator} = require('ibm-watson/auth');
-    const environment_id = "0235fa72-912f-4f3d-a606-bb40a3643e40";
-    const collection_id = "5ee93bfe-ad6b-4928-9616-3df44af86c86";
-    this.discovery = new DiscoveryV1({
-        version: '2019-04-30',
-        authenticator: new IamAuthenticator({
-            apikey: '9U_r_MDwsKMpLghmLBgihOMuFJ0-c-NB3SfFZq3PF63H',
-        }),
-        url: 'https://api.us-south.discovery.watson.cloud.ibm.com/instances/aafddb55-662a-48d2-9e31-f69eb609386f',
-    });
+class WatsonQueryingService{
+    constructor(){
+        this.currentLabel = ""; //The value to add to the query
+        this.usedCateg = new Set(); //So that category questions won't be repeated
+        this.matchingResults = Number.MAX_SAFE_INTEGER; //The number of books returned by the querying (PROBLEM: duplicate results?)
+        this.questionType = QUESTION_TYPES.CATEGORY; //category:0, recommendation:10
+        this.queryParams = {
+            environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
+            collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
+            count: 10,
+            query: "",
+            _return: "",
+            aggregation: "term(enriched_text.categories.label)"
+        };
 
-    this.processQuery = (queryResponse, resolve, reject) => {
+        ///////////// Instantialize Discovery ///////////////
+        
+        this.discovery = new DiscoveryV1({
+            version: '2019-04-30',
+            authenticator: new IamAuthenticator({
+                apikey: '9U_r_MDwsKMpLghmLBgihOMuFJ0-c-NB3SfFZq3PF63H',
+            }),
+            url: 'https://api.us-south.discovery.watson.cloud.ibm.com/instances/aafddb55-662a-48d2-9e31-f69eb609386f',
+        });
+    }
+    
+
+    processQuery(queryResponse, resolve, reject){
         
         this.matchingResults = queryResponse.result.matching_results;
         if (this.matchingResults > RECOMMENDATION_THRESHOLD) { //Continue questioning if there are more than 5 matches
@@ -63,7 +68,7 @@ function WatsonQueryingService() {
         
     }
     ///////////// Question Generation Function /////////////////////
-    this.generateQuestion = () => {
+    generateQuestion(){
         return new Promise((resolve, reject) => {
             this.discovery.query(this.queryParams)
                 .then(queryResponse => this.processQuery(queryResponse, resolve, reject))
@@ -71,25 +76,25 @@ function WatsonQueryingService() {
                     reject(err);
                 });
         });
-    };
+    }
 
     ///////////////// Query Update Function //////////////////////
-    this.provideAnswer = (ans) => {
+    provideAnswer(ans){
         if (this.questionType === 0) {
             this.provideCategoryAnswer(ans);
         } else {
             this.provideCategoryAnswer(ans); //Placeholder for other question types
         }
-    };
+    }
 
     ////////////////// Recommendation Function /////////////////////
-    this.giveRecommendation = (queryResponse) => {
-        console.log(queryResponse.result.results);
+    giveRecommendation(queryResponse){
+        //console.log(queryResponse.result.results);
         return "Congratulations! We have a match! : " + queryResponse.result.results[0].extracted_metadata.title;
-    };
+    }
 
     /////////////////////// Category Question Generation Function /////////////////////
-    this.generateCategoryQuestion = (queryResponse) => {
+    generateCategoryQuestion(queryResponse){
         let categories = queryResponse.result.aggregations[0].results;
         let label = categories[0].key;
         let categCounter = 1;
@@ -110,10 +115,10 @@ function WatsonQueryingService() {
         this.usedCateg.add(label);
 
         return "How do you feel about the concept of \"" + this.currentLabel + "\" in books?";
-    };
+    }
 
     //////////////////// Category Update Query Function ////////////////////
-    this.provideCategoryAnswer = (ans) => {
+    provideCategoryAnswer(ans){
         var queryConcat = "";
         if (this.queryParams.query) { //If the query isn't empty
             queryConcat = queryConcat.concat(", ");
@@ -130,15 +135,15 @@ function WatsonQueryingService() {
             query: this.queryParams.query + queryConcat + this.currentLabel
         };
 
-    };
+    }
 
     ///////////////////// Quote Question Generation Function ////////////////////////
-    this.generateQuoteQuestion = () => {
+    generateQuoteQuestion(){
         //// TODO:
-    };
+    }
 
     ///////////////////// Emotion Question Generation Function //////////////////////
-    this.generateEmotionQuestion = () => { //INCOMPLETE//////////////
+    generateEmotionQuestion(){ //INCOMPLETE//////////////
         tempQueryParams = {
             environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
             collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
@@ -151,7 +156,7 @@ function WatsonQueryingService() {
             .catch(err => {
                 console.log('error:', err);
             });
-    };
+    }
 }
 
 module.exports = WatsonQueryingService; // make importable
