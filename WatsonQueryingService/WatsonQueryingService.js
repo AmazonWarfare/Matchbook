@@ -1,8 +1,17 @@
+const QUESTION_TYPES = {
+    CATEGORY: 0,
+    GENRE: 1,
+    EMOTION: 2, // Add more stuff here if needed
+    RECOMMENDATION: 10
+};
+
+const RECOMMENDATION_THRESHOLD = 5;
+
 function WatsonQueryingService() {
     this.currentLabel = ""; //The value to add to the query
     this.usedCateg = new Set(); //So that category questions won't be repeated
     this.matchingResults = Number.MAX_SAFE_INTEGER; //The number of books returned by the querying (PROBLEM: duplicate results?)
-    this.questionType = 0; //category:0, recommendation:10
+    this.questionType = QUESTION_TYPES.CATEGORY; //category:0, recommendation:10
     this.queryParams = {
         environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
         collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
@@ -25,37 +34,39 @@ function WatsonQueryingService() {
         url: 'https://api.us-south.discovery.watson.cloud.ibm.com/instances/aafddb55-662a-48d2-9e31-f69eb609386f',
     });
 
-
+    this.processQuery = (queryResponse, resolve, reject) => {
+        
+        this.matchingResults = queryResponse.result.matching_results;
+        if (this.matchingResults > RECOMMENDATION_THRESHOLD) { //Continue questioning if there are more than 5 matches
+            if (this.questionType === QUESTION_TYPES.CATEGORY) {
+                let question = {
+                    text: this.generateCategoryQuestion(queryResponse),
+                    type: this.questionType
+                };
+                resolve(question);
+            } else {
+                let question = {
+                    text: this.generateCategoryQuestion(queryResponse.result.aggregations[0].results),
+                    type: this.questionType
+                }; //placeholder for other question types
+                resolve(question)
+            }
+        } else {
+            this.questionType = QUESTION_TYPES.RECOMMENDATION; //Arbitrary value to indicate recommendation stage to front end
+            let rec = {
+                text: this.giveRecommendation(queryResponse),
+                type: this.questionType
+            };
+            console.log('recommending');
+            resolve(rec)
+        }
+        
+    }
     ///////////// Question Generation Function /////////////////////
     this.generateQuestion = () => {
         return new Promise((resolve, reject) => {
             this.discovery.query(this.queryParams)
-                .then(queryResponse => {
-                    this.matchingResults = queryResponse.result.matching_results;
-                    if (this.matchingResults > 5) { //Continue questioning if there are more than 5 matches
-                        if (this.questionType === 0) {
-                            let question = {
-                                text: this.generateCategoryQuestion(queryResponse),
-                                type: this.questionType
-                            };
-                            resolve(question);
-                        } else {
-                            let question = {
-                                text: this.generateCategoryQuestion(queryResponse.result.aggregations[0].results),
-                                type: this.questionType
-                            }; //placeholder for other question types
-                            resolve(question)
-                        }
-                    } else {
-                        this.questionType = 10; //Arbitrary value to indicate recommendation stage to front end
-                        let rec = {
-                            text: this.giveRecommendation(queryResponse),
-                            type: this.questionType
-                        };
-                        console.log('recommending');
-                        resolve(rec)
-                    }
-                })
+                .then(queryResponse => this.processQuery(queryResponse, resolve, reject))
                 .catch(err => {
                     reject(err);
                 });
