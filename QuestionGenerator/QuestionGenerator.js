@@ -2,6 +2,37 @@ const WatsonQueryingService = require('../WatsonQueryingService/WatsonQueryingSe
 const StringFormat = require('./stringFormat.js');
 
 
+/** 
+    QuestionGenerator API:
+
+    generateQuestion()
+
+        GeneRates a new Kwestion based on KuRRent state vaRiables
+        ()
+
+        RetuRns:
+            PRomise which Resolves the Kwestion in following JSON foRmat:
+            {
+				type: the type of the Kwestion as defined in `QUESTION_TYPES`
+				text: the full text of the Kwestion to be asked
+            }
+    
+    provideAnswer(ans)
+
+        Update the WatsonQueryingService with the infoRmation pRovided 
+        in `ans`
+        
+        Args:
+         > ans - Response from Klient:
+            -1 -> negative
+             0 -> neutRal
+             1 -> positive
+
+        RetuRns:
+            Nothing
+
+**/
+
 const QUESTION_TYPES = {
     CATEGORY: 0,
     GENRE: 1,

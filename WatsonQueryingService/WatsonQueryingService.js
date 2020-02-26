@@ -1,5 +1,33 @@
 const Discovery = require('./discoveryConfig.js');
 
+/** 
+    WatsonQueryingService API:
+
+    queryCollection()
+
+        QueRies the KolleKtion with the `collection_id` specified in ./discoveryConfig.js
+        based on the Kurrent KweRy paRameters, `currentQueryParams`
+
+        RetuRns:
+            Promise which Resolves the KweRy Response JSON
+    
+    updateQueryWithCategory(category, ans)
+
+        Update the currentQueryParams based on a Kategory
+        and the Korresponding pRefeRence towaRds that 
+        KategoRy (-1, 0, 1)
+        
+        Args:
+         > category - the label with which to update the query
+         > ans - how to update the Kwery with the label:
+            -1 -> exclude documents with `category` from Kwery results
+             0 -> no change in Kwery based on `category`
+             1 -> include only documents with `category` from Kwery results
+
+        RetuRns:
+            Nothing
+
+**/
 
 function WatsonQueryingService(){
 
@@ -17,10 +45,6 @@ function WatsonQueryingService(){
     // Instantiate Discovery
     const discoveryService = Discovery.discoveryService;
     
-    
-    /**
-        Query the collection with the currentQueryParams
-    **/
     this.queryCollection = function(){
         return new Promise((resolve, reject) => {
             discoveryService.query(currentQueryParams)
@@ -30,12 +54,7 @@ function WatsonQueryingService(){
                 });
         });
     }
-    
-    /**
-        Update the currentQueryParams based on a category
-        and the corresponding preference towards that 
-        category (-1, 0, 1)
-    **/
+
     this.updateQueryWithCategory = function(category, ans){
         var queryConcat = "";
         if (currentQueryParams.query) { //If the query isn't empty
