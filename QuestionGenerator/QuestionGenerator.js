@@ -13,7 +13,7 @@ const StringFormat = require('./stringFormat.js');
         RetuRns:
             PRomise which Resolves the Kwestion in following JSON foRmat:
             {
-				type: the type of the Kwestion as defined in `QUESTION_TYPES`
+				type: the type of the Kwestion as defined in `PREFERENCE_OPTIONS`
 				text: the full text of the Kwestion to be asked
             }
     
@@ -33,37 +33,59 @@ const StringFormat = require('./stringFormat.js');
 
 **/
 
-const QUESTION_TYPES = {
+const PREFERENCE_OPTIONS = {
     CATEGORY: 0,
     GENRE: 1,
-    EMOTION: 2, // Add more stuff here if needed
-    RECOMMENDATION: 10
+    EMOTION: 2 // Add more stuff here if needed
 };
+
+const QUESTION_FORMATS = {
+	TERNARY: 0,
+	SLIDER: 1,
+	MULTI: 2,
+	RECOMMENDATION: 10
+}
 
 const RECOMMENDATION_THRESHOLD = 5;
 
 function QuestionGenerator(){
 	const wqs = new WatsonQueryingService();
 	var usedCateg = new Set(); //So that category questions won't be repeated
-    var currentQuestionType = QUESTION_TYPES.CATEGORY; //category:0, recommendation:10
+    var currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY; //change to genre by default
+    var currentQuestionFormat = QUESTION_FORMATS.TERNARY;
     var currentLabel;
+    var currentLabels;
+    var questionCount = 0;
 
 	var getNextQuestion = function(queryResponse){
 		let question;
+		var QUESTION_GETTER_MAP = {
+			[PREFERENCE_OPTIONS.CATEGORY]: {
+				[QUESTION_FORMATS.TERNARY]: generateTernaryCategoryQuestion,
+				[QUESTION_FORMATS.MULTI]: generateMultiCategoryQuestion,
+				[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+			}, 
+			[PREFERENCE_OPTIONS.GENRE]: {
+				[QUESTION_FORMATS.TERNARY]: generateTernaryGenreQuestion,
+				[QUESTION_FORMATS.MULTI]: generateMultiGenreQuestion,
+				[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+			}
+		};
+		
+		
         while(true){
-            switch(currentQuestionType){
-                case QUESTION_TYPES.CATEGORY:
-                    question = generateCategoryQuestion(queryResponse)
-                    break;
-                case QUESTION_TYPES.RECOMMENDATION:
-                    question = giveRecommendation(queryResponse)
-                    break;
-                default:
-                    question = 0;
-                    break;
-            }
+        	
+            /** 
+            // Uncomment to see what's going on with the function map
+            console.log(currentPreferenceOption);
+            console.log(currentQuestionFormat);
+            console.log(QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat]);
+            **/
+
+            question = QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat](queryResponse);
+            
             if(question === 0){
-                currentQuestionType = 10;
+                currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
                 continue;
             } else {
                 break;
@@ -76,7 +98,7 @@ function QuestionGenerator(){
         
         var matchingResults = queryResponse.result.matching_results;
         if(matchingResults < RECOMMENDATION_THRESHOLD){
-            currentQuestionType = QUESTION_TYPES.RECOMMENDATION;
+            currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
         }
         let question = getNextQuestion(queryResponse);
         resolve(question);
@@ -90,7 +112,7 @@ function QuestionGenerator(){
 
     ///////////////// Query Update Function //////////////////////
     this.provideAnswer = function(ans){
-        if (currentQuestionType === QUESTION_TYPES.CATEGORY) {
+        if (currentPreferenceOption === PREFERENCE_OPTIONS.CATEGORY) {
             provideCategoryAnswer(ans);
         } else {
             provideCategoryAnswer(ans); //Placeholder for other question types
@@ -103,14 +125,14 @@ function QuestionGenerator(){
         let author = StringFormat.formatAuthors(queryResponse.result.results[0].extracted_metadata.author);
         let rec = {
             text: "Based on your preferences, you might like: " + title + " by " + author,
-            type: QUESTION_TYPES.RECOMMENDATION
+            type: QUESTION_FORMATS.RECOMMENDATION
         };
         return rec;
 
     }
 
     /////////////////////// Category Question Generation Function /////////////////////
-    var generateCategoryQuestion = function(queryResponse){
+    var generateTernaryCategoryQuestion = function(queryResponse){
         let categories = queryResponse.result.aggregations[0].results;
         let foundNewLabel = false;
         let label;
@@ -118,6 +140,7 @@ function QuestionGenerator(){
         console.log(categories);
         for(var i = 0; i < categories.length; i++){
             label = categories[i].key;
+            label = label.substring(label.lastIndexOf("/") + 1);
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
                 break;
@@ -127,20 +150,85 @@ function QuestionGenerator(){
         if (!foundNewLabel) { //When there are no more categories
             return 0;
         }
-        currentLabel = StringFormat.formatDisplayName(label.substring(label.lastIndexOf("/") + 1));
+        currentLabel = label;
+        formattedLabel = StringFormat.formatDisplayName(currentLabel);
         usedCateg.add(label);
 
         let question = {
             text: "How do you feel about the concept of \"" + currentLabel + "\" in books?",
-            type: currentQuestionType
+            type: QUESTION_FORMATS.TERNARY,
+            content: {} // No content for ternary question
         };
 
         return question;
     }
+    var generateMultiCategoryQuestion = function(queryResponse){
+    	let categories = queryResponse.result.aggregations[0].results;
+    	let labels = [];
+    	currentLabels = [];
+    	var formattedLabels = [];
+
+    	for(var i = 0; i < categories.length; i++){
+            let label = categories[i].key;
+            label = label.substring(label.lastIndexOf("/") + 1);
+            if(!usedCateg.has(label)){
+                foundNewLabel = true;
+                labels.push(label)
+                currentLabels.push(label);
+                formattedLabels.push(StringFormat.formatDisplayName(label));
+                usedCateg.add(label);
+            }
+        }
+        if(array.length == 0){
+        	return 0;
+        }
+        
+        let question = {
+            text: "Pick book topics from these that would interest you",
+            type: QUESTION_FORMATS.MUlTI,
+            content: {
+            	options: formattedLabels
+            } 
+        };
+
+        return question;
+
+    }
+
     //////////////////// Category Update Query Function ////////////////////
     var provideCategoryAnswer = function(ans){
     	wqs.updateQueryWithCategory(currentLabel, ans);
         
+    }
+    var generateTernaryGenreQuestion = function(queryResponse){
+    	// TODO: Query on genre somehow
+    	let genre;
+    	currentLabel = genre; // Save genre in currentLabel for future reference 
+    	let formattedLabel = StringFormat.formatDisplayName(currentLabel);
+    	let question = {
+    		text: "How do you feel about the genre \"" + formattedLabel + "\"?",
+            type: QUESTION_FORMATS.TERNARY,
+            content: {} 
+        };
+    	
+    	return question;
+
+    }
+    var generateMultiGenreQuestion = function(queryResponse){
+    	//TODO Query on genre somehow
+    	let genres;
+    	currentLabels = genres;
+    	formattedLabels = "this should be a list of formatted labels";
+    	let question = {
+            text: "Pick book topics from these that would interest you",
+            type: QUESTION_FORMATS.MUlTI,
+            content: {
+            	options: formattedLabels
+            } 
+        };
+
+        return question;
+
     }
     /*
     ///////////////////// Quote Question Generation Function ////////////////////////
