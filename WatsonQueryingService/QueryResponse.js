@@ -69,9 +69,15 @@ function QueryResponse(queryResponse, fileType){
     }
 
     this.getCategories = function(){
-        return queryResponse.result.aggregations[0].results;
+        categories_JSON = queryResponse.result.aggregations[0].results;
+        categories = [];
+        for(var i = 0; i < categories_JSON.length; i++){
+            label = categories_JSON[i].key;
+            label = label.substring(label.lastIndexOf("/") + 1);
+            categories.push(label);
+        }
+        return categories;
     }
-
 
 }
 

@@ -140,8 +140,7 @@ function QuestionGenerator(){
 
         console.log(categories);
         for(var i = 0; i < categories.length; i++){
-            label = categories[i].key;
-            label = label.substring(label.lastIndexOf("/") + 1);
+            label = categories[i];
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
                 break;
@@ -170,8 +169,7 @@ function QuestionGenerator(){
     	var formattedLabels = [];
 
     	for(var i = 0; i < categories.length; i++){
-            let label = categories[i].key;
-            label = label.substring(label.lastIndexOf("/") + 1);
+            let label = categories[i];
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
                 labels.push(label)
