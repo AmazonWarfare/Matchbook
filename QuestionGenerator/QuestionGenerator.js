@@ -97,6 +97,7 @@ function QuestionGenerator(){
 	var processQuery = function(queryResponse, resolve, reject){
         
         var matchingResults = queryResponse.result.matching_results;
+        console.log(matchingResults);
         if(matchingResults < RECOMMENDATION_THRESHOLD){
             currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
         }

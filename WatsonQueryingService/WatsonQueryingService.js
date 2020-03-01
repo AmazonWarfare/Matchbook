@@ -34,7 +34,7 @@ function WatsonQueryingService(){
     // Private members    
     var currentQueryParams = {
         environmentId: Discovery.environment_id,
-        collectionId: Discovery.collection_id,
+        collectionId: Discovery.json_collection_id,
         count: 10,
         query: "",
         _return: "",
@@ -72,6 +72,7 @@ function WatsonQueryingService(){
             query: currentQueryParams.query + queryConcat + category
         };
     }
+    
 
 
 }
