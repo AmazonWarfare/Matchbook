@@ -49,6 +49,7 @@ function WatsonQueryingService(){
     const discoveryService = Discovery.discoveryService;
     
     this.queryCollection = function(){
+
         return new Promise((resolve, reject) => {
             discoveryService.query(currentQueryParams)
                 .then(queryResponse => resolve(new QueryResponse(queryResponse, fileType)))

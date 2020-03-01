@@ -12,10 +12,13 @@ class StringFormat{
     return authorsJoined;
 	}
 
+	static formatQuote(str){
+		str = str.replace("\n", " ").trim();
+		return str.substring(1, str.length-1);
+	}
 	static formatDisplayName(str) 
 	{
-		console.log(JSON.stringify(str));
-		console.log(typeof str);
+		str = str.trim();
 	    str = str.replace("_", " ");
 	    str = str.split(" ");
 	    for (var i = 0, x = str.length; i < x; i++) {

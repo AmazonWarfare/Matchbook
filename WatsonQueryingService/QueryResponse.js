@@ -38,7 +38,7 @@ function QueryResponse(queryResponse, fileType){
     };
 
     var getJSONTitle = function(){
-        return queryResponse.result.results[0].title[0].trim();
+        return queryResponse.result.results[0].title[0];
     }
     
     this.getTitle = function(){
@@ -59,6 +59,14 @@ function QueryResponse(queryResponse, fileType){
             'json': getJSONAuthor
         };
         return AUTHOR_GETTER[fileType]();
+    }
+    this.getQuotes = function(){
+        var quotes = queryResponse.result.results[0].quotes[0];
+        return quotes;
+    }
+    this.getTags = function(tagType){
+        var tagName = 'tags'+tagType;
+        return queryResponse.result.results[0][tagName][0];
     }
     var getPDFAuthor = function(){
         return queryResponse.result.results[0].extracted_metadata.author;
