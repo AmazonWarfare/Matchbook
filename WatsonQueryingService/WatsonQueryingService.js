@@ -1,4 +1,5 @@
 const Discovery = require('./discoveryConfig.js');
+const QueryResponse = require('./QueryResponse.js'); 
 
 /** 
     WatsonQueryingService API:
@@ -31,10 +32,12 @@ const Discovery = require('./discoveryConfig.js');
 
 function WatsonQueryingService(){
 
+    var fileType = 'json';
+    var collectionId = fileType === 'json' ? Discovery.json_collection_id : Discovery.pdf_collection_id;
     // Private members    
     var currentQueryParams = {
         environmentId: Discovery.environment_id,
-        collectionId: Discovery.json_collection_id,
+        collectionId: collectionId,
         count: 10,
         query: "",
         _return: "",
@@ -48,7 +51,7 @@ function WatsonQueryingService(){
     this.queryCollection = function(){
         return new Promise((resolve, reject) => {
             discoveryService.query(currentQueryParams)
-                .then(queryResponse => resolve(queryResponse))
+                .then(queryResponse => resolve(new QueryResponse(queryResponse, fileType)))
                 .catch(err => {
                     reject(err);
                 });

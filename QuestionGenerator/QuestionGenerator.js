@@ -46,7 +46,7 @@ const QUESTION_FORMATS = {
 	RECOMMENDATION: 10
 }
 
-const RECOMMENDATION_THRESHOLD = 5;
+const RECOMMENDATION_THRESHOLD = 2;
 
 function QuestionGenerator(){
 	const wqs = new WatsonQueryingService();
@@ -96,7 +96,7 @@ function QuestionGenerator(){
 	}
 	var processQuery = function(queryResponse, resolve, reject){
         
-        var matchingResults = queryResponse.result.matching_results;
+        var matchingResults = queryResponse.getNumMatchingResults();
         console.log(matchingResults);
         if(matchingResults < RECOMMENDATION_THRESHOLD){
             currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
@@ -122,8 +122,8 @@ function QuestionGenerator(){
     ////////////////// Recommendation Function /////////////////////
     var giveRecommendation = function(queryResponse){
         //console.log(queryResponse.result.results);
-        let title = StringFormat.formatDisplayName(queryResponse.result.results[0].extracted_metadata.title);
-        let author = StringFormat.formatAuthors(queryResponse.result.results[0].extracted_metadata.author);
+        let title = StringFormat.formatDisplayName(queryResponse.getTitle());
+        let author = StringFormat.formatAuthors(queryResponse.getAuthor());
         let rec = {
             text: "Based on your preferences, you might like: " + title + " by " + author,
             type: QUESTION_FORMATS.RECOMMENDATION
@@ -134,7 +134,7 @@ function QuestionGenerator(){
 
     /////////////////////// Category Question Generation Function /////////////////////
     var generateTernaryCategoryQuestion = function(queryResponse){
-        let categories = queryResponse.result.aggregations[0].results;
+        let categories = queryResponse.getCategories();
         let foundNewLabel = false;
         let label;
 
@@ -164,7 +164,7 @@ function QuestionGenerator(){
         return question;
     }
     var generateMultiCategoryQuestion = function(queryResponse){
-    	let categories = queryResponse.result.aggregations[0].results;
+    	let categories = queryResponse.getCategories();
     	let labels = [];
     	currentLabels = [];
     	var formattedLabels = [];

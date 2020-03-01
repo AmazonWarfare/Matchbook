@@ -14,6 +14,8 @@ class StringFormat{
 
 	static formatDisplayName(str) 
 	{
+		console.log(JSON.stringify(str));
+		console.log(typeof str);
 	    str = str.replace("_", " ");
 	    str = str.split(" ");
 	    for (var i = 0, x = str.length; i < x; i++) {
