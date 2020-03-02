@@ -12,119 +12,128 @@ else:
 file_name = str(sys.argv[1])
 input_name = "good_reads/" + file_name
 input_file = open(input_name, "rb")
-new_filename = "synopsis_collect/" + input_file.readline() + ".json"
+start_of_entry = input_file.readline().strip()
+while start_of_entry:
+    new_filename = "gr_collect/" + start_of_entry + ".json"
 
-title = input_file.readline()
+    title = input_file.readline().strip()
+    print(title)
 
-Author = input_file.readline()
+    Author = input_file.readline().strip()
 
-count = 0
-genre = []
-new_genre = input_file.readline()
-while new_genre != '#':
-    genre[count] = new_genre
-    new_genre = input_file.readline()
-    count += 1
+    count = 0
+    genre = []
+    new_genre = input_file.readline().strip()
+    while new_genre != '#':
+        genre.append(new_genre.replace('\n', ''))
+        new_genre = input_file.readline().strip()
+        count += 1
 
-count = 0
-tag1 = []
-new_tag = input_file.readline()
-while new_tag != '#':
-    tag1[count] = new_tag
-    new_tag = input_file.readline()
-    count += 1
+    count = 0
+    tag1 = []
+    new_tag = input_file.readline().strip()
+    while new_tag != '#':
+        tag1.append(new_tag.replace('\n', ''))
+        new_tag = input_file.readline().strip()
+        count += 1
 
-count = 0
-tag2 = []
-new_tag = input_file.readline()
-while new_tag != '#':
-    tag2[count] = new_tag
-    new_tag = input_file.readline()
-    count += 1
+    count = 0
+    tag2 = []
+    new_tag = input_file.readline().strip()
+    while new_tag != '#':
+        tag2.append(new_tag.replace('\n', ''))
+        new_tag = input_file.readline().strip()
+        count += 1
 
-count = 0
-tag3 = []
-new_tag = input_file.readline()
-while new_tag != '#':
-    tag3[count] = new_tag
-    new_tag = input_file.readline()
-    count += 1
+    count = 0
+    tag3 = []
+    new_tag = input_file.readline().strip()
+    while new_tag != '#':
+        tag3.append(new_tag.replace('\n', ''))
+        new_tag = input_file.readline().strip()
+        count += 1
 
-numBooks = 0
-#series = False
-series = "no"
-seriesLine = input_file.readline()
-comma = seriesLine.rfind(",")
-if comma > -1:
-    numBooks = int(series[seriesLine.rfind(",")])
-    #series = True
-    series = "yes"
+    numBooks = 0
+    #series = False
+    series = "no"
+    seriesLine = input_file.readline().strip()
+    comma = seriesLine.rfind(",")
+    if comma > -1:
+        numBooks = int(seriesLine[seriesLine.rfind(",")+1])
+        #series = True
+        series = "yes"
 
-adaptedLine = input_file.readline()
-"""
-if adaptedLine == "yes":
-    adapted = True
-else:
-    adapted = False
-"""
-
-count = 0
-quotes = []
-new_quote = input_file.readline()
-while new_quote != '#':
-    if new_quote.endswith('\'')
-        quotes[count] = new_quote
+    adaptedLine = input_file.readline().strip()
+    """
+    if adaptedLine == "yes":
+        adapted = True
     else:
-        while not new_quote.endswith('\''):
-            quote += new_quote
-            new_quote = input_file.readline()
-        quotes[count] = quote
-    new_quote = input_file.readline()
-    count += 1
+        adapted = False
+    """
 
-rating = input_file.readline()
+    count = 0
+    quotes = []
+    new_quote = input_file.readline().strip()
+    while new_quote != '#':
+        if new_quote.endswith('\''):
+            quotes.append(new_quote.replace('\n', ''))
+        else:
+            quote = ""
+            while not new_quote.endswith('\''):
+                quote += new_quote
+                new_quote = input_file.readline().strip()
+            quotes.append(quote.replace('\n', ''))
+        new_quote = input_file.readline().strip()
+        count += 1
 
-numPages = input_file.readline()
+    rating = input_file.readline().strip()
 
-next_line = input_file.readline()
-gr_synopsis = ""
-while next_line != '#':
-    gr_synopsis += next_line
-    next_line = input_file.readline()
+    numPages = input_file.readline().strip()
 
-next_line = input_file.readline()
-wiki_synopsis = ""
-while next_line != '#':
-    wiki_synopsis += next_line
-    next_line = input_file.readline()
+    next_line = input_file.readline().strip()
+    gr_synopsis = ""
+    while next_line != '#':
+        gr_synopsis += next_line
+        next_line = input_file.readline().strip().replace('\n', ' ')
 
-data = {}
-data["title"] = []
-data['title'].append(title)
-data["author"] = []
-data['author'].append(Author)
-data["genre"] = []
-data['genre'].append(genre)
-data["tags 1"] = []
-data['tags 1'].append(tag1)
-data["tags 2"] = []
-data['tags 2'].append(tag2)
-data["tags 3"] = []
-data['tags 3'].append(tag3)
-data["series"] = []
-data['series'].append(series)
-if series == "yes":
-    data['number of books'] = []
-    data['number of books'].append(numBooks)
-data["adapted"] = []
-data['adapted'].append(adaptedLine)
-data["quotes"] = []
-data['quotes'].append(quotes)
-data["rating"] = []
-data['rating'].append(quotes)
-data['number of books'] = []
-data['number of pages'].append(numPages)
-data["good reads synopsis"] = []
-data['good read synopsis'].append(gr_synopsis)
-data["text"] = []
-data['text'].append(wki_synopsis)
+    next_line = input_file.readline().strip()
+    wiki_synopsis = ""
+    while next_line != '#':
+        wiki_synopsis += next_line
+        next_line = input_file.readline().strip().replace('\n', ' ')
+
+    data = {}
+    data["title"] = []
+    data['title'].append(title)
+    data["author"] = []
+    data['author'].append(Author)
+    data["genre"] = []
+    data['genre'].append(genre)
+    data["tags1"] = []
+    data['tags1'].append(tag1)
+    data["tags2"] = []
+    data['tags2'].append(tag2)
+    data["tags3"] = []
+    data['tags3'].append(tag3)
+    data["series"] = []
+    data['series'].append(series)
+    if series == "yes":
+        data['number_of_books'] = []
+        data['number_of_books'].append(numBooks)
+    data["adapted"] = []
+    data['adapted'].append(adaptedLine)
+    data["quotes"] = []
+    data['quotes'].append(quotes)
+    data["rating"] = []
+    data['rating'].append(rating)
+    data['number_of_pages'] = []
+    data['number_of_pages'].append(numPages)
+    data["good_reads_synopsis"] = []
+    data['good_reads_synopsis'].append(gr_synopsis)
+    data["text"] = []
+    data['text'].append(wiki_synopsis)
+
+    with open(new_filename, 'w') as outfile:
+        json.dump(data, outfile)
+
+    start_of_entry = input_file.readline().strip()
