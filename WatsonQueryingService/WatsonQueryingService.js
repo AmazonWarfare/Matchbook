@@ -34,16 +34,20 @@ function WatsonQueryingService(){
     var queryPositives = {
         categories: [],
         quotes:[],
-        tags: [],
-        genres: [],
-        emotions:[]
+        tag1: [],
+        tag2: [],
+        tag3: [],
+        genre: [],
+        emotion:[]
     }
     var queryNegatives = {
         categories: [],
         quotes:[],
-        tags: [],
-        genres: [],
-        emotions:[]
+        tag1: [],
+        tag2: [],
+        tag3: [],
+        genre: [],
+        emotion:[]
     }
 
     var fileType = 'json';
@@ -83,6 +87,24 @@ function WatsonQueryingService(){
         for(var i = 0; i < queryNegatives.categories.length; i++){
             queryConcat += "enriched_text.categories.label:!"+queryNegatives.categories[i]+",";
         }
+        for(var i = 0; i < queryPositives.tag1.length; i++){
+            queryConcat += "tag1:"+queryPositives.tag1[i]+",";
+        }
+        for(var i = 0; i < queryNegatives.tag1.length; i++){
+            queryConcat += "tag1:!"+queryPositives.tag1[i]+",";
+        }
+        for(var i = 0; i < queryPositives.tag2.length; i++){
+            queryConcat += "tag2:"+queryPositives.tag2[i]+",";
+        }
+        for(var i = 0; i < queryNegatives.tag2.length; i++){
+            queryConcat += "tag2:!"+queryPositives.tag2[i]+",";
+        }
+        for(var i = 0; i < queryPositives.tag3.length; i++){
+            queryConcat += "tag3:"+queryPositives.tag3[i]+",";
+        }
+        for(var i = 0; i < queryNegatives.categories.length; i++){
+            queryConcat += "tag3:!"+queryPositives.tag3[i]+",";
+        }
         queryConcat = queryConcat.substring(0, queryConcat.length-1);
         currentQueryParams.query = queryConcat;
     }
@@ -93,6 +115,27 @@ function WatsonQueryingService(){
             queryPositives.categories.push(category);
         } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
             queryNegatives.categories.push(category);
+        }
+    }
+    this.updateQueryWithTag1 = function(tag, ans){
+        if (ans > 0) { //User wants this category -> query contains
+            queryPositives.tag1.push(tag);
+        } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
+            queryNegatives.tag1.push(tag);
+        }
+    }
+    this.updateQueryWithTag2 = function(tag, ans){
+        if (ans > 0) { //User wants this category -> query contains
+            queryPositives.tag2.push(tag);
+        } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
+            queryNegatives.tag2.push(tag);
+        }
+    }
+    this.updateQueryWithTag3 = function(tag, ans){
+        if (ans > 0) { //User wants this category -> query contains
+            queryPositives.tag3.push(tag);
+        } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
+            queryNegatives.tag3.push(tag);
         }
     }
     
