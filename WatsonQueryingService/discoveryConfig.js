@@ -6,7 +6,7 @@ class Discovery{
 	
 	static environment_id = "0235fa72-912f-4f3d-a606-bb40a3643e40";
 	static pdf_collection_id = "5ee93bfe-ad6b-4928-9616-3df44af86c86";
-	static json_collection_id = "b86bcd40-73ea-4d03-8818-e836e78a30d7";
+	static json_collection_id = "74ac3aaa-a930-4def-aea5-ee01aa6ecaf3";
 	static apikey = '9U_r_MDwsKMpLghmLBgihOMuFJ0-c-NB3SfFZq3PF63H';
 	static serviceURL = 'https://api.us-south.discovery.watson.cloud.ibm.com/instances/aafddb55-662a-48d2-9e31-f69eb609386f';
 	static version = '2019-04-30';

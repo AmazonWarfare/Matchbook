@@ -31,10 +31,27 @@ const QueryResponse = require('./QueryResponse.js');
 **/
 
 function WatsonQueryingService(){
+    var queryPositives = {
+        categories: [],
+        quotes:[],
+        tags: [],
+        genres: [],
+        emotions:[]
+    }
+    var queryNegatives = {
+        categories: [],
+        quotes:[],
+        tags: [],
+        genres: [],
+        emotions:[]
+    }
 
     var fileType = 'json';
     var collectionId = fileType === 'json' ? Discovery.json_collection_id : Discovery.pdf_collection_id;
     // Private members    
+
+
+    console.log(collectionId);
     var currentQueryParams = {
         environmentId: Discovery.environment_id,
         collectionId: collectionId,
@@ -43,13 +60,13 @@ function WatsonQueryingService(){
         _return: "",
         aggregation: "term(enriched_text.categories.label)"
         
-    }
+    };
     
     // Instantiate Discovery
     const discoveryService = Discovery.discoveryService;
     
     this.queryCollection = function(){
-
+        buildQuery();
         return new Promise((resolve, reject) => {
             discoveryService.query(currentQueryParams)
                 .then(queryResponse => resolve(new QueryResponse(queryResponse, fileType)))
@@ -58,24 +75,27 @@ function WatsonQueryingService(){
                 });
         });
     }
+    var buildQuery = function(){
+        var queryConcat = "";
+        for(var i = 0; i < queryPositives.categories.length; i++){
+            queryConcat += "enriched_text.categories.label:"+queryPositives.categories[i]+",";
+        }
+        for(var i = 0; i < queryNegatives.categories.length; i++){
+            queryConcat += "enriched_text.categories.label:!"+queryNegatives.categories[i]+",";
+        }
+        queryConcat = queryConcat.substring(0, queryConcat.length-1);
+        currentQueryParams.query = queryConcat;
+    }
 
     this.updateQueryWithCategory = function(category, ans){
-        var queryConcat = "";
-        if (currentQueryParams.query) { //If the query isn't empty
-            queryConcat = queryConcat.concat(", ");
-        }
-        queryConcat = queryConcat.concat("enriched_text.categories.label");
+        
         if (ans > 0) { //User wants this category -> query contains
-            queryConcat = queryConcat.concat(":");
+            queryPositives.categories.push(category);
         } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
-            queryConcat = queryConcat.concat(":!");
+            queryNegatives.categories.push(category);
         }
-
-        currentQueryParams = { //Update query
-            ...currentQueryParams,
-            query: currentQueryParams.query + queryConcat + category
-        };
     }
+    
     
 
 
