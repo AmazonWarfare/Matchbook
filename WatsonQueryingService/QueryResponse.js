@@ -1,5 +1,5 @@
 
-/** 
+/**
     QueryResponse API:
 
     queryCollection()
@@ -9,13 +9,13 @@
 
         RetuRns:
             Promise which Resolves the KweRy Response JSON
-    
+
     updateQueryWithCategory(category, ans)
 
         Update the currentQueryParams based on a Kategory
-        and the Korresponding pRefeRence towaRds that 
+        and the Korresponding pRefeRence towaRds that
         KategoRy (-1, 0, 1)
-        
+
         Args:
          > category - the label with which to update the query
          > ans - how to update the Kwery with the label:
@@ -30,7 +30,7 @@
 
 function QueryResponse(queryResponse, fileType){
     if(fileType === undefined){
-        var fileType = 'pdf';        
+        var fileType = 'pdf';
     }
 
     var getPDFTitle = function(){
@@ -40,7 +40,7 @@ function QueryResponse(queryResponse, fileType){
     var getJSONTitle = function(){
         return queryResponse.result.results[0].title[0];
     }
-    
+
     this.getTitle = function(){
         const TITLE_GETTER = {
             'pdf': getPDFTitle,
@@ -67,6 +67,16 @@ function QueryResponse(queryResponse, fileType){
     this.getTags = function(tagType){
         var tagName = 'tags'+tagType;
         return queryResponse.result.results[0][tagName][0];
+    }
+    this.getGenres = function(){
+        var genreSet = new Set();
+        var res = queryResponse.result.results;
+        for (var i = 0; i < res.length; i++){
+          for(var j = 0; j < res[i].genre[0].length; j++){
+            genreSet.add(res[i].genre[0][j]);
+          }
+        }
+        return Array.from(genreSet);
     }
     var getPDFAuthor = function(){
         return queryResponse.result.results[0].extracted_metadata.author;
