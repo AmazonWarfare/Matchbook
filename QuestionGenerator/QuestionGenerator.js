@@ -34,8 +34,8 @@ const StringFormat = require('./stringFormat.js');
 **/
 
 const PREFERENCE_OPTIONS = {
-    CATEGORY: 1,
-    GENRE: 0,
+    CATEGORY: 0,
+    GENRE: 1,
     EMOTION: 2,
     QUOTE: 3,
     TAG: 4 // Add more stuff here if needed
@@ -48,7 +48,7 @@ const QUESTION_FORMATS = {
 	RECOMMENDATION: 10
 }
 
-const RECOMMENDATION_THRESHOLD = 2;
+const RECOMMENDATION_THRESHOLD = 1;
 
 function QuestionGenerator(){
 	const wqs = new WatsonQueryingService();
@@ -60,6 +60,7 @@ function QuestionGenerator(){
     var currentLabel;
     var currentLabels;
     var questionCount = 0;
+    var questionOrder = 0; //Current order: genre (1), tag (1), category(1), quote (until positive answer), recommendation
 
 	var getNextQuestion = function(queryResponse){
 		let question;
@@ -99,8 +100,29 @@ function QuestionGenerator(){
             question = QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat](queryResponse);
 
             if(question === 0){
-                currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
+              if(questionOrder === 0){ //This should never happen. This means the genre question didn't work.
+                console.log("ERORR: Genre question returned 0!");
+                questionOrder++;
+                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+                currentPreferenceOption = PREFERENCE_OPTIONS.TAG; //Move on to tag questions
                 continue;
+              }else if(questionOrder === 1){//All available tag questions have been asked
+                console.log("All available tags have been asked about.");
+                questionOrder++;
+                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+                currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;//Move on to category questions
+                continue;
+              }else if(questionOrder === 2){//All available category questions have been asked
+                console.log("All available categories have been asked about.");
+                questionOrder++;
+                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+                currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE; //Move on to quote questions
+                continue;
+              }else{ //All available quote questions have been asked
+                //TODO: maybe go back and try a different type of question again?
+                currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION; //For now, give recommendation
+                continue;
+              }
             } else {
                 break;
             }
@@ -109,11 +131,27 @@ function QuestionGenerator(){
         return question;
 	}
 	var processQuery = function(queryResponse, resolve, reject){
-
         var matchingResults = queryResponse.getNumMatchingResults();
         console.log(matchingResults);
         if(matchingResults < RECOMMENDATION_THRESHOLD){
             currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
+        }else if(questionCount === 0){
+          questionCount++;
+        }else if(questionCount === 1){
+          currentPreferenceOption = PREFERENCE_OPTIONS.TAG;
+          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+          questionCount++;
+        }else if(questionCount === 2){
+          currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
+          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+          questionCount++;
+        }else if(questionCount === 3){
+          currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE;
+          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+          questionCount++;
+        }else{
+          currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
+          questionCount = 1;//If the recommendation is rejected, start with tags again 
         }
         let question = getNextQuestion(queryResponse);
         resolve(question);
@@ -130,6 +168,9 @@ function QuestionGenerator(){
         if (currentPreferenceOption === PREFERENCE_OPTIONS.CATEGORY) {
             provideCategoryAnswer(ans);
         } else if (currentPreferenceOption === PREFERENCE_OPTIONS.QUOTE){
+            if(ans === 0){
+              questionCount = 3; //ensures that process query will give another quote question
+            }
             provideQuoteAnswer(ans);
         } else if(currentPreferenceOption === PREFERENCE_OPTIONS.GENRE){
             provideGenreAnswer(ans);
