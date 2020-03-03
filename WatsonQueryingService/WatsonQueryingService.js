@@ -138,9 +138,10 @@ function WatsonQueryingService(){
             queryNegatives.tag3.push(tag);
         }
     }
+    this.updateQueryWithTitle = function(tag, ans){
+        // TODO: this next. Have to format title so that it does equality query instead of contains.
+    }
     
-    
-
 
 }
 
