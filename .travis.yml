@@ -6,4 +6,4 @@ install:
   - cd ui
   - npm install
 
-script: phantomjs "./test.js"
+script: phantomjs ./test.js
