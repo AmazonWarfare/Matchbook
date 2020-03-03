@@ -50,16 +50,16 @@ const RECOMMENDATION_THRESHOLD = 2;
 
 function QuestionGenerator(){
 	const wqs = new WatsonQueryingService();
-	var usedCateg = new Set(); //So that category questions won't be repeated
-    var currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY; //change to genre by default
-    var currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-    var currentLabel;
-    var currentLabels;
-    var questionCount = 0;
+	let usedCateg = new Set(); //So that category questions won't be repeated
+    let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY; //change to genre by default
+    let currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+    let currentLabel;
+    let currentLabels;
+    let questionCount = 0;
 
-	var getNextQuestion = function(queryResponse){
+	let getNextQuestion = function(queryResponse){
 		let question;
-		var QUESTION_GETTER_MAP = {
+		let QUESTION_GETTER_MAP = {
 			[PREFERENCE_OPTIONS.CATEGORY]: {
 				[QUESTION_FORMATS.TERNARY]: generateTernaryCategoryQuestion,
 				[QUESTION_FORMATS.MULTI]: generateMultiCategoryQuestion,
@@ -94,9 +94,9 @@ function QuestionGenerator(){
 	        
         return question;
 	}
-	var processQuery = function(queryResponse, resolve, reject){
+	let processQuery = function(queryResponse, resolve, reject){
         
-        var matchingResults = queryResponse.getNumMatchingResults();
+        let matchingResults = queryResponse.getNumMatchingResults();
         console.log(matchingResults);
         if(matchingResults < RECOMMENDATION_THRESHOLD){
             currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
@@ -120,7 +120,7 @@ function QuestionGenerator(){
         }
     }
     ////////////////// Recommendation Function /////////////////////
-    var giveRecommendation = function(queryResponse){
+    let giveRecommendation = function(queryResponse){
         //console.log(queryResponse.result.results);
         let title = StringFormat.formatDisplayName(queryResponse.getTitle());
         let author = StringFormat.formatAuthors(queryResponse.getAuthor());
@@ -133,13 +133,13 @@ function QuestionGenerator(){
     }
 
     /////////////////////// Category Question Generation Function /////////////////////
-    var generateTernaryCategoryQuestion = function(queryResponse){
+    let generateTernaryCategoryQuestion = function(queryResponse){
         let categories = queryResponse.getCategories();
         let foundNewLabel = false;
         let label;
 
         console.log(categories);
-        for(var i = 0; i < categories.length; i++){
+        for(let i = 0; i < categories.length; i++){
             label = categories[i];
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
@@ -155,20 +155,20 @@ function QuestionGenerator(){
         usedCateg.add(label);
 
         let question = {
-            text: "How do you feel about the concept of \"" + currentLabel + "\" in books?",
+            text: "How do you feel about the concept of \"" + formattedLabel + "\" in books?",
             type: QUESTION_FORMATS.TERNARY,
             content: {} // No content for ternary question
         };
 
         return question;
     }
-    var generateMultiCategoryQuestion = function(queryResponse){
+    let generateMultiCategoryQuestion = function(queryResponse){
     	let categories = queryResponse.getCategories();
     	let labels = [];
     	currentLabels = [];
-    	var formattedLabels = [];
+    	let formattedLabels = [];
 
-    	for(var i = 0; i < categories.length; i++){
+    	for(let i = 0; i < categories.length; i++){
             let label = categories[i];
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
@@ -195,11 +195,11 @@ function QuestionGenerator(){
     }
 
     //////////////////// Category Update Query Function ////////////////////
-    var provideCategoryAnswer = function(ans){
+    let provideCategoryAnswer = function(ans){
     	wqs.updateQueryWithCategory(currentLabel, ans);
         
     }
-    var generateTernaryGenreQuestion = function(queryResponse){
+    let generateTernaryGenreQuestion = function(queryResponse){
     	// TODO: Query on genre somehow
     	let genre;
     	currentLabel = genre; // Save genre in currentLabel for future reference 
@@ -213,7 +213,7 @@ function QuestionGenerator(){
     	return question;
 
     }
-    var generateMultiGenreQuestion = function(queryResponse){
+    let generateMultiGenreQuestion = function(queryResponse){
     	//TODO Query on genre somehow
     	let genres;
     	currentLabels = genres;
@@ -231,12 +231,12 @@ function QuestionGenerator(){
     }
     /*
     ///////////////////// Quote Question Generation Function ////////////////////////
-    var generateQuoteQuestion = function(){
+    let generateQuoteQuestion = function(){
         //// TODO:
     }
 
     ///////////////////// Emotion Question Generation Function //////////////////////
-    var generateEmotionQuestion = function(){ //INCOMPLETE//////////////
+    let generateEmotionQuestion = function(){ //INCOMPLETE//////////////
         tempQueryParams = {
             environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
             collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
@@ -244,7 +244,7 @@ function QuestionGenerator(){
         };
         discovery.query(currentQueryParams)
             .then(queryResponse => {
-                var max = queryResponse.result.aggregations[0].value;
+                let max = queryResponse.result.aggregations[0].value;
             })
             .catch(err => {
                 console.log('error:', err);

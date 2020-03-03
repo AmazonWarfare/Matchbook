@@ -30,14 +30,14 @@
 
 function QueryResponse(queryResponse, fileType){
     if(fileType === undefined){
-        var fileType = 'pdf';        
+        let fileType = 'pdf';        
     }
 
-    var getPDFTitle = function(){
+    let getPDFTitle = function(){
         return queryResponse.result.results[0].extracted_metadata.title;
     };
 
-    var getJSONTitle = function(){
+    let getJSONTitle = function(){
         return queryResponse.result.results[0].title[0];
     }
     
@@ -61,25 +61,25 @@ function QueryResponse(queryResponse, fileType){
         return AUTHOR_GETTER[fileType]();
     }
     this.getQuotes = function(){
-        var quotes = queryResponse.result.results[0].quotes[0];
+        let quotes = queryResponse.result.results[0].quotes[0];
         return quotes;
     }
     this.getTags = function(tagType){
-        var tagName = 'tags'+tagType;
+        let tagName = 'tags'+tagType;
         return queryResponse.result.results[0][tagName][0];
     }
-    var getPDFAuthor = function(){
+    let getPDFAuthor = function(){
         return queryResponse.result.results[0].extracted_metadata.author;
     };
 
-    var getJSONAuthor = function(){
+    let getJSONAuthor = function(){
         return queryResponse.result.results[0].author;
     }
 
     this.getCategories = function(){
         categories_JSON = queryResponse.result.aggregations[0].results;
         categories = [];
-        for(var i = 0; i < categories_JSON.length; i++){
+        for(let i = 0; i < categories_JSON.length; i++){
             label = categories_JSON[i].key;
             label = label.substring(label.lastIndexOf("/") + 1);
             categories.push(label);
