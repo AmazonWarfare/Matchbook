@@ -1,4 +1,3 @@
-#python book_splitter_json.py filename title author genre
 import sys
 import os
 import json
@@ -76,13 +75,14 @@ while start_of_entry:
     new_quote = input_file.readline().strip()
     while new_quote != '#':
         if new_quote.endswith('\''):
-            quotes.append(new_quote.replace('\n', ''))
+            quotes.append(new_quote)
         else:
             quote = ""
             while not new_quote.endswith('\''):
                 quote += new_quote
                 new_quote = input_file.readline().strip()
-            quotes.append(quote.replace('\n', ''))
+            quote += new_quote
+            quotes.append(quote)
         new_quote = input_file.readline().strip()
         count += 1
 

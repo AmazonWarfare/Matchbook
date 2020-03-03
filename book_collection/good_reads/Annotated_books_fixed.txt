@@ -93,7 +93,7 @@ Stephen King
 Horror
 #
 #
-SUSPENCE
+SUSPENSE
 SCARY CLOWNS
 #
 DISTURBING
@@ -449,7 +449,7 @@ Journey before Destination.'
 '"Just because I do not accept the teachings of the devotaries does not mean I've discarded a belief in right and wrong."
 "But the Almighty determines what is right!"
 "Must someone, some unseen thing, declare what is right for it to be right? I believe that my own morality -- which answers only to my heart -- is more sure and true than the morality of those who do right only because they fear retribution."'
-"Ah, the outdoors," Shallan said. "I visited that mythical place once."'
+'"Ah, the outdoors," Shallan said. "I visited that mythical place once."'
 '"Brightness...I believe you stray into sarcasm."
 
 "Funny. I thought I'd run straight into it, screaming at the top of my lungs."'
