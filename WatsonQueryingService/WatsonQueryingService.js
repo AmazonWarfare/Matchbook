@@ -34,20 +34,22 @@ function WatsonQueryingService(){
     var queryPositives = {
         categories: [],
         quotes:[],
-        tag1: [],
-        tag2: [],
-        tag3: [],
+        tags1: [],
+        tags2: [],
+        tags3: [],
         genre: [],
-        emotion:[]
+        emotion:[],
+        title: []
     }
     var queryNegatives = {
         categories: [],
         quotes:[],
-        tag1: [],
-        tag2: [],
-        tag3: [],
+        tags1: [],
+        tags2: [],
+        tags3: [],
         genre: [],
-        emotion:[]
+        emotion:[],
+        title: []
     }
 
     var fileType = 'json';
@@ -81,31 +83,43 @@ function WatsonQueryingService(){
     }
     var buildQuery = function(){
         var queryConcat = "";
+        if(queryPositives.title.length > 0){
+            queryConcat = "title::"+JSON.stringify(queryPositives.title[0]);
+            console.log('Query: '+  queryConcat);
+            currentQueryParams.query = queryConcat;
+            return 0;
+        }
         for(var i = 0; i < queryPositives.categories.length; i++){
-            queryConcat += "enriched_text.categories.label:"+queryPositives.categories[i]+",";
+            queryConcat += "enriched_text.categories.label:"+queryPositives.categories[i]+"|";
         }
         for(var i = 0; i < queryNegatives.categories.length; i++){
-            queryConcat += "enriched_text.categories.label:!"+queryNegatives.categories[i]+",";
+            queryConcat += "enriched_text.categories.label:!"+queryNegatives.categories[i]+"|";
         }
-        for(var i = 0; i < queryPositives.tag1.length; i++){
-            queryConcat += "tag1:"+queryPositives.tag1[i]+",";
+        for(var i = 0; i < queryPositives.tags1.length; i++){
+            queryConcat += "tags1:"+queryPositives.tags1[i]+"|";
         }
-        for(var i = 0; i < queryNegatives.tag1.length; i++){
-            queryConcat += "tag1:!"+queryPositives.tag1[i]+",";
+        for(var i = 0; i < queryNegatives.tags1.length; i++){
+            queryConcat += "tags1:!"+queryNegatives.tags1[i]+"|";
         }
-        for(var i = 0; i < queryPositives.tag2.length; i++){
-            queryConcat += "tag2:"+queryPositives.tag2[i]+",";
+        for(var i = 0; i < queryPositives.tags2.length; i++){
+            queryConcat += "tags2:"+queryPositives.tags2[i]+"|";
         }
-        for(var i = 0; i < queryNegatives.tag2.length; i++){
-            queryConcat += "tag2:!"+queryPositives.tag2[i]+",";
+        for(var i = 0; i < queryNegatives.tags2.length; i++){
+            queryConcat += "tags2:!"+queryNegatives.tags2[i]+"|";
         }
-        for(var i = 0; i < queryPositives.tag3.length; i++){
-            queryConcat += "tag3:"+queryPositives.tag3[i]+",";
+        for(var i = 0; i < queryPositives.tags3.length; i++){
+            queryConcat += "tags3:"+queryPositives.tags3[i]+"|";
         }
-        for(var i = 0; i < queryNegatives.categories.length; i++){
-            queryConcat += "tag3:!"+queryPositives.tag3[i]+",";
+        for(var i = 0; i < queryNegatives.tags3.length; i++){
+            queryConcat += "tags3:!"+queryNegatives.tags3[i]+"|";
         }
+        
+        for(var i = 0; i < queryNegatives.title.length; i++){
+            queryConcat += "title:!"+JSON.stringify(queryNegatives.title[i])+"|";
+        }
+
         queryConcat = queryConcat.substring(0, queryConcat.length-1);
+        console.log('Query: '+  queryConcat);
         currentQueryParams.query = queryConcat;
     }
 
@@ -118,27 +132,43 @@ function WatsonQueryingService(){
         }
     }
     this.updateQueryWithTag1 = function(tag, ans){
+        console.log('WQS received tag: ' + tag);
+        console.log('WQS received ans: ' + ans);
         if (ans > 0) { //User wants this category -> query contains
-            queryPositives.tag1.push(tag);
+            queryPositives.tags1.push(tag);
         } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
-            queryNegatives.tag1.push(tag);
+            queryNegatives.tags1.push(tag);
         }
+        console.log('QueryPositives.Tags1:');
+        console.log(JSON.stringify(queryPositives.tags1));
+        console.log('QueryNegatives.Tags1:');
+        console.log(JSON.stringify(queryNegatives.tags1));
     }
     this.updateQueryWithTag2 = function(tag, ans){
         if (ans > 0) { //User wants this category -> query contains
-            queryPositives.tag2.push(tag);
+            queryPositives.tags2.push(tag);
         } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
-            queryNegatives.tag2.push(tag);
+            queryNegatives.tags2.push(tag);
         }
     }
     this.updateQueryWithTag3 = function(tag, ans){
+        console.log('Tag3:'+tag);
+        console.log('Tag3 ans:'+ans);
         if (ans > 0) { //User wants this category -> query contains
-            queryPositives.tag3.push(tag);
+            queryPositives.tags3.push(tag);
         } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
-            queryNegatives.tag3.push(tag);
+            queryNegatives.tags3.push(tag);
         }
     }
-    this.updateQueryWithTitle = function(tag, ans){
+    this.updateQueryWithTitle = function(title, ans){
+
+        var titleFormatted = [title];
+        console.log(JSON.stringify(titleFormatted));
+        if (ans > 0) { //User wants this category -> query contains
+            queryPositives.title.push(titleFormatted);
+        } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
+            queryNegatives.title.push(titleFormatted);
+        }
         // TODO: this next. Have to format title so that it does equality query instead of contains.
     }
     
