@@ -5,3 +5,5 @@ install:
   - npm install
   - cd ui
   - npm install
+
+script: phantomjs test.js
