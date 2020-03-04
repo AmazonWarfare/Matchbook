@@ -8,6 +8,19 @@
   width: 50%;
   border-radius: 10px;
   margin: 5% auto;
+  transition: height 1s;
+}
+
+.clicked {
+  background: $white;
+  border: none;
+}
+
+.loader {
+  display: block;
+  margin: auto;
+  border-radius: 5px;
+  max-height: 150px;
 }
 
 .question-text {

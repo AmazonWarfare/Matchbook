@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255); display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<defs>
+  <filter id="ldio-hokoywnz9yc-filter" filterUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="3"></feGaussianBlur>
+    <feComponentTransfer result="cutoff">
+      <feFuncA type="linear" slope="10" intercept="-5"></feFuncA>
+    </feComponentTransfer>
+  </filter>
+</defs><g filter="url(#ldio-hokoywnz9yc-filter)"><circle cx="47" cy="21.9555" r="9.93476" fill="#cc2204">
+  <animate attributeName="cy" values="148.79433853464843;-35.155167382738995" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.25568843151969894s"></animate>
+  <animate attributeName="r" values="37;0;0" keyTimes="0;0.9426352018015292;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.25568843151969894s"></animate>
+</circle><circle cx="37" cy="84.3471" r="6.34579" fill="#cc2204">
+  <animate attributeName="cy" values="111.1601396441832;-7.925076381503543" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6983552033781469s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.5321506981575046;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6983552033781469s"></animate>
+</circle><circle cx="46" cy="2.0473" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="160.2166860225527;-36.64786308168576" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.34983052245753915s"></animate>
+  <animate attributeName="r" values="44;0;0" keyTimes="0;0.7252933315032817;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.34983052245753915s"></animate>
+</circle><circle cx="87" cy="57.831" r="1.84114" fill="#cc2204">
+  <animate attributeName="cy" values="118.39493439650447;6.733177384195109" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13408243870761627s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.6647834724334513;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13408243870761627s"></animate>
+</circle><circle cx="30" cy="96.3329" r="17.7836" fill="#cc2204">
+  <animate attributeName="cy" values="148.16378101919435;-17.046721417973895" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7715522660691313s"></animate>
+  <animate attributeName="r" values="29;0;0" keyTimes="0;0.811139222939309;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7715522660691313s"></animate>
+</circle><circle cx="31" cy="72.2756" r="5.85425" fill="#cc2204">
+  <animate attributeName="cy" values="111.72857735305195;1.0468135391403042" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8068647166344772s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.761987452688945;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8068647166344772s"></animate>
+</circle><circle cx="49" cy="38.228" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="119.18792642735238;-0.37895649381789553" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.24542382948616837s"></animate>
+  <animate attributeName="r" values="17;0;0" keyTimes="0;0.667671776703881;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.24542382948616837s"></animate>
+</circle><circle cx="57" cy="61.9225" r="17.4134" fill="#cc2204">
+  <animate attributeName="cy" values="158.93558662710294;-34.102145472263814" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.101167387599159s"></animate>
+  <animate attributeName="r" values="42;0;0" keyTimes="0;0.8584975028330383;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.101167387599159s"></animate>
+</circle><circle cx="54" cy="25.2457" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="160.00169053305126;-22.721850231317347" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.29532049633635066s"></animate>
+  <animate attributeName="r" values="41;0;0" keyTimes="0;0.5176428602472763;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.29532049633635066s"></animate>
+</circle><circle cx="40" cy="-25.4428" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="136.43693292362389;-34.75486808489033" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.46731983629109003s"></animate>
+  <animate attributeName="r" values="36;0;0" keyTimes="0;0.8719593705816417;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.46731983629109003s"></animate>
+</circle><circle cx="51" cy="101.785" r="11.149" fill="#cc2204">
+  <animate attributeName="cy" values="117.25192341716337;-5.4131755082800055" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.61647843759733s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.8855277639995506;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.61647843759733s"></animate>
+</circle><circle cx="28" cy="86.5891" r="4.84254" fill="#cc2204">
+  <animate attributeName="cy" values="120.63054469292874;-9.60064717324968" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7283014607014601s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.5068248842003192;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7283014607014601s"></animate>
+</circle><circle cx="34" cy="7.00767" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="134.78253567190256;-7.731459597967945" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4268019006936173s"></animate>
+  <animate attributeName="r" values="24;0;0" keyTimes="0;0.5238416395260513;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4268019006936173s"></animate>
+</circle><circle cx="51" cy="-19.2329" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="146.8738006883537;-22.63227938403943" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.49570025741806695s"></animate>
+  <animate attributeName="r" values="30;0;0" keyTimes="0;0.627448486384497;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.49570025741806695s"></animate>
+</circle><circle cx="59" cy="11.0217" r="4.68147" fill="#cc2204">
+  <animate attributeName="cy" values="145.5803069159782;-21.29728471455286" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3522178673600102s"></animate>
+  <animate attributeName="r" values="40;0;0" keyTimes="0;0.9132100631473561;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3522178673600102s"></animate>
+</circle><circle cx="55" cy="14.0824" r="4.72574" fill="#cc2204">
+  <animate attributeName="cy" values="148.91051674547703;-17.840409271319437" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3540590025009792s"></animate>
+  <animate attributeName="r" values="32;0;0" keyTimes="0;0.9486566504894028;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3540590025009792s"></animate>
+</circle><circle cx="48" cy="34.5295" r="11.0806" fill="#cc2204">
+  <animate attributeName="cy" values="153.4899683632185;-32.31994404077594" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2149419223846046s"></animate>
+  <animate attributeName="r" values="39;0;0" keyTimes="0;0.8943193641296263;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2149419223846046s"></animate>
+</circle><circle cx="62" cy="116.789" r="12.2664" fill="#cc2204">
+  <animate attributeName="cy" values="133.28052208129034;-12.073889539225544" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6060419457973746s"></animate>
+  <animate attributeName="r" values="14;0;0" keyTimes="0;0.9162557263499589;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6060419457973746s"></animate>
+</circle><circle cx="41" cy="117.679" r="27.0784" fill="#cc2204">
+  <animate attributeName="cy" values="155.37504794270072;-22.81288364071513" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6871114866152622s"></animate>
+  <animate attributeName="r" values="36;0;0" keyTimes="0;0.8536515175021765;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6871114866152622s"></animate>
+</circle><circle cx="74" cy="125.113" r="17.7003" fill="#cc2204">
+  <animate attributeName="cy" values="134.6025106845959;-14.998823431333026" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5646970920012374s"></animate>
+  <animate attributeName="r" values="19;0;0" keyTimes="0;0.9273295510318271;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5646970920012374s"></animate>
+</circle><circle cx="44" cy="36.6002" r="13.302" fill="#cc2204">
+  <animate attributeName="cy" values="141.12039431138467;-29.878284022327513" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.19098072344202238s"></animate>
+  <animate attributeName="r" values="37;0;0" keyTimes="0;0.9543268994971036;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.19098072344202238s"></animate>
+</circle><circle cx="41" cy="-5.70833" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="144.07221511517074;-26.687183927745174" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.41074006143434216s"></animate>
+  <animate attributeName="r" values="27;0;0" keyTimes="0;0.6513198362650359;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.41074006143434216s"></animate>
+</circle><circle cx="45" cy="86.7409" r="17.8713" fill="#cc2204">
+  <animate attributeName="cy" values="149.69237973695803;-31.954382012270905" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.79868700233889s"></animate>
+  <animate attributeName="r" values="43;0;0" keyTimes="0;0.5930296758689669;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.79868700233889s"></animate>
+</circle><circle cx="64" cy="69.6929" r="16.6542" fill="#cc2204">
+  <animate attributeName="cy" values="134.89334284960773;-19.061468230545458" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.03583146658064266s"></animate>
+  <animate attributeName="r" values="34;0;0" keyTimes="0;0.8301228949243251;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.03583146658064266s"></animate>
+</circle><circle cx="78" cy="101.257" r="8.48353" fill="#cc2204">
+  <animate attributeName="cy" values="115.96213992030843;2.648582960883484" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6195287721089189s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.8557883118335544;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6195287721089189s"></animate>
+</circle><circle cx="43" cy="44.0451" r="1.44044" fill="#cc2204">
+  <animate attributeName="cy" values="118.26097295732717;-6.65940247189317" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17682466600130015s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.6940838769379587;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17682466600130015s"></animate>
+</circle><circle cx="41" cy="59.7558" r="3.66717" fill="#cc2204">
+  <animate attributeName="cy" values="123.18786104733653;-4.486765007596581" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.09642889440622136s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.6920448273417394;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.09642889440622136s"></animate>
+</circle><circle cx="31" cy="115.946" r="24.3643" fill="#cc2204">
+  <animate attributeName="cy" values="148.72768809030146;-28.059670027668407" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.665522461629959s"></animate>
+  <animate attributeName="r" values="31;0;0" keyTimes="0;0.8662726472562198;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.665522461629959s"></animate>
+</circle><circle cx="57" cy="38.7139" r="15.2057" fill="#cc2204">
+  <animate attributeName="cy" values="142.18207053386152;-31.856398469448337" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17716102589798144s"></animate>
+  <animate attributeName="r" values="39;0;0" keyTimes="0;0.9744347634568893;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17716102589798144s"></animate>
+</circle><circle cx="33" cy="52.413" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="136.11857028453724;-24.0983279371231" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.11760611825040161s"></animate>
+  <animate attributeName="r" values="31;0;0" keyTimes="0;0.5216549082594747;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.11760611825040161s"></animate>
+</circle><circle cx="57" cy="-6.86343" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="136.76892387478662;-19.519755892182545" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.44534850087409306s"></animate>
+  <animate attributeName="r" values="33;0;0" keyTimes="0;0.7252412996900245;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.44534850087409306s"></animate>
+</circle><circle cx="60" cy="109.616" r="20.6363" fill="#cc2204">
+  <animate attributeName="cy" values="136.42282279188586;-18.661749707716066" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6551305955190393s"></animate>
+  <animate attributeName="r" values="27;0;0" keyTimes="0;0.7334007261435649;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6551305955190393s"></animate>
+</circle><circle cx="58" cy="89.6831" r="22.2509" fill="#cc2204">
+  <animate attributeName="cy" values="132.338704645364;-27.552185666311797" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7327536021973026s"></animate>
+  <animate attributeName="r" values="32;0;0" keyTimes="0;0.875666558025858;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7327536021973026s"></animate>
+</circle><circle cx="55" cy="12.7639" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="157.42096029742032;-37.11802125534285" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.30036418532584486s"></animate>
+  <animate attributeName="r" values="44;0;0" keyTimes="0;0.6375062888767639;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.30036418532584486s"></animate>
+</circle><circle cx="66" cy="27.7803" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="117.72662790965227;9.014544569100925" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3696142399279467s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.7892730006123785;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3696142399279467s"></animate>
+</circle><circle cx="66" cy="52.3129" r="2.22842" fill="#cc2204">
+  <animate attributeName="cy" values="136.9124297679873;-15.608732831672835" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1442361747219768s"></animate>
+  <animate attributeName="r" values="23;0;0" keyTimes="0;0.6141803169104287;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1442361747219768s"></animate>
+</circle><circle cx="43" cy="106.393" r="13.4476" fill="#cc2204">
+  <animate attributeName="cy" values="133.9974634438446;-13.495965566050664" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6669505725698587s"></animate>
+  <animate attributeName="r" values="17;0;0" keyTimes="0;0.8956424146550227;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6669505725698587s"></animate>
+</circle><circle cx="33" cy="3.33513" r="3.21911" fill="#cc2204">
+  <animate attributeName="cy" values="147.34899720309906;-29.484163749858578" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3588905685079965s"></animate>
+  <animate attributeName="r" values="31;0;0" keyTimes="0;0.9087744996449716;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3588905685079965s"></animate>
+</circle><circle cx="50" cy="75.322" r="17.7444" fill="#cc2204">
+  <animate attributeName="cy" values="136.9104439851468;-24.9718172860786" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.0002519761017482457s"></animate>
+  <animate attributeName="r" values="30;0;0" keyTimes="0;0.9312927585507049;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.0002519761017482457s"></animate>
+</circle><circle cx="44" cy="-2.06496" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="155.3860255377814;-33.550757506507125" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3745497168655832s"></animate>
+  <animate attributeName="r" values="41;0;0" keyTimes="0;0.6326015974861061;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3745497168655832s"></animate>
+</circle><circle cx="36" cy="67.4087" r="6.01739" fill="#cc2204">
+  <animate attributeName="cy" values="123.5665570458149;4.843549415831816" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07675014186980011s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.7898855815165904;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07675014186980011s"></animate>
+</circle><circle cx="74" cy="50.7221" r="6.21896" fill="#cc2204">
+  <animate attributeName="cy" values="120.14481577605241;-0.32045424246989107" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.16209922491456313s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.9427023006343016;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.16209922491456313s"></animate>
+</circle><circle cx="56" cy="53.6654" r="13.5342" fill="#cc2204">
+  <animate attributeName="cy" values="155.41320646914946;-21.59249123424251" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1608923589163643s"></animate>
+  <animate attributeName="r" values="37;0;0" keyTimes="0;0.906367301599398;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1608923589163643s"></animate>
+</circle><circle cx="94" cy="26.7295" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="120.89856936004202;16.390260925589892" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4305126119089517s"></animate>
+  <animate attributeName="r" values="3;0;0" keyTimes="0;0.8130908453362841;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4305126119089517s"></animate>
+</circle><circle cx="62" cy="1.70261" r="4.823" fill="#cc2204">
+  <animate attributeName="cy" values="147.85024670069097;-29.43620287724346" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.36711619781969235s"></animate>
+  <animate attributeName="r" values="31;0;0" keyTimes="0;0.976243388021369;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.36711619781969235s"></animate>
+</circle><circle cx="12" cy="7.9996" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="119.72629007822191;-0.9927782703980848" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45071200848019577s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.8138244262882833;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45071200848019577s"></animate>
+</circle><circle cx="47" cy="123.362" r="35.5789" fill="#cc2204">
+  <animate attributeName="cy" values="148.75228106817409;-30.245352319982015" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6295058905232837s"></animate>
+  <animate attributeName="r" values="42;0;0" keyTimes="0;0.927836126434417;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6295058905232837s"></animate>
+</circle><circle cx="39" cy="58.559" r="2.97768" fill="#cc2204">
+  <animate attributeName="cy" values="121.39738318757597;-3.7550736215791787" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.10078204606750729s"></animate>
+  <animate attributeName="r" values="17;0;0" keyTimes="0;0.608715632559759;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.10078204606750729s"></animate>
+</circle><circle cx="85" cy="80.6687" r="5.20367" fill="#cc2204">
+  <animate attributeName="cy" values="120.55982125990117;-0.30420773019025305" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7850421640385762s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.5503413592265413;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7850421640385762s"></animate>
+</circle><circle cx="66" cy="38.2813" r="1.88523" fill="#cc2204">
+  <animate attributeName="cy" values="120.39837285396725;-6.448038634720916" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2208484421488767s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.7404335931537209;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2208484421488767s"></animate>
+</circle><circle cx="50" cy="84.1448" r="17.1105" fill="#cc2204">
+  <animate attributeName="cy" values="141.61642488057282;-23.186554382086587" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8004800460650167s"></animate>
+  <animate attributeName="r" values="31;0;0" keyTimes="0;0.7783314244315798;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8004800460650167s"></animate>
+</circle><circle cx="38" cy="67.6019" r="1.70786" fill="#cc2204">
+  <animate attributeName="cy" values="108.69902676264297;10.780097136824402" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.032692830805198476s"></animate>
+  <animate attributeName="r" values="3;0;0" keyTimes="0;0.9744412327359239;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.032692830805198476s"></animate>
+</circle><circle cx="51" cy="27.8557" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="138.03769533831831;-21.92236722700692" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2550927755384226s"></animate>
+  <animate attributeName="r" values="36;0;0" keyTimes="0;0.6476560173880941;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2550927755384226s"></animate>
+</circle><circle cx="57" cy="20.4292" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="146.1013070712799;-18.123728957887582" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.31826031417904843s"></animate>
+  <animate attributeName="r" values="38;0;0" keyTimes="0;0.6409868490808791;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.31826031417904843s"></animate>
+</circle><circle cx="35" cy="77.5232" r="10.7341" fill="#cc2204">
+  <animate attributeName="cy" values="128.03491464620782;-17.19910397728973" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7997082943986773s"></animate>
+  <animate attributeName="r" values="21;0;0" keyTimes="0;0.7114533798098245;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7997082943986773s"></animate>
+</circle><circle cx="86" cy="29.9951" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="111.75110844060671;-1.9924326520475768" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.27985712636982457s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.665626715428514;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.27985712636982457s"></animate>
+</circle><circle cx="47" cy="15.8596" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="137.75040178643954;-14.96459600380394" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3454639839562241s"></animate>
+  <animate attributeName="r" values="33;0;0" keyTimes="0;0.7494784383304518;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3454639839562241s"></animate>
+</circle><circle cx="12" cy="64.3941" r="2.54671" fill="#cc2204">
+  <animate attributeName="cy" values="113.90508051643071;0.7561023679123231" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.04745985175681303s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.5694009998968778;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.04745985175681303s"></animate>
+</circle><circle cx="63" cy="44.6635" r="7.76503" fill="#cc2204">
+  <animate attributeName="cy" values="137.01846955479948;-7.5692889517901385" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.21371826155755763s"></animate>
+  <animate attributeName="r" values="24;0;0" keyTimes="0;0.944253360743331;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.21371826155755763s"></animate>
+</circle><circle cx="36" cy="122.294" r="18.4007" fill="#cc2204">
+  <animate attributeName="cy" values="133.07992109950177;-5.628220263967613" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5765396872648626s"></animate>
+  <animate attributeName="r" values="20;0;0" keyTimes="0;0.9724339141132536;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5765396872648626s"></animate>
+</circle><circle cx="32" cy="45.848" r="4.55144" fill="#cc2204">
+  <animate attributeName="cy" values="141.0960068949385;-22.226048577409284" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1678042291990863s"></animate>
+  <animate attributeName="r" values="31;0;0" keyTimes="0;0.6835505172046455;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1678042291990863s"></animate>
+</circle><circle cx="23" cy="117.168" r="11.7833" fill="#cc2204">
+  <animate attributeName="cy" values="127.4763895581496;1.722655155467983" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5800225331964788s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.8758767706584677;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5800225331964788s"></animate>
+</circle><circle cx="44" cy="9.34871" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="122.78725817027107;1.143516303727452" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4565286552536102s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.5129033650924874;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4565286552536102s"></animate>
+</circle><circle cx="62" cy="100.867" r="4.1839" fill="#cc2204">
+  <animate attributeName="cy" values="114.03657617751581;5.488725517899283" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6125464201899695s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.7433441601438947;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6125464201899695s"></animate>
+</circle><circle cx="74" cy="-3.08382" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="122.96867568500296;-5.950969007567312" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.49389443766823304s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.891833726560762;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.49389443766823304s"></animate>
+</circle><circle cx="87" cy="14.1302" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="126.91279244074292;0.015545027928812516" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.42034915055951155s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.785102767599126;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.42034915055951155s"></animate>
+</circle><circle cx="80" cy="24.2124" r="3.72249" fill="#cc2204">
+  <animate attributeName="cy" values="132.0304985287554;-10.889797003758837" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.30929322223050154s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.9831219601930061;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.30929322223050154s"></animate>
+</circle><circle cx="81" cy="94.9951" r="3.37093" fill="#cc2204">
+  <animate attributeName="cy" values="121.76155353059244;9.345928968607122" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7090532190728517s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.7307949715814666;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7090532190728517s"></animate>
+</circle><circle cx="56" cy="92.8787" r="19.3056" fill="#cc2204">
+  <animate attributeName="cy" values="128.10919764059503;-26.04201593950073" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7011548854341083s"></animate>
+  <animate attributeName="r" values="27;0;0" keyTimes="0;0.8019777296406798;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7011548854341083s"></animate>
+</circle><circle cx="48" cy="82.1403" r="18.8231" fill="#cc2204">
+  <animate attributeName="cy" values="136.75110618436543;-25.072456515750044" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7911769828164243s"></animate>
+  <animate attributeName="r" values="34;0;0" keyTimes="0;0.7560188068090112;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7911769828164243s"></animate>
+</circle><circle cx="62" cy="51.964" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="151.46819603709156;-18.325613519025772" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17015096154919165s"></animate>
+  <animate attributeName="r" values="34;0;0" keyTimes="0;0.5178437303009356;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17015096154919165s"></animate>
+</circle><circle cx="6" cy="20.684" r="0" fill="#cc2204">
+  <animate attributeName="cy" values="118.63547740653377;13.05898259522245" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45258641473264455s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.9105971817834593;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45258641473264455s"></animate>
+</circle><circle cx="38" cy="55.3063" r="0.784843" fill="#cc2204">
+  <animate attributeName="cy" values="149.72398000368588;-22.245384966993576" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13957846084605277s"></animate>
+  <animate attributeName="r" values="31;0;0" keyTimes="0;0.5632990449206232;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13957846084605277s"></animate>
+</circle></g><g filter="url(#ldio-hokoywnz9yc-filter)"><circle cx="13" cy="104.653" r="6.39316" fill="#eb6613">
+  <animate attributeName="cy" values="114.1470770745787;4.114615839660811" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5835809764385543s"></animate>
+  <animate attributeName="r" values="7;0;0" keyTimes="0;0.9952529167480494;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5835809764385543s"></animate>
+</circle><circle cx="35" cy="9.09904" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="145.07902926656644;-20.45533558083748" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.36472154305258536s"></animate>
+  <animate attributeName="r" values="28;0;0" keyTimes="0;0.6314762219247425;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.36472154305258536s"></animate>
+</circle><circle cx="33" cy="-10.0779" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="123.26483173598301;-15.950945435109613" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4774093156888151s"></animate>
+  <animate attributeName="r" values="17;0;0" keyTimes="0;0.5529042646043973;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4774093156888151s"></animate>
+</circle><circle cx="63" cy="21.3453" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="124.29686579580348;10.786857118884996" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.43540049508652223s"></animate>
+  <animate attributeName="r" values="7;0;0" keyTimes="0;0.7731840436058507;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.43540049508652223s"></animate>
+</circle><circle cx="55" cy="11.3539" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="141.43990496259283;-25.786254474761222" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.328724081217519s"></animate>
+  <animate attributeName="r" values="26;0;0" keyTimes="0;0.6049380867398775;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.328724081217519s"></animate>
+</circle><circle cx="54" cy="74.4442" r="2.81078" fill="#eb6613">
+  <animate attributeName="cy" values="119.9684028016433;-4.013165832080818" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8157338352224829s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.8386234711738663;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8157338352224829s"></animate>
+</circle><circle cx="51" cy="67.887" r="3.03498" fill="#eb6613">
+  <animate attributeName="cy" values="116.96450142635365;-1.0959126655484734" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.029380184380375495s"></animate>
+  <animate attributeName="r" values="7;0;0" keyTimes="0;0.7338897147795376;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.029380184380375495s"></animate>
+</circle><circle cx="64" cy="12.6298" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="135.01911828858377;-15.352862375941694" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3584810197956244s"></animate>
+  <animate attributeName="r" values="26;0;0" keyTimes="0;0.6490062902336237;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3584810197956244s"></animate>
+</circle><circle cx="53" cy="63.296" r="11.1382" fill="#eb6613">
+  <animate attributeName="cy" values="146.96568812293822;-19.74517727906177" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1006098782089911s"></animate>
+  <animate attributeName="r" values="27;0;0" keyTimes="0;0.8543121270442843;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1006098782089911s"></animate>
+</circle><circle cx="24" cy="31.1006" r="3.11624" fill="#eb6613">
+  <animate attributeName="cy" values="123.31943883928925;-6.749527474637635" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2717782071352721s"></animate>
+  <animate attributeName="r" values="17;0;0" keyTimes="0;0.8681360743167197;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2717782071352721s"></animate>
+</circle><circle cx="84" cy="104.332" r="7.90231" fill="#eb6613">
+  <animate attributeName="cy" values="114.28647085457699;2.3434201023087198" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5857645299380613s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.729082504246035;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5857645299380613s"></animate>
+</circle><circle cx="79" cy="75.8184" r="4.60565" fill="#eb6613">
+  <animate attributeName="cy" values="123.32157366862305;-8.179401248569576" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8108188205399947s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.5862397281835704;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8108188205399947s"></animate>
+</circle><circle cx="81" cy="68.5016" r="5.69015" fill="#eb6613">
+  <animate attributeName="cy" values="134.01337822365463;-4.810976471577558" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07583138690575192s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.7323542906352613;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07583138690575192s"></animate>
+</circle><circle cx="72" cy="81.6981" r="2.27528" fill="#eb6613">
+  <animate attributeName="cy" values="118.02065755209557;-2.172070753161793" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7620284986957185s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.7008713937356451;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7620284986957185s"></animate>
+</circle><circle cx="21" cy="5.02013" r="0.261615" fill="#eb6613">
+  <animate attributeName="cy" values="125.4772566572899;-5.877896095498067" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4437070706445819s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.9480364401767015;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4437070706445819s"></animate>
+</circle><circle cx="42" cy="38.9133" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="128.39323774769036;-13.568813328112316" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.20674402789977397s"></animate>
+  <animate attributeName="r" values="23;0;0" keyTimes="0;0.6288160375012285;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.20674402789977397s"></animate>
+</circle><circle cx="27" cy="-0.558777" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="124.1465015089408;-4.271724722344499" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.48837903101648594s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.8154471138869842;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.48837903101648594s"></animate>
+</circle><circle cx="53" cy="56.6093" r="0.631912" fill="#eb6613">
+  <animate attributeName="cy" values="118.75683857528267;4.690503488210158" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13610613842914723s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.5859796404509576;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13610613842914723s"></animate>
+</circle><circle cx="24" cy="63.8555" r="8.04367" fill="#eb6613">
+  <animate attributeName="cy" values="128.84763535378636;-15.015906018620699" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.0591859779094923s"></animate>
+  <animate attributeName="r" values="18;0;0" keyTimes="0;0.8167387496908508;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.0591859779094923s"></animate>
+</circle><circle cx="25" cy="45.5156" r="0.608116" fill="#eb6613">
+  <animate attributeName="cy" values="115.38199583209563;14.213705723727802" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.25656835665446737s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.7862179809088183;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.25656835665446737s"></animate>
+</circle><circle cx="75" cy="85.3592" r="9.63068" fill="#eb6613">
+  <animate attributeName="cy" values="136.92406115217625;-21.936895657708092" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7805314814419508s"></animate>
+  <animate attributeName="r" values="23;0;0" keyTimes="0;0.5584125896656041;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7805314814419508s"></animate>
+</circle><circle cx="50" cy="75.1634" r="15.4187" fill="#eb6613">
+  <animate attributeName="cy" values="132.25733022178466;-20.528263617073286" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.821106595593373s"></animate>
+  <animate attributeName="r" values="29;0;0" keyTimes="0;0.7979303517602162;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.821106595593373s"></animate>
+</circle><circle cx="68" cy="104.357" r="4.09738" fill="#eb6613">
+  <animate attributeName="cy" values="116.06055297949558;6.0579412032661715" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6002013447911331s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.5893491612866812;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6002013447911331s"></animate>
+</circle><circle cx="41" cy="54.6656" r="6.77186" fill="#eb6613">
+  <animate attributeName="cy" values="126.7054429542499;-19.248045714879563" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.09374631582445435s"></animate>
+  <animate attributeName="r" values="22;0;0" keyTimes="0;0.7130731609838191;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.09374631582445435s"></animate>
+</circle><circle cx="40" cy="105.369" r="22.7922" fill="#eb6613">
+  <animate attributeName="cy" values="140.1860399394308;-27.747325251755488" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6836201703801084s"></animate>
+  <animate attributeName="r" values="29;0;0" keyTimes="0;0.9685520196225448;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6836201703801084s"></animate>
+</circle><circle cx="80" cy="64.4848" r="2.3092" fill="#eb6613">
+  <animate attributeName="cy" values="123.68997686991139;-3.271957179185522" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07121885025291287s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.7580819885833662;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07121885025291287s"></animate>
+</circle><circle cx="16" cy="-4.09991" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="131.26966511849452;-11.527217441637063" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4692881015589644s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.9267199114626686;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4692881015589644s"></animate>
+</circle><circle cx="37" cy="94.6494" r="17.951" fill="#eb6613">
+  <animate attributeName="cy" values="134.01899247486978;-12.089228821715622" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7349643516190877s"></animate>
+  <animate attributeName="r" values="25;0;0" keyTimes="0;0.9556512384370763;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7349643516190877s"></animate>
+</circle><circle cx="48" cy="118.715" r="11.2439" fill="#eb6613">
+  <animate attributeName="cy" values="124.20630343561504;-9.40517194330788" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5462392079153692s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.6522539223071873;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5462392079153692s"></animate>
+</circle><circle cx="26" cy="70.1516" r="4.14054" fill="#eb6613">
+  <animate attributeName="cy" values="119.93801467170819;7.991620123417128" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.05337703553759665s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.8236743772349827;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.05337703553759665s"></animate>
+</circle><circle cx="63" cy="101.794" r="12.8584" fill="#eb6613">
+  <animate attributeName="cy" values="133.15195609171676;-18.170520198491946" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6835358760367304s"></animate>
+  <animate attributeName="r" values="19;0;0" keyTimes="0;0.6410860399547327;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6835358760367304s"></animate>
+</circle><circle cx="63" cy="34.7659" r="4.88732" fill="#eb6613">
+  <animate attributeName="cy" values="131.12594196528514;-12.350852777393584" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.24087545479895103s"></animate>
+  <animate attributeName="r" values="19;0;0" keyTimes="0;0.9041893484210652;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.24087545479895103s"></animate>
+</circle><circle cx="78" cy="58.0469" r="8.26099" fill="#eb6613">
+  <animate attributeName="cy" values="125.00649405347417;-15.464277752094809" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07977838553233503s"></animate>
+  <animate attributeName="r" values="17;0;0" keyTimes="0;0.9272849371398113;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07977838553233503s"></animate>
+</circle><circle cx="38" cy="76.2281" r="9.71309" fill="#eb6613">
+  <animate attributeName="cy" values="120.22348527386038;0.9659059932464906" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8171597559253517s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.9388670361561146;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8171597559253517s"></animate>
+</circle><circle cx="84" cy="92.3642" r="7.70527" fill="#eb6613">
+  <animate attributeName="cy" values="117.35695441084356;7.018174835716142" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6994722046325325s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.7562397245328717;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6994722046325325s"></animate>
+</circle><circle cx="38" cy="85.7388" r="6.87386" fill="#eb6613">
+  <animate attributeName="cy" values="140.72584857811617;-12.884527428256984" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8081126268352471s"></animate>
+  <animate attributeName="r" values="24;0;0" keyTimes="0;0.5016389695288772;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8081126268352471s"></animate>
+</circle><circle cx="38" cy="56.2725" r="8.4072" fill="#eb6613">
+  <animate attributeName="cy" values="130.67138298704165;-6.532382467930692" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1339694060666968s"></animate>
+  <animate attributeName="r" values="24;0;0" keyTimes="0;0.8346170265317711;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1339694060666968s"></animate>
+</circle><circle cx="22" cy="80.7563" r="9.48014" fill="#eb6613">
+  <animate attributeName="cy" values="138.9215748370302;-19.78923196095288" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8151551562115374s"></animate>
+  <animate attributeName="r" values="21;0;0" keyTimes="0;0.6680819830114373;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8151551562115374s"></animate>
+</circle><circle cx="63" cy="15.6195" r="2.07487" fill="#eb6613">
+  <animate attributeName="cy" values="118.27996600478681;-8.508243472835655" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3550029692606369s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.9789707385720077;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3550029692606369s"></animate>
+</circle><circle cx="47" cy="113.939" r="13.41" fill="#eb6613">
+  <animate attributeName="cy" values="131.45696995283998;-0.7776527138489406" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6217610818656488s"></animate>
+  <animate attributeName="r" values="18;0;0" keyTimes="0;0.5195265099634001;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6217610818656488s"></animate>
+</circle><circle cx="61" cy="74.5898" r="1.79489" fill="#eb6613">
+  <animate attributeName="cy" values="120.98589968262894;9.92286187896453" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.031072342817240195s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.651685490786018;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.031072342817240195s"></animate>
+</circle><circle cx="26" cy="68.1365" r="4.00842" fill="#eb6613">
+  <animate attributeName="cy" values="134.31103257631997;-12.510558652533852" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.05831912345059958s"></animate>
+  <animate attributeName="r" values="26;0;0" keyTimes="0;0.5328663490000594;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.05831912345059958s"></animate>
+</circle><circle cx="84" cy="55.9662" r="2.26077" fill="#eb6613">
+  <animate attributeName="cy" values="113.10670858114584;5.816597431706342" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.12597653714958176s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.8545813244383403;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.12597653714958176s"></animate>
+</circle><circle cx="74" cy="135.036" r="17.7651" fill="#eb6613">
+  <animate attributeName="cy" values="136.62073122947677;-0.340138378825376" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5218353670215767s"></animate>
+  <animate attributeName="r" values="18;0;0" keyTimes="0;0.8866811268168652;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5218353670215767s"></animate>
+</circle><circle cx="90" cy="45.9557" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="112.94351616489041;6.715043619126487" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.20698689754346225s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.5899790426018012;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.20698689754346225s"></animate>
+</circle><circle cx="65" cy="19.8519" r="4.64954" fill="#eb6613">
+  <animate attributeName="cy" values="144.1358063385343;-14.438152911781913" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3335634587380577s"></animate>
+  <animate attributeName="r" values="25;0;0" keyTimes="0;0.9628276599603265;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3335634587380577s"></animate>
+</circle><circle cx="83" cy="83.6695" r="2.83885" fill="#eb6613">
+  <animate attributeName="cy" values="118.0433507652114;9.720673918389739" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7745295588690213s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.6023035886457133;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7745295588690213s"></animate>
+</circle><circle cx="48" cy="2.83414" r="0.0309649" fill="#eb6613">
+  <animate attributeName="cy" values="127.22161514701133;-1.5367513003725541" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.48421917250584395s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.9690540582197001;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.48421917250584395s"></animate>
+</circle><circle cx="62" cy="83.4594" r="11.0066" fill="#eb6613">
+  <animate attributeName="cy" values="130.22590363186075;-14.968305475172365" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7784698117211554s"></animate>
+  <animate attributeName="r" values="27;0;0" keyTimes="0;0.5437619474655484;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7784698117211554s"></animate>
+</circle><circle cx="56" cy="57.3341" r="1.07565" fill="#eb6613">
+  <animate attributeName="cy" values="118.12496075047643;3.07426431934484" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1225081162939312s"></animate>
+  <animate attributeName="r" values="3;0;0" keyTimes="0;0.8237301804828653;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1225081162939312s"></animate>
+</circle><circle cx="31" cy="61.8273" r="4.81581" fill="#eb6613">
+  <animate attributeName="cy" values="113.11151879426288;-6.508039898232331" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.0401483189178709s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.68100260389742;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.0401483189178709s"></animate>
+</circle><circle cx="41" cy="51.5346" r="3.46276" fill="#eb6613">
+  <animate attributeName="cy" values="123.85345161865872;-11.195064101895833" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.12839296347808635s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.7299319450531377;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.12839296347808635s"></animate>
+</circle><circle cx="44" cy="115.03" r="21.4553" fill="#eb6613">
+  <animate attributeName="cy" values="124.73592346479244;-23.67175141829457" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5663233911435849s"></animate>
+  <animate attributeName="r" values="24;0;0" keyTimes="0;0.6168037780055942;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5663233911435849s"></animate>
+</circle><circle cx="79" cy="54.2482" r="2.31066" fill="#eb6613">
+  <animate attributeName="cy" values="121.39762904340712;0.8684754982332592" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.14625962844198562s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.6775516569769093;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.14625962844198562s"></animate>
+</circle><circle cx="69" cy="97.9972" r="10.756" fill="#eb6613">
+  <animate attributeName="cy" values="144.6945594924769;-17.34401164478031" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7504459791656372s"></animate>
+  <animate attributeName="r" values="25;0;0" keyTimes="0;0.5058029068321258;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7504459791656372s"></animate>
+</circle><circle cx="58" cy="26.1102" r="3.95641" fill="#eb6613">
+  <animate attributeName="cy" values="120.81902665275761;-2.650185227404119" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3197650534059164s"></animate>
+  <animate attributeName="r" values="19;0;0" keyTimes="0;0.9687993056227874;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3197650534059164s"></animate>
+</circle><circle cx="31" cy="39.3265" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="122.17105955990161;-4.746185513491129" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.22528699435010724s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.6267609964339238;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.22528699435010724s"></animate>
+</circle><circle cx="59" cy="49.3408" r="3.95499" fill="#eb6613">
+  <animate attributeName="cy" values="122.50990978630524;-2.054320881365048" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17128371304340728s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.9717120649440961;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17128371304340728s"></animate>
+</circle><circle cx="13" cy="1.23666" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="125.31634145718257;-8.180100345254676" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4539770701314023s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.8321983480585016;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4539770701314023s"></animate>
+</circle><circle cx="54" cy="10.7047" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="140.75769228822008;-8.077341569692766" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.40798260410595916s"></animate>
+  <animate attributeName="r" values="21;0;0" keyTimes="0;0.8592228848454694;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.40798260410595916s"></animate>
+</circle><circle cx="33" cy="124.188" r="7.7194" fill="#eb6613">
+  <animate attributeName="cy" values="127.86748577352179;-1.1084229579193101" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5358512111739672s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.8133502616735482;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5358512111739672s"></animate>
+</circle><circle cx="78" cy="16.9889" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="125.43961521213379;8.812129608331734" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45433249899176553s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.7527189574754828;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45433249899176553s"></animate>
+</circle><circle cx="16" cy="84.6051" r="7.16143" fill="#eb6613">
+  <animate attributeName="cy" values="114.8691101804048;-4.289591273410495" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7221750972586716s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.7278184333756955;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7221750972586716s"></animate>
+</circle><circle cx="73" cy="36.3011" r="3.49613" fill="#eb6613">
+  <animate attributeName="cy" values="123.74494227530779;-7.56955178220159" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2361681408585739s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.9761673498489515;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2361681408585739s"></animate>
+</circle><circle cx="35" cy="55.9183" r="7.67508" fill="#eb6613">
+  <animate attributeName="cy" values="129.08717478944172;-6.009958992796051" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13343304039615803s"></animate>
+  <animate attributeName="r" values="21;0;0" keyTimes="0;0.8535619632722805;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.13343304039615803s"></animate>
+</circle><circle cx="37" cy="6.37845" r="0" fill="#eb6613">
+  <animate attributeName="cy" values="141.06648884342934;-4.091705000639848" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45266302398855657s"></animate>
+  <animate attributeName="r" values="22;0;0" keyTimes="0;0.6170153717662724;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.45266302398855657s"></animate>
+</circle><circle cx="23" cy="122.798" r="15.6163" fill="#eb6613">
+  <animate attributeName="cy" values="124.93655320032023;-10.286329440722438" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5253428000697014s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.6594033490078425;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5253428000697014s"></animate>
+</circle><circle cx="93" cy="115.452" r="5.15641" fill="#eb6613">
+  <animate attributeName="cy" values="125.40762074064675;2.8775335794557506" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5794262980125718s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.5779154706249835;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5794262980125718s"></animate>
+</circle><circle cx="39" cy="85.5089" r="14.2301" fill="#eb6613">
+  <animate attributeName="cy" values="129.8091283704196;-16.266808251711907" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7629098893913906s"></animate>
+  <animate attributeName="r" values="25;0;0" keyTimes="0;0.7039727704044133;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7629098893913906s"></animate>
+</circle><circle cx="70" cy="77.8709" r="14.7408" fill="#eb6613">
+  <animate attributeName="cy" values="138.427771826516;-13.778179710728097" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.014639699955907231s"></animate>
+  <animate attributeName="r" values="28;0;0" keyTimes="0;0.8401809701168621;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.014639699955907231s"></animate>
+</circle><circle cx="23" cy="74.9772" r="4.26573" fill="#eb6613">
+  <animate attributeName="cy" values="127.6042331215967;4.155324380837879" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.03814772069450154s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.6614297246167988;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.03814772069450154s"></animate>
+</circle><circle cx="76" cy="41.1274" r="4.61425" fill="#eb6613">
+  <animate attributeName="cy" values="128.38452435316992;-3.2429040235524855" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.23368727256551594s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.9315640854711329;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.23368727256551594s"></animate>
+</circle><circle cx="82" cy="95.1351" r="10.9242" fill="#eb6613">
+  <animate attributeName="cy" values="129.77786591374394;-3.6819628037102845" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7267987035693065s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.9552959066153921;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7267987035693065s"></animate>
+</circle></g><g filter="url(#ldio-hokoywnz9yc-filter)"><circle cx="55" cy="19.7499" r="0.679459" fill="#ffb01f">
+  <animate attributeName="cy" values="109.45945868559778;9.252943486557239" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.42570164600655525s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.9683527954704986;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.42570164600655525s"></animate>
+</circle><circle cx="79" cy="16.0606" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="125.04135411408814;-8.48539478840997" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.360350266047013s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.7553498916088885;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.360350266047013s"></animate>
+</circle><circle cx="56" cy="72.81" r="3.39603" fill="#ffb01f">
+  <animate attributeName="cy" values="118.55779576025013;10.110637540944285" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.034459524145489084s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.7330091054899961;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.034459524145489084s"></animate>
+</circle><circle cx="84" cy="51.2687" r="0.327349" fill="#ffb01f">
+  <animate attributeName="cy" values="113.72214586524443;7.402695654903123" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17129309793124145s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.6397698917519422;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.17129309793124145s"></animate>
+</circle><circle cx="64" cy="83.2307" r="3.36328" fill="#ffb01f">
+  <animate attributeName="cy" values="119.87278014760759;-4.551235976888804" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7556570306899983s"></animate>
+  <animate attributeName="r" values="7;0;0" keyTimes="0;0.5668440222840675;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7556570306899983s"></animate>
+</circle><circle cx="72" cy="1.84413" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="114.22071751564629;-10.040298225316818" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.433232374130706s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.8333087267576003;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.433232374130706s"></animate>
+</circle><circle cx="11" cy="12.5895" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="114.56673786912454;-9.447080511407435" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3654196241770285s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.769345683162288;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3654196241770285s"></animate>
+</circle><circle cx="45" cy="29.4727" r="1.12291" fill="#ffb01f">
+  <animate attributeName="cy" values="129.5975247494747;-6.649145368254516" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.29316684686854344s"></animate>
+  <animate attributeName="r" values="16;0;0" keyTimes="0;0.7903474748788968;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.29316684686854344s"></animate>
+</circle><circle cx="24" cy="38.8595" r="1.70762" fill="#ffb01f">
+  <animate attributeName="cy" values="114.55479487559012;-0.6854374090732476" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2286773901570513s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.918159365565284;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2286773901570513s"></animate>
+</circle><circle cx="63" cy="60.2016" r="0.297397" fill="#ffb01f">
+  <animate attributeName="cy" values="104.57307415575488;2.3027823206288884" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.04439448578309863s"></animate>
+  <animate attributeName="r" values="2;0;0" keyTimes="0;0.5096490606999045;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.04439448578309863s"></animate>
+</circle><circle cx="31" cy="93.9505" r="5.31485" fill="#ffb01f">
+  <animate attributeName="cy" values="114.60580489992242;9.65300977904165" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6749230093797861s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.5863511919295824;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6749230093797861s"></animate>
+</circle><circle cx="59" cy="69.9032" r="2.54605" fill="#ffb01f">
+  <animate attributeName="cy" values="106.82142303127385;3.2374698695879403" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8068277151448644s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.9805289243171263;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8068277151448644s"></animate>
+</circle><circle cx="68" cy="31.26" r="0.0414904" fill="#ffb01f">
+  <animate attributeName="cy" values="120.58658163324802;15.46538760911331" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3880992516151997s"></animate>
+  <animate attributeName="r" values="2;0;0" keyTimes="0;0.8677498433241753;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3880992516151997s"></animate>
+</circle><circle cx="18" cy="-0.269913" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="120.1953259895174;-3.2971314103013976" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4920154425596964s"></animate>
+  <animate attributeName="r" values="7;0;0" keyTimes="0;0.709329481395368;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4920154425596964s"></animate>
+</circle><circle cx="37" cy="11.4047" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="124.76810807607865;-6.839321247668737" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3977082817865412s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.7601984181130628;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3977082817865412s"></animate>
+</circle><circle cx="59" cy="3.1052" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="125.27502184276585;-5.06706079641215" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.46045754816965256s"></animate>
+  <animate attributeName="r" values="14;0;0" keyTimes="0;0.7813872364559012;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.46045754816965256s"></animate>
+</circle><circle cx="53" cy="100.825" r="2.83971" fill="#ffb01f">
+  <animate attributeName="cy" values="105.50379966963668;-2.4397100635641484" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5481004905537393s"></animate>
+  <animate attributeName="r" values="3;0;0" keyTimes="0;0.8113462161994134;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5481004905537393s"></animate>
+</circle><circle cx="42" cy="65.3018" r="5.46617" fill="#ffb01f">
+  <animate attributeName="cy" values="132.3891271439935;-10.18056983749113" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07471946388890612s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.8119717397515391;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07471946388890612s"></animate>
+</circle><circle cx="83" cy="98.4305" r="7.45296" fill="#ffb01f">
+  <animate attributeName="cy" values="128.63832612123744;5.280515603380316" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7146540700301586s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.9614307138304652;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7146540700301586s"></animate>
+</circle><circle cx="39" cy="110.187" r="11.6869" fill="#ffb01f">
+  <animate attributeName="cy" values="127.57848503992372;0.28663922269565134" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6251903846204323s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.6185771446002721;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6251903846204323s"></animate>
+</circle><circle cx="7" cy="24.7601" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="121.99821482166111;0.36979251817743375" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3465468648355258s"></animate>
+  <animate attributeName="r" values="7;0;0" keyTimes="0;0.6852350680784475;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3465468648355258s"></animate>
+</circle><circle cx="21" cy="33.1154" r="0.749764" fill="#ffb01f">
+  <animate attributeName="cy" values="130.92423712515796;1.3833891837820609" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.30983059957100295s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.8053619724633276;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.30983059957100295s"></animate>
+</circle><circle cx="55" cy="88.3666" r="4.01041" fill="#ffb01f">
+  <animate attributeName="cy" values="110.76259441142577;-1.4647599624343934" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6771996863279837s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.6018098115122674;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6771996863279837s"></animate>
+</circle><circle cx="61" cy="1.71879" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="122.75448657567071;-0.9873918790153873" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4942007894484308s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.780811103664902;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4942007894484308s"></animate>
+</circle><circle cx="52" cy="83.4113" r="4.06565" fill="#ffb01f">
+  <animate attributeName="cy" values="128.07310020365546;1.2295969487383545" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8032675813052338s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.6422152067559593;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8032675813052338s"></animate>
+</circle><circle cx="28" cy="63.9245" r="2.57033" fill="#ffb01f">
+  <animate attributeName="cy" values="116.80788263393418;4.854296829749405" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07621528628779214s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.9720841703710268;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07621528628779214s"></animate>
+</circle><circle cx="68" cy="9.30545" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="111.81072266222732;1.1089701281069235" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4510839958053825s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.5776468747351757;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4510839958053825s"></animate>
+</circle><circle cx="29" cy="52.9497" r="0.0101149" fill="#ffb01f">
+  <animate attributeName="cy" values="120.92861249858012;8.404406072648143" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.18510636894128815s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.6056581401368198;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.18510636894128815s"></animate>
+</circle><circle cx="29" cy="24.9118" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="109.4785155557212;-4.953148396875696" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.29658447326837567s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.5161309339186608;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.29658447326837567s"></animate>
+</circle><circle cx="30" cy="86.6749" r="9.85504" fill="#ffb01f">
+  <animate attributeName="cy" values="114.17204657251153;-12.162854553921935" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6921524907185557s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.8996871581952591;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6921524907185557s"></animate>
+</circle><circle cx="73" cy="-0.775429" r="0.439466" fill="#ffb01f">
+  <animate attributeName="cy" values="123.78793930775203;-7.134069492145377" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.47213511033943445s"></animate>
+  <animate attributeName="r" values="14;0;0" keyTimes="0;0.9822655236937889;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.47213511033943445s"></animate>
+</circle><circle cx="30" cy="35.7282" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="123.03834879930702;3.576606853480026" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2898479022506801s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.5748076095242745;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2898479022506801s"></animate>
+</circle><circle cx="37" cy="120.627" r="11.9286" fill="#ffb01f">
+  <animate attributeName="cy" values="130.78736227549152;6.851179856736639" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5800249843842891s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.9947142528825214;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5800249843842891s"></animate>
+</circle><circle cx="30" cy="26.019" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="110.02735362745752;11.758858707576668" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.39234597770758683s"></animate>
+  <animate attributeName="r" values="2;0;0" keyTimes="0;0.7556916671377415;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.39234597770758683s"></animate>
+</circle><circle cx="27" cy="13.3545" r="0.69203" fill="#ffb01f">
+  <animate attributeName="cy" values="116.67835204107509;2.476494070424419" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4335533228577098s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.9485072007917078;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4335533228577098s"></animate>
+</circle><circle cx="27" cy="67.0322" r="1.97976" fill="#ffb01f">
+  <animate attributeName="cy" values="118.62937517800812;9.093922465895997" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07512928307896179s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.9326710555147985;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.07512928307896179s"></animate>
+</circle><circle cx="91" cy="82.4133" r="3.54722" fill="#ffb01f">
+  <animate attributeName="cy" values="126.9556252593712;7.760371146459091" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8211101753080048s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.6713866248371618;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.8211101753080048s"></animate>
+</circle><circle cx="29" cy="115.013" r="10.4515" fill="#ffb01f">
+  <animate attributeName="cy" values="119.37938261246342;6.088216646597935" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5441247899484248s"></animate>
+  <animate attributeName="r" values="11;0;0" keyTimes="0;0.7729184167115271;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5441247899484248s"></animate>
+</circle><circle cx="82" cy="19.4588" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="111.99235399036294;11.885387621347377" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4497510985660909s"></animate>
+  <animate attributeName="r" values="3;0;0" keyTimes="0;0.7866482360566251;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4497510985660909s"></animate>
+</circle><circle cx="41" cy="47.0341" r="1.61058" fill="#ffb01f">
+  <animate attributeName="cy" values="119.42481971614168;11.163999299085066" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2384473722006996s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.9140200399841462;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2384473722006996s"></animate>
+</circle><circle cx="86" cy="21.9249" r="0.0346434" fill="#ffb01f">
+  <animate attributeName="cy" values="106.37956262888666;6.983601716882433" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3880423218311101s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.8571024621379671;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3880423218311101s"></animate>
+</circle><circle cx="30" cy="70.8939" r="2.25183" fill="#ffb01f">
+  <animate attributeName="cy" values="119.94025153076349;6.102890812201693" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.041899536488410605s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.5303715302639387;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.041899536488410605s"></animate>
+</circle><circle cx="58" cy="84.8237" r="5.08726" fill="#ffb01f">
+  <animate attributeName="cy" values="115.29068209788103;9.218365902481338" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7496531990131332s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.7888894125046015;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7496531990131332s"></animate>
+</circle><circle cx="51" cy="42.1925" r="3.01353" fill="#ffb01f">
+  <animate attributeName="cy" values="129.18761897570363;-9.65293835218987" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.20366529833058877s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.8156618635350047;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.20366529833058877s"></animate>
+</circle><circle cx="54" cy="125.327" r="13.8986" fill="#ffb01f">
+  <animate attributeName="cy" values="131.59926326165953;-11.115712024746207" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5485967825847856s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.5985445286390846;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5485967825847856s"></animate>
+</circle><circle cx="72" cy="96.7149" r="11.1815" fill="#ffb01f">
+  <animate attributeName="cy" values="129.9425354483452;-8.03228578519846" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7113023611639929s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.946027637038875;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7113023611639929s"></animate>
+</circle><circle cx="61" cy="110.254" r="10.9286" fill="#ffb01f">
+  <animate attributeName="cy" values="130.3918526047081;-6.748683538483051" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6336335568430013s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.9215882032330031;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6336335568430013s"></animate>
+</circle><circle cx="78" cy="89.0649" r="8.03203" fill="#ffb01f">
+  <animate attributeName="cy" values="123.14622574581126;0.46337606804662457" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7418616576438719s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.840127452983472;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7418616576438719s"></animate>
+</circle><circle cx="94" cy="41.5755" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="106.50531318681747;-3.890739718982558" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1719059231804925s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.5579457881715829;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.1719059231804925s"></animate>
+</circle><circle cx="72" cy="39.4748" r="1.16272" fill="#ffb01f">
+  <animate attributeName="cy" values="107.43673706669667;6.066391912795158" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2399048008695577s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.8735776650311861;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2399048008695577s"></animate>
+</circle><circle cx="41" cy="110.749" r="10.3988" fill="#ffb01f">
+  <animate attributeName="cy" values="133.92201008309644;4.491124938247918" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6602375095303393s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.5836531598140053;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6602375095303393s"></animate>
+</circle><circle cx="13" cy="26.2284" r="0.317759" fill="#ffb01f">
+  <animate attributeName="cy" values="117.36364070651874;6.489400545036471" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3651417168315232s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.8443266805900318;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3651417168315232s"></animate>
+</circle><circle cx="39" cy="41.5537" r="4.49215" fill="#ffb01f">
+  <animate attributeName="cy" values="124.79992396404802;-2.4421294343457305" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.22651856059066s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.9996712766525063;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.22651856059066s"></animate>
+</circle><circle cx="72" cy="111.811" r="10.5819" fill="#ffb01f">
+  <animate attributeName="cy" values="124.83207402092988;2.235549439737701" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6000507340199319s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.5710016154143559;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6000507340199319s"></animate>
+</circle><circle cx="18" cy="28.7741" r="2.03945" fill="#ffb01f">
+  <animate attributeName="cy" values="113.19661838158046;-5.800308213710791" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2721511293482413s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.9173208346843736;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2721511293482413s"></animate>
+</circle><circle cx="23" cy="79.2868" r="8.8832" fill="#ffb01f">
+  <animate attributeName="cy" values="121.82935762827489;-9.518680833425993" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7799536780589638s"></animate>
+  <animate attributeName="r" values="14;0;0" keyTimes="0;0.886195456798391;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7799536780589638s"></animate>
+</circle><circle cx="65" cy="111.62" r="10.4561" fill="#ffb01f">
+  <animate attributeName="cy" values="132.07125938693798;-7.749148809649232" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6331570584962493s"></animate>
+  <animate attributeName="r" values="14;0;0" keyTimes="0;0.5778325536710921;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6331570584962493s"></animate>
+</circle><circle cx="50" cy="99.7879" r="4.70062" fill="#ffb01f">
+  <animate attributeName="cy" values="125.40782966809373;-4.021810960447242" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6758653535540435s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.9140319942432678;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6758653535540435s"></animate>
+</circle><circle cx="84" cy="65.6602" r="3.47052" fill="#ffb01f">
+  <animate attributeName="cy" values="121.64722523769227;8.562005524716746" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.09499122702250044s"></animate>
+  <animate attributeName="r" values="8;0;0" keyTimes="0;0.8744277811834792;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.09499122702250044s"></animate>
+</circle><circle cx="30" cy="71.6938" r="5.05098" fill="#ffb01f">
+  <animate attributeName="cy" values="109.01254986741223;-6.531520456793279" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7792025150827088s"></animate>
+  <animate attributeName="r" values="9;0;0" keyTimes="0;0.7360931875451308;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7792025150827088s"></animate>
+</circle><circle cx="83" cy="8.98219" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="106.55419111687723;4.064459667868153" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4726195179026424s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.5471537485428096;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4726195179026424s"></animate>
+</circle><circle cx="72" cy="62.4068" r="2.93332" fill="#ffb01f">
+  <animate attributeName="cy" values="133.24629017201835;-13.601545910507538" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.08450620646045791s"></animate>
+  <animate attributeName="r" values="15;0;0" keyTimes="0;0.5996686097757702;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.08450620646045791s"></animate>
+</circle><circle cx="62" cy="38.6359" r="3.29599" fill="#ffb01f">
+  <animate attributeName="cy" values="130.90969383917735;2.3801113134695413" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2791498714825801s"></animate>
+  <animate attributeName="r" values="14;0;0" keyTimes="0;0.9389811700910435;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.2791498714825801s"></animate>
+</circle><circle cx="28" cy="13.8322" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="120.28896373266834;0.2586351605068069" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4188161090244664s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.5148610401392608;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.4188161090244664s"></animate>
+</circle><circle cx="33" cy="110.875" r="9.83964" fill="#ffb01f">
+  <animate attributeName="cy" values="112.12181535783145;0.37420709566369226" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5214960372133477s"></animate>
+  <animate attributeName="r" values="10;0;0" keyTimes="0;0.6958562125564505;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5214960372133477s"></animate>
+</circle><circle cx="7" cy="6.66164" r="0" fill="#ffb01f">
+  <animate attributeName="cy" values="119.9654758200164;4.361589019664905" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.49583190552095524s"></animate>
+  <animate attributeName="r" values="4;0;0" keyTimes="0;0.6145391832036186;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.49583190552095524s"></animate>
+</circle><circle cx="77" cy="84.7045" r="2.77479" fill="#ffb01f">
+  <animate attributeName="cy" values="118.07451085341317;13.912669704702854" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7770408723118457s"></animate>
+  <animate attributeName="r" values="5;0;0" keyTimes="0;0.7198578207449816;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.7770408723118457s"></animate>
+</circle><circle cx="36" cy="28.1119" r="0.861035" fill="#ffb01f">
+  <animate attributeName="cy" values="122.85714416591824;4.366664263262219" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.34665677298936187s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.8563191346036664;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.34665677298936187s"></animate>
+</circle><circle cx="32" cy="104.502" r="9.19569" fill="#ffb01f">
+  <animate attributeName="cy" values="120.02309660737603;-7.61995958212842" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6127698915437937s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.5203384358423583;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.6127698915437937s"></animate>
+</circle><circle cx="63" cy="126.467" r="11.8801" fill="#ffb01f">
+  <animate attributeName="cy" values="127.56201900646825;-11.598435379078168" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5187760910526258s"></animate>
+  <animate attributeName="r" values="12;0;0" keyTimes="0;0.7874601076472302;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5187760910526258s"></animate>
+</circle><circle cx="41" cy="33.6121" r="0.563011" fill="#ffb01f">
+  <animate attributeName="cy" values="122.44114292953624;10.024215402655052" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3388657084217327s"></animate>
+  <animate attributeName="r" values="7;0;0" keyTimes="0;0.8592875999693141;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.3388657084217327s"></animate>
+</circle><circle cx="82" cy="73.3264" r="7.86089" fill="#ffb01f">
+  <animate attributeName="cy" values="120.02088462658364;-0.38810756362205723" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.006323938452428162s"></animate>
+  <animate attributeName="r" values="13;0;0" keyTimes="0;0.9809843932628319;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.006323938452428162s"></animate>
+</circle><circle cx="19" cy="112.182" r="5.49419" fill="#ffb01f">
+  <animate attributeName="cy" values="120.5316048197839;-1.253957176933337" keyTimes="0;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5689330510247096s"></animate>
+  <animate attributeName="r" values="6;0;0" keyTimes="0;0.8132457823662661;1" dur="0.8264462809917356s" repeatCount="indefinite" begin="-0.5689330510247096s"></animate>
+</circle></g>
+<!-- [ldio] generated by https://loading.io/ --></svg>
