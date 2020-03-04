@@ -89,6 +89,17 @@ function WatsonQueryingService(){
             currentQueryParams.query = queryConcat;
             return 0;
         }
+        if(queryPositives.genre.length > 0){
+            queryConcat += "(";
+            for(var i = 0; i < queryPositives.genre.length; i++){
+                queryConcat += "genre:"+queryPositives.genre[i]+"|";
+            }   
+            queryConcat = queryConcat.substring(0, queryConcat.length-1) + "),";
+        }
+        
+        for(var i = 0; i < queryNegatives.genre.length; i++){
+            queryConcat += "enriched_text.categories.label:!"+queryNegatives.categories[i]+"|";
+        }
         for(var i = 0; i < queryPositives.categories.length; i++){
             queryConcat += "enriched_text.categories.label:"+queryPositives.categories[i]+"|";
         }
@@ -168,6 +179,13 @@ function WatsonQueryingService(){
             queryNegatives.title.push(titleFormatted);
         }
         // TODO: this next. Have to format title so that it does equality query instead of contains.
+    }
+    this.updateQueryWithGenre = function(genre, ans){
+        if (ans > 0) { //User wants this category -> query contains
+            queryPositives.genre.push(genre);
+        } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
+            queryNegatives.genre.push(genre);
+        }
     }
 
 }
