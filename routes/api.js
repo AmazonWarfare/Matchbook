@@ -5,10 +5,10 @@
     This mirrors the API between our server and the service which queries Watson.
  */
 const express = require("express");
-const WatsonQueryingService = require("../WatsonQueryingService/WatsonQueryingService");
+const QuestionGenerator = require("../QuestionGenerator/QuestionGenerator");
 const router = express.Router();
 
-let wqs = new WatsonQueryingService();
+let qg = new QuestionGenerator();
 
 /*
     ROUTE: GET question
@@ -16,7 +16,7 @@ let wqs = new WatsonQueryingService();
     Responds with question text as plaintext string
  */
 router.get('/question', (req, res) => {
-    let question_promise = wqs.generateQuestion();
+    let question_promise = qg.generateQuestion();
 
     question_promise.then((question) => {
             let {text, type} = question;
@@ -41,7 +41,7 @@ router.post('/answer', (req, res) => {
         res.send("invalid answer");
     }
     // Here we will respond to the question through another call to WQS
-    wqs.provideAnswer(answer);
+    qg.provideAnswer(answer);
     res.status(200);
     res.send();
 });
