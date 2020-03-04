@@ -180,13 +180,19 @@ function WatsonQueryingService(){
         }
         // TODO: this next. Have to format title so that it does equality query instead of contains.
     }
-    this.updateQueryWithGenre = function(genre, ans){
+    var updateQueryWithSingleGenre = function(genre, ans){
         if (ans > 0) { //User wants this category -> query contains
             queryPositives.genre.push(genre);
         } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
             queryNegatives.genre.push(genre);
         }
     }
+    this.updateQueryWithGenre = function(genres){
+        for(let i = 0; i < genres.length; i++){
+            updateQueryWithSingleGenre(genres[i], 1);
+        }
+    }
+
 
 }
 
