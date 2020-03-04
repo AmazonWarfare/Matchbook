@@ -32,10 +32,10 @@ const QueryResponse = require('./QueryResponse.js');
 
 function WatsonQueryingService(){
 
-    var fileType = 'json';
-    var collectionId = fileType === 'json' ? Discovery.json_collection_id : Discovery.pdf_collection_id;
+    let fileType = 'json';
+    let collectionId = fileType === 'json' ? Discovery.json_collection_id : Discovery.pdf_collection_id;
     // Private members    
-    var currentQueryParams = {
+    let currentQueryParams = {
         environmentId: Discovery.environment_id,
         collectionId: collectionId,
         count: 10,
@@ -60,7 +60,7 @@ function WatsonQueryingService(){
     }
 
     this.updateQueryWithCategory = function(category, ans){
-        var queryConcat = "";
+        let queryConcat = "";
         if (currentQueryParams.query) { //If the query isn't empty
             queryConcat = queryConcat.concat(", ");
         }
