@@ -49,34 +49,37 @@ class App extends Component {
         if (startup_cards.length > 0) {
             this.setState({current_question: startup_cards.shift()});
         } else {
-            if ([-1,0,1].includes(answer)) {
-                axios
-                    .post('/answer', {answer})
-                    .then(() => console.log('answer sent from UI'));
-            }
+            // currently a hacky way to get a bit more hang for our loading icon
+            setTimeout(() => {
+                if ([-1,0,1].includes(answer)) {
+                    axios
+                        .post('/answer', {answer})
+                        .then(() => console.log('answer sent from UI'));
+                }
 
-            axios
-                .get('/question')
-                .then((res) => {
-                    if(res.data.type === 0) {
-                        this.setState({
-                            current_question: {
-                                text: res.data.text,
-                                input_type: INPUT_TYPES.BUTTON_LIST,
-                                custom_responses: false
-                            }
-                        })
-                    } else {
-                        this.setState({
-                            current_question: {
-                                text: res.data.text,
-                                input_type: INPUT_TYPES.BUTTON_LIST,
-                                custom_responses: true,
-                                options: []
-                            }
-                        })
-                    }
-                });
+                axios
+                    .get('/question')
+                    .then((res) => {
+                        if(res.data.type === 0) {
+                            this.setState({
+                                current_question: {
+                                    text: res.data.text,
+                                    input_type: INPUT_TYPES.BUTTON_LIST,
+                                    custom_responses: false
+                                }
+                            })
+                        } else {
+                            this.setState({
+                                current_question: {
+                                    text: res.data.text,
+                                    input_type: INPUT_TYPES.RECOMMENDATION,
+                                    custom_responses: true,
+                                    options: []
+                                }
+                            })
+                        }
+                    });
+            }, 500)
         }
     }
 

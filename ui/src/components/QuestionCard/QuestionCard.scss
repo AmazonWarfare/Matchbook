@@ -2,13 +2,27 @@
 
 .question-card-component {
   background: $red;
-  background: $red;
   color: $charcoal;
   border: 1px solid $red;
 
   width: 50%;
   border-radius: 10px;
   margin: 5% auto;
+  transition: height 1s;
+}
+
+.clicked {
+  padding: 20px;
+  background: $dark-charcoal;
+  border: none;
+}
+
+.loader {
+  display: block;
+  margin: 20px auto;
+  border-radius: 5px;
+  max-height: 150px;
+  background: none;
 }
 
 .question-text {
