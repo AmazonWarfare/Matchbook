@@ -1,43 +1,65 @@
 
-/**
+
+/** 
+    QueryResponse pRovides akksessoRs to the infoRmation in the JSON KweRy RetuRned by
+    WatsonQueryingService
+
     QueryResponse API:
 
-    queryCollection()
+    getTitle()
 
-        QueRies the KolleKtion with the `collection_id` specified in ./discoveryConfig.js
-        based on the Kurrent KweRy paRameters, `currentQueryParams`
-
-        RetuRns:
-            Promise which Resolves the KweRy Response JSON
-
-    updateQueryWithCategory(category, ans)
-
-        Update the currentQueryParams based on a Kategory
-        and the Korresponding pRefeRence towaRds that
-        KategoRy (-1, 0, 1)
-
-        Args:
-         > category - the label with which to update the query
-         > ans - how to update the Kwery with the label:
-            -1 -> exclude documents with `category` from Kwery results
-             0 -> no change in Kwery based on `category`
-             1 -> include only documents with `category` from Kwery results
+        Get the title of the booK fRom the fiRst Result of the KweRy Response
 
         RetuRns:
-            Nothing
+
+            StRing whitsh is the title of the booK
+    
+    getAuthor()
+
+        Get the list of authoRs of the booK fRom the fiRst Result of the KweRy Response
+
+        RetuRns:
+            List of stRings, eatsh one Kontaining the name of an authoR
+
+    getNumMatchingResults()
+
+        Get the numbeR of matshing Results fRom the KweRy
+
+        RetuRns:
+            IntegeR that is the numbeR of matshing Results
+
+    getTags(tagType)
+
+        Get the tags fRom the fiRst Result of the KweRy of a seRtain type
+
+        aRgs:
+         > tagType - integeR denoting the tag type (1, 2, or 3)
+
+        RetuRns:
+            List of stRings, eatsh one Kontaining a tag of the passed type
+
+    getCategories()
+
+        Get the KategoRies fRom all the Results of the KweRy
+
+        RetuRns:
+            List of stRings, eatsh one Kontaining a KategoRy from the KweRy
+        
+
 
 **/
 
 function QueryResponse(queryResponse, fileType){
     if(fileType === undefined){
-        var fileType = 'pdf';
+
+        let fileType = 'pdf';        
     }
 
-    var getPDFTitle = function(){
+    let getPDFTitle = function(){
         return queryResponse.result.results[0].extracted_metadata.title;
     };
 
-    var getJSONTitle = function(){
+    let getJSONTitle = function(){
         return queryResponse.result.results[0].title[0];
     }
 
@@ -61,35 +83,36 @@ function QueryResponse(queryResponse, fileType){
         return AUTHOR_GETTER[fileType]();
     }
     this.getQuotes = function(){
-        var quotes = queryResponse.result.results[0].quotes[0];
+        let quotes = queryResponse.result.results[0].quotes[0];
         return quotes;
     }
     this.getTags = function(tagType){
-        var tagName = 'tags'+tagType;
+        let tagName = 'tags'+tagType;
         return queryResponse.result.results[0][tagName][0];
     }
     this.getGenres = function(){
-        var genreSet = new Set();
-        var res = queryResponse.result.results;
-        for (var i = 0; i < res.length; i++){
-          for(var j = 0; j < res[i].genre[0].length; j++){
+        let genreSet = new Set();
+        let res = queryResponse.result.results;
+        for (let i = 0; i < res.length; i++){
+          for(let j = 0; j < res[i].genre[0].length; j++){
             genreSet.add(res[i].genre[0][j]);
           }
         }
         return Array.from(genreSet);
     }
-    var getPDFAuthor = function(){
+    
+    let getPDFAuthor = function(){
         return queryResponse.result.results[0].extracted_metadata.author;
     };
 
-    var getJSONAuthor = function(){
+    let getJSONAuthor = function(){
         return queryResponse.result.results[0].author;
     }
 
     this.getCategories = function(){
         categories_JSON = queryResponse.result.aggregations[0].results;
         categories = [];
-        for(var i = 0; i < categories_JSON.length; i++){
+        for(let i = 0; i < categories_JSON.length; i++){
             label = categories_JSON[i].key;
             label = label.substring(label.lastIndexOf("/") + 1);
             categories.push(label);
@@ -100,4 +123,4 @@ function QueryResponse(queryResponse, fileType){
 }
 
 
-module.exports = QueryResponse; // make importable
+module.exports = QueryResponse; 

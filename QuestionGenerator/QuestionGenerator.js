@@ -1,8 +1,10 @@
 const WatsonQueryingService = require('../WatsonQueryingService/WatsonQueryingService');
+const Config = require('../Config');
 const StringFormat = require('./stringFormat.js');
 
+/** 
+    QuestionGenerator KontRols the entiRe logiK of the Kwestions that aRe to be asKed
 
-/**
     QuestionGenerator API:
 
     generateQuestion()
@@ -22,7 +24,7 @@ const StringFormat = require('./stringFormat.js');
         Update the WatsonQueryingService with the infoRmation pRovided
         in `ans`
 
-        Args:
+        aRgs:
          > ans - Response from Klient:
             -1 -> negative
              0 -> neutRal
@@ -33,41 +35,27 @@ const StringFormat = require('./stringFormat.js');
 
 **/
 
-const PREFERENCE_OPTIONS = {
-    CATEGORY: 0,
-    GENRE: 1,
-    EMOTION: 2,
-    QUOTE: 3,
-    TAG: 4 // Add more stuff here if needed
-};
-
-const QUESTION_FORMATS = {
-	TERNARY: 0,
-	SLIDER: 1,
-	MULTI: 2,
-	RECOMMENDATION: 10
-}
-
-const RECOMMENDATION_THRESHOLD = 3;
-
 function QuestionGenerator(){
 	const wqs = new WatsonQueryingService();
-	var usedCateg = new Set(); //So that category questions won't be repeated
-  var usedQuotes = new Set();
-  var usedTags = new Set();
-  usedTags.add('STRONG FEMALE CHARACTER(S)');
-    var currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY; //change to genre by default
-    var currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-    var currentLabel;
-    var currentLabels;
-    var currentTagType;
-    var quotePresented = false;
-    var questionCount = 0;
-    var questionOrder = 0; //Current order: genre (1), tag (1), category(1), quote (until positive answer), recommendation
+    const PREFERENCE_OPTIONS = Config.PREFERENCE_OPTIONS;
+    console.log(JSON.stringify(PREFERENCE_OPTIONS));
+    const QUESTION_FORMATS = Config.QUESTION_FORMATS;
+    const RECOMMENDATION_THRESHOLD = Config.RECOMMENDATION_THRESHOLD; 
+	let usedCateg = new Set(); 
+    let usedQuotes = new Set();
+    let usedTags = new Set();
+    usedTags.add('STRONG FEMALE CHARACTER(S)');
+    let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
+    let currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+    let currentLabel;
+    let currentLabels;
+    let questionCount = 0;
+    let quotePresented = false;
+    let questionOrder = 0; //Current order: genre (1), tag (1), category(1), quote (until positive answer), recommendation
 
-	var getNextQuestion = function(queryResponse){
+	let getNextQuestion = function(queryResponse){
 		let question;
-		var QUESTION_GETTER_MAP = {
+		let QUESTION_GETTER_MAP = {
 			[PREFERENCE_OPTIONS.CATEGORY]: {
 				[QUESTION_FORMATS.TERNARY]: generateTernaryCategoryQuestion,
 				[QUESTION_FORMATS.MULTI]: generateMultiCategoryQuestion,
@@ -93,13 +81,6 @@ function QuestionGenerator(){
         console.log('Current Preference Option: ' + currentPreferenceOption);
         console.log('Current Question Format: ' + currentQuestionFormat);
         while(true){
-
-            /**
-            // Uncomment to see what's going on with the function map
-            console.log(currentPreferenceOption);
-            console.log(currentQuestionFormat);
-            console.log(QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat]);
-            **/
 
             question = QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat](queryResponse);
 
@@ -144,9 +125,11 @@ function QuestionGenerator(){
         console.log("QuotePresented = "+ quotePresented);
         return question;
 	}
-	var processQuery = function(queryResponse, resolve, reject){
-        var matchingResults = queryResponse.getNumMatchingResults();
-        console.log('Matching Results: ' + matchingResults);
+
+	let processQuery = function(queryResponse, resolve, reject){
+        
+        let matchingResults = queryResponse.getNumMatchingResults();
+        console.log(matchingResults);
         if(matchingResults < RECOMMENDATION_THRESHOLD){
             if(!quotePresented){
                 currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE;
@@ -193,8 +176,8 @@ function QuestionGenerator(){
         });
     }
 
-    ///////////////// Query Update Function //////////////////////
     this.provideAnswer = function(ans){
+        console.log('Provide answer, PO: ' + currentPreferenceOption);
         if (currentPreferenceOption === PREFERENCE_OPTIONS.CATEGORY) {
             provideCategoryAnswer(ans);
         } else if (currentPreferenceOption === PREFERENCE_OPTIONS.QUOTE){
@@ -208,9 +191,8 @@ function QuestionGenerator(){
             provideTagAnswer(ans);
         }
     }
-    ////////////////// Recommendation Function /////////////////////
-    var giveRecommendation = function(queryResponse){
-        //console.log(queryResponse.result.results);
+
+    let giveRecommendation = function(queryResponse){
         let rec;
         if(queryResponse.getNumMatchingResults() > 0){
             currentLabel = queryResponse.getTitle();
@@ -226,21 +208,19 @@ function QuestionGenerator(){
                 type: QUESTION_FORMATS.RECOMMENDATION
             };
         }
-        
         return rec;
 
     }
 
-    /////////////////////// Category Question Generation Function /////////////////////
-    var generateTernaryCategoryQuestion = function(queryResponse){
+    let generateTernaryCategoryQuestion = function(queryResponse){
         let categories = queryResponse.getCategories();
         let foundNewLabel = false;
         let label;
 
         console.log('Categories:');
         console.log(categories);
-        console.log('\n');
-        for(var i = 0; i < categories.length; i++){
+
+        for(let i = 0; i < categories.length; i++){
             label = categories[i];
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
@@ -248,7 +228,7 @@ function QuestionGenerator(){
             }
         }
 
-        if (!foundNewLabel) { //When there are no more categories
+        if (!foundNewLabel) { 
             return 0;
         }
         currentLabel = label;
@@ -258,13 +238,13 @@ function QuestionGenerator(){
         let question = {
             text: "How do you feel about the concept of \"" + formattedLabel + "\" in books?",
             type: QUESTION_FORMATS.TERNARY,
-            content: {} // No content for ternary question
+            content: {} 
         };
 
         return question;
     }
 
-    var generateTernaryQuoteQuestion = function(queryResponse){
+    let generateTernaryQuoteQuestion = function(queryResponse){
         let quotes = queryResponse.getQuotes();
         let foundNewQuote = false;
         let label;
@@ -295,7 +275,7 @@ function QuestionGenerator(){
         return question;
     }
 
-    var generateTernaryTagQuestion = function(queryResponse){
+    let generateTernaryTagQuestion = function(queryResponse){
         let tagType = 1;
         let tags = queryResponse.getTags(1);
         
@@ -358,13 +338,13 @@ function QuestionGenerator(){
         return question;
     }
 
-    var generateMultiCategoryQuestion = function(queryResponse){
+    let generateMultiCategoryQuestion = function(queryResponse){
     	let categories = queryResponse.getCategories();
     	let labels = [];
     	currentLabels = [];
-    	var formattedLabels = [];
+    	let formattedLabels = [];
 
-    	for(var i = 0; i < categories.length; i++){
+    	for(let i = 0; i < categories.length; i++){
             let label = categories[i];
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
@@ -390,8 +370,7 @@ function QuestionGenerator(){
 
     }
 
-    //////////////////// Update Query Functions ////////////////////
-    var provideCategoryAnswer = function(ans){
+    let provideCategoryAnswer = function(ans){
     	wqs.updateQueryWithCategory(currentLabel, ans);
 
     }
@@ -425,7 +404,7 @@ function QuestionGenerator(){
       
     }
 
-    var generateTernaryGenreQuestion = function(queryResponse){
+    let generateTernaryGenreQuestion = function(queryResponse){
     	// TODO: Query on genre somehow
     	let genre;
     	currentLabel = genre; // Save genre in currentLabel for future reference
@@ -439,7 +418,9 @@ function QuestionGenerator(){
     	return question;
 
     }
-    var generateMultiGenreQuestion = function(queryResponse){
+
+    let generateMultiGenreQuestion = function(queryResponse){
+    	//TODO Query on genre somehow
     	let genres;
     	currentLabels = genres;
     	formattedLabels = queryResponse.getGenres();
@@ -461,29 +442,6 @@ function QuestionGenerator(){
     var generateMultiTagQuestion = function(queryResponse){
       //TODO
     }
-
-    /*
-    ///////////////////// Quote Question Generation Function ////////////////////////
-    var generateQuoteQuestion = function(){
-        //// TODO:
-    }
-
-    ///////////////////// Emotion Question Generation Function //////////////////////
-    var generateEmotionQuestion = function(){ //INCOMPLETE//////////////
-        tempQueryParams = {
-            environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
-            collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
-            aggregation: "max(enriched_text.emotion.document.emotion." + this.emotion[this.emotionCounter] + ")"
-        };
-        discovery.query(currentQueryParams)
-            .then(queryResponse => {
-                var max = queryResponse.result.aggregations[0].value;
-            })
-            .catch(err => {
-                console.log('error:', err);
-            });
-    }
-    */
 
 }
 
