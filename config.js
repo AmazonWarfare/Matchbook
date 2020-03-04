@@ -13,13 +13,16 @@ const Configuration = {
 	apikey: '9U_r_MDwsKMpLghmLBgihOMuFJ0-c-NB3SfFZq3PF63H',
 	serviceURL: 'https://api.us-south.discovery.watson.cloud.ibm.com/instances/aafddb55-662a-48d2-9e31-f69eb609386f',
 	version: '2019-04-30',
-	discoveryService: () => {
+	/*
+		returns a new DiscoveryV1 object configured with the current apiKey and serviceUrl
+	 */
+	getNewDiscoveryService: () => {
 		return new DiscoveryV1({
-	        version: this.version,
+	        version: Configuration.version,
 	        authenticator: new IamAuthenticator({
-	            apikey: this.apikey,
+	            apikey: Configuration.apikey,
 	        }),
-	        url: this.serviceURL,
+	        url: Configuration.serviceURL,
 	    });
 	},
 	PREFERENCE_OPTIONS: {
@@ -27,15 +30,13 @@ const Configuration = {
 		GENRE: 1,
 		EMOTION: 2 
 	},
-
 	QUESTION_FORMATS: {
 		TERNARY: 0,
 		SLIDER: 1,
 		MULTI: 2,
 		RECOMMENDATION: 10
 	},
-
-	RECOMMENDATION_THRESHOLD: 2,
+	RECOMMENDATION_THRESHOLD: 2
 };
 
 module.exports = Configuration; // make importable
