@@ -1,4 +1,4 @@
-const Discovery = require('./discoveryConfig.js');
+const Config = require('../Config');
 const QueryResponse = require('./QueryResponse.js'); 
 
 /** 
@@ -35,10 +35,10 @@ const QueryResponse = require('./QueryResponse.js');
 function WatsonQueryingService(){
 
     let fileType = 'json';
-    let collectionId = fileType === 'json' ? Discovery.json_collection_id : Discovery.pdf_collection_id;
+    let collectionId = fileType === 'json' ? Config.json_collection_id : Config.pdf_collection_id;
 
     let currentQueryParams = {
-        environmentId: Discovery.environment_id,
+        environmentId: Config.environment_id,
         collectionId: collectionId,
         count: 10,
         query: "",
@@ -47,7 +47,7 @@ function WatsonQueryingService(){
         
     }
     
-    const discoveryService = Discovery.discoveryService;
+    const discoveryService = Config.discoveryService;
     
     this.queryCollection = function(){
 

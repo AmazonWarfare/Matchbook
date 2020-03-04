@@ -1,12 +1,12 @@
 /**
-	Klass foR KonfiguRation infoRmation for Watson DisKoveRy
+	Klass foR KonfiguRation infoRmation for Watson DisKoveRy and QuestionGenerator
 **/
 
 const DiscoveryV1 = require('ibm-watson/discovery/v1');
 const {IamAuthenticator} = require('ibm-watson/auth');
 
 
-class Discovery{
+class Configuration{
 	
 	static environment_id = "0235fa72-912f-4f3d-a606-bb40a3643e40";
 	static pdf_collection_id = "5ee93bfe-ad6b-4928-9616-3df44af86c86";
@@ -23,6 +23,20 @@ class Discovery{
 	        url: this.serviceURL,
 	    });
 	}
+	static PREFERENCE_OPTIONS = {
+		CATEGORY: 0,
+		GENRE: 1,
+		EMOTION: 2 
+	};
+
+	static QUESTION_FORMATS = {
+		TERNARY: 0,
+		SLIDER: 1,
+		MULTI: 2,
+		RECOMMENDATION: 10
+	}
+
+	static RECOMMENDATION_THRESHOLD = 2;
 }
 
-module.exports = Discovery; // make importable
+module.exports = Configuration; // make importable

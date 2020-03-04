@@ -1,4 +1,5 @@
 const WatsonQueryingService = require('../WatsonQueryingService/WatsonQueryingService');
+const Config = require('../Config');
 const StringFormat = require('./stringFormat.js');
 
 
@@ -35,24 +36,14 @@ const StringFormat = require('./stringFormat.js');
 
 **/
 
-const PREFERENCE_OPTIONS = {
-    CATEGORY: 0,
-    GENRE: 1,
-    EMOTION: 2 
-};
 
-const QUESTION_FORMATS = {
-	TERNARY: 0,
-	SLIDER: 1,
-	MULTI: 2,
-	RECOMMENDATION: 10
-}
-
-const RECOMMENDATION_THRESHOLD = 2;
 
 function QuestionGenerator(){
 	const wqs = new WatsonQueryingService();
-	let usedCateg = new Set(); =
+    const PREFERENCE_OPTIONS = Config.PREFERENCE_OPTIONS;
+    const QUESTION_FORMATS = Config.QUESTION_FORMATS;
+    const RECOMMENDATION_THRESHOLD = Config.RECOMMENDATION_THRESHOLD; 
+	let usedCateg = new Set(); 
     let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
     let currentQuestionFormat = QUESTION_FORMATS.TERNARY;
     let currentLabel;
