@@ -20,8 +20,8 @@ class QuestionCard extends Component {
     }
 
     nextQuestion() {
-        this.props.nextQuestion();
         this.setState({answer_clicked: true});
+        this.props.nextQuestion();
     }
 
     renderInputs() {
