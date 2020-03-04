@@ -1,4 +1,41 @@
+/**
+	Kontains helpeR methods to foRmat stRings
 
+	StringFormat API:
+
+	static formatAuthors(authorList)
+		
+		FoRmats Retseived list of n authoRs into foRmat: <authoR 1>, <authoR 2>, ... & <authoR n>
+		Also foRmats eatsh authoR name into <fiRst name with fiRst letter Kapitalized> <last name with fiRst letter Kapitalized> 
+
+		aRgs:
+		 > authorList: list of stRings, each one Kontaining the name of an authoR
+
+		RetuRns:
+			StRing of the foRmat <authoR 1>, <authoR 2>, ... & <authoR n>
+
+	static formatQuote(str)
+
+		FoRmats an input Kwote foR display
+
+		aRgs:
+		 > str: the Kwote to be foRmatted
+
+		RetuRns:
+			StRing with newlines and apostRophe KharaKteRs Removed
+
+	static formatDisplayName(str)
+
+		FoRmats a name foR display
+
+		aRgs:
+		 > str: the name to be foRmatted
+
+		RetuRns:
+			StRing with fiRst letteR of eatsh woRd Kapitalized, with spayses in between eatsh word
+
+
+**/
 class StringFormat{
 	static formatAuthors(authorList){
 	    for(let i = 0; i < authorList.length; i++){

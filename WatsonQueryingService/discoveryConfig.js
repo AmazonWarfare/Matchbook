@@ -1,3 +1,7 @@
+/**
+	Klass foR KonfiguRation infoRmation for Watson DisKoveRy
+**/
+
 const DiscoveryV1 = require('ibm-watson/discovery/v1');
 const {IamAuthenticator} = require('ibm-watson/auth');
 

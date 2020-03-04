@@ -3,6 +3,8 @@ const StringFormat = require('./stringFormat.js');
 
 
 /** 
+    QuestionGenerator KontRols the entiRe logiK of the Kwestions that aRe to be asKed
+
     QuestionGenerator API:
 
     generateQuestion()
@@ -22,7 +24,7 @@ const StringFormat = require('./stringFormat.js');
         Update the WatsonQueryingService with the infoRmation pRovided 
         in `ans`
         
-        Args:
+        aRgs:
          > ans - Response from Klient:
             -1 -> negative
              0 -> neutRal
@@ -36,7 +38,7 @@ const StringFormat = require('./stringFormat.js');
 const PREFERENCE_OPTIONS = {
     CATEGORY: 0,
     GENRE: 1,
-    EMOTION: 2 // Add more stuff here if needed
+    EMOTION: 2 
 };
 
 const QUESTION_FORMATS = {
@@ -50,8 +52,8 @@ const RECOMMENDATION_THRESHOLD = 2;
 
 function QuestionGenerator(){
 	const wqs = new WatsonQueryingService();
-	let usedCateg = new Set(); //So that category questions won't be repeated
-    let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY; //change to genre by default
+	let usedCateg = new Set(); =
+    let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
     let currentQuestionFormat = QUESTION_FORMATS.TERNARY;
     let currentLabel;
     let currentLabels;
@@ -74,13 +76,6 @@ function QuestionGenerator(){
 		
 		
         while(true){
-        	
-            /** 
-            // Uncomment to see what's going on with the function map
-            console.log(currentPreferenceOption);
-            console.log(currentQuestionFormat);
-            console.log(QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat]);
-            **/
 
             question = QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat](queryResponse);
             
@@ -111,7 +106,6 @@ function QuestionGenerator(){
         });
     }
 
-    ///////////////// Query Update Function //////////////////////
     this.provideAnswer = function(ans){
         if (currentPreferenceOption === PREFERENCE_OPTIONS.CATEGORY) {
             provideCategoryAnswer(ans);
@@ -119,9 +113,8 @@ function QuestionGenerator(){
             provideCategoryAnswer(ans); //Placeholder for other question types
         }
     }
-    ////////////////// Recommendation Function /////////////////////
+    
     let giveRecommendation = function(queryResponse){
-        //console.log(queryResponse.result.results);
         let title = StringFormat.formatDisplayName(queryResponse.getTitle());
         let author = StringFormat.formatAuthors(queryResponse.getAuthor());
         let rec = {
@@ -132,7 +125,6 @@ function QuestionGenerator(){
 
     }
 
-    /////////////////////// Category Question Generation Function /////////////////////
     let generateTernaryCategoryQuestion = function(queryResponse){
         let categories = queryResponse.getCategories();
         let foundNewLabel = false;
@@ -147,7 +139,7 @@ function QuestionGenerator(){
             }
         }
         
-        if (!foundNewLabel) { //When there are no more categories
+        if (!foundNewLabel) { 
             return 0;
         }
         currentLabel = label;
@@ -157,7 +149,7 @@ function QuestionGenerator(){
         let question = {
             text: "How do you feel about the concept of \"" + formattedLabel + "\" in books?",
             type: QUESTION_FORMATS.TERNARY,
-            content: {} // No content for ternary question
+            content: {} 
         };
 
         return question;
@@ -194,7 +186,6 @@ function QuestionGenerator(){
 
     }
 
-    //////////////////// Category Update Query Function ////////////////////
     let provideCategoryAnswer = function(ans){
     	wqs.updateQueryWithCategory(currentLabel, ans);
         
@@ -229,28 +220,6 @@ function QuestionGenerator(){
         return question;
 
     }
-    /*
-    ///////////////////// Quote Question Generation Function ////////////////////////
-    let generateQuoteQuestion = function(){
-        //// TODO:
-    }
-
-    ///////////////////// Emotion Question Generation Function //////////////////////
-    let generateEmotionQuestion = function(){ //INCOMPLETE//////////////
-        tempQueryParams = {
-            environmentId: "0235fa72-912f-4f3d-a606-bb40a3643e40",
-            collectionId: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
-            aggregation: "max(enriched_text.emotion.document.emotion." + this.emotion[this.emotionCounter] + ")"
-        };
-        discovery.query(currentQueryParams)
-            .then(queryResponse => {
-                let max = queryResponse.result.aggregations[0].value;
-            })
-            .catch(err => {
-                console.log('error:', err);
-            });
-    }
-    */
 
 }
 

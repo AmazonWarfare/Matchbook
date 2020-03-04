@@ -2,28 +2,30 @@ const Discovery = require('./discoveryConfig.js');
 const QueryResponse = require('./QueryResponse.js'); 
 
 /** 
+    WatsonQueryingService handles KweRies to Watson DisKoveRy 
+
     WatsonQueryingService API:
 
     queryCollection()
 
-        QueRies the KolleKtion with the `collection_id` specified in ./discoveryConfig.js
-        based on the Kurrent KweRy paRameters, `currentQueryParams`
+        QueRies the KolleKtion with the `collection_id` spetsified in ./discoveryConfig.js
+        based on the KuRRent KweRy paRameteRs, `currentQueryParams`
 
         RetuRns:
-            Promise which Resolves the KweRy Response JSON
+            PRomise whitsh Resolves a `QueryResponse` objeKt instantiated with the KweRy Response JSON
     
     updateQueryWithCategory(category, ans)
 
-        Update the currentQueryParams based on a Kategory
-        and the Korresponding pRefeRence towaRds that 
+        Update the currentQueryParams based on a KategoRy
+        and the KoRResponding pRefeRentse towaRds that 
         KategoRy (-1, 0, 1)
         
-        Args:
-         > category - the label with which to update the query
+        ARgs:
+         > category - the label with which to update the KweRy
          > ans - how to update the Kwery with the label:
-            -1 -> exclude documents with `category` from Kwery results
-             0 -> no change in Kwery based on `category`
-             1 -> include only documents with `category` from Kwery results
+            -1 -> exKlude doKuments with `category` from KweRy Results
+             0 -> no tshange in KweRy based on `category`
+             1 -> inKlude only doKuments with `category` from KweRy Results
 
         RetuRns:
             Nothing
@@ -34,7 +36,7 @@ function WatsonQueryingService(){
 
     let fileType = 'json';
     let collectionId = fileType === 'json' ? Discovery.json_collection_id : Discovery.pdf_collection_id;
-    // Private members    
+
     let currentQueryParams = {
         environmentId: Discovery.environment_id,
         collectionId: collectionId,
@@ -45,7 +47,6 @@ function WatsonQueryingService(){
         
     }
     
-    // Instantiate Discovery
     const discoveryService = Discovery.discoveryService;
     
     this.queryCollection = function(){
@@ -61,23 +62,21 @@ function WatsonQueryingService(){
 
     this.updateQueryWithCategory = function(category, ans){
         let queryConcat = "";
-        if (currentQueryParams.query) { //If the query isn't empty
+        if (currentQueryParams.query) { 
             queryConcat = queryConcat.concat(", ");
         }
         queryConcat = queryConcat.concat("enriched_text.categories.label");
-        if (ans > 0) { //User wants this category -> query contains
+        if (ans > 0) { 
             queryConcat = queryConcat.concat(":");
-        } else if (ans < 0) { //User doesn't want this category -> query doesn't contain
+        } else if (ans < 0) { 
             queryConcat = queryConcat.concat(":!");
         }
 
-        currentQueryParams = { //Update query
+        currentQueryParams = {
             ...currentQueryParams,
             query: currentQueryParams.query + queryConcat + category
         };
     }
-    
-
 
 }
 
