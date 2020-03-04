@@ -1,6 +1,6 @@
 
 
-/** 
+/**
     QueryResponse pRovides akksessoRs to the infoRmation in the JSON KweRy RetuRned by
     WatsonQueryingService
 
@@ -13,7 +13,7 @@
         RetuRns:
 
             StRing whitsh is the title of the booK
-    
+
     getAuthor()
 
         Get the list of authoRs of the booK fRom the fiRst Result of the KweRy Response
@@ -44,7 +44,7 @@
 
         RetuRns:
             List of stRings, eatsh one Kontaining a KategoRy from the KweRy
-        
+
 
 
 **/
@@ -52,23 +52,23 @@
 function QueryResponse(queryResponse, fileType){
     if(fileType === undefined){
 
-        let fileType = 'pdf';        
+        let fileType = 'pdf';
     }
 
-    let getPDFTitle = function(){
-        return queryResponse.result.results[0].extracted_metadata.title;
+    let getPDFTitle = function(result){
+        return queryResponse.result.results[result].extracted_metadata.title;
     };
 
-    let getJSONTitle = function(){
-        return queryResponse.result.results[0].title[0];
+    let getJSONTitle = function(result){
+        return queryResponse.result.results[result].title[0];
     }
 
-    this.getTitle = function(){
+    this.getTitle = function(result){
         const TITLE_GETTER = {
             'pdf': getPDFTitle,
             'json': getJSONTitle
         };
-        return TITLE_GETTER[fileType]();
+        return TITLE_GETTER[fileType](result);
     }
 
     this.getNumMatchingResults = function(){
@@ -82,8 +82,8 @@ function QueryResponse(queryResponse, fileType){
         };
         return AUTHOR_GETTER[fileType]();
     }
-    this.getQuotes = function(){
-        let quotes = queryResponse.result.results[0].quotes[0];
+    this.getQuotes = function(result){
+        let quotes = queryResponse.result.results[result].quotes[0];
         return quotes;
     }
     this.getTags = function(tagType){
@@ -100,7 +100,7 @@ function QueryResponse(queryResponse, fileType){
         }
         return Array.from(genreSet);
     }
-    
+
     let getPDFAuthor = function(){
         return queryResponse.result.results[0].extracted_metadata.author;
     };
@@ -123,4 +123,4 @@ function QueryResponse(queryResponse, fileType){
 }
 
 
-module.exports = QueryResponse; 
+module.exports = QueryResponse;
