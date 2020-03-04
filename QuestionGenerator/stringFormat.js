@@ -45,15 +45,18 @@ class StringFormat{
 	    let lastCommaPos = authorsJoined.lastIndexOf(',');
 	    if(lastCommaPos >= 0){
 	        authorsJoined = authorsJoined.substring(0,lastCommaPos) + " &" + authorsJoined.substring(lastCommaPos + 1);
-	    } 
+	    }
     return authorsJoined;
 	}
 
 	static formatQuote(str){
+		console.log(str)
 		str = str.replace("\n", " ").trim();
+		var str2 = str.substring(1, str.length-1);
+		console.log(str2);
 		return str.substring(1, str.length-1);
 	}
-	static formatDisplayName(str) 
+	static formatDisplayName(str)
 	{
 		str = str.trim();
 	    str = str.replace("_", " ");

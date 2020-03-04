@@ -1,4 +1,5 @@
 
+
 /** 
     QueryResponse pRovides akksessoRs to the infoRmation in the JSON KweRy RetuRned by
     WatsonQueryingService
@@ -10,6 +11,7 @@
         Get the title of the booK fRom the fiRst Result of the KweRy Response
 
         RetuRns:
+
             StRing whitsh is the title of the booK
     
     getAuthor()
@@ -49,6 +51,7 @@
 
 function QueryResponse(queryResponse, fileType){
     if(fileType === undefined){
+
         let fileType = 'pdf';        
     }
 
@@ -59,7 +62,7 @@ function QueryResponse(queryResponse, fileType){
     let getJSONTitle = function(){
         return queryResponse.result.results[0].title[0];
     }
-    
+
     this.getTitle = function(){
         const TITLE_GETTER = {
             'pdf': getPDFTitle,
@@ -87,6 +90,17 @@ function QueryResponse(queryResponse, fileType){
         let tagName = 'tags'+tagType;
         return queryResponse.result.results[0][tagName][0];
     }
+    this.getGenres = function(){
+        let genreSet = new Set();
+        let res = queryResponse.result.results;
+        for (let i = 0; i < res.length; i++){
+          for(let j = 0; j < res[i].genre[0].length; j++){
+            genreSet.add(res[i].genre[0][j]);
+          }
+        }
+        return Array.from(genreSet);
+    }
+    
     let getPDFAuthor = function(){
         return queryResponse.result.results[0].extracted_metadata.author;
     };

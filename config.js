@@ -25,8 +25,10 @@ class Configuration{
 	}
 	static PREFERENCE_OPTIONS = {
 		CATEGORY: 0,
-		GENRE: 1,
-		EMOTION: 2 
+	    GENRE: 1,
+	    EMOTION: 2,
+	    QUOTE: 3,
+	    TAG: 4 // Add more stuff here if needed
 	};
 
 	static QUESTION_FORMATS = {
