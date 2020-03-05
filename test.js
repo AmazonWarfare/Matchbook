@@ -6,10 +6,11 @@ console.log("EUREKA");
 //let phantomjs = require("selenium-webdriver/phantomjs");
 //let phantomjsnew = require("/usr/local/bin/phantomjs");
 
-//let app = express();
-//let driver = new phantomjsnew.Driver();
-
-let phantomjs = require("/usr/local/bin/phantomjs");
+let express = require("express");
 let test = require("selenium-webdriver");
+let phantomjs = require("selenium-webdriver/phantomjs");
+
+let app = express();
+let driver = new phantomjsnew.Driver();
 
 console.log("EUREKA AGAIN");
