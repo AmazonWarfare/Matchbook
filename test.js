@@ -9,11 +9,12 @@ chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 
 const chromeCapabilities = Capabilities.chrome();
-chromeCapabilities.set('chromeOptions', {args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage']});
+//chromeCapabilities.set('chromeOptions', {args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']});
+chromeCapabilities.set('chromeOptions', {args: ['--no-sandbox', '--disable-dev-shm-usage']});
 
 (async function example() {
-    //let driver = await new Builder().withCapabilities(chromeCapabilities).forBrowser('chrome').build();
-    let driver = chrome.Driver.createSession(chromeCapabilities);
+    let driver = await new Builder().withCapabilities(chromeCapabilities).forBrowser('chrome').build();
+    //let driver = chrome.Driver.createSession(chromeCapabilities);
 
     try {
         await driver.get('http://www.google.com/ncr');
