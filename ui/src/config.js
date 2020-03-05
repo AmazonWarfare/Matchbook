@@ -6,4 +6,11 @@ const INPUT_TYPES = {
     RECOMMENDATION: "recommendation"
 };
 
-module.exports = {INPUT_TYPES};
+const QUESTION_FORMATS = {
+    TERNARY: 0,
+    SLIDER: 1,
+    MULTI: 2,
+    RECOMMENDATION: 10
+};
+
+module.exports = {INPUT_TYPES, QUESTION_FORMATS};
