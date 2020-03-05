@@ -22,6 +22,7 @@
     "chromedriver": "^80.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "chromedriver": "^80.0.1"
   }
 }

@@ -2,14 +2,14 @@ console.log('MARCO')
 
 // Set PATH stuff for Chrome to work
 let chrome = require('selenium-webdriver/chrome');
-//let chrome_driver = require('chromedriver');
-let chrome_driver = require('/home/travis/build/AmazonWarfare/Matchbook/node_modules/chromedriver/lib/chromedriver/chromedriver')
+let chrome_driver = require('chromedriver');
+//let chrome_driver = require('/home/travis/build/AmazonWarfare/Matchbook/node_modules/chromedriver/lib/chromedriver/chromedriver')
 chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 
 const chromeCapabilities = Capabilities.chrome();
-chromeCapabilities.set('chromeOptions', {args: ['--headless']});
+chromeCapabilities.set('chromeOptions', {args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage']});
 
 (async function example() {
     //let driver = await new Builder().withCapabilities(chromeCapabilities).forBrowser('chrome').build();
