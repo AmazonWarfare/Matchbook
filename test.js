@@ -5,8 +5,11 @@ chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 
+const chromeCapabilities = Capabilities.chrome();
+chromeCapabilities.set('chromeOptions', {args: ['--headless']});
+
 (async function example() {
-    let driver = await new Builder().withCapabilities(Capabilities.chrome()).forBrowser('chrome').build();
+    let driver = await new Builder().withCapabilities(chromeCapabilities).forBrowser('chrome').build();
 
     try {
         await driver.get('http://www.google.com/ncr');
