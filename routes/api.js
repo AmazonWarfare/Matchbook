@@ -19,8 +19,11 @@ router.get('/question', (req, res) => {
     let question_promise = qg.generateQuestion();
 
     question_promise.then((question) => {
-            let {text, type} = question;
-            res.send(JSON.stringify({text, type}));
+            let {text, type, content} = question;
+            let responseObject = {
+                question: {text, type, content}
+            };
+            res.send(JSON.stringify(responseObject));
         })
         .catch((err) => {
                 console.log(err);
@@ -35,11 +38,12 @@ router.get('/question', (req, res) => {
     Body of post is JSON with a field "answer"
  */
 router.post('/answer', (req, res) => {
-    let answer = parseInt(req.body.answer);
-    if (![-1, 0, 1].includes(answer)) {
+    let answer = req.body.answer;
+    console.log("serverside ans:", answer);
+    /*if (![-1, 0, 1].includes(answer)) {
         res.status(404);
         res.send("invalid answer");
-    }
+    }*/
     // Here we will respond to the question through another call to WQS
     qg.provideAnswer(answer);
     res.status(200);
