@@ -8,8 +8,7 @@
     "start-ui": "npm run start --prefix ui",
     "start-dev": "concurrently \"npm run start-server\" \"npm run start-ui\"",
     "test": "npm run test --prefix ui",
-    "build": "npm run build --prefix ui",
-    "travistest": "testem ci --launch PhantomJS"
+    "build": "npm run build --prefix ui"
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +18,8 @@
     "concurrently": "^5.1.0",
     "express": "^4.17.1",
     "ibm-watson": "^5.3.1",
-    "phantomjs-prebuilt": "^2.1.16",
     "selenium-webdriver": "^4.0.0-alpha.7",
-    "testem": "^3.0.2"
+    "chromedriver": "^80.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

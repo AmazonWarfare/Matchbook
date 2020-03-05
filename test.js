@@ -1,16 +1,20 @@
-console.log("EUREKA");
+// Set PATH stuff for Chrome to work
+let chrome = require('selenium-webdriver/chrome');
+let chrome_driver = require('chromedriver');
+chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 
-//let express = require("express");
-//let By = require("selenium-webdriver").By;
-//let until = require("selenium-webdriver").until;
-//let phantomjs = require("selenium-webdriver/phantomjs");
-//let phantomjsnew = require("/usr/local/bin/phantomjs");
+const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 
-let express = require("express");
-let test = require("selenium-webdriver");
-let phantomjs = require("phantomjs-prebuilt");
+(async function example() {
+    let driver = await new Builder().withCapabilities(Capabilities.chrome()).forBrowser('chrome').build();
 
-let app = express();
-let driver = new phantomjs.arch.Driver();
+    try {
+        await driver.get('http://www.google.com/ncr');
+        await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
+        await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
+    } finally {
+        await driver.quit();
+    }
+})();
 
-console.log("EUREKA AGAIN");
+console.log('EUREKA');
