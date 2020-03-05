@@ -11,6 +11,5 @@ console.log("EUREKA");
 
 let phantomjs = require("/usr/local/bin/phantomjs");
 let test = require("selenium-webdriver");
-console.log(test)
 
 console.log("EUREKA AGAIN");
