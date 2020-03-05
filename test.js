@@ -4,16 +4,16 @@ console.log('MARCO')
 let chrome = require('selenium-webdriver/chrome');
 let chrome_driver = require('chromedriver');
 //let chrome_driver = require('/home/travis/build/AmazonWarfare/Matchbook/node_modules/chromedriver/lib/chromedriver/chromedriver')
-chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
+//chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 
 const chromeCapabilities = Capabilities.chrome();
 //chromeCapabilities.set('chromeOptions', {args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']});
-chromeCapabilities.set('chromeOptions', {args: ['--no-sandbox', '--disable-dev-shm-usage']});
+chromeCapabilities.set('chromeOptions', {args: ['--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox']});
 
 (async function example() {
-    let driver = await new Builder().withCapabilities(chromeCapabilities).forBrowser('chrome').build();
+    let driver = await new Builder().forBrowser('chrome').withCapabilities(chromeCapabilities).build();
     //let driver = chrome.Driver.createSession(chromeCapabilities);
 
     try {
