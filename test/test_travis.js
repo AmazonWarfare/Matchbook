@@ -1,10 +1,9 @@
 console.log('######################################################################################################################################################');
 console.log('Beginning Selinium Testing on Travis CI Github');
 
-console.log('Setting up PATH stuff for Chrome');
 // Set PATH stuff for Chrome to work
 let chrome = require('selenium-webdriver/chrome');
-let chrome_driver = require('/home/travis/build/AmazonWarfare/Matchbook/node_modules/chromedriver')
+let chrome_driver = require('/home/travis/build/AmazonWarfare/Matchbook/node_modules/chromedriver');
 chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');

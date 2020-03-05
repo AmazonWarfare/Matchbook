@@ -1,7 +1,6 @@
 console.log('######################################################################################################################################################');
 console.log('Beginning Selinium Testing on Local Machine');
 
-console.log('Setting up PATH stuff for Chrome');
 // Set PATH stuff for Chrome to work
 let chrome = require('selenium-webdriver/chrome');
 let chrome_driver = require('chromedriver');
