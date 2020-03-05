@@ -375,7 +375,7 @@ function QuestionGenerator(){
         }
 
         let question = {
-            text: "Pick book topics from these that would interest you",
+            text: "Pick book genres from these that would interest you",
             type: QUESTION_FORMATS.MULTI,
             content: {
             	options: formattedLabels
@@ -452,10 +452,10 @@ function QuestionGenerator(){
     	let genres;
     	currentLabels = genres;
     	formattedLabels = queryResponse.getGenres();
-      console.log(formattedLabels);
+        console.log(formattedLabels);
     	let question = {
             text: "Pick book topics from these that would interest you",
-            type: QUESTION_FORMATS.MUlTI,
+            type: QUESTION_FORMATS.MULTI,
             content: {
             	options: formattedLabels
             }
