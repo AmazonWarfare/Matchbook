@@ -1,3 +1,5 @@
+console.log('MARCO')
+
 // Set PATH stuff for Chrome to work
 let chrome = require('selenium-webdriver/chrome');
 //let chrome_driver = require('chromedriver');
@@ -22,4 +24,4 @@ chromeCapabilities.set('chromeOptions', {args: ['--headless']});
     }
 })();
 
-console.log('EUREKA');
+console.log('POLO');
