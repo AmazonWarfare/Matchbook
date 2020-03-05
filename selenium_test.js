@@ -7,9 +7,6 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
     let test_state = 0
     let error
 
-    console.log('######################################################################################################################################################');
-    console.log('Executing test: test_selenium_functioning');
-
     let driver = await new Builder().forBrowser('firefox').withCapabilities(Capabilities.firefox()).build();
 
     try {
@@ -17,6 +14,7 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
         await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
         await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 
+        console.log('######################################################################################################################################################');
         console.log('test_selenium_functioning PASSED');
         console.log('######################################################################################################################################################');
     } catch (err) {
@@ -26,6 +24,7 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
         await driver.quit();
 
         if (test_state == 1) {
+            console.log('######################################################################################################################################################');
             console.log('test_selenium_functioning FAILED');
             console.log('######################################################################################################################################################');
             throw error
@@ -37,9 +36,6 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
     let test_state = 0
     let error
 
-    console.log('######################################################################################################################################################');
-    console.log('Executing test: test_selenium_functioning2');
-
     let driver = await new Builder().forBrowser('firefox').withCapabilities(Capabilities.firefox()).build();
 
     try {
@@ -47,6 +43,7 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
         await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
         await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 
+        console.log('######################################################################################################################################################');
         console.log('test_selenium_functioning2 PASSED');
         console.log('######################################################################################################################################################');
     } catch (err) {
@@ -56,9 +53,10 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
         await driver.quit();
 
         if (test_state == 1) {
+            console.log('######################################################################################################################################################');
             console.log('test_selenium_functioning2 FAILED');
             console.log('######################################################################################################################################################');
-            new Promise((_, reject) => reject({ test: 'woops!' })).catch(() => {});
+            new Promise((_, reject) => reject({ test: 'woops!' })).catch(() => {throw error});
         }
     }
 })();
