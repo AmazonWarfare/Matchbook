@@ -58,7 +58,7 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
         if (test_state == 1) {
             console.log('test_selenium_functioning2 FAILED');
             console.log('######################################################################################################################################################');
-            throw error
+            new Promise((_, reject) => reject({ test: 'woops!' })).catch(() => {});
         }
     }
 })();
