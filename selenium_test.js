@@ -38,7 +38,7 @@ driver.get('http://www.hjgkjkghjg.com').then(function(){
     driver.findElement(By.name('q')).sendKeys('BrowserStack\n').then(function(){
         driver.getTitle().then(function(title) {
             console.log(title);
-            driver.quit().then(r => {});
+            driver.quit().then();
         });
     });
-}).catch(error => console.log(error.message));
+});
