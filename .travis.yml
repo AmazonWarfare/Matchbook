@@ -16,4 +16,4 @@ install:
   - npm install
   - cd ..
 
-script: node ./test/test_travis.js
+script: node ./selenium_test.js
