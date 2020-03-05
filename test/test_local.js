@@ -9,7 +9,7 @@ chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 
 const chromeCapabilities = Capabilities.chrome();
-chromeCapabilities.set('chromeOptions', {args: ['--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox']});
+chromeCapabilities.set('chromeOptions', {args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox']});
 
 (async function test_selenium_functioning() {
     let test_state = 0
@@ -18,10 +18,12 @@ chromeCapabilities.set('chromeOptions', {args: ['--disable-gpu', '--no-sandbox',
     console.log('######################################################################################################################################################');
     console.log('Executing test: test_selenium_functioning');
 
-    //let driver = await new Builder().forBrowser('chrome').withCapabilities(chromeCapabilities).build();
-    let driver = chrome.Driver.createSession(chromeCapabilities);
+    let driver
 
     try {
+        //driver = await new Builder().forBrowser('chrome').withCapabilities(chromeCapabilities).build();
+        driver = chrome.Driver.createSession(chromeCapabilities);
+
         await driver.get('http://www.google.com/ncr');
         await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
         await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
