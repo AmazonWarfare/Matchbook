@@ -2,9 +2,9 @@ console.log('MARCO')
 
 // Set PATH stuff for Chrome to work
 let chrome = require('selenium-webdriver/chrome');
-let chrome_driver = require('chromedriver');
-//let chrome_driver = require('/home/travis/build/AmazonWarfare/Matchbook/node_modules/chromedriver/lib/chromedriver/chromedriver')
-//chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
+//let chrome_driver = require('chromedriver');
+let chrome_driver = require('/home/travis/build/AmazonWarfare/Matchbook/node_modules/chromedriver')
+chrome.setDefaultService(new chrome.ServiceBuilder(chrome_driver.path).build());
 
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 
@@ -13,8 +13,8 @@ const chromeCapabilities = Capabilities.chrome();
 chromeCapabilities.set('chromeOptions', {args: ['--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox']});
 
 (async function example() {
-    let driver = await new Builder().forBrowser('chrome').withCapabilities(chromeCapabilities).build();
-    //let driver = chrome.Driver.createSession(chromeCapabilities);
+    //let driver = await new Builder().forBrowser('chrome').withCapabilities(chromeCapabilities).build();
+    let driver = chrome.Driver.createSession(chromeCapabilities);
 
     try {
         await driver.get('http://www.google.com/ncr');
