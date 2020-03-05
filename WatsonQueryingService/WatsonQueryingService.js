@@ -69,7 +69,7 @@ function WatsonQueryingService(){
         
     };
     
-    const discoveryService = Config.discoveryService;
+    const discoveryService = Config.getNewDiscoveryService();
     
     this.queryCollection = function(){
         buildQuery();
