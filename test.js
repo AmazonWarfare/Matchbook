@@ -9,7 +9,8 @@ const chromeCapabilities = Capabilities.chrome();
 chromeCapabilities.set('chromeOptions', {args: ['--headless']});
 
 (async function example() {
-    let driver = await new Builder().withCapabilities(chromeCapabilities).forBrowser('chrome').build();
+    //let driver = await new Builder().withCapabilities(chromeCapabilities).forBrowser('chrome').build();
+    let driver = chrome.Driver.createSession(chromeCapabilities);
 
     try {
         await driver.get('http://www.google.com/ncr');
