@@ -3,11 +3,12 @@ language: node_js
 node_js:
   - "8"
 
-addons:
-  chrome: stable
+env:
+  global:
+    - MOZ_HEADLESS=1
 
-before_install:
-  - google-chrome --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --disable-setuid-sandbox --remote-debugging-port=9222 http://localhost &
+addons:
+  firefox: latest
 
 install:
   - npm install

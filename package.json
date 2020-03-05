@@ -20,10 +20,9 @@
     "express": "^4.17.1",
     "ibm-watson": "^5.3.1",
     "selenium-webdriver": "^4.0.0-alpha.7",
-    "chromedriver": "^80.0.1"
+    "geckodriver": "^1.19.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2",
-    "chromedriver": "^80.0.1"
+    "nodemon": "^2.0.2"
   }
 }
