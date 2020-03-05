@@ -27,7 +27,7 @@ This runs a live version of the UI which updates every time you save. This curre
 - The app should automatically open in the default browser, to `localhost:3000`
 
 ## Run Tests:
- A template/example UI test can be found in `/ui/src/components/inputs/ButtonList/button.test.js`. Tests should be placed in the folder with the file they are testing for easy imports. Tests for a file should always be of format `file_name.test.js`. This will allow Jest to find the tests when running them and to keep our file structure simple and consistent. 
+ A template/example UI test can be found in `/ui/src/components/inputs/ButtonList/button.test_travis.js`. Tests should be placed in the folder with the file they are testing for easy imports. Tests for a file should always be of format `file_name.test_travis.js`. This will allow Jest to find the tests when running them and to keep our file structure simple and consistent. 
  
  To execute tests:
  - From root directory run `npm run test`
