@@ -189,7 +189,7 @@ function QuestionGenerator(){
             provideCategoryAnswer(ans);
         } else if (currentPreferenceOption === PREFERENCE_OPTIONS.QUOTE){
             if(ans === 0){
-              questionCount = 2; //ensures that process query will give another quote question
+              questionCount = 3; //ensures that process query will give another quote question
             }
             provideQuoteAnswer(ans);
         } else if(currentPreferenceOption === PREFERENCE_OPTIONS.GENRE){
