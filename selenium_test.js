@@ -32,21 +32,13 @@ const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
     }
 })();
 
-(async function test_selenium_functioning2() {
-    let test_state = 0;
-    let error;
+let driver = new Builder().forBrowser('firefox').withCapabilities(Capabilities.firefox()).build();
 
-    let driver = await new Builder().forBrowser('firefox').withCapabilities(Capabilities.firefox()).build();
-
-    try {
-        await driver.get('http://www.sadklfjsdalfkj.com/ncr');
-        await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
-        await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
-
-        console.log('######################################################################################################################################################');
-        console.log('test_selenium_functioning2 PASSED');
-        console.log('######################################################################################################################################################');
-    } finally {
-        await driver.quit();
-    }
-})();
+driver.get('http://www.hjgkjkghjg.com').then(function(){
+    driver.findElement(By.name('q')).sendKeys('BrowserStack\n').then(function(){
+        driver.getTitle().then(function(title) {
+            console.log(title);
+            driver.quit().then(r => {});
+        });
+    });
+}).catch(error => console.log(error.message));
