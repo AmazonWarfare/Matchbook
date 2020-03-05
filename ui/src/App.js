@@ -4,7 +4,7 @@ import './components/QuestionCard/QuestionCard';
 import QuestionCard from "./components/QuestionCard/QuestionCard";
 import NavBar from "./components/NavBar/NavBar";
 import Fade from "./HigherOrderComponents/Fade";
-import {INPUT_TYPES} from "./config";
+import {INPUT_TYPES, QUESTION_FORMATS} from "./config";
 
 import axios from "axios";
 
@@ -33,7 +33,6 @@ let startup_cards = [
     }
 ];
 
-let get_initial_axios_question = false;
 
 class App extends Component {
     constructor(props) {
@@ -45,39 +44,70 @@ class App extends Component {
         this.nextQuestion = this.nextQuestion.bind(this);
     }
 
+    mapQuestionToCardQuestion(question) {
+        let cardQuestion = {
+            text: question.text
+        };
+        if (question.type === QUESTION_FORMATS.TERNARY) {
+            cardQuestion = {
+                ...cardQuestion,
+                input_type: INPUT_TYPES.BUTTON_LIST,
+                custom_responses: false
+            }
+        } else if (question.type === QUESTION_FORMATS.MULTI) {
+            cardQuestion = {
+                ...cardQuestion,
+                input_type: INPUT_TYPES.MULTISELECT,
+                options: question.content.options
+            }
+        }
+        return cardQuestion;
+    }
+
+    isFirstQuestion = false;
+
     nextQuestion(answer) {
         if (startup_cards.length > 0) {
             this.setState({current_question: startup_cards.shift()});
+            if (startup_cards.length === 0) {
+                this.isFirstQuestion = true;
+            }
+        } else if(this.isFirstQuestion) {
+            axios.get('/question')
+                .then((res) => {
+                    let question = res.data.question;
+                    let cardQuestion = this.mapQuestionToCardQuestion(question);
+
+                    this.setState({
+                        current_question: cardQuestion
+                    });
+                });
+
+            this.isFirstQuestion = false;
         } else {
             // currently a hacky way to get a bit more hang for our loading icon
             setTimeout(() => {
-                if ([-1,0,1].includes(answer)) {
-                    axios
-                        .post('/answer', {answer})
-                        .then(() => console.log('answer sent from UI'));
-                }
+                axios
+                    .post('/answer', {answer})
+                    .then(() => console.log('answer sent from UI'));
 
                 axios
                     .get('/question')
                     .then((res) => {
-                        if(res.data.type === 0) {
-                            this.setState({
-                                current_question: {
-                                    text: res.data.text,
-                                    input_type: INPUT_TYPES.BUTTON_LIST,
-                                    custom_responses: false
-                                }
-                            })
-                        } else {
-                            this.setState({
-                                current_question: {
-                                    text: res.data.text,
-                                    input_type: INPUT_TYPES.RECOMMENDATION,
-                                    custom_responses: true,
-                                    options: []
-                                }
-                            })
-                        }
+                        /*
+                            here, res is a question object with {text, type, content}
+                            The type is a QUESTION_FORMAT type, each has its own needed
+                            configuration to be passed as the question (through
+                            state.current_question. This code disassembles the response
+                            object and creates the question configuration as needed by the
+                            QuestionCard object
+                         */
+                        let question = res.data.question;
+                        let cardQuestion = this.mapQuestionToCardQuestion(question);
+
+                        this.setState({
+                            current_question: cardQuestion
+                        });
                     });
             }, 500)
         }
