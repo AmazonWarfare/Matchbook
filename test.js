@@ -8,9 +8,9 @@ console.log("EUREKA");
 
 let express = require("express");
 let test = require("selenium-webdriver");
-let phantomjs = require("selenium-webdriver/phantomjs");
+let phantomjs = require("phantomjs-prebuilt");
 
 let app = express();
-let driver = new phantomjsnew.Driver();
+let driver = new phantomjs.arch.Driver();
 
 console.log("EUREKA AGAIN");
