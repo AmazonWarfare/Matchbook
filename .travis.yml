@@ -6,6 +6,9 @@ node_js:
 addons:
   chrome: stable
 
+before_install:
+  - google-chrome --headless --disable-gpu --no-sandbox --disable-dev-shm-usage --disable-setuid-sandbox --remote-debugging-port=9222 http://localhost &
+
 install:
   - npm install
   - cd ui
