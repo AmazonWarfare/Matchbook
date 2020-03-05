@@ -18,7 +18,8 @@
     "concurrently": "^5.1.0",
     "express": "^4.17.1",
     "ibm-watson": "^5.3.1",
-    "phantomjs-prebuilt": "^2.1.16"
+    "phantomjs-prebuilt": "^2.1.16",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
