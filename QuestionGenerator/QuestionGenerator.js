@@ -153,13 +153,18 @@ function QuestionGenerator(){
         }
         **/
 
-      if(questionCount === 0){
+        if(questionCount === 0){
+            currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
+            currentQuestionFormat = QUESTION_FORMATS.MULTI;
+            questionCount++;
+        }
+        else if(questionCount === 1){
           currentPreferenceOption = PREFERENCE_OPTIONS.TAG;
           currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-        }else if(questionCount === 1){
+        }else if(questionCount === 2){
           currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
           currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-        }else if(questionCount === 2){
+        }else if(questionCount === 3){
           currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE;
           currentQuestionFormat = QUESTION_FORMATS.TERNARY;
         }else{
@@ -375,7 +380,7 @@ function QuestionGenerator(){
         }
 
         let question = {
-            text: "Pick book genres from these that would interest you",
+            text: "Pick book topics from these that would interest you",
             type: QUESTION_FORMATS.MULTI,
             content: {
             	options: formattedLabels
@@ -434,7 +439,8 @@ function QuestionGenerator(){
 
     let generateTernaryGenreQuestion = function(queryResponse){
     	// TODO: Query on genre somehow
-    	let genre;
+    	let genre = queryResponse.getGenres()[0];
+
     	currentLabel = genre; // Save genre in currentLabel for future reference
     	let formattedLabel = StringFormat.formatDisplayName(currentLabel);
     	let question = {
@@ -454,7 +460,7 @@ function QuestionGenerator(){
     	formattedLabels = queryResponse.getGenres();
         console.log(formattedLabels);
     	let question = {
-            text: "Pick book topics from these that would interest you",
+            text: "Pick book genres from these that would interest you",
             type: QUESTION_FORMATS.MULTI,
             content: {
             	options: formattedLabels
