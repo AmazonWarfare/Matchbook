@@ -1,0 +1,71 @@
+DIRECTIONS:
+Using a plain text editor (not word!) type in the values for each book, putting each value on its own line.
+Only input the values, not the headers.
+For the annotations that can have multiple entries, we use a # on a newline to represent the last entry. If there aren't any entries for a particular annotation type, like one of the tags, still include the # symbol. It is okay to have something like this:
+#
+#
+When finished, save as a .txt file and upload it to Jared's branch in the folder book_collection/good_reads.
+Below is the general format for each book. To start a new book, start again from the file name on the next line after the last #.
+
+GENERAL FORMAT:
+
+File_name
+Name of Book
+Author
+Genres
+Genres
+#
+How do you feel about _________ ? Tags
+How do you feel about _________  ? Tags
+#
+How do you feel about ____________ in books? Tags
+How do you feel about ____________ in books? Tags
+#
+How do you feel about ____________ books? Tags
+How do you feel about ____________ books? Tags
+#
+Is the book a series: yes,#_of_books or no (ex: yes,14)
+Is the book adapted to film: yes or no
+Quotes (They should be in single quotes so that quotes that span multilines will still be kept together.)---- quotes example:
+'"What did you spend so much time talking about with Ila? If you weren't dancing with that long-legged fellow, you were talking to her like it was some kind of secret."
+"Ila was giving me advice on being a woman," Egwene replied absently. He began laughing, and she gave him a hooded, dangerous look that he failed to see.
+"Advice! Nobody tells us how to be men. We just are."
+"That," Egwene said, "is probably why you make such a bad job of it."'
+'I will hate the man you choose because he isn't me, and love him if he makes you smile.'
+#
+Good Reads rating (ex. 4.19)
+Number of pages (ex. 377)
+Good reads synopsis
+#
+
+EXAMPLE:
+
+Pride_and_Prejudice
+Pride and Prejudice
+Jane Austen
+Romance
+Historical
+#
+LOVE STORIES
+CLASSIC ENGLISH LITERATURE
+#
+ARISTOCRACY
+HISTORICAL BRITISH SOCIAL CLASSES
+#
+#
+No
+Yes
+'It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.'
+'What are men to rocks and mountains?'
+'There is a stubbornness about me that never can bear to be frightened at the will of others. My courage always rises at every attempt to intimidate me.'
+'I could easily forgive his pride, if he had not mortified mine.'
+'I must learn to be content with being happier than I deserve.'
+'I have not the pleasure of understanding you.'
+'It is happy for you that you possess the talent of flattering with delicacy. May I ask whether these pleasing attentions proceed from the impulse of the moment, or are they the result of previous study?'
+#
+4.26
+279
+Since its immediate success in 1813, Pride and Prejudice has remained one of the most popular novels in the English language. Jane Austen called this brilliant work "her own darling child" and its vivacious heroine, Elizabeth Bennet, "as delightful a creature as ever appeared in print." The romantic clash between the opinionated Elizabeth and her proud beau, Mr. Darcy, is a splendid performance of civilized sparring. And Jane Austen's radiant wit sparkles as her characters dance a delicate quadrille of flirtation and intrigue, making this book the most superb comedy of manners of Regency England.
+
+
+If you have any further questions, feel free to message me.
