@@ -7,6 +7,12 @@ For the annotations that can have multiple entries, we use a # on a newline to r
 When finished, save as a .txt file and upload it to Jared's branch in the folder book_collection/good_reads.
 Below is the general format for each book. To start a new book, start again from the file name on the next line after the last #.
 
+All of this information should be available on Good Reads. For the tags, I looked at the names of the book lists that the book was included in and selected tags from those. It is definitely the most labor intensive part, since you actually have to consider whether the tag would be a good fit and what type of tag it would be. It's still not that hard though. I believe in you guys! Feel free to ask me if you are unsure if you tag ideas are good or not.
+
+At the bottom, I have listed all the current tags. Please update this list as you annotate.
+
+When entering tags, please use all CAPS for consistency and be mindful of the plurality. For example, How do you feel about "love story" doesn't sound nearly as good as How do you feel about "love stories". 
+
 GENERAL FORMAT:
 
 File_name
@@ -15,7 +21,7 @@ Author
 Genres
 Genres
 #
-How do you feel about _________ ? Tags
+How do you feel about _________ ? Tags (ex. EPIC FANTASIES)
 How do you feel about _________  ? Tags
 #
 How do you feel about ____________ in books? Tags
@@ -69,3 +75,47 @@ Since its immediate success in 1813, Pride and Prejudice has remained one of the
 
 
 If you have any further questions, feel free to message me.
+
+CURRENT TAGS:
+
+Type 1:
+
+Cyberpunk
+Epic fantasies
+Classic English literature
+dark fantasies
+feminist science fiction
+jevenile fiction
+love stories
+memoirs
+
+Type 2:
+
+Magic
+adventure
+aristocracy
+artificial intelligence
+dystopian society
+historical british social classes
+holocaust
+kick-ass female characters
+MMORPG'S
+mythology
+protagonists with hidden potential
+romantic subplots
+scary clowns
+space
+strong female characters
+superpowers
+suspense
+swords and sorcery
+the battle of good vs. evil
+violent action
+virtual reality
+
+Type 3:
+
+Young adult
+chilling
+depressing
+disturbing
