@@ -88,6 +88,8 @@ feminist science fiction
 jevenile fiction
 love stories
 memoirs
+SOCIAL COMMENTARIES
+ABSURDIST FICTION
 
 Type 2:
 
@@ -112,6 +114,13 @@ swords and sorcery
 the battle of good vs. evil
 violent action
 virtual reality
+ART
+PANDEMICS
+EXISTENTIALISM
+ALIENS
+WAR
+TIME TRAVEL
+MENTAL ILLNESS
 
 Type 3:
 
@@ -119,3 +128,7 @@ Young adult
 chilling
 depressing
 disturbing
+PHILOSOPHICAL
+POST-APOCALYPTIC
+CULTURAL
+SATIRICAL
