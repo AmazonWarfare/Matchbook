@@ -16,8 +16,13 @@ class MultiSelect extends Component {
 
     select(text) {
         this.setState(state => {
-            return state.selected.push(text);
-        })
+            if(state.selected.includes(text)) {
+                state.selected = state.selected.filter(elt => elt !== text);
+            } else {
+                state.selected.push(text);
+            }
+            return state.selected
+        });
     }
     renderOptions() {
         return (

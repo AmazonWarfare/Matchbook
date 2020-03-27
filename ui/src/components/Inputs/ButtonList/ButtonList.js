@@ -20,7 +20,7 @@ class ButtonList extends Component {
                 </div>
             );
         }
-
+        /* default response options are ternary */
         return (
             <div className="button-list">
                 <Button
