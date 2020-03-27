@@ -50,6 +50,9 @@
 **/
 
 function QueryResponse(queryResponse, fileType){
+   // console.log(JSON.stringify(queryResponse.result.results, null, 2));
+    //console.log('\n');
+
     if(fileType === undefined){
 
         let fileType = 'pdf';

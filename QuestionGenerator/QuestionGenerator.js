@@ -198,7 +198,17 @@ function QuestionGenerator(){
             provideTagAnswer(ans);
         }
     }
+    this.updateAnswer = function(label, newValue){
+        // label = tag name, genre name, category name
+        // 
+        //let newValue = ''; // if want to delete
+        return 0;
 
+    }
+
+    let deleteAnswer = function(){
+        // delete answer from query
+    }
     let giveRecommendation = function(queryResponse){
         let rec;
         console.log("MATCHIGN RESULTS: " + queryResponse.getNumMatchingResults());
@@ -392,7 +402,7 @@ function QuestionGenerator(){
     }
 
     let provideCategoryAnswer = function(ans){
-    	wqs.updateQueryWithCategory(currentLabel, ans);
+    	wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.CATEGORY);
       if(ans === 1){
         questionCount++;
       }
@@ -400,13 +410,14 @@ function QuestionGenerator(){
     }
 
     var provideGenreAnswer = function(ans){
-      wqs.updateQueryWithGenre(ans);
-
+        for(let i = 0; i < ans.length; i++){
+            wqs.updateQuery(ans[i], 1, PREFERENCE_OPTIONS.GENRE);
+        }
     }
 
     var provideQuoteAnswer = function(ans){
       console.log('Title of quoted book: ' + currentLabel);
-      wqs.updateQueryWithTitle(currentLabel, ans);
+      wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.TITLE);
       if(ans === 1){
         questionCount++;
       }else if(ans === 0){
@@ -420,17 +431,7 @@ function QuestionGenerator(){
         console.log('Current Tag Type: ' + currentTagType);
         console.log('Current Tag: '+currentLabel);
 
-        switch(currentTagType){
-            case 1:
-                wqs.updateQueryWithTag1(currentLabel, ans);
-                break;
-            case 2:
-                wqs.updateQueryWithTag2(currentLabel, ans);
-                break;
-            case 3:
-                wqs.updateQueryWithTag3(currentLabel, ans);
-                break;
-        }
+        wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.TAG, {tag_type: currentTagType});
         if(ans === 1){
           questionCount++;
         }
