@@ -90,6 +90,12 @@ function QueryResponse(queryResponse, fileType){
         return quotes;
     }
     this.getTags = function(tagType){
+        // Uncomment once JSON tag formatting is changed.
+        /**
+        // Need to remove tagType as argument
+        let tags = queryResponse.result.results[0].tags;
+        return tags;
+        **/
         let tagName = 'tags'+tagType;
         return queryResponse.result.results[0][tagName][0];
     }

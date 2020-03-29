@@ -211,7 +211,7 @@ function QuestionGenerator(){
     }
     let giveRecommendation = function(queryResponse){
         let rec;
-        console.log("MATCHIGN RESULTS: " + queryResponse.getNumMatchingResults());
+        console.log("MATCHING RESULTS: " + queryResponse.getNumMatchingResults());
         if(queryResponse.getNumMatchingResults() > 0){
             currentLabel = queryResponse.getTitle(0);
             let title = StringFormat.formatDisplayName(currentLabel);
@@ -305,6 +305,48 @@ function QuestionGenerator(){
         };
         return question;
     }
+
+    // Refactored to account for new JSON tag format
+    // Uncomment when changes are made
+
+    /**
+    let generateTernaryTagQuestion = function(queryResponse){
+        const TAGTYPEQUESTIONMAP = {
+            1: "?",
+            2: " in books?",
+            3: " books?"
+        }
+        let tags = queryResponse.getTags();
+        let foundNewTag = false;
+        let label, tagType;
+
+        for(let i = 0; i < tags.length; i++){
+            label = tags[i].tag_name;
+            tagType = tags[i].tag_type;
+            if(!usedTags.has(label)){
+                foundNewLabel = true;
+                break;
+            }
+        }
+
+        if (!foundNewTag) {
+            return 0;
+        }
+        currentLabel = label;
+        currentTagType = tagType;
+        formattedLabel = StringFormat.formatDisplayName(currentLabel);
+        usedTags.add(label);
+
+        let question = {
+            text: "How do you feel about the concept of \"" + formattedLabel + TAGTYPEQUESTIONMAP[currentTagType],
+            type: QUESTION_FORMATS.TERNARY,
+            content: {}
+        };
+
+        return question;
+
+    }
+    **/
 
     let generateTernaryTagQuestion = function(queryResponse){
         let tagType = 1;
