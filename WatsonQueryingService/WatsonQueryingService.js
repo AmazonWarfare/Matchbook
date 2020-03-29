@@ -17,18 +17,18 @@ const PREFERENCE_OPTIONS = Config.PREFERENCE_OPTIONS;
         RetuRns:
             PRomise whitsh Resolves a `QueryResponse` objeKt instantiated with the KweRy Response JSON
     
-    updateQueryWithCategory(category, ans)
+    updateQuery(label, sentiment, preferenceOption, extraInfo)
 
-        Update the currentQueryParams based on a KategoRy
-        and the KoRResponding pRefeRentse towaRds that 
-        KategoRy (-1, 0, 1)
+        Update the query params through QueryBuilder
         
         ARgs:
-         > category - the label with which to update the KweRy
-         > ans - how to update the Kwery with the label:
+         > label - the label with which to update the KweRy
+         > sentiment - how to update the Kwery with the label:
             -1 -> exKlude doKuments with `category` from KweRy Results
              0 -> no tshange in KweRy based on `category`
              1 -> inKlude only doKuments with `category` from KweRy Results
+         > preferenceOption - the type of item (genre, tag, category, etc.) the label pertains to
+         > extraInfo - object containing additional info (such as tag type for tags)
 
         RetuRns:
             Nothing

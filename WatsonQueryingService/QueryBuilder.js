@@ -1,4 +1,29 @@
-const Config = require('../Config');
+/** 
+    QueryBuilder is a class used to manage query elements (instances of QueryElement)
+    and build Watson Discovery Queries from them 
+
+    QueryBuilder API:
+
+    updateQuery(label, sentiment, preferenceOption, extraInfo)
+
+        Update (or add if not already existing) QueryElement with
+        given label using the information in the arguments
+        
+        ARgs:
+         > label - the label with which to update the KweRy
+         > sentiment - how to update the Kwery with the label:
+            -1 -> exKlude doKuments with `category` from KweRy Results
+             0 -> no tshange in KweRy based on `category`
+             1 -> inKlude only doKuments with `category` from KweRy Results
+         > preferenceOption - the type of item (genre, tag, category, etc.) the label pertains to
+         > extraInfo - object containing additional info (such as tag type for tags)
+
+        RetuRns:
+            Nothing
+
+**/
+
+Config = require('../Config');
 const QueryElement = require('./QueryElement.js');
 const PREFERENCE_OPTIONS = Config.PREFERENCE_OPTIONS;
 
@@ -15,18 +40,18 @@ function QueryBuilder(fileType){
         aggregation: "term(enriched_text.categories.label)"
         
     };
-	this.addQueryElement = function(label, sentiment, preferenceOption, extraInfo){
+	let addQueryElement = function(label, sentiment, preferenceOption, extraInfo){
 		queryElements.push(new QueryElement(label, sentiment, preferenceOption, extraInfo));
 	}
 	this.updateQuery = function(label, sentiment, preferenceOption, extraInfo){
-		let result = this.getElementByLabel(label);
+		let result = getElementByLabel(label);
 		if(result !== undefined){
 			result.sentiment = sentiment;
 		} else {
-			this.addQueryElement(label, sentiment, preferenceOption, extraInfo);
+			addQueryElement(label, sentiment, preferenceOption, extraInfo);
 		}
 	}
-	this.getElementByLabel = function(label){
+	let getElementByLabel = function(label){
 		let result;
 		for(let i = 0; i < queryElements.length; i++){
 			currentQueryElement = queryElements[i];
@@ -37,7 +62,7 @@ function QueryBuilder(fileType){
 		}
 		return result;
 	}
-	this.getElementsOfType = function(preferenceOption, sentiment){
+	let getElementsOfType = function(preferenceOption, sentiment){
 		if(sentiment === undefined){
 			sentiment = 1;
 		}
@@ -69,7 +94,7 @@ function QueryBuilder(fileType){
 		};
 
 		let queryConcat = "";
-		let positiveTitleElements = this.getElementsOfType(PREFERENCE_OPTIONS.TITLE, 1);
+		let positiveTitleElements = getElementsOfType(PREFERENCE_OPTIONS.TITLE, 1);
         if(positiveTitleElements.length > 0){
             queryConcat = "title::"+JSON.stringify(positiveTitleElements[0].label);
             console.log('Query: '+  queryConcat);
@@ -77,7 +102,7 @@ function QueryBuilder(fileType){
             return currentQueryParams;
         }
 
-        let positiveGenreElements = this.getElementsOfType(PREFERENCE_OPTIONS.GENRE, 1);
+        let positiveGenreElements = getElementsOfType(PREFERENCE_OPTIONS.GENRE, 1);
         if(positiveGenreElements.length > 0){
             queryConcat += "(";
             for(let i = 0; i < positiveGenreElements.length; i++){
