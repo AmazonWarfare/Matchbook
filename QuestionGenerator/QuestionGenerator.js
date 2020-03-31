@@ -265,6 +265,7 @@ function QuestionGenerator(){
         let resultNum = 0;
         let quotes = queryResponse.getQuotes(resultNum);
         let title = queryResponse.getTitle(resultNum);
+        let genre = queryResponse.getGenre(resultNum);
         let numMatch = queryResponse.getNumMatchingResults();
         while(quotedBooks.has(title)){
           if(resultNum < numMatch - 1){
@@ -274,6 +275,7 @@ function QuestionGenerator(){
           }
           quotes = queryResponse.getQuotes(resultNum);
           title = queryResponse.getTitle(resultNum);
+          genre = queryResponse.getGenre(resultNum);
         }
         let foundNewQuote = false;
         let label;
@@ -292,13 +294,15 @@ function QuestionGenerator(){
             return 0;
         }
 
+        console.log(genre);
+        let formattedGenre = genre.toUpperCase();
         currentLabel = title;
         quotedBooks.add(currentLabel);
         formattedLabel = StringFormat.formatQuote(label);
         usedQuotes.add(label);
 
         let question = {
-            text: "Would you like a book that says things like this:          \"" + formattedLabel + "\"",
+            text: "Would you like a " + formattedGenre +" book that says things like this:          \"" + formattedLabel + "\"",
             type: QUESTION_FORMATS.TERNARY,
             content: {} // No content for ternary question
         };

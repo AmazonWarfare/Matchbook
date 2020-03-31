@@ -110,6 +110,12 @@ function QueryResponse(queryResponse, fileType){
         return Array.from(genreSet);
     }
 
+    this.getGenre = function(result){
+        let targetGenre = queryResponse.result.results[result].genre[0][0];
+
+        return targetGenre;
+
+    }
     let getPDFAuthor = function(){
         return queryResponse.result.results[0].extracted_metadata.author;
     };
