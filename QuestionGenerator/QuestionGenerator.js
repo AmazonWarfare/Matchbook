@@ -197,17 +197,10 @@ function QuestionGenerator(){
             provideTagAnswer(ans);
         }
     }
-    this.updateAnswer = function(label, newValue){
-        // label = tag name, genre name, category name
-        // 
-        //let newValue = ''; // if want to delete
-        return 0;
-
+    this.updateAnswer = function(label, newSentiment){
+        wqs.updateQuery(label, newSentiment);
     }
 
-    let deleteAnswer = function(){
-        // delete answer from query
-    }
     let giveRecommendation = function(queryResponse){
         let rec;
         console.log("MATCHING RESULTS: " + queryResponse.getNumMatchingResults());

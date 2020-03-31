@@ -83,6 +83,27 @@ function QueryBuilder(fileType){
 			queryElements[i].printQueryElement();
 		}
 	}
+    let assembleQueryFromList = function(elementList, sentiment, operator){
+        const QUERYBUILDER_MAP = {
+            [PREFERENCE_OPTIONS.GENRE]: 'genre',
+            [PREFERENCE_OPTIONS.CATEGORY]: 'enriched_text.categories.label',
+            [PREFERENCE_OPTIONS.TAG]: 'tags',
+            [PREFERENCE_OPTIONS.TITLE]: 'title'
+        };
+        let queryConcat = '(';
+        for(let i = 0; i < elementList.length; i++){
+
+            currentQueryElement = elementList[i];
+            queryConcat += QUERYBUILDER_MAP[currentQueryElement.preferenceOption];
+            
+            queryConcat += ":";
+            queryConcat += sentiment === -1 ? "!" : "";
+            queryConcat += currentQueryElement.label + operator;
+        }
+        queryConcat = queryConcat.substring(0, queryConcat.length-1);
+        queryConcat += ")";
+        return queryConcat;
+    }
 	this.buildQuery = function(){
 		/**
 		console.log('Printing Query Elements: ');
@@ -113,6 +134,21 @@ function QueryBuilder(fileType){
             }   
             queryConcat = queryConcat.substring(0, queryConcat.length-1) + ")";
         }
+        // Uncomment this for the new query building logic; delete everything else up to return statement
+        /**
+        let posPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], 1);
+        if(posPOElements.length > 0){
+            let posConcat = assembleQueryFromList(posPOElements, 1, '|');
+            queryConcat += "," + posConcat;    
+        }
+        let negPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], -1);
+        if(negPOElements.length > 0){
+            let negConcat = assembleQueryFromList(negPOElements, -1, ',');
+            queryConcat += "," + negConcat;    
+        }
+        
+        **/
+        
         let POConcat = '(';
         for(let i = 0; i < queryElements.length; i++){
 
@@ -146,6 +182,7 @@ function QueryBuilder(fileType){
         	queryConcat += "," + POConcat;	
         }
         
+
         console.log('Query: '+  queryConcat);
         currentQueryParams.query = queryConcat;
         return currentQueryParams;
