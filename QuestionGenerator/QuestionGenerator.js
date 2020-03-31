@@ -49,7 +49,6 @@ function QuestionGenerator(){
     let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
     let currentQuestionFormat = QUESTION_FORMATS.TERNARY;
     let currentLabel;
-    let currentLabels;
     let questionCount = 0;
     let quotePresented = false;
     let questionOrder = 0; //Current order: genre (1), tag (1), category(1), quote (until positive answer), recommendation
@@ -414,7 +413,6 @@ function QuestionGenerator(){
     let generateMultiCategoryQuestion = function(queryResponse){
     	let categories = queryResponse.getCategories();
     	let labels = [];
-    	currentLabels = [];
     	let formattedLabels = [];
 
     	for(let i = 0; i < categories.length; i++){
@@ -422,7 +420,6 @@ function QuestionGenerator(){
             if(!usedCateg.has(label)){
                 foundNewLabel = true;
                 labels.push(label)
-                currentLabels.push(label);
                 formattedLabels.push(StringFormat.formatDisplayName(label));
                 usedCateg.add(label);
             }
@@ -498,9 +495,9 @@ function QuestionGenerator(){
 
     let generateMultiGenreQuestion = function(queryResponse){
     	//TODO Query on genre somehow
-    	let genres;
-    	currentLabels = genres;
-    	formattedLabels = queryResponse.getGenres();
+
+    	
+        let formattedLabels = queryResponse.getGenres();
         console.log(formattedLabels);
     	let question = {
             text: "Pick book genres from these that would interest you",
