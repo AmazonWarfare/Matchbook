@@ -62,16 +62,19 @@ function QueryBuilder(fileType){
 		}
 		return result;
 	}
-	let getElementsOfType = function(preferenceOption, sentiment){
+	let getElementsOfType = function(preferenceOptions, sentiment){
 		if(sentiment === undefined){
 			sentiment = 1;
 		}
 		let result = [];
-		for(let i = 0; i < queryElements.length; i++){
-			currentQueryElement = queryElements[i];
-			if(currentQueryElement.preferenceOption === preferenceOption && currentQueryElement.sentiment === sentiment){
-				result.push(currentQueryElement);
-			}
+        for(let j = 0; j < preferenceOptions.length; j++){
+            let preferenceOption = preferenceOptions[j];
+            for(let i = 0; i < queryElements.length; i++){
+                currentQueryElement = queryElements[i];
+                if(currentQueryElement.preferenceOption === preferenceOption && currentQueryElement.sentiment === sentiment){
+                    result.push(currentQueryElement);
+                }
+            }
 		}
 		return result;
 	}
@@ -94,7 +97,7 @@ function QueryBuilder(fileType){
 		};
 
 		let queryConcat = "";
-		let positiveTitleElements = getElementsOfType(PREFERENCE_OPTIONS.TITLE, 1);
+		let positiveTitleElements = getElementsOfType([PREFERENCE_OPTIONS.TITLE], 1);
         if(positiveTitleElements.length > 0){
             queryConcat = "title::"+JSON.stringify(positiveTitleElements[0].label);
             console.log('Query: '+  queryConcat);
@@ -102,7 +105,7 @@ function QueryBuilder(fileType){
             return currentQueryParams;
         }
 
-        let positiveGenreElements = getElementsOfType(PREFERENCE_OPTIONS.GENRE, 1);
+        let positiveGenreElements = getElementsOfType([PREFERENCE_OPTIONS.GENRE], 1);
         if(positiveGenreElements.length > 0){
             queryConcat += "(";
             for(let i = 0; i < positiveGenreElements.length; i++){
