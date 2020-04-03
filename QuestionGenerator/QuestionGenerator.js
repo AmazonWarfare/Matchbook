@@ -45,6 +45,7 @@ function QuestionGenerator(){
     let usedQuotes = new Set();
     let usedTags = new Set();
     let quotedBooks = new Set();
+    let questionOptions = [PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY];
     usedTags.add('STRONG FEMALE CHARACTER(S)');
     let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
     let currentQuestionFormat = QUESTION_FORMATS.TERNARY;
@@ -66,50 +67,33 @@ function QuestionGenerator(){
 				[QUESTION_FORMATS.MULTI]: generateMultiGenreQuestion,
 				[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
 			},
-      [PREFERENCE_OPTIONS.QUOTE]: {
-				[QUESTION_FORMATS.TERNARY]: generateTernaryQuoteQuestion,
-				[QUESTION_FORMATS.MULTI]: generateMultiQuoteQuestion,
-				[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+            [PREFERENCE_OPTIONS.QUOTE]: {
+    			[QUESTION_FORMATS.TERNARY]: generateTernaryQuoteQuestion,
+    			[QUESTION_FORMATS.MULTI]: generateMultiQuoteQuestion,
+    			[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
 			},
-      [PREFERENCE_OPTIONS.TAG]: {
-				[QUESTION_FORMATS.TERNARY]: generateTernaryTagQuestion,
-				[QUESTION_FORMATS.MULTI]: generateMultiTagQuestion,
-				[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+            [PREFERENCE_OPTIONS.TAG]: {
+    			[QUESTION_FORMATS.TERNARY]: generateTernaryTagQuestion,
+    			[QUESTION_FORMATS.MULTI]: generateMultiTagQuestion,
+    			[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
 			}
 		};
 
         console.log('Current Preference Option: ' + currentPreferenceOption);
         console.log('Current Question Format: ' + currentQuestionFormat);
+        exhaustedOptions = [];
         while(true){
-
             question = QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat](queryResponse);
-
             if(question === 0){
-
-              if(currentPreferenceOption === PREFERENCE_OPTIONS.GENRE){ //This should never happen. This means the genre question didn't work.
-                console.log("ERROR: Genre question returned 0!");
-                questionOrder++;
-                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-                currentPreferenceOption = PREFERENCE_OPTIONS.TAG; //Move on to tag questions
-                continue;
-              }else if(currentPreferenceOption === PREFERENCE_OPTIONS.TAG){//All available tag questions have been asked
-                console.log("All available tags have been asked about.");
-                questionOrder++;
-                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-                currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;//Move on to category questions
-                continue;
-              }else if(currentPreferenceOption === PREFERENCE_OPTIONS.CATEGORY){//All available category questions have been asked
-                console.log("All available categories have been asked about.");
-                questionOrder++;
-                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-                currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE; //Move on to quote questions
-                continue;
-              }else{ //All available quote questions have been asked
-                //TODO: maybe go back and try a different type of question again?
-                currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION; //For now, give recommendation
-                continue;
-              }
-              // currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION; //For now, give recommendation
+                console.log("All possible questions of type " + currentPreferenceOption + " have been asked");
+                exhaustedOptions.push(currentPreferenceOption);
+                let remainingOptions = questionOptions.filter(x => !exhaustedOptions.includes(x) );
+                if(remainingOptions.length > 0){
+                    currentPreferenceOption = remainingOptions[Math.floor(Math.random() * remainingOptions.length)];
+                } else {
+                    currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION; //For now, give recommendation
+                    continue;
+                }
             } else {
                 break;
             }
@@ -122,9 +106,6 @@ function QuestionGenerator(){
 
         let matchingResults = queryResponse.getNumMatchingResults();
         console.log(matchingResults);
-        if(matchingResults === 0){
-
-        }
         if(matchingResults < RECOMMENDATION_THRESHOLD){
             if(!quotePresented){
                 currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE;
@@ -133,48 +114,16 @@ function QuestionGenerator(){
                 currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
             }
         }
-        /**
-        else if(questionCount === 0){
-          questionCount++;
-        }else if(questionCount === 1){
-          currentPreferenceOption = PREFERENCE_OPTIONS.TAG;
-          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-          questionCount++;
-        }else if(questionCount === 2){
-          currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
-          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-          questionCount++;
-        }else if(questionCount === 3){
-          currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE;
-          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-          questionCount++;
-        }else{
-          currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
-          questionCount = 1;//If the recommendation is rejected, start with tags again
-        }
-        **/
 
         if(questionCount === 0){
             currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
             currentQuestionFormat = QUESTION_FORMATS.MULTI;
-            questionCount++;
+        } else {
+            currentPreferenceOption = questionOptions[Math.floor(Math.random() * questionOptions.length)];
+            currentQuestionFormat = QUESTION_FORMATS.TERNARY;
         }
-        else if(questionCount === 1){
-          currentPreferenceOption = PREFERENCE_OPTIONS.TAG;
-          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-        }else if(questionCount === 2){
-          currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
-          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-        }else if(questionCount === 3){
-          currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE;
-          currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-        }else{
-          currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
-          //questionCount = 0;//If the recommendation is rejected, start with tags again
-        }
-
-
         let question = getNextQuestion(queryResponse);
+        questionCount++;
         resolve(question);
     }
 
