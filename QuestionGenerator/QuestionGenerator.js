@@ -36,25 +36,44 @@ const StringFormat = require('./stringFormat.js');
 **/
 
 function QuestionGenerator(){
-	const wqs = new WatsonQueryingService();
     const PREFERENCE_OPTIONS = Config.PREFERENCE_OPTIONS;
-    console.log(JSON.stringify(PREFERENCE_OPTIONS));
     const QUESTION_FORMATS = Config.QUESTION_FORMATS;
     const RECOMMENDATION_THRESHOLD = Config.RECOMMENDATION_THRESHOLD;
+
+    let wqs = new WatsonQueryingService();
+
 	let usedCateg = new Set();
     let usedQuotes = new Set();
     let usedTags = new Set();
     let quotedBooks = new Set();
+
     let questionOptions = [PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.QUOTE];
-    usedTags.add('STRONG FEMALE CHARACTER(S)');
-    let currentPreferenceOption = PREFERENCE_OPTIONS.CATEGORY;
-    let currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+    
+    let currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
+    let currentQuestionFormat = QUESTION_FORMATS.MULTI;
     let currentLabel;
+
     let questionCount = 0;
-    let quotePresented = false;
-    let questionOrder = 0; //Current order: genre (1), tag (1), category(1), quote (until positive answer), recommendation
+    
+    this.reset = function(){
+        wqs = new WatsonQueryingService();
+
+        usedCateg = new Set();
+        usedQuotes = new Set();
+        usedTags = new Set();
+        quotedBooks = new Set();
+        
+        currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
+        currentQuestionFormat = QUESTION_FORMATS.MULTI;
+        currentLabel;
+
+        questionCount = 0;
+    }
 
 	let getNextQuestion = function(queryResponse){
+        if(questionCount === 4){
+            reset();
+        }
 		let question;
 		let QUESTION_GETTER_MAP = {
 			[PREFERENCE_OPTIONS.CATEGORY]: {
@@ -164,10 +183,9 @@ function QuestionGenerator(){
         }
         
     }
-    this.reset = function(){
-        // Dan calls this when restart is clicked (don't save state) userGenerated = 1
-        // We call this when we run out of recommendations (save state) userGenerated = 0
-    }
+
+    
+
     let resetWithSaveState = function(){
         // 
         return 0;
