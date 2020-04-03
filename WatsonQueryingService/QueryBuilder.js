@@ -119,6 +119,7 @@ function QueryBuilder(fileType){
 
 		let queryConcat = "";
         // Get rid of this for refactor because quotes can be asked at any time now.
+        /**
 		let positiveTitleElements = getElementsOfType([PREFERENCE_OPTIONS.TITLE], 1);
         if(positiveTitleElements.length > 0){
             queryConcat = "title::"+JSON.stringify(positiveTitleElements[0].label);
@@ -126,6 +127,7 @@ function QueryBuilder(fileType){
             currentQueryParams.query = queryConcat;
             return currentQueryParams;
         }
+        **/
 
         let positiveGenreElements = getElementsOfType([PREFERENCE_OPTIONS.GENRE], 1);
         if(positiveGenreElements.length > 0){

@@ -40,7 +40,12 @@ const Configuration = {
 		MULTI: 2,
 		RECOMMENDATION: 10
 	},
-	RECOMMENDATION_THRESHOLD: 2
+	RECOMMENDATION_THRESHOLD: 2,
+
+	QG_STATES: {
+		QUERYING: 0,
+		RECOMMENDATION: 1
+	}
 };
 
 module.exports = Configuration; // make importable
