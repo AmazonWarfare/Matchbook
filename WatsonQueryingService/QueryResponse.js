@@ -89,15 +89,13 @@ function QueryResponse(queryResponse, fileType){
         let quotes = queryResponse.result.results[result].quotes[0];
         return quotes;
     }
-    this.getTags = function(tagType){
+    this.getTags = function(){
         // Uncomment once JSON tag formatting is changed.
-        /**
+        
         // Need to remove tagType as argument
         let tags = queryResponse.result.results[0].tags;
         return tags;
-        **/
-        let tagName = 'tags'+tagType;
-        return queryResponse.result.results[0][tagName][0];
+        
     }
     this.getGenres = function(){
         let genreSet = new Set();

@@ -113,7 +113,7 @@ function QueryBuilder(fileType){
 		const QUERYBUILDER_MAP = {
 			[PREFERENCE_OPTIONS.GENRE]: 'genre',
 			[PREFERENCE_OPTIONS.CATEGORY]: 'enriched_text.categories.label',
-			[PREFERENCE_OPTIONS.TAG]: 'tags',
+			[PREFERENCE_OPTIONS.TAG]: 'tags.tag_name',
 			[PREFERENCE_OPTIONS.TITLE]: 'title'
 		};
 
@@ -135,7 +135,7 @@ function QueryBuilder(fileType){
             }   
             queryConcat = queryConcat.substring(0, queryConcat.length-1) + ")";
         }
-        // Uncomment this for the new query building logic; delete everything else up to return statement
+        // Uncomment this for the new query building logic; delete everything else up to return statements
         /**
         let posPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], 1);
         if(posPOElements.length > 0){
@@ -160,9 +160,6 @@ function QueryBuilder(fileType){
         	let negativeSentiment = currentQueryElement.sentiment === -1;
     		switch(currentQueryElement.preferenceOption){
     			case PREFERENCE_OPTIONS.TAG:
-    				let tagType = currentQueryElement.extraInfo.tag_type;
-    				POConcat += "tags" + tagType;
-    				break;
     			case PREFERENCE_OPTIONS.CATEGORY:
     			case PREFERENCE_OPTIONS.TITLE:
     				POConcat += QUERYBUILDER_MAP[currentQueryElement.preferenceOption];

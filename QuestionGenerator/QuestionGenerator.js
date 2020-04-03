@@ -122,6 +122,9 @@ function QuestionGenerator(){
 
         let matchingResults = queryResponse.getNumMatchingResults();
         console.log(matchingResults);
+        if(matchingResults === 0){
+
+        }
         if(matchingResults < RECOMMENDATION_THRESHOLD){
             if(!quotePresented){
                 currentPreferenceOption = PREFERENCE_OPTIONS.QUOTE;
@@ -129,7 +132,6 @@ function QuestionGenerator(){
             } else {
                 currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
             }
-
         }
         /**
         else if(questionCount === 0){
@@ -197,8 +199,23 @@ function QuestionGenerator(){
             provideTagAnswer(ans);
         }
     }
-    this.updateAnswer = function(label, newSentiment){
-        wqs.updateQuery(label, newSentiment);
+    this.updateAnswer = function(label, updatedAnswer){
+
+        if(label === "genre"){
+            // clear previous genres (set all genres to sentiment 0)
+            // loop through updated answer and update genres to sentiment 1
+        } else {
+            wqs.updateQuery(label, updatedAnswer);    
+        }
+        
+    }
+    this.reset = function(){
+        // Dan calls this when restart is clicked (don't save state) userGenerated = 1
+        // We call this when we run out of recommendations (save state) userGenerated = 0
+    }
+    let resetWithSaveState = function(){
+        // 
+        return 0;
     }
 
     let giveRecommendation = function(queryResponse){
@@ -248,7 +265,10 @@ function QuestionGenerator(){
         let question = {
             text: "How do you feel about the concept of \"" + formattedLabel + "\" in books?",
             type: QUESTION_FORMATS.TERNARY,
-            content: {}
+            content: {
+                formatted_label: formattedLabel,
+                label: currentLabel
+            }
         };
 
         return question;
@@ -305,22 +325,24 @@ function QuestionGenerator(){
     // Refactored to account for new JSON tag format
     // Uncomment when changes are made
 
-    /**
+    
     let generateTernaryTagQuestion = function(queryResponse){
         const TAGTYPEQUESTIONMAP = {
-            1: "?",
-            2: " in books?",
-            3: " books?"
+            1: "\"?",
+            2: "\" in books?",
+            3: "\" books?"
         }
         let tags = queryResponse.getTags();
+        console.log('GenerateTernaryTagQuestion:');
+        console.log(JSON.stringify(tags,null,2));
         let foundNewTag = false;
         let label, tagType;
 
         for(let i = 0; i < tags.length; i++){
-            label = tags[i].tag_name;
-            tagType = tags[i].tag_type;
+            label = tags[i].tag_name[0];
+            tagType = tags[i].tag_type[0];
             if(!usedTags.has(label)){
-                foundNewLabel = true;
+                foundNewTag = true;
                 break;
             }
         }
@@ -342,8 +364,8 @@ function QuestionGenerator(){
         return question;
 
     }
-    **/
-
+    
+    /**
     let generateTernaryTagQuestion = function(queryResponse){
         let tagType = 1;
         let tags = queryResponse.getTags(1);
@@ -406,7 +428,7 @@ function QuestionGenerator(){
         };
         return question;
     }
-
+    **/
     let generateMultiCategoryQuestion = function(queryResponse){
     	let categories = queryResponse.getCategories();
     	let labels = [];
@@ -491,8 +513,6 @@ function QuestionGenerator(){
     }
 
     let generateMultiGenreQuestion = function(queryResponse){
-    	//TODO Query on genre somehow
-
     	
         let formattedLabels = queryResponse.getGenres();
         console.log(formattedLabels);
@@ -500,7 +520,8 @@ function QuestionGenerator(){
             text: "Pick book genres from these that would interest you",
             type: QUESTION_FORMATS.MULTI,
             content: {
-            	options: formattedLabels
+            	options: formattedLabels,
+                label: 'genre'
             }
         };
 
