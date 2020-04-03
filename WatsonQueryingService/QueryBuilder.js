@@ -87,7 +87,7 @@ function QueryBuilder(fileType){
         const QUERYBUILDER_MAP = {
             [PREFERENCE_OPTIONS.GENRE]: 'genre',
             [PREFERENCE_OPTIONS.CATEGORY]: 'enriched_text.categories.label',
-            [PREFERENCE_OPTIONS.TAG]: 'tags',
+            [PREFERENCE_OPTIONS.TAG]: 'tags.tag_name',
             [PREFERENCE_OPTIONS.TITLE]: 'title'
         };
         let queryConcat = '(';
@@ -136,7 +136,7 @@ function QueryBuilder(fileType){
             queryConcat = queryConcat.substring(0, queryConcat.length-1) + ")";
         }
         // Uncomment this for the new query building logic; delete everything else up to return statements
-        /**
+        
         let posPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], 1);
         if(posPOElements.length > 0){
             let posConcat = assembleQueryFromList(posPOElements, 1, '|');
@@ -148,8 +148,8 @@ function QueryBuilder(fileType){
             queryConcat += "," + negConcat;    
         }
         
-        **/
         
+        /**
         let POConcat = '(';
         for(let i = 0; i < queryElements.length; i++){
 
@@ -179,7 +179,7 @@ function QueryBuilder(fileType){
         	POConcat += ")";
         	queryConcat += "," + POConcat;	
         }
-        
+        **/
 
         console.log('Query: '+  queryConcat);
         currentQueryParams.query = queryConcat;

@@ -113,15 +113,16 @@ function QuestionGenerator(){
             } else {
                 currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
             }
-        }
-
-        if(questionCount === 0){
+        } else {
+            if(questionCount === 0){
             currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
             currentQuestionFormat = QUESTION_FORMATS.MULTI;
-        } else {
-            currentPreferenceOption = questionOptions[Math.floor(Math.random() * questionOptions.length)];
-            currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+            } else {
+                currentPreferenceOption = questionOptions[Math.floor(Math.random() * questionOptions.length)];
+                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+            }
         }
+
         let question = getNextQuestion(queryResponse);
         questionCount++;
         resolve(question);
