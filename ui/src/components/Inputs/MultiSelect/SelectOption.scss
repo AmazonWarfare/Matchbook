@@ -23,7 +23,13 @@
 }
 
 .selected {
-  background: $dark-charcoal !important;
-  color: $white;
+  background: $white;
+  color: black;
+}
+.selected:hover {
+  transition-duration: .2s;
+  background: $orange-red;
+  color: black;
+  cursor: pointer;
 }
 

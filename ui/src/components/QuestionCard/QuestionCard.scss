@@ -1,9 +1,8 @@
 @import "../../colors";
 
 .question-card-component {
-  background: $red;
-  color: $charcoal;
-  border: 1px solid $red;
+  background: $dark-charcoal;
+  color: $white;
 
   width: 50%;
   border-radius: 4px;
@@ -30,5 +29,5 @@
   padding: 15px 5px;
   margin: 20px auto;
   border-radius: 2px;
-  background: $white;
+  background: $dark-charcoal;
 }
