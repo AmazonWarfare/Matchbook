@@ -5,6 +5,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './QuestionCard.scss';
 import ButtonList from "../Inputs/ButtonList/ButtonList";
+import Button from "../Inputs/ButtonList/Button";
 import MultiSelect from "../Inputs/MultiSelect/MultiSelect";
 import {INPUT_TYPES} from "../../config";
 import loader from "./Lava Lamp-0.8s-200px.svg";
@@ -17,11 +18,17 @@ class QuestionCard extends Component {
         };
         this.renderInputs = this.renderInputs.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     nextQuestion(ans) {
         this.setState({answer_clicked: true});
         this.props.nextQuestion(ans);
+    }
+
+    reset() {
+        this.setState({answer_clicked: true});
+        this.props.reset();
     }
 
     renderInputs() {
@@ -55,7 +62,7 @@ class QuestionCard extends Component {
             )
         }
         return (
-            <>
+            <div>
                 <Container className={`question-card-component`}>
                     <div className="question-text">
                         {this.props.question.text}
@@ -64,7 +71,10 @@ class QuestionCard extends Component {
                         {this.renderInputs()}
                     </div>
                 </Container>
-            </>
+                <div className={'restart-container'}>
+                    <Button text={'Start Over'} onClick={this.reset}/>
+                </div>
+            </div>
         );
     }
 }

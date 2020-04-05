@@ -114,7 +114,7 @@ class App extends Component {
         }
     }
 
-    restart() {
+    reset() {
         console.log('restart logic here');
     }
 
@@ -127,10 +127,8 @@ class App extends Component {
                     <FadedQuestionCard
                         question={this.state.current_question}
                         nextQuestion={this.nextQuestion}
+                        reset={this.reset}
                     />
-                    <div className={'restart-container'}>
-                        <Button text={'Start Over'} onClick={this.restart}/>
-                    </div>
                 </div>
             </div>
 
