@@ -31,7 +31,8 @@ const Configuration = {
 		EMOTION: 2,
 		QUOTE: 3,
 		TAG: 4,
-		TITLE: 5
+		TITLE: 5,
+		SYNOPSIS: 6
 
 	},
 	QUESTION_FORMATS: {

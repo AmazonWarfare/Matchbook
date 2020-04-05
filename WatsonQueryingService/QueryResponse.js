@@ -146,6 +146,32 @@ function QueryResponse(queryResponse, fileType){
         let targetGenre = queryResponse.result.results[resultNum].genre[0][0];
         return targetGenre;
     }
+    this.getSynopses = function(resultNum){
+        if(resultNum === undefined){
+            result = [];
+            for(let i = 0; i < this.getNumMatchingResults(); i++){
+                let synopsis = queryResponse.result.results[i].good_reads_synopsis;
+                let title = this.getTitles(i);
+                let genre = this.getGenres(i);
+                result.push({
+                    title: title,
+                    genre: genre,
+                    synopsis: synopsis,
+                    resultNum: i
+                });
+            }  
+            return result;
+        } 
+        let synopsis = queryResponse.result.results[resultNum].good_reads_synopsis;
+        let title = this.getTitles(resultNum);
+        let genre = this.getGenres(resultNum);
+        return {
+            title: title,
+            genre: genre,
+            synopsis: synopsis,
+            resultNum: resultNum
+        };
+    }
 
     let getPDFAuthor = function(resultNum){
         return queryResponse.result.results[resultNum].extracted_metadata.author;

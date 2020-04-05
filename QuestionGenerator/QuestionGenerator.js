@@ -39,6 +39,7 @@ function QuestionGenerator(){
     const PREFERENCE_OPTIONS = Config.PREFERENCE_OPTIONS;
     const QUESTION_FORMATS = Config.QUESTION_FORMATS;
     const RECOMMENDATION_THRESHOLD = Config.RECOMMENDATION_THRESHOLD;
+    const QG_STATES = Config.QG_STATES;
 
     let wqs = new WatsonQueryingService();
 
@@ -46,6 +47,10 @@ function QuestionGenerator(){
     let usedQuotes = new Set();
     let usedTags = new Set();
     let quotedBooks = new Set();
+    let usedSynopsesBooks = new Set();
+    let neutralSynopsisBooks = [];
+    let negativeSynopsisBooks = [];
+    let positiveSynopsisAnswer;
 
     let questionOptions = [PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.QUOTE];
     
@@ -54,6 +59,8 @@ function QuestionGenerator(){
     let currentLabel;
 
     let questionCount = 0;
+
+    let currentQGState = QG_STATES.QUERYING;
     
     this.reset = function(){
 
@@ -69,32 +76,84 @@ function QuestionGenerator(){
         currentLabel;
 
         questionCount = 0;
+
+        currentQGState = QG_STATES.QUERYING;
+
+        neutralSynopsisBooks = [];
+        negativeSynopsisBooks = [];
+        usedSynopsesBooks = new Set();
+    }
+    let getNextSynopsisQuestion = function(queryResponse){
+        let synopses = queryResponse.getSynopses();
+        let foundNewSynopsis = false;
+        let question, synopsis;
+        let recResultNum = -1;
+
+        for(let i=0; i<synopses.length;i++){
+            synopsis = synopses[i];
+            recResultNum = synopsis.title === positiveSynopsisAnswer ? synopsis.resultNum : -1;
+            if(usedSynopsesBooks.has(synopsis.title)){
+                continue;
+            }
+            foundNewSynopsis = true;
+            break;
+        }
+        if(recResultNum !== -1){
+            return giveRecommendation(queryResponse, recResultNum);
+        }
+        console.log('Found New Synopsis: ' + foundNewSynopsis);
+        if(!foundNewSynopsis){
+            if(neutralSynopsisBooks.length === 0){
+                question = giveRecommendation(queryResponse, -1) // Todo: reset with saved state
+            } else {
+                let randomChoice = neutralSynopsisBooks[Math.floor(Math.random() * neutralSynopsisBooks.length)];
+                console.log(JSON.stringify(randomChoice,null,2));
+                question = giveRecommendation(queryResponse, randomChoice.resultNum);
+            }
+        } else {
+            let formattedGenre = synopsis.genre.toUpperCase();
+            currentLabel = synopsis; // BIG JANK: storing object in variable intended for string
+            usedSynopsesBooks.add(synopsis.title);
+            question = {
+                text: "Here is the synopsis for the " + formattedGenre +" book, " + synopsis.title + ". How does this sound to you?\n\n" + synopsis.synopsis+ "\"",
+                type: QUESTION_FORMATS.TERNARY,
+                content: {
+                    formatted_label: synopsis.synopsis,
+                    label: synopsis.title
+                }
+            }
+        
+        }
+        return question;
     }
 
-	let getNextQuestion = function(queryResponse){
-		let question;
-		let QUESTION_GETTER_MAP = {
-			[PREFERENCE_OPTIONS.CATEGORY]: {
-				[QUESTION_FORMATS.TERNARY]: generateTernaryCategoryQuestion,
-				[QUESTION_FORMATS.MULTI]: generateMultiCategoryQuestion,
-				[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
-			},
-			[PREFERENCE_OPTIONS.GENRE]: {
-				[QUESTION_FORMATS.TERNARY]: generateTernaryGenreQuestion,
-				[QUESTION_FORMATS.MULTI]: generateMultiGenreQuestion,
-				[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
-			},
+    let getNextQueryQuestion = function(queryResponse){
+        neutralSynopsisBooks = [];
+        negativeSynopsisBooks = [];
+        usedSynopsesBooks = new Set();
+        let question;
+        let QUESTION_GETTER_MAP = {
+            [PREFERENCE_OPTIONS.CATEGORY]: {
+                [QUESTION_FORMATS.TERNARY]: generateTernaryCategoryQuestion,
+                [QUESTION_FORMATS.MULTI]: generateMultiCategoryQuestion,
+                [QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+            },
+            [PREFERENCE_OPTIONS.GENRE]: {
+                [QUESTION_FORMATS.TERNARY]: generateTernaryGenreQuestion,
+                [QUESTION_FORMATS.MULTI]: generateMultiGenreQuestion,
+                [QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+            },
             [PREFERENCE_OPTIONS.QUOTE]: {
-    			[QUESTION_FORMATS.TERNARY]: generateTernaryQuoteQuestion,
-    			[QUESTION_FORMATS.MULTI]: generateMultiQuoteQuestion,
-    			[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
-			},
+                [QUESTION_FORMATS.TERNARY]: generateTernaryQuoteQuestion,
+                [QUESTION_FORMATS.MULTI]: generateMultiQuoteQuestion,
+                [QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+            },
             [PREFERENCE_OPTIONS.TAG]: {
-    			[QUESTION_FORMATS.TERNARY]: generateTernaryTagQuestion,
-    			[QUESTION_FORMATS.MULTI]: generateMultiTagQuestion,
-    			[QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
-			}
-		};
+                [QUESTION_FORMATS.TERNARY]: generateTernaryTagQuestion,
+                [QUESTION_FORMATS.MULTI]: generateMultiTagQuestion,
+                [QUESTION_FORMATS.RECOMMENDATION]: giveRecommendation
+            }
+        };
 
         console.log('Current Preference Option: ' + currentPreferenceOption);
         console.log('Current Question Format: ' + currentQuestionFormat);
@@ -128,8 +187,20 @@ function QuestionGenerator(){
                 }
             }
         }
-        
-
+        return question;
+    }
+	let getNextQuestion = function(queryResponse){
+        let NEXT_QUESTION_MAP = {
+            [QG_STATES.RECOMMENDATION]: getNextSynopsisQuestion,
+            [QG_STATES.QUERYING]: getNextQueryQuestion
+        };
+        let question;
+        if(currentQGState === QG_STATES.RECOMMENDATION){
+            question = getNextSynopsisQuestion(queryResponse);
+        } else {
+            question = getNextQueryQuestion(queryResponse);
+        }
+		
         return question;
 	}
 
@@ -139,8 +210,11 @@ function QuestionGenerator(){
         console.log(matchingResults);
         
         if(matchingResults < RECOMMENDATION_THRESHOLD){
+            currentQGState = QG_STATES.RECOMMENDATION;
             currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
+            currentPreferenceOption = PREFERENCE_OPTIONS.SYNOPSIS;
         } else {
+            currentQGState = QG_STATES.QUERYING;
             if(questionCount === 0){
             currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
             currentQuestionFormat = QUESTION_FORMATS.MULTI;
@@ -168,6 +242,7 @@ function QuestionGenerator(){
             [PREFERENCE_OPTIONS.GENRE]: provideGenreAnswer,
             [PREFERENCE_OPTIONS.TAG]: provideTagAnswer,
             [PREFERENCE_OPTIONS.QUOTE]: provideQuoteAnswer,
+            [PREFERENCE_OPTIONS.SYNOPSIS]: provideSynopsisAnswer
         }
         ANSWERMAP[currentPreferenceOption](ans);
     }
@@ -192,13 +267,13 @@ function QuestionGenerator(){
         return 0;
     }
 
-    let giveRecommendation = function(queryResponse){
+    let giveRecommendation = function(queryResponse, resultNum){
         let rec;
         console.log("MATCHING RESULTS: " + queryResponse.getNumMatchingResults());
-        if(queryResponse.getNumMatchingResults() > 0){
-            currentLabel = queryResponse.getTitles(0);
+        if(resultNum !== -1){
+            currentLabel = queryResponse.getTitles(resultNum);
             let title = StringFormat.formatDisplayName(currentLabel);
-            let author = StringFormat.formatAuthors(queryResponse.getAuthors(0));
+            let author = StringFormat.formatAuthors(queryResponse.getAuthors(resultNum));
             rec = {
                 text: "Based on your preferences, you might like: " + title + " by " + author,
                 type: QUESTION_FORMATS.RECOMMENDATION
@@ -367,23 +442,36 @@ function QuestionGenerator(){
 
     }
 
-    var provideGenreAnswer = function(ans){
+    let provideGenreAnswer = function(ans){
         for(let i = 0; i < ans.length; i++){
             wqs.updateQuery(ans[i], 1, PREFERENCE_OPTIONS.GENRE);
         }
     }
 
-    var provideQuoteAnswer = function(ans){
+    let provideQuoteAnswer = function(ans){
         console.log('Title of quoted book: ' + currentLabel);
-        wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.TITLE);
+        wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.TITLE, {rec: false});
         if(ans !== 0){
             quotedBooks.add(currentLabel);
         }
         console.log("QUOTED BOOKS");
         console.log(quotedBooks);
     }
+    let provideSynopsisAnswer = function(ans){
+        switch(ans){
+            case 0:
+                neutralSynopsisBooks.push(currentLabel);
+                break;
+            case -1:
+                negativeSynopsisBooks.push(currentLabel);
+                break;
+            case 1:
+                positiveSynopsisAnswer = currentLabel.title;
+                break;
+        }
+    }
 
-    var provideTagAnswer = function(ans){
+    let provideTagAnswer = function(ans){
         console.log('Current Tag Type: ' + currentTagType);
         console.log('Current Tag: '+currentLabel);
 
@@ -419,7 +507,6 @@ function QuestionGenerator(){
                 label: 'genre'
             }
         };
-        console.log(JSON.stringify(question));
         return question;
 
     }
