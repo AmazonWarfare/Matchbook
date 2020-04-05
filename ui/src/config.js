@@ -10,6 +10,7 @@ const QUESTION_FORMATS = {
     TERNARY: 0,
     SLIDER: 1,
     MULTI: 2,
+    BUTTON: 3,
     RECOMMENDATION: 10
 };
 
