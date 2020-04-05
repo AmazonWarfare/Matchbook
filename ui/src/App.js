@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import './components/QuestionCard/QuestionCard';
 import QuestionCard from "./components/QuestionCard/QuestionCard";
 import NavBar from "./components/NavBar/NavBar";
 import Fade from "./HigherOrderComponents/Fade";
 import {INPUT_TYPES, QUESTION_FORMATS} from "./config";
+import Button from './components/Inputs/ButtonList/Button';
 
 import axios from "axios";
 
@@ -72,7 +73,7 @@ class App extends Component {
             if (startup_cards.length === 0) {
                 this.isFirstQuestion = true;
             }
-        } else if(this.isFirstQuestion) {
+        } else if (this.isFirstQuestion) {
             axios.get('/question')
                 .then((res) => {
                     let question = res.data.question;
@@ -113,16 +114,26 @@ class App extends Component {
         }
     }
 
+    restart() {
+        console.log('restart logic here');
+    }
+
     render() {
         let FadedQuestionCard = Fade(QuestionCard);
         return (
             <div>
                 <NavBar/>
-                <FadedQuestionCard
-                    question={this.state.current_question}
-                    nextQuestion={this.nextQuestion}
-                />
+                <div className={'content'}>
+                    <FadedQuestionCard
+                        question={this.state.current_question}
+                        nextQuestion={this.nextQuestion}
+                    />
+                    <div className={'restart-container'}>
+                        <Button text={'Start Over'} onClick={this.restart}/>
+                    </div>
+                </div>
             </div>
+
         );
     }
 }

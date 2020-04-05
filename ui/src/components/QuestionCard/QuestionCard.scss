@@ -3,11 +3,11 @@
 .question-card-component {
   background: $dark-charcoal;
   color: $white;
-
-  width: 50%;
   border-radius: 4px;
-  margin: 5% auto;
+  margin: 5% auto 0;
   transition: height 1s;
+  min-height: 20em;
+  position: relative;
 }
 
 .clicked {
@@ -16,18 +16,32 @@
   border: none;
 }
 
+.loader-container {
+  position: relative;
+}
+
 .loader {
   display: block;
-  margin: 20px auto;
+  margin:  auto;
   border-radius: 2px;
   max-height: 150px;
   background: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
 }
 
 .question-text {
   font-size: 30px;
   padding: 15px 5px;
   margin: 20px auto;
+  min-height: 75%;
   border-radius: 2px;
   background: $dark-charcoal;
+}
+
+.input-container {
+  position: absolute;
+  bottom: 0;
 }
