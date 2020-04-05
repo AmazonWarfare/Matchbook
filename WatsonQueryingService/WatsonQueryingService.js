@@ -55,6 +55,12 @@ function WatsonQueryingService(){
     this.updateQuery = function(label, sentiment, preferenceOption, extraInfo){
         queryBuilder.updateQuery(label, sentiment, preferenceOption, extraInfo);
     }
+    this.clearGenreAnswers = function(){
+        queryBuilder.clearGenreAnswers();
+    }
+    this.printGenreElements = function(){
+        queryBuilder.printGenreElements();
+    }
 
 }
 

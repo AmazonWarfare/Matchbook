@@ -62,16 +62,16 @@ function QueryBuilder(fileType){
 		}
 		return result;
 	}
-	let getElementsOfType = function(preferenceOptions, sentiment){
-		if(sentiment === undefined){
-			sentiment = 1;
+	let getElementsOfType = function(preferenceOptions, sentiments){
+		if(sentiments === undefined){
+			sentiments = [1,0,-1];
 		}
 		let result = [];
         for(let j = 0; j < preferenceOptions.length; j++){
             let preferenceOption = preferenceOptions[j];
             for(let i = 0; i < queryElements.length; i++){
                 currentQueryElement = queryElements[i];
-                if(currentQueryElement.preferenceOption === preferenceOption && currentQueryElement.sentiment === sentiment){
+                if(currentQueryElement.preferenceOption === preferenceOption && sentiments.includes(currentQueryElement.sentiment)){
                     result.push(currentQueryElement);
                 }
             }
@@ -83,6 +83,10 @@ function QueryBuilder(fileType){
 			queryElements[i].printQueryElement();
 		}
 	}
+    this.printGenreElements = function(){
+        let genreElements = getElementsOfType([PREFERENCE_OPTIONS.GENRE]);
+        console.log(JSON.stringify(genreElements, null, 2));
+    }
     let assembleQueryFromList = function(elementList, sentiment, operator){
         const QUERYBUILDER_MAP = {
             [PREFERENCE_OPTIONS.GENRE]: 'genre',
@@ -103,6 +107,10 @@ function QueryBuilder(fileType){
         queryConcat = queryConcat.substring(0, queryConcat.length-1);
         queryConcat += ")";
         return queryConcat;
+    }
+    this.clearGenreAnswers = function(){
+        let genreElements = getElementsOfType([PREFERENCE_OPTIONS.GENRE], [1]);
+        genreElements.forEach(element => element.sentiment = 0);
     }
 	this.buildQuery = function(){
 		/**
@@ -129,7 +137,7 @@ function QueryBuilder(fileType){
         }
         **/
 
-        let positiveGenreElements = getElementsOfType([PREFERENCE_OPTIONS.GENRE], 1);
+        let positiveGenreElements = getElementsOfType([PREFERENCE_OPTIONS.GENRE], [1]);
         if(positiveGenreElements.length > 0){
             queryConcat += "(";
             for(let i = 0; i < positiveGenreElements.length; i++){
@@ -139,12 +147,12 @@ function QueryBuilder(fileType){
         }
         // Uncomment this for the new query building logic; delete everything else up to return statements
         
-        let posPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], 1);
+        let posPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], [1]);
         if(posPOElements.length > 0){
             let posConcat = assembleQueryFromList(posPOElements, 1, '|');
             queryConcat += "," + posConcat;    
         }
-        let negPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], -1);
+        let negPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], [-1]);
         if(negPOElements.length > 0){
             let negConcat = assembleQueryFromList(negPOElements, -1, ',');
             queryConcat += "," + negConcat;    

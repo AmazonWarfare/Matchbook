@@ -56,6 +56,7 @@ function QuestionGenerator(){
     let questionCount = 0;
     
     this.reset = function(){
+
         wqs = new WatsonQueryingService();
 
         usedCateg = new Set();
@@ -175,6 +176,9 @@ function QuestionGenerator(){
         if(label === "genre"){
             // clear previous genres (set all genres to sentiment 0)
             // loop through updated answer and update genres to sentiment 1
+
+            wqs.clearGenreAnswers();
+            updatedAnswer.forEach(genre => wqs.updateQuery(genre, 1, PREFERENCE_OPTIONS.GENRE));
         } else {
             wqs.updateQuery(label, updatedAnswer);    
         }
