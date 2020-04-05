@@ -71,9 +71,6 @@ function QuestionGenerator(){
     }
 
 	let getNextQuestion = function(queryResponse){
-        if(questionCount === 4){
-            reset();
-        }
 		let question;
 		let QUESTION_GETTER_MAP = {
 			[PREFERENCE_OPTIONS.CATEGORY]: {
