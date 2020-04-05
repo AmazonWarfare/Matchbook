@@ -45,7 +45,8 @@ const Configuration = {
 
 	QG_STATES: {
 		QUERYING: 0,
-		RECOMMENDATION: 1
+		RECOMMENDATION: 1,
+		EMPTY: 2
 	}
 };
 

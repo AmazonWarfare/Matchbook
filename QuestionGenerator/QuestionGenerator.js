@@ -176,8 +176,11 @@ function QuestionGenerator(){
                         currentPreferenceOption = remainingOptions[Math.floor(Math.random() * remainingOptions.length)];
                     } else {
                         if(resultNum === queryResponse.getNumMatchingResults - 1){
-                            currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
-                            continue questionFinder;
+                            // currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
+                            // continue questionFinder;
+                            question = getNextSynopsisQuestion(queryResponse);
+                            break resultIterator;
+                            
                         } else{
                             break questionFinder;
                         }
@@ -197,8 +200,10 @@ function QuestionGenerator(){
         let question;
         if(currentQGState === QG_STATES.RECOMMENDATION){
             question = getNextSynopsisQuestion(queryResponse);
-        } else {
+        } else if(currentQGState === QG_STATES.QUERYING){
             question = getNextQueryQuestion(queryResponse);
+        } else {
+            question = giveRecommendation(queryResponse, -1)
         }
 		
         return question;
@@ -209,7 +214,10 @@ function QuestionGenerator(){
         let matchingResults = queryResponse.getNumMatchingResults();
         console.log(matchingResults);
         
-        if(matchingResults < RECOMMENDATION_THRESHOLD){
+        if(matchingResults === 0){
+            currentQGState = QG_STATES.EMPTY;
+        }
+        else if(matchingResults < RECOMMENDATION_THRESHOLD){
             currentQGState = QG_STATES.RECOMMENDATION;
             currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
             currentPreferenceOption = PREFERENCE_OPTIONS.SYNOPSIS;
@@ -280,7 +288,7 @@ function QuestionGenerator(){
             };
         } else {
             rec = {
-                text: "You picky bastard, we have nothing to offer you >:(",
+                text: currentQGState === QG_STATES.EMPTY ? "Your request returned no results because it is too narrow. Please try broadening your criteria." : "You picky bastard, we have nothing to offer you >:(",
                 type: QUESTION_FORMATS.RECOMMENDATION
             };
         }
