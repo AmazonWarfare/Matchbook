@@ -5,32 +5,34 @@ import QuestionCard from "./components/QuestionCard/QuestionCard";
 import NavBar from "./components/NavBar/NavBar";
 import Fade from "./HigherOrderComponents/Fade";
 import {INPUT_TYPES, QUESTION_FORMATS} from "./config";
-import Button from './components/Inputs/ButtonList/Button';
 
 import axios from "axios";
 
 let startup_cards = [
     {
         text: "Welcome to Matchbook",
-        input_type: INPUT_TYPES.BUTTON_LIST,
-        custom_responses: true,
-        options: [
-            "Next"
-        ]
+        type: QUESTION_FORMATS.BUTTON,
+        content: {
+            options: [
+                "Next"
+            ]
+        }
     }, {
         text: "We will ask you a series of questions to gauge your interest in topics from our library of books",
-        input_type: INPUT_TYPES.BUTTON_LIST,
-        custom_responses: true,
-        options: [
-            "Next"
-        ]
+        type: QUESTION_FORMATS.BUTTON,
+        content: {
+            options: [
+                "Next"
+            ]
+        }
     }, {
         text: "Each answer will gather information about your preferences to tune our recommendation!",
-        input_type: INPUT_TYPES.BUTTON_LIST,
-        custom_responses: true,
-        options: [
-            "Let's get started!"
-        ]
+        type: QUESTION_FORMATS.BUTTON,
+        content: {
+            options: [
+                "Let's get started!"
+            ]
+        }
     }
 ];
 
@@ -39,13 +41,14 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current_question: startup_cards.shift(),
-            question_change_scheduled: false
+            current_question: App.mapQuestionToCardQuestion(startup_cards.shift())
         };
+        this.setNextQuestion = this.setNextQuestion.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
-    mapQuestionToCardQuestion(question) {
+    static mapQuestionToCardQuestion(question) {
         let cardQuestion = {
             text: question.text
         };
@@ -61,27 +64,36 @@ class App extends Component {
                 input_type: INPUT_TYPES.MULTISELECT,
                 options: question.content.options
             }
+        } else if (question.type === QUESTION_FORMATS.BUTTON) {
+            cardQuestion = {
+                ...cardQuestion,
+                input_type: INPUT_TYPES.BUTTON_LIST,
+                custom_responses: true,
+                options: question.content.options
+            }
         }
         return cardQuestion;
+    }
+
+    setNextQuestion(q) {
+        let cardQuestion = App.mapQuestionToCardQuestion(q);
+        this.setState({
+            current_question: cardQuestion
+        });
     }
 
     isFirstQuestion = false;
 
     nextQuestion(answer) {
         if (startup_cards.length > 0) {
-            this.setState({current_question: startup_cards.shift()});
+            this.setNextQuestion(startup_cards.shift());
             if (startup_cards.length === 0) {
                 this.isFirstQuestion = true;
             }
         } else if (this.isFirstQuestion) {
             axios.get('/question')
                 .then((res) => {
-                    let question = res.data.question;
-                    let cardQuestion = this.mapQuestionToCardQuestion(question);
-
-                    this.setState({
-                        current_question: cardQuestion
-                    });
+                    this.setNextQuestion(res.data.question);
                 });
 
             this.isFirstQuestion = false;
@@ -95,27 +107,17 @@ class App extends Component {
                 axios
                     .get('/question')
                     .then((res) => {
-                        /*
-                            here, res is a question object with {text, type, content}
-                            The type is a QUESTION_FORMAT type, each has its own needed
-                            configuration to be passed as the question (through
-                            state.current_question. This code disassembles the response
-                            object and creates the question configuration as needed by the
-                            QuestionCard object
-                         */
-                        let question = res.data.question;
-                        let cardQuestion = this.mapQuestionToCardQuestion(question);
-
-                        this.setState({
-                            current_question: cardQuestion
-                        });
+                        this.setNextQuestion(res.data.question);
                     });
             }, 500)
         }
     }
 
     reset() {
-        console.log('restart logic here');
+        axios.get('/reset')
+            .then((res) => {
+                this.setNextQuestion(res.data.question);
+            });
     }
 
     render() {

@@ -18,7 +18,8 @@ let qg = new QuestionGenerator();
 router.get('/question', (req, res) => {
     let question_promise = qg.generateQuestion();
 
-    question_promise.then((question) => {
+    question_promise
+        .then((question) => {
             let {text, type, content} = question;
             let responseObject = {
                 question: {text, type, content}
@@ -49,5 +50,29 @@ router.post('/answer', (req, res) => {
     res.status(200);
     res.send();
 });
+
+/*
+    ROUTE: RESET
+    resets the QuestionGenerator interface and responds with the first question
+    generated from the fresh QG
+ */
+router.get('/reset', (req, res) => {
+    qg.reset();
+
+    let question_promise = qg.generateQuestion();
+
+    question_promise
+        .then((question) => {
+            let {text, type, content} = question;
+            let responseObject = {
+                question: {text, type, content}
+            };
+            res.send(JSON.stringify(responseObject));
+        })
+        .catch((err) => {
+                console.log(err);
+            }
+        )
+})
 
 module.exports = router;
