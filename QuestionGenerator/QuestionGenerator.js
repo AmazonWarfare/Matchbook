@@ -418,7 +418,7 @@ function QuestionGenerator(){
         let label, tagType;
 
         for(let i = 0; i < tags.length; i++){
-            label = tags[i].tag_name[0];
+            label = tags[i].tag_name[0].toUpperCase();
             tagType = tags[i].tag_type[0];
             if(!usedTags.has(label)){
                 foundNewTag = true;
