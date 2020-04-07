@@ -203,6 +203,8 @@ function QuestionGenerator(){
             question = getNextSynopsisQuestion(queryResponse);
         } else if(currentQGState === QG_STATES.QUERYING){
             question = getNextQueryQuestion(queryResponse);
+        } else if(currentQGState === QG_STATES.TOP){
+            question = giveRecommendation(queryResponse, 0);
         } else {
             question = giveRecommendation(queryResponse, -1)
         }
@@ -214,8 +216,10 @@ function QuestionGenerator(){
 
         let matchingResults = queryResponse.getNumMatchingResults();
         console.log(matchingResults);
-        
-        if(matchingResults === 0){
+        if(currentQGState === QG_STATES.TOP){
+            console.log('Giving top recommendation');
+        }
+        else if(matchingResults === 0){
             currentQGState = QG_STATES.EMPTY;
         }
         else if(matchingResults < RECOMMENDATION_THRESHOLD){
@@ -245,6 +249,10 @@ function QuestionGenerator(){
     }
 
     this.provideAnswer = function(ans){
+        if(ans === 'fin'){
+            currentQGState = QG_STATES.TOP;
+            return 0;
+        }
         console.log('Provide answer, PO: ' + currentPreferenceOption);
         const ANSWERMAP = {
             [PREFERENCE_OPTIONS.CATEGORY]: provideCategoryAnswer,

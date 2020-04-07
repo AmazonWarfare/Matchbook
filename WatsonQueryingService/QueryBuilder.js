@@ -67,7 +67,7 @@ function QueryBuilder(fileType){
 			sentiments = [1,0,-1];
 		}
 		let result = [];
-        // let result = queryElements.filter(e => preferenceOptions.includes(e.preferenceOption) && sentiments.includes(e.sentiment));
+        let result1 = queryElements.filter(e => preferenceOptions.includes(e.preferenceOption) && sentiments.includes(e.sentiment));
         for(let i = 0; i < queryElements.length; i++){
             currentQueryElement = queryElements[i];
             if(preferenceOptions.includes(currentQueryElement.preferenceOption) && sentiments.includes(currentQueryElement.sentiment)){
@@ -145,7 +145,7 @@ function QueryBuilder(fileType){
         if(positiveGenreElements.length > 0){
             queryConcat += "(";
             for(let i = 0; i < positiveGenreElements.length; i++){
-                queryConcat += "genre:"+positiveGenreElements[i].label+"|";
+                queryConcat += "genre::"+positiveGenreElements[i].label+"|";
             }   
             queryConcat = queryConcat.substring(0, queryConcat.length-1) + ")";
         }
