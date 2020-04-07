@@ -61,6 +61,9 @@ function WatsonQueryingService(){
     this.printGenreElements = function(){
         queryBuilder.printGenreElements();
     }
+    this.getNegativeTitles = function(){
+        return queryBuilder.getNegativeTitles();
+    }
 
 }
 

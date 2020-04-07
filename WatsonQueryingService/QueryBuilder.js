@@ -67,15 +67,14 @@ function QueryBuilder(fileType){
 			sentiments = [1,0,-1];
 		}
 		let result = [];
-        for(let j = 0; j < preferenceOptions.length; j++){
-            let preferenceOption = preferenceOptions[j];
-            for(let i = 0; i < queryElements.length; i++){
-                currentQueryElement = queryElements[i];
-                if(currentQueryElement.preferenceOption === preferenceOption && sentiments.includes(currentQueryElement.sentiment)){
-                    result.push(currentQueryElement);
-                }
+        // let result = queryElements.filter(e => preferenceOptions.includes(e.preferenceOption) && sentiments.includes(e.sentiment));
+        for(let i = 0; i < queryElements.length; i++){
+            currentQueryElement = queryElements[i];
+            if(preferenceOptions.includes(currentQueryElement.preferenceOption) && sentiments.includes(currentQueryElement.sentiment)){
+                result.push(currentQueryElement);
             }
-		}
+        }
+		
 		return result;
 	}
 	let printAllQueryElements = function(){
@@ -83,6 +82,11 @@ function QueryBuilder(fileType){
 			queryElements[i].printQueryElement();
 		}
 	}
+    this.getNegativeTitles = function(){
+        let titleElements = getElementsOfType([PREFERENCE_OPTIONS.TITLE], [-1]);
+        let titles = titleElements.map(e => e.label);
+        return titles;
+    }
     this.printGenreElements = function(){
         let genreElements = getElementsOfType([PREFERENCE_OPTIONS.GENRE]);
         console.log(JSON.stringify(genreElements, null, 2));
@@ -150,12 +154,14 @@ function QueryBuilder(fileType){
         let posPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], [1]);
         if(posPOElements.length > 0){
             let posConcat = assembleQueryFromList(posPOElements, 1, '|');
-            queryConcat += "," + posConcat;    
+            queryConcat += queryConcat.length > 0 ? "," : "";
+            queryConcat += posConcat;    
         }
         let negPOElements = getElementsOfType([PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TITLE], [-1]);
         if(negPOElements.length > 0){
             let negConcat = assembleQueryFromList(negPOElements, -1, ',');
-            queryConcat += "," + negConcat;    
+            queryConcat += queryConcat.length > 0 ? "," : "";
+            queryConcat += negConcat;    
         }
         
         

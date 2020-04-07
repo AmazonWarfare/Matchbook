@@ -63,7 +63,7 @@ function QuestionGenerator(){
     let currentQGState = QG_STATES.QUERYING;
     
     this.reset = function(){
-
+        
         wqs = new WatsonQueryingService();
 
         usedCateg = new Set();
@@ -82,6 +82,7 @@ function QuestionGenerator(){
         neutralSynopsisBooks = [];
         negativeSynopsisBooks = [];
         usedSynopsesBooks = new Set();
+        
     }
     let getNextSynopsisQuestion = function(queryResponse){
         let synopses = queryResponse.getSynopses();
@@ -271,8 +272,30 @@ function QuestionGenerator(){
     
 
     let resetWithSaveState = function(){
-        // 
-        return 0;
+        let negativeTitles = wqs.getNegativeTitles();
+        wqs = new WatsonQueryingService();
+        negativeTitles.forEach(title => wqs.updateQuery(title, -1, PREFERENCE_OPTIONS.TITLE));
+        negativeSynopsisBooks.forEach(label => wqs.updateQuery(label.title, -1, PREFERENCE_OPTIONS.TITLE));
+
+        usedCateg = new Set();
+        usedQuotes = new Set();
+        usedTags = new Set();
+        quotedBooks = new Set();
+        
+        currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
+        currentQuestionFormat = QUESTION_FORMATS.MULTI;
+        currentLabel;
+
+        questionCount = 0;
+
+        currentQGState = QG_STATES.QUERYING;
+
+
+        neutralSynopsisBooks = [];
+        negativeSynopsisBooks = [];
+        usedSynopsesBooks = new Set();
+
+
     }
 
     let giveRecommendation = function(queryResponse, resultNum){
@@ -458,7 +481,7 @@ function QuestionGenerator(){
 
     let provideQuoteAnswer = function(ans){
         console.log('Title of quoted book: ' + currentLabel);
-        wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.TITLE, {rec: false});
+        wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.TITLE);
         if(ans !== 0){
             quotedBooks.add(currentLabel);
         }
