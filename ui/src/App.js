@@ -10,13 +10,7 @@ import axios from "axios";
 
 let startup_cards = [
     {
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis, urna vel iaculis condimentum, diam dui accumsan sapien, nec vestibulum mi orci eget eros. Integer consectetur placerat finibus. Nullam pharetra, purus a rhoncus volutpat, lacus felis ultricies velit, id commodo erat dui non erat. Vestibulum nulla lorem, sodales a fermentum in, tincidunt in ipsum. Phasellus quis facilisis ex. Sed a orci eget turpis varius eleifend ac non ligula. Aliquam sit amet placerat dolor. Mauris vestibulum, enim sit amet feugiat euismod, tortor justo lacinia arcu, nec cursus dui magna ut ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus maximus cursus scelerisque. Quisque porttitor tortor consequat, accumsan sapien nec, finibus lectus. Curabitur et auctor risus. Vestibulum dignissim pharetra magna, quis porta purus sollicitudin et. Nam efficitur diam sapien, eu viverra massa lobortis eu. Vestibulum odio tellus, molestie sed odio sed, bibendum sollicitudin nulla. Duis tincidunt pretium lorem, sit amet tempor leo fermentum at.\n" +
-            "\n" +
-            "Curabitur eleifend lacinia imperdiet. Nunc viverra nisl vel volutpat iaculis. Suspendisse congue, justo vel suscipit mattis, augue lacus consectetur massa, elementum placerat est arcu et purus. Phasellus in viverra nunc. In diam orci, aliquet vel tincidunt eget, varius at leo. Etiam consequat nec ante nec aliquet. Integer sed pharetra massa. Quisque quam leo, placerat fringilla justo vel, sollicitudin euismod ex. Pellentesque ut ullamcorper tellus. Praesent tristique fringilla quam vel sollicitudin. Morbi dictum congue nisi, sit amet fringilla turpis consectetur non.\n" +
-            "\n" +
-            "Etiam sit amet leo a nulla hendrerit ultrices. Nunc tincidunt purus tortor. Etiam viverra leo ut porttitor ultricies. Morbi vel magna placerat risus hendrerit pharetra non eget diam. Proin luctus ut odio et finibus. Suspendisse bibendum pretium urna vitae lacinia. Curabitur hendrerit convallis erat, vel fringilla dolor suscipit eget. Praesent et diam non lacus tristique efficitur. Aenean at justo feugiat, molestie arcu vitae, placerat arcu. Sed eu ex a odio maximus semper sed et erat. Cras scelerisque odio a neque imperdiet rutrum. Duis a semper eros.\n" +
-            "\n" +
-            "Cras lobortis sem et lacus semper, in aliquam nisl mattis. Aenean at fermentum elit, in efficitur ex. Nunc finibus turpis at ullamcorper elementum. Proin non lorem quam. Nulla odio enim, vestibulum feugiat molestie eget, feugiat eu tellus. Vestibulum eget mi vitae massa viverra porta. Cras tempor diam iaculis lacus mollis ullamcorper. Morbi ut dui feugiat, ultricies lectus in, ultricies nulla.",
+        text: "Welcome to MatchBook!",
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
