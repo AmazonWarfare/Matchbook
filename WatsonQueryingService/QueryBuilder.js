@@ -34,11 +34,10 @@ function QueryBuilder(fileType){
     let currentQueryParams = {
         environmentId: Config.environment_id,
         collectionId: collectionId,
-        count: 10,
+        count: 10000,
         query: "",
         _return: "",
         aggregation: "term(enriched_text.categories.label)"
-        
     };
 	let addQueryElement = function(label, sentiment, preferenceOption, extraInfo){
 		queryElements.push(new QueryElement(label, sentiment, preferenceOption, extraInfo));
