@@ -103,6 +103,7 @@ class App extends Component {
     getFirstQuestion() {
         axios.get('/question')
             .then((res) => {
+                console.log(res.data.question);
                 this.setNextQuestion(res.data.question);
             });
     }
@@ -131,9 +132,16 @@ class App extends Component {
     }
 
     reset() {
-        this.questionIndex = 0;
-        axios.get('/reset')
-        this.setNextQuestion(startup_cards[0]);
+        if (this.questionIndex < startup_cards.length) {
+            this.questionIndex = 0;
+            this.setNextQuestion(startup_cards[this.questionIndex]);
+        } else {
+            this.questionIndex = startup_cards.length;
+            axios.get('/reset')
+                .then((res) => {
+                    this.setNextQuestion(res.data.question);
+                });
+        }
     }
 
     giveRec() {

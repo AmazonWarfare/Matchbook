@@ -56,6 +56,18 @@ router.post('/answer', (req, res) => {
  */
 router.get('/reset', (req, res) => {
     qg.reset();
+
+    let question_promise = qg.generateQuestion();
+
+    question_promise.then(question => {
+        let responseObject = {
+            question
+        };
+        res.send(JSON.stringify((responseObject)));
+    })
+    .catch(err => {
+        console.log(err);
+    })
 })
 
 module.exports = router;
