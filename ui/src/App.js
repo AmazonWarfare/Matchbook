@@ -25,8 +25,16 @@ let startup_cards = [
                 "Next"
             ]
         }
+    },  {
+        text: "Each answer will gather information about your preferences to tune our recommendation.",
+        type: QUESTION_FORMATS.BUTTON,
+        content: {
+            options: [
+                "Next"
+            ]
+        }
     }, {
-        text: "Each answer will gather information about your preferences to tune our recommendation!",
+        text: "When we have enough info we will give you our best guess at a book you might like. You can also get a recommendation at any time during the process.",
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
@@ -41,7 +49,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current_question: App.mapQuestionToCardQuestion(startup_cards.shift())
+            current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex])
         };
         this.setNextQuestion = this.setNextQuestion.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
@@ -49,6 +57,7 @@ class App extends Component {
         this.giveRec = this.giveRec.bind(this);
     }
 
+    questionIndex = 0;
     static mapQuestionToCardQuestion(question) {
         let cardQuestion = {
             text: question.text
@@ -83,23 +92,18 @@ class App extends Component {
         });
     }
 
-    isFirstQuestion = false;
-    currentIsStartupQuestion = true;
-
     nextQuestion(answer) {
-        if (startup_cards.length > 0) {
-            this.setNextQuestion(startup_cards.shift());
+        this.questionIndex++;
+        if (this.questionIndex < startup_cards.length) {
+            this.setNextQuestion(startup_cards[this.questionIndex]);
             if (startup_cards.length === 0) {
                 this.isFirstQuestion = true;
             }
-        } else if (this.isFirstQuestion) {
+        } else if (this.questionIndex === startup_cards.length) {
             axios.get('/question')
                 .then((res) => {
                     this.setNextQuestion(res.data.question);
                 });
-
-            this.isFirstQuestion = false;
-            this.currentIsStartupQuestion = false;
         } else {
             // currently a hacky way to get a bit more hang for our loading icon
             setTimeout(() => {
@@ -117,10 +121,9 @@ class App extends Component {
     }
 
     reset() {
+        this.questionIndex = 0;
         axios.get('/reset')
-            .then((res) => {
-                this.setNextQuestion(res.data.question);
-            });
+        this.setNextQuestion(startup_cards[0]);
     }
 
     giveRec() {
@@ -144,7 +147,7 @@ class App extends Component {
                         nextQuestion={this.nextQuestion}
                         reset={this.reset}
                         giveRec={this.giveRec}
-                        startup={this.currentIsStartupQuestion}
+                        startup={this.questionIndex < startup_cards.length}
                     />
                 </div>
             </div>
