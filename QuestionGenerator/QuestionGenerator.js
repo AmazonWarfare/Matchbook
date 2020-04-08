@@ -39,6 +39,7 @@ function QuestionGenerator(){
     const PREFERENCE_OPTIONS = Config.PREFERENCE_OPTIONS;
     const QUESTION_FORMATS = Config.QUESTION_FORMATS;
     const RECOMMENDATION_THRESHOLD = Config.RECOMMENDATION_THRESHOLD;
+    const QUESTION_THRESHOLD = Config.QUESTION_THRESHOLD;
     const QG_STATES = Config.QG_STATES;
 
     let wqs = new WatsonQueryingService();
@@ -64,6 +65,7 @@ function QuestionGenerator(){
     
     this.reset = function(){
         
+        console.log('Reset function called now');
         wqs = new WatsonQueryingService();
 
         usedCateg = new Set();
@@ -82,6 +84,8 @@ function QuestionGenerator(){
         neutralSynopsisBooks = [];
         negativeSynopsisBooks = [];
         usedSynopsesBooks = new Set();
+
+
         
     }
     let getNextSynopsisQuestion = function(queryResponse){
@@ -222,7 +226,7 @@ function QuestionGenerator(){
         else if(matchingResults === 0){
             currentQGState = QG_STATES.EMPTY;
         }
-        else if(matchingResults < RECOMMENDATION_THRESHOLD){
+        else if(matchingResults < RECOMMENDATION_THRESHOLD || questionCount > QUESTION_THRESHOLD){
             currentQGState = QG_STATES.RECOMMENDATION;
             currentQuestionFormat = QUESTION_FORMATS.RECOMMENDATION;
             currentPreferenceOption = PREFERENCE_OPTIONS.SYNOPSIS;
@@ -243,6 +247,7 @@ function QuestionGenerator(){
     }
 
 	this.generateQuestion = function(){
+        console.log('Generate Question called now');
         return new Promise((resolve, reject) => {
             wqs.queryCollection().then(queryResponse => processQuery(queryResponse, resolve, reject))
         });
@@ -477,7 +482,6 @@ function QuestionGenerator(){
 
     let provideGenreAnswer = function(ans){
         ans.forEach(genre => wqs.updateQuery(genre, 1, PREFERENCE_OPTIONS.GENRE));
-        
     }
 
     let provideQuoteAnswer = function(ans){

@@ -136,6 +136,7 @@ function QueryResponse(queryResponse, fileType){
         if(resultNum === undefined){
             let genreSet = new Set();
             let res = queryResponse.result.results;
+            console.log(res.length);
             for (let i = 0; i < res.length; i++){
                 let currentGenres = res[i].genre[0];
                 currentGenres.forEach(e => genreSet.add(e));
