@@ -8,6 +8,7 @@
   transition: height 1s;
   min-height: 20em;
   position: relative;
+  vertical-align: bottom;
 }
 
 .clicked {
@@ -34,16 +35,16 @@
 
 .question-text {
   font-size: 30px;
-  padding: 15px 5px;
+  padding: 10px 0px;
   margin: 20px auto;
   min-height: 75%;
   border-radius: 2px;
   background: $dark-charcoal;
+  display: block;
 }
 
 .input-container {
-  position: absolute;
-  bottom: 0;
+  padding: 15px 0px;
 }
 
 .restart-container {

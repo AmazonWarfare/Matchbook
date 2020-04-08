@@ -26,7 +26,6 @@ class QuestionCard extends Component {
     }
 
 
-
     renderInputs() {
         if (this.props.question.input_type === INPUT_TYPES.BUTTON_LIST) {
 
@@ -48,7 +47,7 @@ class QuestionCard extends Component {
     }
 
     addGetRecIfNotStartup() {
-        if(!this.props.startup) {
+        if (!this.props.startup) {
             return (
                 <Button text={'Give me a recommendation!'} onClick={() => this.loadDuringFunction(this.props.giveRec)}/>
             )
@@ -68,12 +67,12 @@ class QuestionCard extends Component {
         return (
             <div>
                 <Container className={`question-card-component`}>
-                    <div className="question-text">
+                    <Container className="question-text">
                         {this.props.question.text}
-                    </div>
-                    <div className={"input-container"}>
+                    </Container>
+                    <Container className={"input-container"}>
                         {this.renderInputs()}
-                    </div>
+                    </Container>
                 </Container>
                 <div className={'restart-container'}>
                     <Button text={'Start Over'} onClick={() => this.loadDuringFunction(this.props.reset)}/>
