@@ -89,19 +89,22 @@ function QuestionGenerator(){
         let foundNewSynopsis = false;
         let question, synopsis;
         let recResultNum = -1;
+        console.log('Pos: '+positiveSynopsisAnswer);
 
         for(let i=0; i<synopses.length;i++){
             synopsis = synopses[i];
             recResultNum = synopsis.title === positiveSynopsisAnswer ? synopsis.resultNum : -1;
+            if(recResultNum !== -1){
+                return giveRecommendation(queryResponse, recResultNum);
+            }
+            console.log('recResultNum ' + recResultNum);
             if(usedSynopsesBooks.has(synopsis.title)){
                 continue;
             }
             foundNewSynopsis = true;
             break;
         }
-        if(recResultNum !== -1){
-            return giveRecommendation(queryResponse, recResultNum);
-        }
+        
         console.log('Found New Synopsis: ' + foundNewSynopsis);
         if(!foundNewSynopsis){
             if(neutralSynopsisBooks.length === 0){
@@ -493,6 +496,7 @@ function QuestionGenerator(){
                 break;
             case 1:
                 positiveSynopsisAnswer = currentLabel.title;
+                console.log(positiveSynopsisAnswer);
                 break;
         }
     }
