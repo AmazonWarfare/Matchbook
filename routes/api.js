@@ -40,7 +40,6 @@ router.get('/question', (req, res) => {
  */
 router.post('/answer', (req, res) => {
     let answer = req.body.answer;
-    console.log("serverside ans:", answer);
     /*if (![-1, 0, 1].includes(answer)) {
         res.status(404);
         res.send("invalid answer");

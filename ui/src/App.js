@@ -46,6 +46,7 @@ class App extends Component {
         this.setNextQuestion = this.setNextQuestion.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.reset = this.reset.bind(this);
+        this.giveRec = this.giveRec.bind(this);
     }
 
     static mapQuestionToCardQuestion(question) {
@@ -83,6 +84,7 @@ class App extends Component {
     }
 
     isFirstQuestion = false;
+    currentIsStartupQuestion = true;
 
     nextQuestion(answer) {
         if (startup_cards.length > 0) {
@@ -97,6 +99,7 @@ class App extends Component {
                 });
 
             this.isFirstQuestion = false;
+            this.currentIsStartupQuestion = false;
         } else {
             // currently a hacky way to get a bit more hang for our loading icon
             setTimeout(() => {
@@ -120,6 +123,16 @@ class App extends Component {
             });
     }
 
+    giveRec() {
+        axios
+            .post('/answer', {answer: "fin"})
+        axios
+            .get('/question')
+            .then((res) => {
+                this.setNextQuestion(res.data.question);
+            })
+    }
+
     render() {
         let FadedQuestionCard = Fade(QuestionCard);
         return (
@@ -130,6 +143,8 @@ class App extends Component {
                         question={this.state.current_question}
                         nextQuestion={this.nextQuestion}
                         reset={this.reset}
+                        giveRec={this.giveRec}
+                        startup={this.currentIsStartupQuestion}
                     />
                 </div>
             </div>

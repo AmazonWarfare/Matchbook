@@ -17,26 +17,22 @@ class QuestionCard extends Component {
             answer_clicked: false
         };
         this.renderInputs = this.renderInputs.bind(this);
-        this.nextQuestion = this.nextQuestion.bind(this);
-        this.reset = this.reset.bind(this);
+        this.loadDuringFunction = this.loadDuringFunction.bind(this);
     }
 
-    nextQuestion(ans) {
+    loadDuringFunction(f) {
         this.setState({answer_clicked: true});
-        this.props.nextQuestion(ans);
+        f();
     }
 
-    reset() {
-        this.setState({answer_clicked: true});
-        this.props.reset();
-    }
+
 
     renderInputs() {
         if (this.props.question.input_type === INPUT_TYPES.BUTTON_LIST) {
 
             return (
                 <ButtonList
-                    nextQuestion={this.nextQuestion} // gets applied to each button
+                    nextQuestion={() => this.loadDuringFunction(this.props.nextQuestion)} // gets applied to each button
                     buttons={this.props.question.options} //list of text for buttons
                     custom_responses={this.props.question.custom_responses} //decides if we use custom responses in button list or just -1,0,1
                 />
@@ -44,9 +40,17 @@ class QuestionCard extends Component {
         } else if (this.props.question.input_type === INPUT_TYPES.MULTISELECT) {
             return (
                 <MultiSelect
-                    nextQuestion={this.nextQuestion} // gets applied to "done" button
+                    nextQuestion={() => this.loadDuringFunction(this.props.nextQuestion)} // gets applied to "done" button
                     options={this.props.question.options}
                 />
+            )
+        }
+    }
+
+    addGetRecIfNotStartup() {
+        if(!this.props.startup) {
+            return (
+                <Button text={'Give me a recommendation!'} onClick={() => this.loadDuringFunction(this.props.giveRec)}/>
             )
         }
     }
@@ -72,7 +76,10 @@ class QuestionCard extends Component {
                     </div>
                 </Container>
                 <div className={'restart-container'}>
-                    <Button text={'Start Over'} onClick={this.reset}/>
+                    <Button text={'Start Over'} onClick={() => this.loadDuringFunction(this.props.reset)}/>
+                    {
+                        this.addGetRecIfNotStartup()
+                    }
                 </div>
             </div>
         );
