@@ -32,7 +32,7 @@ class QuestionCard extends Component {
 
             return (
                 <ButtonList
-                    nextQuestion={() => this.loadDuringFunction(this.props.nextQuestion)} // gets applied to each button
+                    nextQuestion={(ans) => this.loadDuringFunction(() => this.props.nextQuestion(ans))} // gets applied to each button
                     buttons={this.props.question.options} //list of text for buttons
                     custom_responses={this.props.question.custom_responses} //decides if we use custom responses in button list or just -1,0,1
                 />
@@ -40,7 +40,7 @@ class QuestionCard extends Component {
         } else if (this.props.question.input_type === INPUT_TYPES.MULTISELECT) {
             return (
                 <MultiSelect
-                    nextQuestion={() => this.loadDuringFunction(this.props.nextQuestion)} // gets applied to "done" button
+                    nextQuestion={(ans) => this.loadDuringFunction(() => this.props.nextQuestion(ans))} // gets applied to "done" button
                     options={this.props.question.options}
                 />
             )
