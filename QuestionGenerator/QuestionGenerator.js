@@ -163,12 +163,9 @@ function QuestionGenerator(){
         for(let resultNum = 0; resultNum < queryResponse.getNumMatchingResults(); resultNum++){
             exhaustedOptions = [];
 
-            console.log(1);
             questionFinder:
             while(true){
-                console.log(2);
                 question = QUESTION_GETTER_MAP[currentPreferenceOption][currentQuestionFormat](queryResponse, resultNum);
-                console.log(3);
                 if(question === 0){
                     console.log("All possible questions of type " + currentPreferenceOption + " for result "+ resultNum+" have been asked");
                     exhaustedOptions.push(currentPreferenceOption);
@@ -215,7 +212,7 @@ function QuestionGenerator(){
 	let processQuery = function(queryResponse, resolve, reject){
 
         let matchingResults = queryResponse.getNumMatchingResults();
-        console.log(matchingResults);
+        console.log('Matching Results: '+matchingResults);
         if(currentQGState === QG_STATES.TOP){
             console.log('Giving top recommendation');
         }
@@ -249,11 +246,12 @@ function QuestionGenerator(){
     }
 
     this.provideAnswer = function(ans){
+        console.log('Answer: ' + JSON.stringify(ans));
         if(ans === 'fin'){
             currentQGState = QG_STATES.TOP;
             return 0;
         }
-        console.log('Provide answer, PO: ' + currentPreferenceOption);
+        console.log('Provide answer, PO: ' + currentPreferenceOption + '\n');
         const ANSWERMAP = {
             [PREFERENCE_OPTIONS.CATEGORY]: provideCategoryAnswer,
             [PREFERENCE_OPTIONS.GENRE]: provideGenreAnswer,
@@ -367,9 +365,6 @@ function QuestionGenerator(){
         let foundNewQuote = false;
         let quote;
 
-        console.log('quotes: \n');
-        console.log(quotes);
-
         for(let i = 0; i < quotes.quotes.length; i++){
             quote = quotes.quotes[i];
             if(!usedQuotes.has(quote)){
@@ -378,8 +373,6 @@ function QuestionGenerator(){
             }
         }
 
-        console.log('Found new quote: '+foundNewQuote);
-        console.log('Book ' + quotes.title + ' already quoted: ' + quotedBooks.has(quotes.title));
         if (!foundNewQuote || quotedBooks.has(quotes.title)) {
             quotedBooks.add(quotes.title);
             return 0;
@@ -412,8 +405,6 @@ function QuestionGenerator(){
             3: "\" books?"
         }
         let tags = queryResponse.getTags(resultNum);
-        console.log('GenerateTernaryTagQuestion:');
-        console.log(JSON.stringify(tags,null,2));
         let foundNewTag = false;
         let label, tagType;
 
@@ -482,19 +473,15 @@ function QuestionGenerator(){
     }
 
     let provideGenreAnswer = function(ans){
-        for(let i = 0; i < ans.length; i++){
-            wqs.updateQuery(ans[i], 1, PREFERENCE_OPTIONS.GENRE);
-        }
+        ans.forEach(genre => wqs.updateQuery(genre, 1, PREFERENCE_OPTIONS.GENRE));
+        
     }
 
     let provideQuoteAnswer = function(ans){
-        console.log('Title of quoted book: ' + currentLabel);
         wqs.updateQuery(currentLabel, ans, PREFERENCE_OPTIONS.TITLE);
         if(ans !== 0){
             quotedBooks.add(currentLabel);
         }
-        console.log("QUOTED BOOKS");
-        console.log(quotedBooks);
     }
     let provideSynopsisAnswer = function(ans){
         switch(ans){
