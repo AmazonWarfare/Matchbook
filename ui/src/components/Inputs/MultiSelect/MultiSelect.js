@@ -9,14 +9,20 @@ class MultiSelect extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: this.props.options.map(() => false)
-        }
+            selected: []
+        };
+        this.select = this.select.bind(this);
     }
 
-    select(index) {
+    select(text) {
         this.setState(state => {
-            return state.selected[index] = !state.selected[index];
-        })
+            if(state.selected.includes(text)) {
+                state.selected = state.selected.filter(elt => elt !== text);
+            } else {
+                state.selected.push(text);
+            }
+            return state.selected
+        });
     }
     renderOptions() {
         return (
@@ -25,8 +31,8 @@ class MultiSelect extends Component {
                         return <SelectOption
                             key={i}
                             text={text}
-                            onClick={() => this.select(i)}
-                            class={this.state.selected[i] ? "option selected" : "option" }
+                            onClick={() => this.select(text)}
+                            class={this.state.selected.includes(text)  ? "option selected" : "option" }
                         />
                     }
                 )}
@@ -41,7 +47,7 @@ class MultiSelect extends Component {
                 <br/>
                 <Button
                     text="Done"
-                    onClick={this.props.nextQuestion}
+                    onClick={() => this.props.nextQuestion(this.state.selected)}
                 />
             </div>
         );

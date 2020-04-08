@@ -28,7 +28,12 @@ const Configuration = {
 	PREFERENCE_OPTIONS: {
 		CATEGORY: 0,
 		GENRE: 1,
-		EMOTION: 2 
+		EMOTION: 2,
+		QUOTE: 3,
+		TAG: 4,
+		TITLE: 5,
+		SYNOPSIS: 6
+
 	},
 	QUESTION_FORMATS: {
 		TERNARY: 0,
@@ -36,7 +41,15 @@ const Configuration = {
 		MULTI: 2,
 		RECOMMENDATION: 10
 	},
-	RECOMMENDATION_THRESHOLD: 2
+	RECOMMENDATION_THRESHOLD: 5,
+	QUESTION_THRESHOLD: 15,
+
+	QG_STATES: {
+		QUERYING: 0,
+		RECOMMENDATION: 1,
+		EMPTY: 2, 
+		TOP: 3
+	}
 };
 
 module.exports = Configuration; // make importable

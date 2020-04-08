@@ -1,14 +1,14 @@
 @import "../../colors";
 
 .question-card-component {
-  background: $red;
-  color: $charcoal;
-  border: 1px solid $red;
-
-  width: 50%;
-  border-radius: 10px;
-  margin: 5% auto;
+  background: $dark-charcoal;
+  color: $white;
+  border-radius: 4px;
+  margin: 5% auto 0;
   transition: height 1s;
+  min-height: 20em;
+  position: relative;
+  vertical-align: bottom;
 }
 
 .clicked {
@@ -17,18 +17,39 @@
   border: none;
 }
 
+.loader-container {
+  position: relative;
+}
+
 .loader {
   display: block;
-  margin: 20px auto;
-  border-radius: 5px;
+  margin:  auto;
+  border-radius: 2px;
   max-height: 150px;
   background: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
 }
 
 .question-text {
   font-size: 30px;
-  padding: 15px 5px;
+  padding: 10px 0px;
   margin: 20px auto;
-  border-radius: 5px;
-  background: $white;
+  min-height: 75%;
+  border-radius: 2px;
+  background: $dark-charcoal;
+  display: block;
 }
+
+.input-container {
+  padding: 15px 0px;
+}
+
+.meta-controls {
+   padding: 15px 15px;
+   background-color: $dark-charcoal;
+   margin: 5px 0px;
+   border-radius: 4px;
+ }

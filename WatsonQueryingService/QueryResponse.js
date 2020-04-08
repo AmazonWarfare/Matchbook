@@ -1,5 +1,6 @@
 
-/** 
+
+/**
     QueryResponse pRovides akksessoRs to the infoRmation in the JSON KweRy RetuRned by
     WatsonQueryingService
 
@@ -10,8 +11,9 @@
         Get the title of the booK fRom the fiRst Result of the KweRy Response
 
         RetuRns:
+
             StRing whitsh is the title of the booK
-    
+
     getAuthor()
 
         Get the list of authoRs of the booK fRom the fiRst Result of the KweRy Response
@@ -42,59 +44,145 @@
 
         RetuRns:
             List of stRings, eatsh one Kontaining a KategoRy from the KweRy
-        
+
 
 
 **/
 
 function QueryResponse(queryResponse, fileType){
+   // console.log(JSON.stringify(queryResponse.result.results, null, 2));
+    //console.log('\n');
+
     if(fileType === undefined){
-        let fileType = 'pdf';        
+
+        let fileType = 'pdf';
     }
 
-    let getPDFTitle = function(){
-        return queryResponse.result.results[0].extracted_metadata.title;
+    let getPDFTitle = function(result){
+        return queryResponse.result.results[result].extracted_metadata.title;
     };
 
-    let getJSONTitle = function(){
-        return queryResponse.result.results[0].title[0];
+    let getJSONTitle = function(result){
+        return queryResponse.result.results[result].title[0];
     }
-    
-    this.getTitle = function(){
+
+    this.getTitles = function(resultNum){
         const TITLE_GETTER = {
             'pdf': getPDFTitle,
             'json': getJSONTitle
         };
-        return TITLE_GETTER[fileType]();
+        if(resultNum === undefined){
+            result = [];
+            for(let i = 0; i < this.getNumMatchingResults(); i++){
+                result.push(TITLE_GETTER[fileType](i))
+            }
+            return result;
+        }
+        return TITLE_GETTER[fileType](resultNum);
+           
     }
 
     this.getNumMatchingResults = function(){
         return queryResponse.result.matching_results;
     }
 
-    this.getAuthor = function(){
+    this.getAuthors = function(resultNum){
         const AUTHOR_GETTER = {
             'pdf': getPDFAuthor,
             'json': getJSONAuthor
         };
-        return AUTHOR_GETTER[fileType]();
+        return AUTHOR_GETTER[fileType](resultNum);
     }
-    this.getQuotes = function(){
-        let quotes = queryResponse.result.results[0].quotes[0];
-        return quotes;
+    this.getQuotes = function(resultNum){
+        if(resultNum === undefined){
+            result = [];
+            for(let i = 0; i < this.getNumMatchingResults(); i++){
+                let quotes = queryResponse.result.results[i].quotes[0];
+                let title = this.getTitles(i);
+                let genre = this.getGenres(i);
+                result.push({
+                    title: title,
+                    genre: genre,
+                    quotes: quotes
+                });
+            }  
+            return result;
+        } 
+        let quotes = queryResponse.result.results[resultNum].quotes[0];
+        let title = this.getTitles(resultNum);
+        let genre = this.getGenres(resultNum);
+        return {
+            title: title,
+            genre: genre,
+            quotes: quotes
+        };
     }
-    this.getTags = function(tagType){
-        let tagName = 'tags'+tagType;
-        return queryResponse.result.results[0][tagName][0];
+    this.getTags = function(resultNum){
+        // Uncomment once JSON tag formatting is changed.
+        
+        if(resultNum === undefined){
+            result = new Set();
+            for(let i = 0; i < this.getNumMatchingResults(); i++){
+                let tagList = queryResponse.result.results[i].tags;
+                tagList.forEach(e => result.add(e));
+            }
+            return Array.from(result);
+        }
+        let tags = queryResponse.result.results[resultNum].tags;
+        return tags;
+        
     }
-    let getPDFAuthor = function(){
-        return queryResponse.result.results[0].extracted_metadata.author;
+    this.getGenres = function(resultNum){
+        if(resultNum === undefined){
+            let genreSet = new Set();
+            let res = queryResponse.result.results;
+            console.log(res.length);
+            for (let i = 0; i < res.length; i++){
+                let currentGenres = res[i].genre[0];
+                currentGenres.forEach(e => genreSet.add(e));
+            }
+            return Array.from(genreSet);
+
+        }
+        let targetGenre = queryResponse.result.results[resultNum].genre[0][0];
+        return targetGenre;
+    }
+    this.getSynopses = function(resultNum){
+        if(resultNum === undefined){
+            result = [];
+            for(let i = 0; i < this.getNumMatchingResults(); i++){
+                let synopsis = queryResponse.result.results[i].good_reads_synopsis;
+                let title = this.getTitles(i);
+                let genre = this.getGenres(i);
+                result.push({
+                    title: title,
+                    genre: genre,
+                    synopsis: synopsis,
+                    resultNum: i
+                });
+            }  
+            return result;
+        } 
+        let synopsis = queryResponse.result.results[resultNum].good_reads_synopsis;
+        let title = this.getTitles(resultNum);
+        let genre = this.getGenres(resultNum);
+        return {
+            title: title,
+            genre: genre,
+            synopsis: synopsis,
+            resultNum: resultNum
+        };
+    }
+
+    let getPDFAuthor = function(resultNum){
+        return queryResponse.result.results[resultNum].extracted_metadata.author;
     };
 
-    let getJSONAuthor = function(){
-        return queryResponse.result.results[0].author;
+    let getJSONAuthor = function(resultNum){
+        return queryResponse.result.results[resultNum].author;
     }
 
+    /*
     this.getCategories = function(){
         categories_JSON = queryResponse.result.aggregations[0].results;
         categories = [];
@@ -105,8 +193,32 @@ function QueryResponse(queryResponse, fileType){
         }
         return categories;
     }
-
+    */
+    this.getCategories = function(resultNum){
+        // Uncomment once JSON tag formatting is changed.
+        
+        let getCategoriesFromJSON = function(categories_JSON){
+            let categories = [];
+            for(let i = 0; i < categories_JSON.length; i++){
+                let label = categories_JSON[i].label;
+                label = label.substring(label.lastIndexOf("/") + 1);
+                categories.push(label);
+            }
+            return categories;
+        };
+        if(resultNum === undefined){
+            let result = new Set();
+            for(let i = 0; i < this.getNumMatchingResults(); i++){
+                let categories_JSON = queryResponse.result.results[i].enriched_text.categories;
+                let categories = getCategoriesFromJSON(categories_JSON);
+                categories.forEach(e => result.add(e));
+            }
+            return Array.from(result);
+        }
+        let categories_JSON = queryResponse.result.results[resultNum].enriched_text.categories;
+        return getCategoriesFromJSON(categories_JSON);
+    }
 }
 
 
-module.exports = QueryResponse; 
+module.exports = QueryResponse;

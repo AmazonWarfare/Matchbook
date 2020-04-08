@@ -1,3 +1,4 @@
+@import "./colors";
 .App {
   text-align: center;
 }
@@ -5,6 +6,11 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.content {
+  margin: auto;
+  width: 50%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
