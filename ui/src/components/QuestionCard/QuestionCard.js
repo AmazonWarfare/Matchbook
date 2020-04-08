@@ -17,21 +17,36 @@ class QuestionCard extends Component {
             answer_clicked: false
         };
         this.renderInputs = this.renderInputs.bind(this);
-        this.loadDuringFunction = this.loadDuringFunction.bind(this);
+        this.load = this.load.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.reset = this.reset.bind(this);
+        this.giveRec = this.giveRec.bind(this);
     }
 
-    loadDuringFunction(f) {
+    load() {
         this.setState({answer_clicked: true});
-        f();
     }
 
+    nextQuestion(ans) {
+        this.load();
+        this.props.nextQuestion(ans);
+    }
+
+    reset() {
+        this.load();
+        this.props.reset();
+    }
+
+    giveRec() {
+        this.load();
+        this.props.giveRec();
+    }
 
     renderInputs() {
         if (this.props.question.input_type === INPUT_TYPES.BUTTON_LIST) {
-
             return (
                 <ButtonList
-                    nextQuestion={(ans) => this.loadDuringFunction(() => this.props.nextQuestion(ans))} // gets applied to each button
+                    nextQuestion={this.nextQuestion} // gets applied to each button
                     buttons={this.props.question.options} //list of text for buttons
                     custom_responses={this.props.question.custom_responses} //decides if we use custom responses in button list or just -1,0,1
                 />
@@ -39,19 +54,27 @@ class QuestionCard extends Component {
         } else if (this.props.question.input_type === INPUT_TYPES.MULTISELECT) {
             return (
                 <MultiSelect
-                    nextQuestion={(ans) => this.loadDuringFunction(() => this.props.nextQuestion(ans))} // gets applied to "done" button
+                    nextQuestion={this.nextQuestion} // gets applied to "done" button
                     options={this.props.question.options}
                 />
             )
         }
     }
 
-    addGetRecIfNotStartup() {
+    renderMetaControls() {
+        let recButton;
+
         if (!this.props.startup) {
-            return (
-                <Button text={'Give me a recommendation!'} onClick={() => this.loadDuringFunction(this.props.giveRec)}/>
-            )
+            recButton = (<Button text={'Give me a recommendation!'}
+                                 onClick={this.giveRec}/>);
         }
+
+        return (
+            <div className={'meta-controls'}>
+                <Button text={'Start Over'} onClick={this.reset}/>
+                {recButton}
+            </div>
+        )
     }
 
     render() {
@@ -74,12 +97,7 @@ class QuestionCard extends Component {
                         {this.renderInputs()}
                     </Container>
                 </Container>
-                <div className={'restart-container'}>
-                    <Button text={'Start Over'} onClick={() => this.loadDuringFunction(this.props.reset)}/>
-                    {
-                        this.addGetRecIfNotStartup()
-                    }
-                </div>
+                {this.renderMetaControls()}
             </div>
         );
     }

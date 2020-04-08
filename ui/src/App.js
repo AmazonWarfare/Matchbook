@@ -48,13 +48,14 @@ let startup_cards = [
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex])
-        };
         this.setNextQuestion = this.setNextQuestion.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.reset = this.reset.bind(this);
         this.giveRec = this.giveRec.bind(this);
+
+        this.state = {
+            current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex])
+        };
     }
 
     questionIndex = 0;
@@ -92,31 +93,40 @@ class App extends Component {
         });
     }
 
+    getNextStartupQuestion() {
+        this.setNextQuestion(startup_cards[this.questionIndex]);
+        if (startup_cards.length === 0) {
+            this.isFirstQuestion = true;
+        }
+    }
+
+    getFirstQuestion() {
+        axios.get('/question')
+            .then((res) => {
+                this.setNextQuestion(res.data.question);
+            });
+    }
+
+    getNextQuestion(answer) {
+        axios
+            .post('/answer', {answer})
+            .then(() => console.log('answer sent from UI'));
+
+        axios
+            .get('/question')
+            .then((res) => {
+                this.setNextQuestion(res.data.question);
+            });
+    }
+
     nextQuestion(answer) {
         this.questionIndex++;
         if (this.questionIndex < startup_cards.length) {
-            this.setNextQuestion(startup_cards[this.questionIndex]);
-            if (startup_cards.length === 0) {
-                this.isFirstQuestion = true;
-            }
+            this.getNextStartupQuestion();
         } else if (this.questionIndex === startup_cards.length) {
-            axios.get('/question')
-                .then((res) => {
-                    this.setNextQuestion(res.data.question);
-                });
+            this.getFirstQuestion();
         } else {
-            // currently a hacky way to get a bit more hang for our loading icon
-            setTimeout(() => {
-                axios
-                    .post('/answer', {answer})
-                    .then(() => console.log('answer sent from UI'));
-
-                axios
-                    .get('/question')
-                    .then((res) => {
-                        this.setNextQuestion(res.data.question);
-                    });
-            }, 500)
+            this.getNextQuestion(answer);
         }
     }
 
