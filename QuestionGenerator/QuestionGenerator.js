@@ -63,6 +63,8 @@ function QuestionGenerator(){
     let questionCount = 0;
 
     let currentQGState = QG_STATES.QUERYING;
+
+    let lastSynopsisQuestion = false;
     
     this.reset = function(){
         
@@ -86,6 +88,7 @@ function QuestionGenerator(){
         negativeSynopsisBooks = [];
         usedSynopsesBooks = new Set();
 
+        lastSynopsisQuestion = false;
 
         
     }
@@ -96,6 +99,8 @@ function QuestionGenerator(){
         let recResultNum = -1;
         console.log('Pos: '+positiveSynopsisAnswer);
 
+        let remainingSynopses = synopses.filter(synopsis => !usedSynopsesBooks.has(synopsis.title));
+        lastSynopsisQuestion = remainingSynopses.length === 1;
         for(let i=0; i<synopses.length;i++){
             synopsis = synopses[i];
             recResultNum = synopsis.title === positiveSynopsisAnswer ? synopsis.resultNum : -1;
@@ -113,17 +118,8 @@ function QuestionGenerator(){
         console.log('Found New Synopsis: ' + foundNewSynopsis);
         if(!foundNewSynopsis){
             if(neutralSynopsisBooks.length === 0){
-                if(wqs.getNumQueryPositives() < SYNOPSIS_PRESENT_THRESHOLD){
-                    // clear positives
-                    wqs.clearQueryPositives();
-                    // add book to negative
-                    negativeSynopsisBooks.forEach(book => wqs.updateQuery(book.title, -1, PREFERENCE_OPTIONS.TITLE));
-                    currentPreferenceOption = questionOptions[Math.floor(Math.random() * questionOptions.length)];
-                    currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-                    return generateContinueScreen(queryResponse);
-                } else {
-                    question = giveRecommendation(queryResponse, -1)
-                } // Todo: reset with saved state
+                question = giveRecommendation(queryResponse, -1);
+                
             } else {
                 let randomChoice = neutralSynopsisBooks[Math.floor(Math.random() * neutralSynopsisBooks.length)];
                 console.log(JSON.stringify(randomChoice,null,2));
@@ -517,17 +513,30 @@ function QuestionGenerator(){
         }
     }
     let provideSynopsisAnswer = function(ans){
-        switch(ans){
-            case 0:
-                neutralSynopsisBooks.push(currentLabel);
-                break;
-            case -1:
-                negativeSynopsisBooks.push(currentLabel);
-                break;
-            case 1:
-                positiveSynopsisAnswer = currentLabel.title;
-                console.log(positiveSynopsisAnswer);
-                break;
+        if(lastSynopsisQuestion && ans < 1){
+            lastSynopsisQuestion = false;
+            negativeSynopsisBooks.push(currentLabel);
+            if(wqs.getNumQueryPositives() < SYNOPSIS_PRESENT_THRESHOLD){
+                    // clear positives
+                wqs.clearQueryPositives();
+                // add book to negative
+                negativeSynopsisBooks.forEach(book => wqs.updateQuery(book.title, -1, PREFERENCE_OPTIONS.TITLE));
+                currentPreferenceOption = questionOptions[Math.floor(Math.random() * questionOptions.length)];
+                currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+            }
+        } else {
+            switch(ans){
+                case 0:
+                    neutralSynopsisBooks.push(currentLabel);
+                    break;
+                case -1:
+                    negativeSynopsisBooks.push(currentLabel);
+                    break;
+                case 1:
+                    positiveSynopsisAnswer = currentLabel.title;
+                    console.log(positiveSynopsisAnswer);
+                    break;
+            }
         }
     }
 
