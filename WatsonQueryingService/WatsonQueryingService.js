@@ -64,6 +64,12 @@ function WatsonQueryingService(){
     this.getNegativeTitles = function(){
         return queryBuilder.getNegativeTitles();
     }
+    this.getNumQueryPositives = function(){
+        return queryBuilder.getNumQueryPositives();
+    }
+    this.clearQueryPositives = function(){
+        queryBuilder.clearQueryPositives();
+    }
 
 }
 

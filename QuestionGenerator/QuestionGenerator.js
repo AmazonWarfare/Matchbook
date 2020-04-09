@@ -112,7 +112,17 @@ function QuestionGenerator(){
         console.log('Found New Synopsis: ' + foundNewSynopsis);
         if(!foundNewSynopsis){
             if(neutralSynopsisBooks.length === 0){
-                question = giveRecommendation(queryResponse, -1) // Todo: reset with saved state
+                if(wqs.getNumQueryPositives() < 3){
+                    // clear positives
+                    wqs.clearQueryPositives();
+                    // add book to negative
+                    negativeSynopsisBooks.forEach(book => wqs.updateQuery(book.title, -1, PREFERENCE_OPTIONS.TITLE));
+                    currentPreferenceOption = questionOptions[Math.floor(Math.random() * questionOptions.length)];
+                    currentQuestionFormat = QUESTION_FORMATS.TERNARY;
+                    return getNextQueryQuestion(queryResponse);
+                } else {
+                    question = giveRecommendation(queryResponse, -1)
+                } // Todo: reset with saved state
             } else {
                 let randomChoice = neutralSynopsisBooks[Math.floor(Math.random() * neutralSynopsisBooks.length)];
                 console.log(JSON.stringify(randomChoice,null,2));
@@ -325,7 +335,7 @@ function QuestionGenerator(){
             };
         } else {
             rec = {
-                text: currentQGState === QG_STATES.EMPTY ? "Your request returned no results because it is too narrow. Please try broadening your criteria." : "You picky bastard, we have nothing to offer you >:(",
+                text: currentQGState === QG_STATES.EMPTY ? "Your request returned no results because it is too narrow. Please try broadening your criteria." : "You picky scoundrel, we have nothing to offer you >:(",
                 type: QUESTION_FORMATS.RECOMMENDATION
             };
         }
