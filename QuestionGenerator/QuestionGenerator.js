@@ -40,6 +40,7 @@ function QuestionGenerator(){
     const QUESTION_FORMATS = Config.QUESTION_FORMATS;
     const RECOMMENDATION_THRESHOLD = Config.RECOMMENDATION_THRESHOLD;
     const QUESTION_THRESHOLD = Config.QUESTION_THRESHOLD;
+    const SYNOPSIS_PRESENT_THRESHOLD = Config.SYNOPSIS_PRESENT_THRESHOLD;
     const QG_STATES = Config.QG_STATES;
 
     let wqs = new WatsonQueryingService();
@@ -112,14 +113,14 @@ function QuestionGenerator(){
         console.log('Found New Synopsis: ' + foundNewSynopsis);
         if(!foundNewSynopsis){
             if(neutralSynopsisBooks.length === 0){
-                if(wqs.getNumQueryPositives() < 3){
+                if(wqs.getNumQueryPositives() < SYNOPSIS_PRESENT_THRESHOLD){
                     // clear positives
                     wqs.clearQueryPositives();
                     // add book to negative
                     negativeSynopsisBooks.forEach(book => wqs.updateQuery(book.title, -1, PREFERENCE_OPTIONS.TITLE));
                     currentPreferenceOption = questionOptions[Math.floor(Math.random() * questionOptions.length)];
                     currentQuestionFormat = QUESTION_FORMATS.TERNARY;
-                    return getNextQueryQuestion(queryResponse);
+                    return generateContinueScreen(queryResponse);
                 } else {
                     question = giveRecommendation(queryResponse, -1)
                 } // Todo: reset with saved state
@@ -269,6 +270,9 @@ function QuestionGenerator(){
             currentQGState = QG_STATES.TOP;
             return 0;
         }
+        if(currentQGState === QG_STATES.CONTINUE){
+            return 0;
+        }
         console.log('Provide answer, PO: ' + currentPreferenceOption + '\n');
         const ANSWERMAP = {
             [PREFERENCE_OPTIONS.CATEGORY]: provideCategoryAnswer,
@@ -341,6 +345,18 @@ function QuestionGenerator(){
         }
         return rec;
 
+    }
+    let generateContinueScreen = function(queryResponse){
+        currentQGState = QG_STATES.CONTINUE;
+        let question = {
+            text: "We will not show you results from any of these books. Click any button to continue.",
+            type: QUESTION_FORMATS.TERNARY,
+            content: {
+                formatted_label: 'hey',
+                label: 'whats up'
+            }
+        };
+        return question;
     }
 
     let generateTernaryCategoryQuestion = function(queryResponse, resultNum){
