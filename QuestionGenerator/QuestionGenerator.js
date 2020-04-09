@@ -349,7 +349,7 @@ function QuestionGenerator(){
     let generateContinueScreen = function(queryResponse){
         currentQGState = QG_STATES.CONTINUE;
         let question = {
-            text: "We will not show you results from any of these books. Click any button to continue.",
+            text: "We will not show you results from any of these books. Click any button to continue answering more questions.",
             type: QUESTION_FORMATS.TERNARY,
             content: {
                 formatted_label: 'hey',
