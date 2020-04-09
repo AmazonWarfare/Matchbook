@@ -335,20 +335,14 @@ function QuestionGenerator(){
 
     let generateTernaryCategoryQuestion = function(queryResponse, resultNum){
         let categories = queryResponse.getCategories(resultNum);
-        let foundNewLabel = false;
-        let label;
 
         console.log('Categories:');
         console.log(categories);
 
-        for(let i = 0; i < categories.length; i++){
-            label = categories[i];
-            if(!usedCateg.has(label)){
-                foundNewLabel = true;
-                break;
-            }
-        }
-
+        let remainingCategories = categories.filter(x => !usedCateg.has(x));
+        let foundNewLabel = remainingCategories.length > 0;
+        let label = remainingCategories[Math.floor(Math.random() * remainingCategories.length)];
+       
         if (!foundNewLabel) {
             return 0;
         }
@@ -370,16 +364,11 @@ function QuestionGenerator(){
 
     let generateTernaryQuoteQuestion = function(queryResponse, resultNum){
         let quotes = queryResponse.getQuotes(resultNum);
-        let foundNewQuote = false;
-        let quote;
 
-        for(let i = 0; i < quotes.quotes.length; i++){
-            quote = quotes.quotes[i];
-            if(!usedQuotes.has(quote)){
-                foundNewQuote = true;
-                break;
-            }
-        }
+        console.log(quotes);
+        let remainingQuotes = quotes.quotes.filter(x => !usedQuotes.has(x));
+        let foundNewQuote = remainingQuotes.length > 0;
+        let quote = remainingQuotes[Math.floor(Math.random() * remainingQuotes.length)];
 
         if (!foundNewQuote || quotedBooks.has(quotes.title)) {
             quotedBooks.add(quotes.title);
@@ -413,25 +402,20 @@ function QuestionGenerator(){
             3: "\" books?"
         }
         let tags = queryResponse.getTags(resultNum);
-        let foundNewTag = false;
-        let label, tagType;
 
-        for(let i = 0; i < tags.length; i++){
-            label = tags[i].tag_name[0].toUpperCase();
-            tagType = tags[i].tag_type[0];
-            if(!usedTags.has(label)){
-                foundNewTag = true;
-                break;
-            }
-        }
+        console.log(JSON.stringify(tags,null,2));
 
+        let remainingTags = tags.filter(x => !usedTags.has(x.tag_name[0].toUpperCase()));
+        let foundNewTag = remainingTags.length > 0;
+        let tag = remainingTags[Math.floor(Math.random() * remainingTags.length)];
+        
         if (!foundNewTag) {
             return 0;
         }
-        currentLabel = label;
-        currentTagType = tagType;
+        currentLabel = tag.tag_name[0].toUpperCase();
+        currentTagType = tag.tag_type[0];
         formattedLabel = StringFormat.formatDisplayName(currentLabel);
-        usedTags.add(label);
+        usedTags.add(currentLabel);
 
         let question = {
             text: "How do you feel about the concept of \"" + formattedLabel + TAGTYPEQUESTIONMAP[currentTagType],
