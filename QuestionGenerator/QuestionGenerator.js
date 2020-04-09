@@ -364,16 +364,11 @@ function QuestionGenerator(){
 
     let generateTernaryQuoteQuestion = function(queryResponse, resultNum){
         let quotes = queryResponse.getQuotes(resultNum);
-        let foundNewQuote = false;
-        let quote;
 
-        for(let i = 0; i < quotes.quotes.length; i++){
-            quote = quotes.quotes[i];
-            if(!usedQuotes.has(quote)){
-                foundNewQuote = true;
-                break;
-            }
-        }
+        console.log(quotes);
+        let remainingQuotes = quotes.quotes.filter(x => !usedQuotes.has(x));
+        let foundNewQuote = remainingQuotes.length > 0;
+        let quote = remainingQuotes[Math.floor(Math.random() * remainingQuotes.length)];
 
         if (!foundNewQuote || quotedBooks.has(quotes.title)) {
             quotedBooks.add(quotes.title);
