@@ -81,6 +81,14 @@ function QueryBuilder(fileType){
 			queryElements[i].printQueryElement();
 		}
 	}
+    this.getNumQueryPositives = function(){
+        let queryPositives = getElementsOfType([PREFERENCE_OPTIONS.TITLE, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TAG], [1]);
+        return queryPositives.length;
+    }
+    this.clearQueryPositives = function(){
+        let queryPositives = getElementsOfType([PREFERENCE_OPTIONS.TITLE, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.TAG], [1]);
+        queryPositives.forEach(element => element.sentiment = 0);
+    }
     this.getNegativeTitles = function(){
         let titleElements = getElementsOfType([PREFERENCE_OPTIONS.TITLE], [-1]);
         let titles = titleElements.map(e => e.label);
