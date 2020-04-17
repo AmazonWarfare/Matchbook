@@ -1,0 +1,28 @@
+FORM NOTES:
+- Data:
+	
+	- Name: string
+	- Phone/Email: string
+	- Sexual Preferences: Checkboxes
+	- Gender: Checkboxes
+
+- Data transfer model:
+
+	Form Data:
+
+	{
+		name: "string",
+		contact: "string",
+		sexual_pref: ["string",...],
+		gender: ["string",...]
+	}
+
+	sent back through qg.provideAnswer interface
+
+- Question Generator Dynamic sexual_pref list API:
+
+	I want to call as:
+
+	qg.getSexualPrefOptions()
+
+	and get back an array of strings
