@@ -29,27 +29,34 @@ while start_of_entry:
         count += 1
 
     count = 0
-    tag1 = []
-    new_tag = input_file.readline().strip()
-    while new_tag != '#':
-        tag1.append(new_tag.replace('\n', ''))
-        new_tag = input_file.readline().strip()
+    tags = []
+    new_line = input_file.readline().strip()
+    while new_line != '#':
+        new_tag = {}
+        new_tag["tag_name"] = [new_line]
+        new_tag["tag_type"] = [1]
+        tags.append(new_tag)
+        new_line = input_file.readline().strip()
         count += 1
 
     count = 0
-    tag2 = []
-    new_tag = input_file.readline().strip()
-    while new_tag != '#':
-        tag2.append(new_tag.replace('\n', ''))
-        new_tag = input_file.readline().strip()
+    new_line = input_file.readline().strip()
+    while new_line != '#':
+        new_tag = {}
+        new_tag["tag_name"] = [new_line]
+        new_tag["tag_type"] = [2]
+        tags.append(new_tag)
+        new_line = input_file.readline().strip()
         count += 1
 
     count = 0
-    tag3 = []
-    new_tag = input_file.readline().strip()
-    while new_tag != '#':
-        tag3.append(new_tag.replace('\n', ''))
-        new_tag = input_file.readline().strip()
+    new_line = input_file.readline().strip()
+    while new_line != '#':
+        new_tag = {}
+        new_tag["tag_name"] = [new_line]
+        new_tag["tag_type"] = [3]
+        tags.append(new_tag)
+        new_line = input_file.readline().strip()
         count += 1
 
     numBooks = 0
@@ -58,7 +65,7 @@ while start_of_entry:
     seriesLine = input_file.readline().strip()
     comma = seriesLine.rfind(",")
     if comma > -1:
-        numBooks = int(seriesLine[seriesLine.rfind(",")+1])
+        numBooks = int(seriesLine[seriesLine.rfind(",")+1:len(seriesLine)])
         #series = True
         series = "yes"
 
@@ -109,12 +116,8 @@ while start_of_entry:
     data['author'].append(Author)
     data["genre"] = []
     data['genre'].append(genre)
-    data["tags1"] = []
-    data['tags1'].append(tag1)
-    data["tags2"] = []
-    data['tags2'].append(tag2)
-    data["tags3"] = []
-    data['tags3'].append(tag3)
+    data["tags"] = []
+    data['tags'] = (tags)
     data["series"] = []
     data['series'].append(series)
     if series == "yes":

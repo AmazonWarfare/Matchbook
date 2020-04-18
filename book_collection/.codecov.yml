@@ -1,0 +1,34 @@
+codecov:
+  bot: jayvdb
+
+coverage:
+  status:
+    project:
+      default:
+        enabled: yes
+    patch:
+      default:
+        enabled: yes
+    changes:
+      default:
+        enabled: yes
+
+  ignore:
+    - pywikibot/data/mysql.py
+    - pywikibot/families/__init__.py
+    - scripts/archive
+    - scripts/userscripts
+    - scripts/version.py
+    - scripts/maintenance/colors.py
+    - scripts/maintenance/make_i18n_dict.py
+    - scripts/maintenance/wikimedia_sites.py
+
+  notify:
+    irc:
+      default:
+        server: chat.freenode.net
+        channel: pywikibot
+
+    gitter:
+      default:
+        url: https://webhooks.gitter.im/e/f312b840da1c40d9f4be
