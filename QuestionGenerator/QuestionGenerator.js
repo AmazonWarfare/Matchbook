@@ -285,6 +285,9 @@ function QuestionGenerator(){
         if(ans === 'fin'){
             currentQGState = QG_STATES.TOP;
             return 0;
+        }else if(typeof ans === 'object' && !Array.isArray(ans)){
+          currentUserInfo = ans;
+          return 0;
         }
         if(currentQGState === QG_STATES.CONTINUE){
             return 0;
