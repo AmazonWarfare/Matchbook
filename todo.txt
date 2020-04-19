@@ -1,0 +1,264 @@
+MOONSHOT TO DO:
+
+Reinvent wheel
+
+Add Dan on Snapchat
+
+Modify the questions to suit new information
+
+JSON field names (e.g., "tags:", "")
+new field names: Name, URL, genre, tags, description (PREFERENCE OPTIONS)
+
+I'm feeling lucky -> random?
+
+^ Work on all of this once we get annotated documents in discovery
+	^ Badger jared for annotation information
+	^ Badger dan (on snapchat) to annotate and upload
+
+v Start working on this now
+
+dating service:
+
+	create state variable -> currentUserInfo
+	reset state variable in this.reset
+	this.getSexualPrefOptions() (CREATE) - 
+		query database to get all sexual preference options
+		include standard options (male, female: perhaps from config)
+		assemble into list of strings and return
+	
+	this.provideAnswer() (UPDATE) - 
+		catch JSON object answer
+		store information locally in QG (currentUserInfo) until recommendation or reset
+
+	provideRecommmendation() (UPDATE) - 
+		update database with current user preferences
+		// dbHelper.updateTable(userInfo);
+
+		query database to get current user information
+
+		// dbHelper.getUserInfo(name)
+
+		query database :
+			GET WHERE user identity contains current user preferences and
+					  user preference contains current user identity and 
+					  user name not equals current user name
+
+		if num results >= 1:
+			take the result that has most overlapping matching services with user
+			currentUserInfo.services has highest overlap with user.services (from database)
+		else:
+			you're lonely (or something to that effect)
+
+		return recommendation as normal with all relevant information in rec.text
+
+		relevant information:
+		"Based on your preferences in online services, you might like <service>.
+		You lucky duck. We also found someone who used our service who you may be a good romantic match with.
+		Here are their gender identities: <identities>. They also liked <services>. Here is
+		their contact information: <contact>" (or something to that effect)
+
+
+	console.log(arguments to querying fucntion) -> verify that we're seeing what we expect
+
+	// Query database
+	// Update database
+
+	DatabaseHelper class:
+		add user
+		update user preferences 
+			overwrite gender/preferences
+			append services recommended
+		query table 
+	TABLE:
+		name - PK
+		services - strings delimited by ,
+		gender - string
+		sexual preference - string 
+		contact info - string
+	SELECT name from Table 
+		where service contains pornhub
+		and gender_identity is telephone (not case sensitive)
+
+	passing/receiving information to/from QG:
+	{
+		name: string,
+		contact: string,
+		gender: list of strings,
+		preferences: list of strings,
+		services: list of strings
+	}
+	
+
+TO DO:
+
+	
+	call reset with saved state upon all negatives. make start over do this.
+	continue querying if recommendation appears after only one question.
+
+	refactor the jank
+
+	update documentation for QuestionGenerator, QueryResponse, QueryBuilder, WQS
+
+	Return queryElements from QueryResponse and use currentElement instead of currentLabel and currentTagType (consult with team)
+
+	Dan: 
+		Try to change answers on UI side
+
+	Anthony:
+		we hate tests because they don't work (email Mr. GitHub)
+
+
+COMPLETED:
+
+	Add QueryBuilder
+
+	Add QueryElement class (label, sentiment, preference option)
+
+	change updateQuery... to allow for actual updates (not just additions)
+
+	Tag Type Refactor:
+		QuestionGenerator: generateTagQuestions, provideTagAnswer
+		WatsonQueryingService updateQuery functions
+		QueryResponse: getTags pass tags as list of objects instead of string
+
+	Add documentation for QueryElement, QueryBuilder
+	
+	Despaghettify:
+		generateTernaryTagQuestion
+		generateTernaryQuoteQuestion
+		provideQuoteAnswer
+		provideTagAnswer
+		provideAnswer (quote)
+		processQuery
+		getNextQuestion
+
+	Abolish currentLabels (QuestionGenerator)
+
+	QuestionGenerator.updateAnswer
+
+	Change query assembly logic (with ands and ors)
+
+	Rethink structure of interrogation (Sarah's job)
+
+	Think about how to better assemble query using logical operators
+
+	Test query contains on new tags format (tags: [{tag_name: dog, tag_type: 2}, {tag_name: peep, tag_type: 3}])
+
+	Hard reset
+
+	update answer for genres
+
+	QG States: Querying, Recommendation, etc.
+
+	add synopsis question to recommendation
+	
+	add synopsis answer
+
+	all tags in uppercase
+	\n to <br>
+	Max number of questions? 15
+	top recommendation
+	randomize questions within question types
+
+	reset with saved state
+
+	Dan: 
+		Restart button
+
+	Jared:
+		upload our drivel
+	
+
+--------------------------------------------------------------------------------------------------
+Ideas for interrogation tactic:
+
+Good cop, bad cop, sexy cop:
+	Alternate between:
+
+	"You son of a bitch, what do you want from us?"
+
+	"Here's a cup of coffee. Please tell me what your interests are? We're on your side."
+
+	"You sexy devil, use those luscious lips to tell me what you want? I'll do anything ;)"
+
+Randomize EVERYTHING after genre question (except for the top result from which we pick labels):
+	Would need to use query information to narrow down (possibly need conjunction of elements)
+	Probably use number of matching results as stopping threshold.
+
+Synopsis possibilities:
+	Use synopsis questions in the same way we're doing quotes right now
+		Neutral:
+			treat either as positive or negative OR
+			ignore it and push it onto a list of neutral synopses. If we get through all synopses,
+				pick random from neutral list.
+
+		No to all: Restart querying again but add all those titles onto the negative.
+
+	Give synopsis along with the recommendation and let 'em deal with it
+
+Scrap what we're doing now.
+
+Possible stopping criteria:
+	Certain number of each question asked.
+	Number of matching results below some threshold (could be fraction of collection size).
+	Certain number of questions overall?
+	Hardcode the order... kind of what we do now. Sarah: "I don't think that's a good idea. I don't think we want to 
+	do the same types of questions all at once." ... "Thanks for the closed captioning"
+
+Query Building ideas:
+	     ~category~   ~tag~   ~quote~
+	~pos~    and        or       or   (use or for categories as well if not much overlap)
+	~neg~    and       and      and
+
+--------------------------------------------------------------------------------------------------
+Agenda for 3/31:
+	Update people about annotation about synopsis 
+	QuestionGenerator.updateAnswer
+	Interrogation procedure
+
+		what is the order of questions?
+			Sarah: random
+
+		what is the stopping criterion?
+			Sarah: count x number and then percentage threshold, put a cap on it
+			Anthony: the percentage could get us in trouble in terms of scaling
+					(if we had 300 or a 1000 books, does a percentage really make sense?)
+					* some shallow contemplation *
+					(I guess a percentage does make sense)
+
+
+		where do we put quote questions?
+			Sarah: should be a regular question in the mix (below some certain threshold?)
+			Srini: Put them after we've reached some criterion to provide context for the quote.
+					OR along with quote question, provide genre for context.
+					"Would you like a <genre in caps and comic sans> book that says things like this:"
+
+		what do we do with the synopses?
+
+	Query building logic
+	Return queryElements from QueryResponse and use currentElement instead of currentLabel and currentTagType
+
+--------------------------------------------------------------------------------------------------
+
+VIDEO FORMAT:
+
+Record a Zoom call. Anthony NEEDS to have video on and mic unmuted. Anthony cannot annotate while we're
+recording.
+
+Background music: Tame Impala - The less I know the better
+					Soft jazz
+
+
+When are we doing it?
+	
+Virtual backgrounds:
+	Be tasteful
+	
+
+Robustness? Sarah grows a moustache and messes with the product. Minoxidil (rogaine)
+
+--------------------------------------------------------------------------------------------------
+
+Meeting agenda:
+
+	Text formatting
