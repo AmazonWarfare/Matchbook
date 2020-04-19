@@ -4,6 +4,7 @@ import './components/QuestionCard/QuestionCard';
 import QuestionCard from "./components/QuestionCard/QuestionCard";
 import NavBar from "./components/NavBar/NavBar";
 import Fade from "./HigherOrderComponents/Fade";
+import ProfileForm from "./components/Inputs/ProfileForm/ProfileForm";
 import {INPUT_TYPES, QUESTION_FORMATS} from "./config";
 
 import axios from "axios";
@@ -25,7 +26,7 @@ let startup_cards = [
                 "Next"
             ]
         }
-    },  {
+    }, {
         text: "Each answer will gather information about your preferences to tune our recommendation.",
         type: QUESTION_FORMATS.BUTTON,
         content: {
@@ -54,11 +55,15 @@ class App extends Component {
         this.giveRec = this.giveRec.bind(this);
 
         this.state = {
-            current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex])
+            current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex]),
+            profile_form: null,
+            render_profile_form: false,
+
         };
     }
 
     questionIndex = 0;
+
     static mapQuestionToCardQuestion(question) {
         let cardQuestion = {
             text: question.text
@@ -95,16 +100,19 @@ class App extends Component {
 
     getNextStartupQuestion() {
         this.setNextQuestion(startup_cards[this.questionIndex]);
-        if (startup_cards.length === 0) {
-            this.isFirstQuestion = true;
-        }
     }
 
     getFirstQuestion() {
-        axios.get('/question')
+        axios.get('/sex_prefs')
             .then((res) => {
-                console.log(res.data.question);
-                this.setNextQuestion(res.data.question);
+
+                this.setState({
+                    render_profile_form: true,
+                    profile_form: (<ProfileForm
+                        sexual_pref_options={res.data.sex_prefs}
+                        nextQuestion={this.nextQuestion}
+                    />)
+                })
             });
     }
 
@@ -156,17 +164,35 @@ class App extends Component {
 
     render() {
         let FadedQuestionCard = Fade(QuestionCard);
+        let qc;
+
+        if (this.state.render_profile_form) {
+            qc = (
+                <FadedQuestionCard
+                    profileForm={true}
+                    nextQuestion={this.nextQuestion()}
+                    giveRec={this.giveRec}
+                    startup={this.questionIndex < startup_cards.length}
+                >
+                    {this.state.profile_form}
+                </FadedQuestionCard>
+            )
+        } else {
+            qc = (
+                <FadedQuestionCard
+                    question={this.state.current_question}
+                    nextQuestion={this.nextQuestion}
+                    reset={this.reset}
+                    giveRec={this.giveRec}
+                    startup={this.questionIndex < startup_cards.length}
+                />
+            );
+        }
         return (
             <div>
                 <NavBar/>
                 <div className={'content'}>
-                    <FadedQuestionCard
-                        question={this.state.current_question}
-                        nextQuestion={this.nextQuestion}
-                        reset={this.reset}
-                        giveRec={this.giveRec}
-                        startup={this.questionIndex < startup_cards.length}
-                    />
+                    {qc}
                 </div>
             </div>
 

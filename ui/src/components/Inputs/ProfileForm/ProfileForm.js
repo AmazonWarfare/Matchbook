@@ -10,7 +10,13 @@ import "./ProfileForm.scss";
  */
 class ProfileForm extends Component {
     render() {
-        return super.render();
+        return (
+            <div>
+                <p>
+                    Hello world
+                </p>
+            </div>
+        )
     }
 }
 

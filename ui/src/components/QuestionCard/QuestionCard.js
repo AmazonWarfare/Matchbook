@@ -86,6 +86,15 @@ class QuestionCard extends Component {
                     </Container>
                 </div>
             )
+        } else if (this.props.profileForm) {
+            return (
+                <div>
+                    <Container className={`question-card-component`}>
+                        {this.props.children}
+                    </Container>
+                    {this.renderMetaControls()}
+                </div>
+            )
         }
         return (
             <div>
