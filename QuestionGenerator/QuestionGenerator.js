@@ -326,11 +326,38 @@ function QuestionGenerator(){
         let rec;
         console.log("MATCHING RESULTS: " + queryResponse.getNumMatchingResults());
         if(resultNum !== -1){
+
             currentLabel = queryResponse.getTitles(resultNum);
             let title = StringFormat.formatDisplayName(currentLabel);
             let author = StringFormat.formatAuthors(queryResponse.getAuthors(resultNum));
+            /**
+            let matchText;
+            dbHelper.updateUserInformation(currentUserInfo);
+            currentUserInfo = dbHelper.getUserInformation(currentUserInfo.name);
+            let matchingUsers = dbHelper.getMatchingUsers(currentUserInfo);
+            if(matchingUsers.length === 0){
+                matchText = "We couldn't find anyone matching your romantic preferences. Looks like you're bound to be lonely.";
+            } else {
+                let maxMatchingServices = [];
+                let bestMatchUser = matchingUsers[0];
+                for(let i = 0; i < matchingUsers.length; i++){
+                    let user = matchingUsers(i);
+                    let matchingServices = currentUserInfo.services.filter(value => user.services.includes(value));
+                    if(matchingServices.length > maxMatchingServices.length){
+                        maxMatchingServices = matchingServices;
+                        bestMatchUser = user;
+                    }
+                }
+                matchText = "We also think you may be romantically compatible with "
+                            +bestMatchUser.name+". They match your sexual preferences "
+                            +"and also enjoyed the following online services: "
+                            +JSON.stringify(bestMatchUser.services)
+                            +". Here is their contact info: "
+                            +bestMatchUser.contact;
+            }
+            **/
             rec = {
-                text: "Based on your preferences, you might like: " + title + " by " + author,
+                text: "Based on your preferences, you might like: " + title + " by " + author, // + matchText
                 type: QUESTION_FORMATS.RECOMMENDATION
             };
         } else {
