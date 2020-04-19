@@ -55,7 +55,7 @@ function QuestionGenerator(){
     let positiveSynopsisAnswer;
 
     let questionOptions = [PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.QUOTE];
-    
+
     let currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
     let currentQuestionFormat = QUESTION_FORMATS.MULTI;
     let currentLabel;
@@ -65,9 +65,11 @@ function QuestionGenerator(){
     let currentQGState = QG_STATES.QUERYING;
 
     let lastSynopsisQuestion = false;
-    
+
+    let currentUserInfo;
+
     this.reset = function(){
-        
+
         console.log('Reset function called now');
         wqs = new WatsonQueryingService();
 
@@ -75,7 +77,7 @@ function QuestionGenerator(){
         usedQuotes = new Set();
         usedTags = new Set();
         quotedBooks = new Set();
-        
+
         currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
         currentQuestionFormat = QUESTION_FORMATS.MULTI;
         currentLabel;
@@ -90,7 +92,9 @@ function QuestionGenerator(){
 
         lastSynopsisQuestion = false;
 
-        
+        currentUserInfo = new Object();
+
+
     }
     let getNextSynopsisQuestion = function(queryResponse){
         let synopses = queryResponse.getSynopses();
@@ -114,12 +118,12 @@ function QuestionGenerator(){
             foundNewSynopsis = true;
             break;
         }
-        
+
         console.log('Found New Synopsis: ' + foundNewSynopsis);
         if(!foundNewSynopsis){
             if(neutralSynopsisBooks.length === 0){
                 question = giveRecommendation(queryResponse, -1);
-                
+
             } else {
                 let randomChoice = neutralSynopsisBooks[Math.floor(Math.random() * neutralSynopsisBooks.length)];
                 console.log(JSON.stringify(randomChoice,null,2));
@@ -137,7 +141,7 @@ function QuestionGenerator(){
                     label: synopsis.title
                 }
             }
-        
+
         }
         return question;
     }
@@ -192,7 +196,7 @@ function QuestionGenerator(){
                             // continue questionFinder;
                             question = getNextSynopsisQuestion(queryResponse);
                             break resultIterator;
-                            
+
                         } else{
                             break questionFinder;
                         }
@@ -219,7 +223,7 @@ function QuestionGenerator(){
         } else {
             question = giveRecommendation(queryResponse, -1)
         }
-		
+
         return question;
 	}
 
@@ -252,6 +256,22 @@ function QuestionGenerator(){
         questionCount++;
         resolve(question);
     }
+
+  this.getSexualPrefOptions = function(){
+    //TODO: Change return to list form if not already a list of Strings
+    let sexPrefOptions = dbHelper.getAllSexualPrefOptions();
+
+    //Can remove if accounted for elsewhere in the DB
+    if(!sexPrefOptions.includes("Female")){
+      sexPrefOptions.unshift("Female");
+    }
+    if(!sexPrefOptions.includes("Male")){
+      sexPrefOptions.unshift("Male");
+    }
+
+    return sexPrefOptions;
+
+  }
 
 	this.generateQuestion = function(){
         console.log('Generate Question called now');
@@ -288,12 +308,12 @@ function QuestionGenerator(){
             wqs.clearGenreAnswers();
             updatedAnswer.forEach(genre => wqs.updateQuery(genre, 1, PREFERENCE_OPTIONS.GENRE));
         } else {
-            wqs.updateQuery(label, updatedAnswer);    
+            wqs.updateQuery(label, updatedAnswer);
         }
-        
+
     }
 
-    
+
 
     let resetWithSaveState = function(){
         let negativeTitles = wqs.getNegativeTitles();
@@ -305,7 +325,7 @@ function QuestionGenerator(){
         usedQuotes = new Set();
         usedTags = new Set();
         quotedBooks = new Set();
-        
+
         currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
         currentQuestionFormat = QUESTION_FORMATS.MULTI;
         currentLabel;
@@ -364,7 +384,7 @@ function QuestionGenerator(){
         let remainingCategories = categories.filter(x => !usedCateg.has(x));
         let foundNewLabel = remainingCategories.length > 0;
         let label = remainingCategories[Math.floor(Math.random() * remainingCategories.length)];
-       
+
         if (!foundNewLabel) {
             return 0;
         }
@@ -416,7 +436,7 @@ function QuestionGenerator(){
     // Refactored to account for new JSON tag format
     // Uncomment when changes are made
 
-    
+
     let generateTernaryTagQuestion = function(queryResponse, resultNum){
         const TAGTYPEQUESTIONMAP = {
             1: "\"?",
@@ -430,7 +450,7 @@ function QuestionGenerator(){
         let remainingTags = tags.filter(x => !usedTags.has(x.tag_name[0].toUpperCase()));
         let foundNewTag = remainingTags.length > 0;
         let tag = remainingTags[Math.floor(Math.random() * remainingTags.length)];
-        
+
         if (!foundNewTag) {
             return 0;
         }
@@ -549,7 +569,7 @@ function QuestionGenerator(){
     }
 
     let generateMultiGenreQuestion = function(queryResponse, resultNum){
-    	
+
         let formattedLabels = queryResponse.getGenres();
         console.log(formattedLabels);
     	let question = {
