@@ -1,3 +1,16 @@
+/*
+* anytime you see userInfo, it should be an object of this form:
+*
+* let userInfo = {
+*   "name": NAME(STRING),
+*   "services": SERVICES_DELIMITED_BY_COMMA(STRING),
+*   "gender": GENDER(STRING),
+*   "sexualPreference": SEXUAL_PREFERENCE(STRING),
+*   "contactInfo": CONTACT_INFO(STRING)
+* }
+*/
+
+
 function DatabaseHelper(){
     const { MongoClient } = require("mongodb");
 
@@ -39,7 +52,8 @@ function DatabaseHelper(){
         }
     }
 
-    this.updateUser = async function(){
+    this.updateUser = async function(userInfo){
+
     }
 }
 
