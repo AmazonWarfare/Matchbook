@@ -63,17 +63,26 @@ dating service:
 	// Query database
 	// Update database
 
+	js class
 	DatabaseHelper class:
+		connect to our database
+		getAllSexualPrefOptions()
+			query database for ALL results
+			returns a list of all options under gender identity
+		dbHelper.updateUserInformation(currentUserInfo);
+			
+        dbHelper.getUserInformation(currentUserInfo.name);
+        dbHelper.getMatchingUsers(currentUserInfo);
 		add user
 		update user preferences 
 			overwrite gender/preferences
 			append services recommended
 		query table 
 	TABLE:
-		name - PK
+		name - string PK
 		services - strings delimited by ,
-		gender - string
-		sexual preference - string 
+		gender - strings delimited by commas,
+		sexual preference - strings delimited by commas, 
 		contact info - string
 	SELECT name from Table 
 		where service contains pornhub
