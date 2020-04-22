@@ -40,11 +40,11 @@ Zoom
 http://zoom.us
 video
 communication
-reconnecting
 #
 video conferencing
 professional use
 education
+reconnecting
 #
 Zoom provides videotelephony and online chat services through a cloud-based peer-to-peer software platform and is used for teleconferencing, telecommuting, distance education, and social relations. Use of the platform is free for video conferences of up to 100 participants, with a 40-minute time limit. For longer or larger conferences with more features, paid subscriptions are available, costing $15–20 per month. Features geared towards business conferences, such as Zoom Rooms, are available for $50–100 per month.
 #
@@ -170,7 +170,7 @@ shopping
 #
 bidding
 niche interests
-buy anything
+buying anything
 #
 eBay Inc. is an e-commerce corporation that facilitates consumer-to-consumer and business-to-consumer sales through its website. In addition to eBay's original auction-style sales, the website has evolved and expanded to include: instant "Buy It Now" shopping.
 #
