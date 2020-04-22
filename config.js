@@ -7,11 +7,11 @@ const {IamAuthenticator} = require('ibm-watson/auth');
 
 
 const Configuration = {
-	environment_id: "0235fa72-912f-4f3d-a606-bb40a3643e40",
+	environment_id: "e82a2a7c-4af4-4f5a-a82f-d36fa33aa995",
 	pdf_collection_id: "5ee93bfe-ad6b-4928-9616-3df44af86c86",
-	json_collection_id: "74ac3aaa-a930-4def-aea5-ee01aa6ecaf3",
-	apikey: '9U_r_MDwsKMpLghmLBgihOMuFJ0-c-NB3SfFZq3PF63H',
-	serviceURL: 'https://api.us-south.discovery.watson.cloud.ibm.com/instances/aafddb55-662a-48d2-9e31-f69eb609386f',
+	json_collection_id: "7089ac9d-4b18-4080-8e34-67d130e318b7",
+	apikey: 'aOoroj0a3AIL3NhybUGKl-y1C0bSG1UEMeGdrSseMr6T',
+	serviceURL: 'https://api.eu-gb.discovery.watson.cloud.ibm.com/instances/0c94eabf-c83b-4a95-8a08-cf355283ff34',
 	version: '2019-04-30',
 	/*
 		returns a new DiscoveryV1 object configured with the current apiKey and serviceUrl
@@ -41,7 +41,7 @@ const Configuration = {
 		MULTI: 2,
 		RECOMMENDATION: 10
 	},
-	RECOMMENDATION_THRESHOLD: 4,
+	RECOMMENDATION_THRESHOLD: 2,
 	QUESTION_THRESHOLD: 15,
 	SYNOPSIS_PRESENT_THRESHOLD: 3,
 

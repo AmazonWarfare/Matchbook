@@ -151,7 +151,7 @@ function QueryResponse(queryResponse, fileType){
         if(resultNum === undefined){
             result = [];
             for(let i = 0; i < this.getNumMatchingResults(); i++){
-                let synopsis = queryResponse.result.results[i].desc;
+                let synopsis = queryResponse.result.results[i].desc[0];
                 let title = this.getTitles(i);
                 let genre = this.getGenres(i);
                 result.push({
@@ -163,7 +163,7 @@ function QueryResponse(queryResponse, fileType){
             }  
             return result;
         } 
-        let synopsis = queryResponse.result.results[resultNum].desc;
+        let synopsis = queryResponse.result.results[resultNum].desc[0];
         let title = this.getTitles(resultNum);
         let genre = this.getGenres(resultNum);
         return {

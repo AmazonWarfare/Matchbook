@@ -55,7 +55,7 @@ function QuestionGenerator(){
     let negativeSynopsisBooks = [];
     let positiveSynopsisAnswer;
 
-    let questionOptions = [PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY];
+    let questionOptions = [PREFERENCE_OPTIONS.TAG]//, PREFERENCE_OPTIONS.CATEGORY];
 
     let currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
     let currentQuestionFormat = QUESTION_FORMATS.MULTI;
@@ -67,7 +67,13 @@ function QuestionGenerator(){
 
     let lastSynopsisQuestion = false;
 
-    let currentUserInfo;
+    let currentUserInfo = {
+    	name: "John Frog",
+    	services: "Twitter",
+    	gender: "Male",
+    	sexualPreferences: "Female",
+    	contactInfo: "johnfrog2@aol.com"
+    };
 
     let dbHelper = new DatabaseHelper();
     dbHelper.startDatabaseConnection().catch(console.dir);
@@ -96,7 +102,7 @@ function QuestionGenerator(){
 
         lastSynopsisQuestion = false;
 
-        currentUserInfo = {};
+        // currentUserInfo = {};
 
 
     }
@@ -363,11 +369,13 @@ function QuestionGenerator(){
             currentLabel = queryResponse.getTitles(resultNum);
             let title = StringFormat.formatDisplayName(currentLabel);
             let link = queryResponse.getAuthors(resultNum);
+            let desc = queryResponse.getSynopses(resultNum).synopsis;
             
-            /**
             let matchText;
             dbHelper.updateUserInformation(currentUserInfo);
-            currentUserInfo = dbHelper.getUserInformation(currentUserInfo.name);
+            console.log('HERE' + JSON.stringify(currentUserInfo));
+            currentUserInfo = dbHelper.getUserInformation(currentUserInfo);
+            console.log(JSON.stringify(currentUserInfo));
             let matchingUsers = dbHelper.getMatchingUsers(currentUserInfo);
             if(matchingUsers.length === 0){
                 matchText = "We couldn't find anyone matching your romantic preferences. Looks like you're bound to be lonely.";
@@ -389,9 +397,9 @@ function QuestionGenerator(){
                             +". Here is their contact info: "
                             +bestMatchUser.contact;
             }
-            **/
+            
             rec = {
-                text: "Based on your preferences, you might like: " + title +"("+link+"). Here is a description" + queryResponse.getSynopses(resultNum), // + matchText
+                text: "Based on your preferences, you might like: " + title +"("+link+"). Here is a description" + desc,// + matchText,
                 type: QUESTION_FORMATS.RECOMMENDATION
             };
         } else {
@@ -480,7 +488,7 @@ function QuestionGenerator(){
 
     let generateTernaryTagQuestion = function(queryResponse, resultNum){
         const TAGTYPEQUESTIONMAP = {
-            1: "\"?",
+            1: "?",
             2: "\" in web services?",
             3: "\" web services?"
         }
@@ -501,7 +509,7 @@ function QuestionGenerator(){
         usedTags.add(currentLabel);
 
         let question = {
-            text: "How do you feel about the concept of \"" + formattedLabel + TAGTYPEQUESTIONMAP[currentTagType],
+            text: "Would you like a web service for " + formattedLabel + TAGTYPEQUESTIONMAP[currentTagType],
             type: QUESTION_FORMATS.TERNARY,
             content: {
                 formatted_label: formattedLabel,

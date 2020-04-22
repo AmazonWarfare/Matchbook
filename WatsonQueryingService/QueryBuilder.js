@@ -100,7 +100,7 @@ function QueryBuilder(fileType){
     }
     let assembleQueryFromList = function(elementList, sentiment, operator){
         const QUERYBUILDER_MAP = {
-            [PREFERENCE_OPTIONS.GENRE]: 'genre',
+            [PREFERENCE_OPTIONS.GENRE]: 'site_type',
             [PREFERENCE_OPTIONS.CATEGORY]: 'enriched_text.categories.label',
             [PREFERENCE_OPTIONS.TAG]: 'tags.tag_name',
             [PREFERENCE_OPTIONS.TITLE]: 'sitename'
@@ -152,7 +152,7 @@ function QueryBuilder(fileType){
         if(positiveGenreElements.length > 0){
             queryConcat += "(";
             for(let i = 0; i < positiveGenreElements.length; i++){
-                queryConcat += "genre::"+positiveGenreElements[i].label+"|";
+                queryConcat += "site_type::"+positiveGenreElements[i].label+"|";
             }   
             queryConcat = queryConcat.substring(0, queryConcat.length-1) + ")";
         }
