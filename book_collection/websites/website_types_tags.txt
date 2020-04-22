@@ -1,20 +1,21 @@
 TYPES:
-video
+video streaming
+image sharing
 communication
-messaging
 social networking
 forum
 dating
 shopping
+blogging
 
 TAGS: "would you like a web service for ..."
 
-video streaming
 live streaming
 content creation
 content consumption
 gaming
 video conferencing
+voice calling
 professional use
 reconnecting
 finding communities
@@ -22,10 +23,8 @@ education
 friends
 followers
 subscribers
-image sharing
 memes
 news
-blogging
 discussion
 casual dating
 serious dating
@@ -35,3 +34,10 @@ buying anything
 bidding
 niche interests
 in person meetups
+anonimity
+TV and Movies
+video streaming
+image sharing
+microblogging
+email
+instant messaging

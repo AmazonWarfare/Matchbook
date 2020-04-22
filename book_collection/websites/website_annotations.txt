@@ -1,9 +1,8 @@
 youtube
 YouTube
 http://www.youtube.com/
-video
-#
 video streaming
+#
 live streaming
 content creation
 subscribers
@@ -13,7 +12,7 @@ YouTube allows users to upload, view, rate, share, add to playlists, report, com
 vimeo
 Vimeo
 http://vimeo.com
-video
+video streaming
 #
 education
 video streaming
@@ -26,7 +25,7 @@ Vimeo is an American ad-free video platform headquartered in New York City, prov
 twitch
 Twitch
 http://twitch.tv
-video
+video streaming
 #
 live streaming
 gaming
@@ -38,10 +37,11 @@ Twitch is a video live streaming service operated by Twitch Interactive, a subsi
 zoom
 Zoom
 http://zoom.us
-video
+video streaming
 communication
 #
 video conferencing
+voice calling
 professional use
 education
 reconnecting
@@ -51,11 +51,11 @@ Zoom provides videotelephony and online chat services through a cloud-based peer
 skype
 Skype
 http://www.skype.com/
-video
+video streaming
 communication
-messaging
 #
 video conferencing
+voice calling
 professional use
 instant messaging
 #
@@ -70,6 +70,7 @@ reconnecting
 finding communities
 friends
 image sharing
+instant messaging
 #
 Facebook is an American online social media and social networking service. Facebook allows users to become friends with other users that agree, and to join larger communities.
 #
@@ -77,8 +78,8 @@ instagram
 Instagram
 http://instagram.com
 social networking
-#
 image sharing
+#
 video streaming
 followers
 reconnecting
@@ -86,16 +87,34 @@ instant messaging
 #
 Instagram is an American photo and video-sharing social networking service owned by Facebook, Inc. As of January 14, 2019, the most liked photo on Instagram is a picture of an egg, posted by the account @world_record_egg, created with the sole purpose of surpassing the previous record of 18 million likes on a Kylie Jenner post.
 #
+snapchat
+snapchat
+http://snap.com
+social networking
+image sharing
+communication
+#
+image sharing
+instant messaging
+voice calling
+video conferencing
+content consumption
+anonimity
+#
+Snapchat is a multimedia messaging app used globally. One of the principal features of Snapchat is that pictures and messages are usually only available for a short time before they become inaccessible to their recipients. 
+#
 twitter
 Twitter
 http://twitter.com
 social networking
+blogging
 #
 followers
 instant messaging
 news
-blogging
+microblogging
 memes
+discussion
 #
 Twitter is an American microblogging and social networking service on which users post and interact with messages known as "tweets". Tweets are limited to 280 characters, so choose your words wisely. 
 #
@@ -108,7 +127,7 @@ social networking
 finding communities
 image sharing
 news
-blogging
+anonimity
 discussion
 memes
 niche interests
@@ -190,11 +209,111 @@ Craigslist is an American classified advertisements website with sections devote
 4chan
 http://4chan.org
 forum
+image sharing
 #
 memes
 niche interests
 image sharing
+anonimity
 #
 4chan is an anonymous English-language imageboard website. Launched by Christopher "moot" Poole in October 2003, the site hosts boards dedicated to a wide variety of topics, from anime and manga to video games, music, literature, fitness, politics, and sports, among others.
 #
-
+netflix
+Netflix
+http://netflix.com
+video streaming
+#
+content consumption
+TV and Movies
+#
+Netflix, Inc. is an American media-services provider and production company. The company's primary business is its subscription-based streaming service which offers online streaming of a library of films and television programs, including those produced in-house.
+#
+hulu
+Hulu
+http://hulu.com
+video streaming
+#
+content consumption
+TV and Movies
+#
+Hulu is a U.S.-based subscription video on demand service fully controlled and majority-owned by The Walt Disney Company. Beginning in 2011, Hulu began to produce its own original content.
+#
+disneyplus
+Disney+
+http://disneyplus.com
+video streaming
+#
+content consumption
+TV and movies
+Disney
+#
+Disney+ is a subscription video on-demand streaming service owned and operated by The Walt Disney Company. The service primarily distributes films and television series produced by The Walt Disney Studios and Walt Disney Television, with the service advertising content from Disney's Marvel, National Geographic, Pixar, and Star Wars.
+#
+medium
+Medium
+http://medium.com
+blogging
+#
+professional use
+subscribers
+discussion
+niche interests
+#
+Medium is an online publishing platform developed by Evan Williams and launched in August 2012. The platform is an example of social journalism, having a hybrid collection of amateur and professional people and publications, or exclusive blogs or publishers on Medium.
+#
+tumblr
+Tumblr
+http://tumblr.com
+social networking
+blogging
+#
+microblogging
+image sharing
+anonimity
+finding communities
+followers
+#
+Tumblr is an American microblogging and social networking website. Tumblr has been noted for the socially progressive views of its users.
+#
+gmail
+gMail
+http://mail.google.com
+communication
+#
+email
+#
+Gmail is a free email service developed by Google. Google's mail servers automatically scan emails for multiple purposes, including to filter spam and malware, and to add context-sensitive advertisements next to emails. This advertising practice has been significantly criticized by privacy advocates due to concerns over unlimited data retention.
+#
+outlook
+Microsoft Outlook
+http://microsoft.com/outlook
+communication
+#
+email
+professional use
+#
+Microsoft Outlook, or simply Outlook, is a personal information manager from Microsoft, available as a part of the Microsoft Office suite. Primarily an email application, it also includes a calendar, task manager, contact manager, note taking, journal, and web browsing.
+#
+groupme
+GroupMe
+http://groupme.com
+communication
+#
+memes
+image sharing
+instant messaging
+#
+GroupMe is a mobile group messaging app owned by Microsoft. GroupMe allows users to message both directly to contacts or create groups of up to 500 members.
+#
+discord
+Discord
+http://discord.com
+communication
+#
+instant messaging
+video conferencing
+voice calling
+gaming
+#
+Discord is a proprietary freeware VoIP application and digital distribution platform designed for video gaming communities, that specializes in text, image, video and audio communication between users in a chat channel.
+#
