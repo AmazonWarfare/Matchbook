@@ -402,8 +402,8 @@ function QuestionGenerator(){
 			                }
 			                matchText = "We also think you may be romantically compatible with "
 			                            +bestMatchUser.name+". They match your sexual preferences "
-			                            +"and also enjoyed the following online services: "
-			                            +bestMatchUser.services.join(",")
+			                            +"and also enjoyed the following online services that you did: "
+			                            +maxMatchingServices.join(", ")
 			                            +". Here is their contact info: "
 			                            +bestMatchUser.contactInfo;
 			            }
