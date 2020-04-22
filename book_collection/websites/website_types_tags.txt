@@ -1,0 +1,37 @@
+TYPES:
+video
+communication
+messaging
+social networking
+forum
+dating
+shopping
+
+TAGS: "would you like a web service for ..."
+
+video streaming
+live streaming
+content creation
+content consumption
+gaming
+video conferencing
+professional use
+reconnecting
+finding communities
+education
+friends
+followers
+subscribers
+image sharing
+memes
+news
+blogging
+discussion
+casual dating
+serious dating
+algorithmic dating
+reviews
+buying anything
+bidding
+niche interests
+in person meetups
