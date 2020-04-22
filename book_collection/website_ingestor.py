@@ -33,26 +33,6 @@ while start_of_entry:
         new_line = input_file.readline().strip()
         count += 1
 
-    count = 0
-    new_line = input_file.readline().strip()
-    while new_line != '#':
-        new_tag = {}
-        new_tag["tag_name"] = [new_line]
-        new_tag["tag_type"] = [2]
-        tags.append(new_tag)
-        new_line = input_file.readline().strip()
-        count += 1
-
-    count = 0
-    new_line = input_file.readline().strip()
-    while new_line != '#':
-        new_tag = {}
-        new_tag["tag_name"] = [new_line]
-        new_tag["tag_type"] = [3]
-        tags.append(new_tag)
-        new_line = input_file.readline().strip()
-        count += 1
-
     next_line = input_file.readline().strip()
     desc = ""
     while next_line != '#':
