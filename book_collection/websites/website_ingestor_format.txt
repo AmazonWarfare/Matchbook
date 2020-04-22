@@ -2,11 +2,8 @@ file name
 site name
 site link
 site type
+#
 tags 1
-#
-tags 2
-#
-tags 3
 #
 desc
 #
