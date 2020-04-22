@@ -1,4 +1,41 @@
+POSTER THINGS:
+
+Sections:
+	Title
+	Problem Statement/Introduction - 100 words
+	Picture of UI/Loading Icon
+	Diagram of Architecture 
+	Technology Used - Summary section - 200 words
+	Design Decisions - 400 words
+		Discussion of what we ended up using.
+		More in depth. 
+
+Medium - Powerpoint
+
+
 MOONSHOT TO DO:
+
+Tell chris to shut the fuck up
+
+Question wording:
+
+	Tag types:
+		Verb (tag_type 1)
+			"Would you like a web service that lets you ______ ?" (e.g., stream videos)
+			"Is _____ important to you in a web service?"
+			"Would you like a web service for ______ ?"
+		Noun (tag_type 2)
+			"Would you like ______ in a site?" (e.g., )
+
+Document format:
+	site name
+	site link
+	site type
+	#
+	tags
+	#
+	desc
+	#
 
 Reinvent wheel
 
