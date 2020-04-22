@@ -9,6 +9,7 @@ import Button from "../Inputs/ButtonList/Button";
 import MultiSelect from "../Inputs/MultiSelect/MultiSelect";
 import {INPUT_TYPES} from "../../config";
 import loader from "./Lava Lamp-0.8s-200px.svg";
+import ProfileForm from "../Inputs/ProfileForm/ProfileForm";
 
 class QuestionCard extends Component {
     constructor(props) {
@@ -79,6 +80,9 @@ class QuestionCard extends Component {
 
     render() {
         if (this.state.answer_clicked) {
+            /*
+            *   LOADING
+             */
             return (
                 <div>
                     <Container className={`question-card-component clicked`}>
@@ -87,28 +91,37 @@ class QuestionCard extends Component {
                 </div>
             )
         } else if (this.props.profileForm) {
+            /*
+            * Profile Form
+             */
             return (
                 <div>
                     <Container className={`question-card-component`}>
-                        {this.props.children}
+                        <ProfileForm
+                            nextQuestion={this.nextQuestion}
+                        />
                     </Container>
                     {this.renderMetaControls()}
                 </div>
             )
+        } else {
+            /*
+            * Standard question
+             */
+            return (
+                <div>
+                    <Container className={`question-card-component`}>
+                        <Container className="question-text">
+                            {this.props.question.text}
+                        </Container>
+                        <Container className={"input-container"}>
+                            {this.renderInputs()}
+                        </Container>
+                    </Container>
+                    {this.renderMetaControls()}
+                </div>
+            );
         }
-        return (
-            <div>
-                <Container className={`question-card-component`}>
-                    <Container className="question-text">
-                        {this.props.question.text}
-                    </Container>
-                    <Container className={"input-container"}>
-                        {this.renderInputs()}
-                    </Container>
-                </Container>
-                {this.renderMetaControls()}
-            </div>
-        );
     }
 }
 

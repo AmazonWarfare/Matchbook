@@ -75,7 +75,7 @@ router.get('/sex_prefs', (req, res) => {
         sex_prefs: ["male", "female", "Srini"]
     };
 
-    res.send(JSON.stringify((responseObject)));
+    res.send(JSON.stringify(responseObject));
 })
 
 module.exports = router;

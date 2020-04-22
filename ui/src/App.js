@@ -4,7 +4,6 @@ import './components/QuestionCard/QuestionCard';
 import QuestionCard from "./components/QuestionCard/QuestionCard";
 import NavBar from "./components/NavBar/NavBar";
 import Fade from "./HigherOrderComponents/Fade";
-import ProfileForm from "./components/Inputs/ProfileForm/ProfileForm";
 import {INPUT_TYPES, QUESTION_FORMATS} from "./config";
 
 import axios from "axios";
@@ -56,13 +55,31 @@ class App extends Component {
 
         this.state = {
             current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex]),
-            profile_form: null,
             render_profile_form: false,
 
         };
     }
 
     questionIndex = 0;
+
+    nextQuestion(answer) {
+        console.log("next question");
+        this.questionIndex++;
+        if (this.questionIndex < startup_cards.length) {
+            this.getNextStartupQuestion();
+        } else if (this.questionIndex === startup_cards.length) {
+            this.getFirstQuestion();
+        } else {
+            this.getNextQuestion(answer);
+        }
+    }
+
+    setNextQuestion(q) {
+        let cardQuestion = App.mapQuestionToCardQuestion(q);
+        this.setState({
+            current_question: cardQuestion
+        });
+    }
 
     static mapQuestionToCardQuestion(question) {
         let cardQuestion = {
@@ -91,32 +108,17 @@ class App extends Component {
         return cardQuestion;
     }
 
-    setNextQuestion(q) {
-        let cardQuestion = App.mapQuestionToCardQuestion(q);
-        this.setState({
-            current_question: cardQuestion
-        });
-    }
-
     getNextStartupQuestion() {
+        console.log("get next startup question");
         this.setNextQuestion(startup_cards[this.questionIndex]);
     }
 
     getFirstQuestion() {
-        axios.get('/sex_prefs')
-            .then((res) => {
-
-                this.setState({
-                    render_profile_form: true,
-                    profile_form: (<ProfileForm
-                        sexual_pref_options={res.data.sex_prefs}
-                        nextQuestion={this.nextQuestion}
-                    />)
-                })
-            });
+        this.setState({render_profile_form: true});
     }
 
     getNextQuestion(answer) {
+        this.state.render_profile_form = false; // bad react but it works
         axios
             .post('/answer', {answer})
             .then(() => console.log('answer sent from UI'));
@@ -126,17 +128,6 @@ class App extends Component {
             .then((res) => {
                 this.setNextQuestion(res.data.question);
             });
-    }
-
-    nextQuestion(answer) {
-        this.questionIndex++;
-        if (this.questionIndex < startup_cards.length) {
-            this.getNextStartupQuestion();
-        } else if (this.questionIndex === startup_cards.length) {
-            this.getFirstQuestion();
-        } else {
-            this.getNextQuestion(answer);
-        }
     }
 
     reset() {
@@ -164,35 +155,31 @@ class App extends Component {
 
     render() {
         let FadedQuestionCard = Fade(QuestionCard);
-        let qc;
+        let qc_props ={
+            nextQuestion: this.nextQuestion,
+            giveRec: this.giveRec,
+            startup: this.questionIndex < startup_cards.length,
+            reset: this.reset
+        };
 
         if (this.state.render_profile_form) {
-            qc = (
-                <FadedQuestionCard
-                    profileForm={true}
-                    nextQuestion={this.nextQuestion()}
-                    giveRec={this.giveRec}
-                    startup={this.questionIndex < startup_cards.length}
-                >
-                    {this.state.profile_form}
-                </FadedQuestionCard>
-            )
+            qc_props = {
+                ...qc_props,
+                profileForm: true
+            }
         } else {
-            qc = (
-                <FadedQuestionCard
-                    question={this.state.current_question}
-                    nextQuestion={this.nextQuestion}
-                    reset={this.reset}
-                    giveRec={this.giveRec}
-                    startup={this.questionIndex < startup_cards.length}
-                />
-            );
+            qc_props = {
+                ...qc_props,
+                question: this.state.current_question
+            }
         }
         return (
             <div>
                 <NavBar/>
                 <div className={'content'}>
-                    {qc}
+                    <FadedQuestionCard
+                        {...qc_props}
+                    />
                 </div>
             </div>
 
