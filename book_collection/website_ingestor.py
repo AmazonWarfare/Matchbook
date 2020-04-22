@@ -20,7 +20,13 @@ while start_of_entry:
 
     site_link = input_file.readline().strip()
 
-    site_type = input_file.readline().strip()
+    count = 0
+    site_type = []
+    new_site_type = input_file.readline().strip()
+    while new_site_type != '#':
+        site_type.append(new_site_type.replace('\n', ''))
+        new_site_type = input_file.readline().strip()
+        count += 1
 
     count = 0
     tags = []
