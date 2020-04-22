@@ -376,7 +376,7 @@ function QuestionGenerator(){
         if(resultNum !== -1){
 
             currentLabel = queryResponse.getTitles(resultNum);
-            currentUserInfo.services = currentLabel;
+            currentUserInfo.services = [currentLabel];
             let title = StringFormat.formatDisplayName(currentLabel);
             let link = queryResponse.getAuthors(resultNum);
             let desc = queryResponse.getSynopses(resultNum).synopsis;
@@ -393,7 +393,7 @@ function QuestionGenerator(){
 			                let maxMatchingServices = [];
 			                let bestMatchUser = matchingUsers[0];
 			                for(let i = 0; i < matchingUsers.length; i++){
-			                    let user = matchingUsers(i);
+			                    let user = matchingUsers[i];
 			                    let matchingServices = currentUserInfo.services.filter(value => user.services.includes(value));
 			                    if(matchingServices.length > maxMatchingServices.length){
 			                        maxMatchingServices = matchingServices;
@@ -403,7 +403,7 @@ function QuestionGenerator(){
 			                matchText = "We also think you may be romantically compatible with "
 			                            +bestMatchUser.name+". They match your sexual preferences "
 			                            +"and also enjoyed the following online services: "
-			                            +JSON.stringify(bestMatchUser.services)
+			                            +bestMatchUser.services.join(",")
 			                            +". Here is their contact info: "
 			                            +bestMatchUser.contactInfo;
 			            }

@@ -62,11 +62,12 @@ function DatabaseHelper(){
                 "name": userInfo.name.toString()
             });
             let cursorArray = await cursor.toArray();
-            console.log('Update User Info: ' + JSON.stringify(cursorArray)+'length: ' + cursorArray.length);
+            // console.log('Update User Info: ' + JSON.stringify(cursorArray)+'length: ' + cursorArray.length);
             if (cursorArray.length == 0) {
+                console.log('User not found. Adding user.');
                 await database.collection(collectionName).insertOne({
                     "name": userInfo.name.toString(),
-                    "services": userInfo.services.toString(),
+                    "services": userInfo.services.join(","),
                     "gender": userInfo.gender.toString(),
                     "sexualPreferences": userInfo.sexualPreferences.toString(),
                     "contactInfo": userInfo.contactInfo.toString()
@@ -74,10 +75,16 @@ function DatabaseHelper(){
                 console.log('Succesfully? inserted');
                 return new Promise((resolve,reject) => { resolve(1) });
             } else {
+                console.log('User found. Updating information.');
+                let info = await this.getUserInformation(userInfo);
+                console.log(JSON.stringify(info));
+                let newServices = userInfo.services.filter(service => !info.services.includes(service));
+                let newServicesConcat = newServices.length > 0 ? ","+newServices.join(",") : "";
+                console.log('New Services: '+newServices.join(","));
                 await database.collection(collectionName).updateOne(
                     { "name": userInfo.name.toString() },
                     { $set: {
-                            "services": cursorArray[0].services.toString().concat(",", userInfo.services),
+                            "services": cursorArray[0].services.toString().concat(newServicesConcat),
                             "gender": userInfo.gender.toString(),
                             "sexualPreferences": userInfo.sexualPreferences.toString(),
                             "contactInfo": userInfo.contactInfo.toString()
@@ -100,13 +107,13 @@ function DatabaseHelper(){
             });
             let cursorArray = await cursor.toArray();
             return new Promise((resolve, reject) => {
-                console.log('Get User Info: ' + JSON.stringify(cursorArray)+'length: ' + cursorArray.length);
+                //console.log('Get User Info: ' + JSON.stringify(cursorArray)+'length: ' + cursorArray.length);
                 if (cursorArray.length == 0) {
                     resolve({});
                 } else {
                     resolve({
                         "name": cursorArray[0].name.toString(),
-                        "services": cursorArray[0].services.toString(),
+                        "services": cursorArray[0].services.toString().split(","),
                         "gender": cursorArray[0].gender.toString(),
                         "sexualPreferences": cursorArray[0].sexualPreferences.toString(),
                         "contactInfo": cursorArray[0].contactInfo.toString()
@@ -127,23 +134,27 @@ function DatabaseHelper(){
                 "sexualPreferences": { $regex : "".concat(".*", userInfo.gender.toString(), ".*") }
             });
             let cursorArray = await cursor.toArray();
-
+            console.log('Matching Users (Outside Promise): ' + cursorArray.length);
             return new Promise((resolve, reject) => {
-                if (cursorArray.length == 0) {
+                console.log('Matching Users (inside promise): ' + cursorArray.length);
+
+                if (cursorArray.length === 0) {
+                    console.log('Matching Users: cursorArray empty');
                     resolve([]);
                 } else {
                     let results = [];
-
+                    console.log('Matching Users: iterating through cursorArray');
                     for (let i = 0; i < cursorArray.length; i++) {
-                        results.concat({
+                        console.log('Matching User '+i+": "+cursorArray[i].name);
+                        results.push({
                             "name": cursorArray[i].name.toString(),
-                            "services": cursorArray[i].services.toString(),
+                            "services": cursorArray[i].services.toString().split(","),
                             "gender": cursorArray[i].gender.toString(),
                             "sexualPreferences": cursorArray[i].sexualPreferences.toString(),
                             "contactInfo": cursorArray[i].contactInfo.toString()
                         })
                     }
-
+                    console.log(JSON.stringify(results, null, 2));
                     resolve(results);
                 }   
             });
