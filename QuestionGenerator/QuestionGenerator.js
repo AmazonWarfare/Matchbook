@@ -1,6 +1,7 @@
 const WatsonQueryingService = require('../WatsonQueryingService/WatsonQueryingService');
 const Config = require('../Config');
 const StringFormat = require('./stringFormat.js');
+const DatabaseHelper = require('./DatabaseHelper');
 
 /**
     QuestionGenerator KontRols the entiRe logiK of the Kwestions that aRe to be asKed
@@ -68,7 +69,8 @@ function QuestionGenerator(){
 
     let currentUserInfo;
 
-    // let dbHelper = new DatabaseHelper();
+    let dbHelper = new DatabaseHelper();
+    dbHelper.startDatabaseConnection().catch(console.dir);
 
     this.reset = function(){
 
@@ -223,7 +225,7 @@ function QuestionGenerator(){
         } else if(currentQGState === QG_STATES.QUERYING){
             question = getNextQueryQuestion(queryResponse);
         } else if(currentQGState === QG_STATES.TOP){
-            question = giveRecommendation(queryResponse, 0);
+            question = giveRecommendation(queryResponse, 'random');
         } else {
             question = giveRecommendation(queryResponse, -1)
         }
