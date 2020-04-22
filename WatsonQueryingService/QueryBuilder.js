@@ -103,7 +103,7 @@ function QueryBuilder(fileType){
             [PREFERENCE_OPTIONS.GENRE]: 'genre',
             [PREFERENCE_OPTIONS.CATEGORY]: 'enriched_text.categories.label',
             [PREFERENCE_OPTIONS.TAG]: 'tags.tag_name',
-            [PREFERENCE_OPTIONS.TITLE]: 'title'
+            [PREFERENCE_OPTIONS.TITLE]: 'sitename'
         };
         let queryConcat = '(';
         for(let i = 0; i < elementList.length; i++){

@@ -1,4 +1,41 @@
+POSTER THINGS:
+
+Sections:
+	Title
+	Problem Statement/Introduction - 100 words
+	Picture of UI/Loading Icon
+	Diagram of Architecture 
+	Technology Used - Summary section - 200 words
+	Design Decisions - 400 words
+		Discussion of what we ended up using.
+		More in depth. 
+
+Medium - Powerpoint
+
+
 MOONSHOT TO DO:
+
+Tell chris to shut the fuck up
+
+Question wording:
+
+	Tag types:
+		Verb (tag_type 1)
+			"Would you like a web service that lets you ______ ?" (e.g., stream videos)
+			"Is _____ important to you in a web service?"
+			"Would you like a web service for ______ ?"
+		Noun (tag_type 2)
+			"Would you like ______ in a site?" (e.g., )
+
+Document format:
+	site name
+	site link
+	site type
+	#
+	tags
+	#
+	desc
+	#
 
 Reinvent wheel
 
@@ -63,17 +100,26 @@ dating service:
 	// Query database
 	// Update database
 
+	js class
 	DatabaseHelper class:
+		connect to our database
+		getAllSexualPrefOptions()
+			query database for ALL results
+			returns a list of all options under gender identity
+		dbHelper.updateUserInformation(currentUserInfo);
+			
+        dbHelper.getUserInformation(currentUserInfo.name);
+        dbHelper.getMatchingUsers(currentUserInfo);
 		add user
 		update user preferences 
 			overwrite gender/preferences
 			append services recommended
 		query table 
 	TABLE:
-		name - PK
+		name - string PK
 		services - strings delimited by ,
-		gender - string
-		sexual preference - string 
+		gender - strings delimited by commas,
+		sexual preference - strings delimited by commas, 
 		contact info - string
 	SELECT name from Table 
 		where service contains pornhub

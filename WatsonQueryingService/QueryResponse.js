@@ -63,7 +63,7 @@ function QueryResponse(queryResponse, fileType){
     };
 
     let getJSONTitle = function(result){
-        return queryResponse.result.results[result].title[0];
+        return queryResponse.result.results[result].sitename[0];
     }
 
     this.getTitles = function(resultNum){
@@ -138,20 +138,20 @@ function QueryResponse(queryResponse, fileType){
             let res = queryResponse.result.results;
             console.log(res.length);
             for (let i = 0; i < res.length; i++){
-                let currentGenres = res[i].genre[0];
+                let currentGenres = res[i].site_type[0];
                 currentGenres.forEach(e => genreSet.add(e));
             }
             return Array.from(genreSet);
 
         }
-        let targetGenre = queryResponse.result.results[resultNum].genre[0][0];
+        let targetGenre = queryResponse.result.results[resultNum].site_type[0][0];
         return targetGenre;
     }
     this.getSynopses = function(resultNum){
         if(resultNum === undefined){
             result = [];
             for(let i = 0; i < this.getNumMatchingResults(); i++){
-                let synopsis = queryResponse.result.results[i].good_reads_synopsis;
+                let synopsis = queryResponse.result.results[i].desc;
                 let title = this.getTitles(i);
                 let genre = this.getGenres(i);
                 result.push({
@@ -163,7 +163,7 @@ function QueryResponse(queryResponse, fileType){
             }  
             return result;
         } 
-        let synopsis = queryResponse.result.results[resultNum].good_reads_synopsis;
+        let synopsis = queryResponse.result.results[resultNum].desc;
         let title = this.getTitles(resultNum);
         let genre = this.getGenres(resultNum);
         return {
@@ -179,7 +179,7 @@ function QueryResponse(queryResponse, fileType){
     };
 
     let getJSONAuthor = function(resultNum){
-        return queryResponse.result.results[resultNum].author;
+        return queryResponse.result.results[resultNum].site_link[0];
     }
 
     /*

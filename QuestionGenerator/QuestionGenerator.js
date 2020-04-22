@@ -54,7 +54,7 @@ function QuestionGenerator(){
     let negativeSynopsisBooks = [];
     let positiveSynopsisAnswer;
 
-    let questionOptions = [PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY, PREFERENCE_OPTIONS.QUOTE];
+    let questionOptions = [PREFERENCE_OPTIONS.TAG, PREFERENCE_OPTIONS.CATEGORY];
 
     let currentPreferenceOption = PREFERENCE_OPTIONS.GENRE;
     let currentQuestionFormat = QUESTION_FORMATS.MULTI;
@@ -67,6 +67,8 @@ function QuestionGenerator(){
     let lastSynopsisQuestion = false;
 
     let currentUserInfo;
+
+    // let dbHelper = new DatabaseHelper();
 
     this.reset = function(){
 
@@ -92,11 +94,13 @@ function QuestionGenerator(){
 
         lastSynopsisQuestion = false;
 
-        currentUserInfo = new Object();
+        currentUserInfo = {};
 
 
     }
     let getNextSynopsisQuestion = function(queryResponse){
+        return giveRecommendation(queryResponse, 0);
+        // Changed this ^
         let synopses = queryResponse.getSynopses();
         let foundNewSynopsis = false;
         let question, synopsis;
@@ -257,9 +261,10 @@ function QuestionGenerator(){
         resolve(question);
     }
 
+/**
   this.getSexualPrefOptions = function(){
     //TODO: Change return to list form if not already a list of Strings
-    let sexPrefOptions = dbHelper.getAllSexualPrefOptions();
+    // let sexPrefOptions = dbHelper.getAllSexualPrefOptions();
 
     //Can remove if accounted for elsewhere in the DB
     if(!sexPrefOptions.includes("Female")){
@@ -272,7 +277,7 @@ function QuestionGenerator(){
     return sexPrefOptions;
 
   }
-
+**/
 	this.generateQuestion = function(){
         console.log('Generate Question called now');
         return new Promise((resolve, reject) => {
@@ -347,13 +352,44 @@ function QuestionGenerator(){
 
     let giveRecommendation = function(queryResponse, resultNum){
         let rec;
-        console.log("MATCHING RESULTS: " + queryResponse.getNumMatchingResults());
+        let matchResults = queryResponse.getNumMatchingResults();
+        if(resultNum === 'random'){
+            resultNum = Math.floor(Math.random() * matchResults);
+        }
         if(resultNum !== -1){
+
             currentLabel = queryResponse.getTitles(resultNum);
             let title = StringFormat.formatDisplayName(currentLabel);
-            let author = StringFormat.formatAuthors(queryResponse.getAuthors(resultNum));
+            let link = queryResponse.getAuthors(resultNum);
+            
+            /**
+            let matchText;
+            dbHelper.updateUserInformation(currentUserInfo);
+            currentUserInfo = dbHelper.getUserInformation(currentUserInfo.name);
+            let matchingUsers = dbHelper.getMatchingUsers(currentUserInfo);
+            if(matchingUsers.length === 0){
+                matchText = "We couldn't find anyone matching your romantic preferences. Looks like you're bound to be lonely.";
+            } else {
+                let maxMatchingServices = [];
+                let bestMatchUser = matchingUsers[0];
+                for(let i = 0; i < matchingUsers.length; i++){
+                    let user = matchingUsers(i);
+                    let matchingServices = currentUserInfo.services.filter(value => user.services.includes(value));
+                    if(matchingServices.length > maxMatchingServices.length){
+                        maxMatchingServices = matchingServices;
+                        bestMatchUser = user;
+                    }
+                }
+                matchText = "We also think you may be romantically compatible with "
+                            +bestMatchUser.name+". They match your sexual preferences "
+                            +"and also enjoyed the following online services: "
+                            +JSON.stringify(bestMatchUser.services)
+                            +". Here is their contact info: "
+                            +bestMatchUser.contact;
+            }
+            **/
             rec = {
-                text: "Based on your preferences, you might like: " + title + " by " + author,
+                text: "Based on your preferences, you might like: " + title +"("+link+"). Here is a description" + queryResponse.getSynopses(resultNum), // + matchText
                 type: QUESTION_FORMATS.RECOMMENDATION
             };
         } else {
@@ -443,8 +479,8 @@ function QuestionGenerator(){
     let generateTernaryTagQuestion = function(queryResponse, resultNum){
         const TAGTYPEQUESTIONMAP = {
             1: "\"?",
-            2: "\" in books?",
-            3: "\" books?"
+            2: "\" in web services?",
+            3: "\" web services?"
         }
         let tags = queryResponse.getTags(resultNum);
 
@@ -493,7 +529,7 @@ function QuestionGenerator(){
         }
 
         let question = {
-            text: "Pick book topics from these that would interest you",
+            text: "Pick types of web services from these that would interest you",
             type: QUESTION_FORMATS.MULTI,
             content: {
             	options: formattedLabels
@@ -576,7 +612,7 @@ function QuestionGenerator(){
         let formattedLabels = queryResponse.getGenres();
         console.log(formattedLabels);
     	let question = {
-            text: "Pick book genres from these that would interest you",
+            text: "Pick types of web services from these that would interest you",
             type: QUESTION_FORMATS.MULTI,
             content: {
             	options: formattedLabels,
