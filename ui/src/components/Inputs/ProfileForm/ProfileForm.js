@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, FormGroup, Label, Input, CustomInput, } from 'reactstrap';
+import {Form, FormGroup, Label, Input, CustomInput,} from 'reactstrap';
 import Button from "../ButtonList/Button.js";
 
 import "./ProfileForm.scss";
@@ -61,7 +61,7 @@ class ProfileForm extends Component {
     render_sex_prefs() {
         let sex_prefs = ["male", "female", "other"];
 
-        let checkboxes = sex_prefs.map(option => {
+        return sex_prefs.map(option => {
             let id = `sex_prefs_${option}`;
             return (
                 <div>
@@ -74,16 +74,15 @@ class ProfileForm extends Component {
                 </div>
             )
         });
-
-        return checkboxes
     }
+
     /*
     * BAD DESIGN /\ these \/ are are copies just because I didn't feel like using a separate param
      */
     render_gender() {
         let genders = ["male", "female", "other"];
 
-        let checkboxes = genders.map(option => {
+        return genders.map(option => {
             let id = `gender_${option}`;
             return (
                 <div>
@@ -96,8 +95,6 @@ class ProfileForm extends Component {
                 </div>
             )
         });
-
-        return checkboxes
     }
 
     nextQuestion() {
@@ -137,7 +134,7 @@ class ProfileForm extends Component {
                 <Button
                     text="Done"
                     onClick={this.nextQuestion}
-                    />
+                />
             </div>
         );
     }

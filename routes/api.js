@@ -56,26 +56,8 @@ router.post('/answer', (req, res) => {
  */
 router.get('/reset', (req, res) => {
     qg.reset();
-
-    let question_promise = qg.generateQuestion();
-
-    question_promise.then(question => {
-        let responseObject = {
-            question
-        };
-        res.send(JSON.stringify((responseObject)));
-    })
-    .catch(err => {
-        console.log(err);
-    })
+    res.status(200);
+    res.send();
 });
-
-router.get('/sex_prefs', (req, res) => {
-    let responseObject = {
-        sex_prefs: ["male", "female", "Srini"]
-    };
-
-    res.send(JSON.stringify(responseObject));
-})
 
 module.exports = router;

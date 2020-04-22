@@ -136,8 +136,8 @@ class App extends Component {
         } else {
             this.questionIndex = startup_cards.length;
             axios.get('/reset')
-                .then((res) => {
-                    this.setNextQuestion(res.data.question);
+                .then(() => {
+                    this.getFirstQuestion();
                 });
         }
     }
