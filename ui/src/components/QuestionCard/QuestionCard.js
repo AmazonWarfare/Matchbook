@@ -43,6 +43,27 @@ class QuestionCard extends Component {
         this.props.giveRec();
     }
 
+    renderText() {
+        console.log(this.props.question.text);
+        if (Array.isArray(this.props.question.text)) {
+            // allows multi-line text to render as separate paragraphs
+            let question_paragraphs = this.props.question.text.map(p => {
+                return (
+                    <p>
+                        {p}
+                    </p>
+                )
+            });
+            console.log(question_paragraphs)
+            return question_paragraphs;
+        }
+        console.log("here")
+        return (<p>
+                {this.props.question.text}
+            </p>
+        );
+    }
+
     renderInputs() {
         if (this.props.question.input_type === INPUT_TYPES.BUTTON_LIST) {
             return (
@@ -112,7 +133,7 @@ class QuestionCard extends Component {
                 <div>
                     <Container className={`question-card-component`}>
                         <Container className="question-text">
-                            {this.props.question.text}
+                            {this.renderText()}
                         </Container>
                         <Container className={"input-container"}>
                             {this.renderInputs()}

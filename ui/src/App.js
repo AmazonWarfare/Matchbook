@@ -10,7 +10,7 @@ import axios from "axios";
 
 let startup_cards = [
     {
-        text: "Welcome to MatchApp!",
+        text: ["Welcome to MatchApp!", "The app that recommends you apps! (and also people to date)"],
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
