@@ -8,7 +8,7 @@ import ButtonList from "../Inputs/ButtonList/ButtonList";
 import Button from "../Inputs/ButtonList/Button";
 import MultiSelect from "../Inputs/MultiSelect/MultiSelect";
 import {INPUT_TYPES} from "../../config";
-import loader from "./Lava Lamp-0.8s-200px.svg";
+import loader from "./loader.svg";
 import ProfileForm from "../Inputs/ProfileForm/ProfileForm";
 
 class QuestionCard extends Component {
