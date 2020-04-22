@@ -21,6 +21,7 @@ class ProfileForm extends Component {
 
         this.update_sex_pref = this.update_sex_pref.bind(this)
         this.update_gender = this.update_gender.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
     }
 
     update_name(e) {
@@ -100,14 +101,14 @@ class ProfileForm extends Component {
     }
 
     nextQuestion() {
-        console.log("next question in PF")
-        const {
+
+        let {
             name,
             email,
             selected_sex_prefs,
             selected_genders
         } = this.state;
-        console.log(name)
+
         let profile = {name, email, sex_prefs: selected_sex_prefs, gender: selected_genders};
         this.props.nextQuestion(profile);
     }

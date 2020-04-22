@@ -10,7 +10,7 @@ import axios from "axios";
 
 let startup_cards = [
     {
-        text: "Welcome to MatchBook!",
+        text: "Welcome to MatchApp!",
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
@@ -18,7 +18,7 @@ let startup_cards = [
             ]
         }
     }, {
-        text: "We will ask you a series of questions to gauge your interest in topics from our library of books",
+        text: "We will ask you a series of questions about what kind of web app you want to use",
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
@@ -34,7 +34,7 @@ let startup_cards = [
             ]
         }
     }, {
-        text: "When we have enough info we will give you our best guess at a book you might like. You can also get a recommendation at any time during the process.",
+        text: "When we have enough info we will give you our best guess at an App you might like. You can also get a recommendation at any time during the process.",
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
@@ -63,7 +63,7 @@ class App extends Component {
     questionIndex = 0;
 
     nextQuestion(answer) {
-        console.log("next question");
+
         this.questionIndex++;
         if (this.questionIndex < startup_cards.length) {
             this.getNextStartupQuestion();
@@ -109,7 +109,6 @@ class App extends Component {
     }
 
     getNextStartupQuestion() {
-        console.log("get next startup question");
         this.setNextQuestion(startup_cards[this.questionIndex]);
     }
 
@@ -121,7 +120,7 @@ class App extends Component {
         this.state.render_profile_form = false; // bad react but it works
         axios
             .post('/answer', {answer})
-            .then(() => console.log('answer sent from UI'));
+            .then(() => console.log('answer sent from UI', answer));
 
         axios
             .get('/question')

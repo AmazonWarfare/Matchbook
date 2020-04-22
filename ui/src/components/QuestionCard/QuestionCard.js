@@ -66,7 +66,7 @@ class QuestionCard extends Component {
         let recButton;
 
         if (!this.props.startup) {
-            recButton = (<Button text={'Give me a recommendation!'}
+            recButton = (<Button text={'I\'m feeling lucky!'}
                                  onClick={this.giveRec}/>);
         }
 
