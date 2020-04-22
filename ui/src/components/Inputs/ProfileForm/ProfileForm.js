@@ -127,11 +127,11 @@ class ProfileForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label>Select your gender(s)</Label>
-                        {this.render_sex_prefs()}
+                        {this.render_gender()}
                     </FormGroup>
                     <FormGroup>
                         <Label>Looking for</Label>
-                        {this.render_gender()}
+                        {this.render_sex_prefs()}
                     </FormGroup>
                 </Form>
                 <Button
