@@ -1,0 +1,200 @@
+youtube
+YouTube
+http://www.youtube.com/
+video
+#
+video streaming
+live streaming
+content creation
+subscribers
+#
+YouTube allows users to upload, view, rate, share, add to playlists, report, comment on videos, and subscribe to other users. It offers a wide variety of user-generated and corporate media videos. Available content includes video clips, TV show clips, music videos, short and documentary films, audio recordings, movie trailers, live streams, and other content such as video blogging, short original videos, and educational videos.
+#
+vimeo
+Vimeo
+http://vimeo.com
+video
+#
+education
+video streaming
+content creation
+subscribers
+memes
+#
+Vimeo is an American ad-free video platform headquartered in New York City, providing free video viewing services as a competitor to YouTube. In 2007, Vimeo became the first video sharing site to support high-definition video. It has launched several products that enable quality video creation at scale, most recently with the launch of Vimeo Stock in fall of 2018.
+#
+twitch
+Twitch
+http://twitch.tv
+video
+#
+live streaming
+gaming
+finding communities
+subscribers
+#
+Twitch is a video live streaming service operated by Twitch Interactive, a subsidiary of Amazon. Introduced in June 2011 as a spin-off of the general-interest streaming platform, Justin.tv, the site primarily focuses on video game live streaming, including broadcasts of eSports competitions, in addition to music broadcasts, creative content, and more recently, "in real life" streams. Content on the site can be viewed either live or via video on demand.
+#
+zoom
+Zoom
+http://zoom.us
+video
+communication
+#
+video conferencing
+professional use
+education
+reconnecting
+#
+Zoom provides videotelephony and online chat services through a cloud-based peer-to-peer software platform and is used for teleconferencing, telecommuting, distance education, and social relations. Use of the platform is free for video conferences of up to 100 participants, with a 40-minute time limit. For longer or larger conferences with more features, paid subscriptions are available, costing $15–20 per month. Features geared towards business conferences, such as Zoom Rooms, are available for $50–100 per month.
+#
+skype
+Skype
+http://www.skype.com/
+video
+communication
+messaging
+#
+video conferencing
+professional use
+instant messaging
+#
+Skype is a telecommunications application that specializes in providing video chat and voice calls between computers, tablets, mobile devices, the Xbox One console, and smartwatches over the Internet. Skype also provides instant messaging services. Users may transmit text, video, audio and images. Skype allows video conference calls.
+#
+facebook
+Facebook
+http://facebook.com
+social networking
+#
+reconnecting
+finding communities
+friends
+image sharing
+#
+Facebook is an American online social media and social networking service. Facebook allows users to become friends with other users that agree, and to join larger communities.
+#
+instagram
+Instagram
+http://instagram.com
+social networking
+#
+image sharing
+video streaming
+followers
+reconnecting
+instant messaging
+#
+Instagram is an American photo and video-sharing social networking service owned by Facebook, Inc. As of January 14, 2019, the most liked photo on Instagram is a picture of an egg, posted by the account @world_record_egg, created with the sole purpose of surpassing the previous record of 18 million likes on a Kylie Jenner post.
+#
+twitter
+Twitter
+http://twitter.com
+social networking
+#
+followers
+instant messaging
+news
+blogging
+memes
+#
+Twitter is an American microblogging and social networking service on which users post and interact with messages known as "tweets". Tweets are limited to 280 characters, so choose your words wisely. 
+#
+reddit
+Reddit
+http://reddit.com
+forum
+social networking
+#
+finding communities
+image sharing
+news
+blogging
+discussion
+memes
+niche interests
+#
+Reddit is an American social news aggregation, web content rating, and discussion website. Registered members submit content to the site such as links, text posts, and images, which are then voted up or down by other members. Posts are organized by subject into user-created boards called "subreddits", which cover a variety of topics like news, science, movies, video games, music, books, fitness, food, and image-sharing.
+#
+tinder
+Tinder
+http://tinder.com
+dating
+#
+casual dating
+image sharing
+instant messaging
+in person meetups
+#
+Tinder is a geosocial networking and online dating application that allows users to anonymously swipe to like or dislike other profiles based on their photos, a small bio, and common interests. Once two users have “matched,” they can exchange messages.
+#
+match
+Match.com
+http://match.com
+dating
+#
+serious dating
+algorithmic dating
+in person meetups
+#
+Match is an online dating service with web sites serving over 50 countries in twelve languages. 
+#
+okc
+OkCupid
+http://okcupid.com
+dating
+#
+casual dating
+serious dating
+instant messaging
+algorithmic dating
+in person meetups
+#
+OkCupid (OKC) is an online dating, friendship, and social networking website that features multiple-choice questions in order to match members. It is supported by advertisements, by paying users who do not see ads, and by selling user data for data mining.
+#
+amazon
+Amazon
+http://amazon.com
+shopping
+#
+reviews
+discussion
+buying anything
+niche interests
+#
+Amazon.com, Inc. is an American multinational technology company focused on e-commerce. Amazon is known for its disruption of well-established industries through technological innovation and mass scale.
+#
+ebay
+eBay
+http://ebay.com
+shopping
+#
+bidding
+niche interests
+buying anything
+#
+eBay Inc. is an e-commerce corporation that facilitates consumer-to-consumer and business-to-consumer sales through its website. In addition to eBay's original auction-style sales, the website has evolved and expanded to include: instant "Buy It Now" shopping.
+#
+craigslist
+Craigslist
+http://craigslist.com
+shopping
+forum
+#
+discussion
+niche interests
+in person meetups
+#
+Craigslist is an American classified advertisements website with sections devoted to jobs, housing, for sale, items wanted, services, community service, gigs, résumés, and discussion forums.
+#
+4chan
+4chan
+http://4chan.org
+forum
+#
+memes
+niche interests
+image sharing
+#
+4chan is an anonymous English-language imageboard website. Launched by Christopher "moot" Poole in October 2003, the site hosts boards dedicated to a wide variety of topics, from anime and manga to video games, music, literature, fitness, politics, and sports, among others.
+#
+
