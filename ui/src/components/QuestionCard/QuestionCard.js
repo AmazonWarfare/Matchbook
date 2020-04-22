@@ -44,7 +44,6 @@ class QuestionCard extends Component {
     }
 
     renderText() {
-        console.log(this.props.question.text);
         if (Array.isArray(this.props.question.text)) {
             // allows multi-line text to render as separate paragraphs
             let question_paragraphs = this.props.question.text.map(p => {
@@ -54,10 +53,8 @@ class QuestionCard extends Component {
                     </p>
                 )
             });
-            console.log(question_paragraphs)
             return question_paragraphs;
         }
-        console.log("here")
         return (<p>
                 {this.props.question.text}
             </p>
