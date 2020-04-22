@@ -10,7 +10,7 @@ import axios from "axios";
 
 let startup_cards = [
     {
-        text: "Welcome to MatchBook!",
+        text: ["Welcome to MatchApp!", "The app that recommends you apps! (and also people to date)"],
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
@@ -18,14 +18,14 @@ let startup_cards = [
             ]
         }
     }, {
-        text: "We will ask you a series of questions to gauge your interest in topics from our library of books",
+        text: "We will ask you a series of questions about what kind of web app you want to use",
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
                 "Next"
             ]
         }
-    },  {
+    }, {
         text: "Each answer will gather information about your preferences to tune our recommendation.",
         type: QUESTION_FORMATS.BUTTON,
         content: {
@@ -34,7 +34,7 @@ let startup_cards = [
             ]
         }
     }, {
-        text: "When we have enough info we will give you our best guess at a book you might like. You can also get a recommendation at any time during the process.",
+        text: "When we have enough info we will give you our best guess at an App you might like. You can also get a recommendation at any time during the process.",
         type: QUESTION_FORMATS.BUTTON,
         content: {
             options: [
@@ -54,11 +54,33 @@ class App extends Component {
         this.giveRec = this.giveRec.bind(this);
 
         this.state = {
-            current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex])
+            current_question: App.mapQuestionToCardQuestion(startup_cards[this.questionIndex]),
+            render_profile_form: false,
+
         };
     }
 
     questionIndex = 0;
+
+    nextQuestion(answer) {
+
+        this.questionIndex++;
+        if (this.questionIndex < startup_cards.length) {
+            this.getNextStartupQuestion();
+        } else if (this.questionIndex === startup_cards.length) {
+            this.getFirstQuestion();
+        } else {
+            this.getNextQuestion(answer);
+        }
+    }
+
+    setNextQuestion(q) {
+        let cardQuestion = App.mapQuestionToCardQuestion(q);
+        this.setState({
+            current_question: cardQuestion
+        });
+    }
+
     static mapQuestionToCardQuestion(question) {
         let cardQuestion = {
             text: question.text
@@ -86,49 +108,25 @@ class App extends Component {
         return cardQuestion;
     }
 
-    setNextQuestion(q) {
-        let cardQuestion = App.mapQuestionToCardQuestion(q);
-        this.setState({
-            current_question: cardQuestion
-        });
-    }
-
     getNextStartupQuestion() {
         this.setNextQuestion(startup_cards[this.questionIndex]);
-        if (startup_cards.length === 0) {
-            this.isFirstQuestion = true;
-        }
     }
 
     getFirstQuestion() {
-        axios.get('/question')
-            .then((res) => {
-                console.log(res.data.question);
-                this.setNextQuestion(res.data.question);
-            });
+        this.setState({render_profile_form: true});
     }
 
     getNextQuestion(answer) {
+        this.state.render_profile_form = false; // bad react but it works
         axios
             .post('/answer', {answer})
-            .then(() => console.log('answer sent from UI'));
+            .then(() => console.log('answer sent from UI', answer));
 
         axios
             .get('/question')
             .then((res) => {
                 this.setNextQuestion(res.data.question);
             });
-    }
-
-    nextQuestion(answer) {
-        this.questionIndex++;
-        if (this.questionIndex < startup_cards.length) {
-            this.getNextStartupQuestion();
-        } else if (this.questionIndex === startup_cards.length) {
-            this.getFirstQuestion();
-        } else {
-            this.getNextQuestion(answer);
-        }
     }
 
     reset() {
@@ -156,16 +154,30 @@ class App extends Component {
 
     render() {
         let FadedQuestionCard = Fade(QuestionCard);
+        let qc_props ={
+            nextQuestion: this.nextQuestion,
+            giveRec: this.giveRec,
+            startup: this.questionIndex < startup_cards.length,
+            reset: this.reset
+        };
+
+        if (this.state.render_profile_form) {
+            qc_props = {
+                ...qc_props,
+                profileForm: true
+            }
+        } else {
+            qc_props = {
+                ...qc_props,
+                question: this.state.current_question
+            }
+        }
         return (
             <div>
                 <NavBar/>
                 <div className={'content'}>
                     <FadedQuestionCard
-                        question={this.state.current_question}
-                        nextQuestion={this.nextQuestion}
-                        reset={this.reset}
-                        giveRec={this.giveRec}
-                        startup={this.questionIndex < startup_cards.length}
+                        {...qc_props}
                     />
                 </div>
             </div>

@@ -8,7 +8,8 @@ import ButtonList from "../Inputs/ButtonList/ButtonList";
 import Button from "../Inputs/ButtonList/Button";
 import MultiSelect from "../Inputs/MultiSelect/MultiSelect";
 import {INPUT_TYPES} from "../../config";
-import loader from "./Lava Lamp-0.8s-200px.svg";
+import loader from "./loader.svg";
+import ProfileForm from "../Inputs/ProfileForm/ProfileForm";
 
 class QuestionCard extends Component {
     constructor(props) {
@@ -42,6 +43,24 @@ class QuestionCard extends Component {
         this.props.giveRec();
     }
 
+    renderText() {
+        if (Array.isArray(this.props.question.text)) {
+            // allows multi-line text to render as separate paragraphs
+            let question_paragraphs = this.props.question.text.map(p => {
+                return (
+                    <p>
+                        {p}
+                    </p>
+                )
+            });
+            return question_paragraphs;
+        }
+        return (<p>
+                {this.props.question.text}
+            </p>
+        );
+    }
+
     renderInputs() {
         if (this.props.question.input_type === INPUT_TYPES.BUTTON_LIST) {
             return (
@@ -65,7 +84,7 @@ class QuestionCard extends Component {
         let recButton;
 
         if (!this.props.startup) {
-            recButton = (<Button text={'Give me a recommendation!'}
+            recButton = (<Button text={'I\'m feeling lucky!'}
                                  onClick={this.giveRec}/>);
         }
 
@@ -79,6 +98,9 @@ class QuestionCard extends Component {
 
     render() {
         if (this.state.answer_clicked) {
+            /*
+            *   LOADING
+             */
             return (
                 <div>
                     <Container className={`question-card-component clicked`}>
@@ -86,20 +108,38 @@ class QuestionCard extends Component {
                     </Container>
                 </div>
             )
+        } else if (this.props.profileForm) {
+            /*
+            * Profile Form
+             */
+            return (
+                <div>
+                    <Container className={`question-card-component`}>
+                        <ProfileForm
+                            nextQuestion={this.nextQuestion}
+                        />
+                    </Container>
+                    {this.renderMetaControls()}
+                </div>
+            )
+        } else {
+            /*
+            * Standard question
+             */
+            return (
+                <div>
+                    <Container className={`question-card-component`}>
+                        <Container className="question-text">
+                            {this.renderText()}
+                        </Container>
+                        <Container className={"input-container"}>
+                            {this.renderInputs()}
+                        </Container>
+                    </Container>
+                    {this.renderMetaControls()}
+                </div>
+            );
         }
-        return (
-            <div>
-                <Container className={`question-card-component`}>
-                    <Container className="question-text">
-                        {this.props.question.text}
-                    </Container>
-                    <Container className={"input-container"}>
-                        {this.renderInputs()}
-                    </Container>
-                </Container>
-                {this.renderMetaControls()}
-            </div>
-        );
     }
 }
 

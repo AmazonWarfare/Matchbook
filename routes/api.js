@@ -68,6 +68,14 @@ router.get('/reset', (req, res) => {
     .catch(err => {
         console.log(err);
     })
+});
+
+router.get('/sex_prefs', (req, res) => {
+    let responseObject = {
+        sex_prefs: ["male", "female", "Srini"]
+    };
+
+    res.send(JSON.stringify(responseObject));
 })
 
 module.exports = router;
