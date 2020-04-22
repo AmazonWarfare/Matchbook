@@ -33,7 +33,6 @@ function DatabaseHelper(){
             console.log('Client connected');
             database = client.db(databaseName);
             collection = database.collection(collectionName);
-            console.log(collection);
 
         } catch(err) {
             console.log(err.stack);

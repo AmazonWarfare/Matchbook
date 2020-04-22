@@ -67,13 +67,8 @@ function QuestionGenerator(){
 
     let lastSynopsisQuestion = false;
 
-    let currentUserInfo = {
-    	name: "John Frog",
-    	services: "Twitter",
-    	gender: "Male",
-    	sexualPreferences: "Female",
-    	contactInfo: "johnfrog2@aol.com"
-    };
+    let currentUserInfo = {};
+    
 
     let dbHelper = new DatabaseHelper();
     dbHelper.startDatabaseConnection().catch(console.dir);
@@ -102,7 +97,7 @@ function QuestionGenerator(){
 
         lastSynopsisQuestion = false;
 
-        // currentUserInfo = {};
+        currentUserInfo = {};
 
 
     }
@@ -308,7 +303,12 @@ function QuestionGenerator(){
             currentQGState = QG_STATES.TOP;
             return 0;
         }else if(typeof ans === 'object' && !Array.isArray(ans)){
-          currentUserInfo = ans;
+        	console.log('User info received');
+          currentUserInfo.name = ans.name;
+          currentUserInfo.gender = ans.gender.join(",");
+          currentUserInfo.contactInfo = ans.email;
+          currentUserInfo.sexualPreferences = ans.sex_prefs.join(",");
+          console.log(JSON.stringify(currentUserInfo));
           return 0;
         }
         if(currentQGState === QG_STATES.CONTINUE){
@@ -376,6 +376,7 @@ function QuestionGenerator(){
         if(resultNum !== -1){
 
             currentLabel = queryResponse.getTitles(resultNum);
+            currentUserInfo.services = currentLabel;
             let title = StringFormat.formatDisplayName(currentLabel);
             let link = queryResponse.getAuthors(resultNum);
             let desc = queryResponse.getSynopses(resultNum).synopsis;
@@ -407,7 +408,7 @@ function QuestionGenerator(){
 			                            +bestMatchUser.contactInfo;
 			            }
 			            rec = {
-			                text: "Based on your preferences, you might like: " + title +"("+link+"). Here is a description" + desc + matchText,
+			                text: ["Based on your preferences, you might like: " + title +"("+link+"). Here is a description", desc, matchText],
 			                type: QUESTION_FORMATS.RECOMMENDATION
 			            };
 			            console.log(rec);
