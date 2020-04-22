@@ -107,7 +107,11 @@ function QuestionGenerator(){
 
     }
     let getNextSynopsisQuestion = function(queryResponse){
-        return giveRecommendation(queryResponse, 0);
+        return new Promise((resolve, reject) => {
+        	giveRecommendation(queryResponse, 0).then((rec) => resolve(rec))
+        });
+        
+        return rec;
         // Changed this ^
         let synopses = queryResponse.getSynopses();
         let foundNewSynopsis = false;
@@ -221,23 +225,26 @@ function QuestionGenerator(){
         return question;
     }
 	let getNextQuestion = function(queryResponse){
+
         let NEXT_QUESTION_MAP = {
             [QG_STATES.RECOMMENDATION]: getNextSynopsisQuestion,
             [QG_STATES.QUERYING]: getNextQueryQuestion
         };
         let question;
-        if(currentQGState === QG_STATES.RECOMMENDATION){
-            question = getNextSynopsisQuestion(queryResponse);
-        } else if(currentQGState === QG_STATES.QUERYING){
-            question = getNextQueryQuestion(queryResponse);
-        } else if(currentQGState === QG_STATES.TOP){
-            question = giveRecommendation(queryResponse, 'random');
-        } else {
-            question = giveRecommendation(queryResponse, -1)
-        }
-
-        return question;
-	}
+        return new Promise((resolve, reject) => {
+        	if(currentQGState === QG_STATES.RECOMMENDATION){
+            	getNextSynopsisQuestion(queryResponse).then((question) => resolve(question));
+	        } else if(currentQGState === QG_STATES.QUERYING){
+	            question = getNextQueryQuestion(queryResponse);
+	            resolve(question);
+	        } else if(currentQGState === QG_STATES.TOP){
+	            question = giveRecommendation(queryResponse, 'random');
+	            resolve(question);
+	        } else {
+	            giveRecommendation(queryResponse, -1).then((question) => resolve(question));
+	        }
+        })
+  	}
 
 	let processQuery = function(queryResponse, resolve, reject){
 
@@ -264,9 +271,11 @@ function QuestionGenerator(){
             }
         }
 
-        let question = getNextQuestion(queryResponse);
-        questionCount++;
-        resolve(question);
+        getNextQuestion(queryResponse).then((question) => {
+        	questionCount++;
+        	resolve(question);
+        });
+        
     }
 
 /**
@@ -372,43 +381,52 @@ function QuestionGenerator(){
             let desc = queryResponse.getSynopses(resultNum).synopsis;
             
             let matchText;
-            dbHelper.updateUserInformation(currentUserInfo);
-            console.log('HERE' + JSON.stringify(currentUserInfo));
-            currentUserInfo = dbHelper.getUserInformation(currentUserInfo);
-            console.log(JSON.stringify(currentUserInfo));
-            let matchingUsers = dbHelper.getMatchingUsers(currentUserInfo);
-            if(matchingUsers.length === 0){
-                matchText = "We couldn't find anyone matching your romantic preferences. Looks like you're bound to be lonely.";
-            } else {
-                let maxMatchingServices = [];
-                let bestMatchUser = matchingUsers[0];
-                for(let i = 0; i < matchingUsers.length; i++){
-                    let user = matchingUsers(i);
-                    let matchingServices = currentUserInfo.services.filter(value => user.services.includes(value));
-                    if(matchingServices.length > maxMatchingServices.length){
-                        maxMatchingServices = matchingServices;
-                        bestMatchUser = user;
-                    }
-                }
-                matchText = "We also think you may be romantically compatible with "
-                            +bestMatchUser.name+". They match your sexual preferences "
-                            +"and also enjoyed the following online services: "
-                            +JSON.stringify(bestMatchUser.services)
-                            +". Here is their contact info: "
-                            +bestMatchUser.contact;
-            }
+            return new Promise((resolve, reject) => {
+            dbHelper.updateUserInformation(currentUserInfo).then((response) => {
+            	dbHelper.getUserInformation(currentUserInfo).then((userInfo) => {
+            		currentUserInfo = userInfo;
+            		dbHelper.getMatchingUsers(currentUserInfo).then((matchingUsers) => {
+            			if(matchingUsers.length === 0){
+			                matchText = "We couldn't find anyone matching your romantic preferences. Looks like you're bound to be lonely.";
+			            } else {
+			                let maxMatchingServices = [];
+			                let bestMatchUser = matchingUsers[0];
+			                for(let i = 0; i < matchingUsers.length; i++){
+			                    let user = matchingUsers(i);
+			                    let matchingServices = currentUserInfo.services.filter(value => user.services.includes(value));
+			                    if(matchingServices.length > maxMatchingServices.length){
+			                        maxMatchingServices = matchingServices;
+			                        bestMatchUser = user;
+			                    }
+			                }
+			                matchText = "We also think you may be romantically compatible with "
+			                            +bestMatchUser.name+". They match your sexual preferences "
+			                            +"and also enjoyed the following online services: "
+			                            +JSON.stringify(bestMatchUser.services)
+			                            +". Here is their contact info: "
+			                            +bestMatchUser.contactInfo;
+			            }
+			            rec = {
+			                text: "Based on your preferences, you might like: " + title +"("+link+"). Here is a description" + desc + matchText,
+			                type: QUESTION_FORMATS.RECOMMENDATION
+			            };
+			            console.log(rec);
+			            resolve(rec);
+			           
+            		});
+            	});
+            });
+        });
             
-            rec = {
-                text: "Based on your preferences, you might like: " + title +"("+link+"). Here is a description" + desc,// + matchText,
-                type: QUESTION_FORMATS.RECOMMENDATION
-            };
+            
         } else {
             rec = {
                 text: currentQGState === QG_STATES.EMPTY ? "Your request returned no results because it is too narrow. Please try broadening your criteria." : "You picky scoundrel, we have nothing to offer you >:(",
                 type: QUESTION_FORMATS.RECOMMENDATION
             };
+            return new Promise(resolve => resolve(rec));
         }
-        return rec;
+
 
     }
     let generateContinueScreen = function(queryResponse){

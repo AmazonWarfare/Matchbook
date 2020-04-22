@@ -73,6 +73,7 @@ function DatabaseHelper(){
                     "contactInfo": userInfo.contactInfo.toString()
                 }).catch(console.dir);
                 console.log('Succesfully? inserted');
+                return new Promise((resolve,reject) => { resolve(1) });
             } else {
                 await database.collection(collectionName).updateOne(
                     { "name": userInfo.name.toString() },
@@ -84,10 +85,13 @@ function DatabaseHelper(){
                         }}
                 );
                 console.log('Succesfully? updated')
+                return new Promise((resolve,reject) => { resolve(1) });
             }
         } catch(err) {
             console.log(err.stack);
+            return new Promise((resolve,reject) => { reject(0) });
         }
+    
     }
 
     this.getUserInformation = async function(userInfo){
@@ -96,18 +100,21 @@ function DatabaseHelper(){
                 "name": userInfo.name.toString()
             });
             let cursorArray = await cursor.toArray();
-            console.log('Get User Info: ' + JSON.stringify(cursorArray)+'length: ' + cursorArray.length);
-            if (cursorArray.length == 0) {
-                return {};
-            } else {
-                return {
-                    "name": cursorArray[0].name.toString(),
-                    "services": cursorArray[0].services.toString(),
-                    "gender": cursorArray[0].gender.toString(),
-                    "sexualPreferences": cursorArray[0].sexualPreferences.toString(),
-                    "contactInfo": cursorArray[0].contactInfo.toString()
+            return new Promise((resolve, reject) => {
+                console.log('Get User Info: ' + JSON.stringify(cursorArray)+'length: ' + cursorArray.length);
+                if (cursorArray.length == 0) {
+                    resolve({});
+                } else {
+                    resolve({
+                        "name": cursorArray[0].name.toString(),
+                        "services": cursorArray[0].services.toString(),
+                        "gender": cursorArray[0].gender.toString(),
+                        "sexualPreferences": cursorArray[0].sexualPreferences.toString(),
+                        "contactInfo": cursorArray[0].contactInfo.toString()
+                    });
                 }
-            }
+            });
+            
         } catch(err) {
             console.log(err.stack);
         }
@@ -122,23 +129,26 @@ function DatabaseHelper(){
             });
             let cursorArray = await cursor.toArray();
 
-            if (cursorArray.length == 0) {
-                return [];
-            } else {
-                let results = [];
+            return new Promise((resolve, reject) => {
+                if (cursorArray.length == 0) {
+                    resolve([]);
+                } else {
+                    let results = [];
 
-                for (let i = 0; i < cursorArray.length; i++) {
-                    results.concat({
-                        "name": cursorArray[i].name.toString(),
-                        "services": cursorArray[i].services.toString(),
-                        "gender": cursorArray[i].gender.toString(),
-                        "sexualPreferences": cursorArray[i].sexualPreferences.toString(),
-                        "contactInfo": cursorArray[i].contactInfo.toString()
-                    })
-                }
+                    for (let i = 0; i < cursorArray.length; i++) {
+                        results.concat({
+                            "name": cursorArray[i].name.toString(),
+                            "services": cursorArray[i].services.toString(),
+                            "gender": cursorArray[i].gender.toString(),
+                            "sexualPreferences": cursorArray[i].sexualPreferences.toString(),
+                            "contactInfo": cursorArray[i].contactInfo.toString()
+                        })
+                    }
 
-                return results;
-            }
+                    resolve(results);
+                }   
+            });
+            
         } catch(err) {
             console.log(err.stack);
         }
