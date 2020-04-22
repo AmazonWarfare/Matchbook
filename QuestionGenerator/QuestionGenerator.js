@@ -305,9 +305,25 @@ function QuestionGenerator(){
         }else if(typeof ans === 'object' && !Array.isArray(ans)){
         	console.log('User info received');
           currentUserInfo.name = ans.name;
-          currentUserInfo.gender = ans.gender.join(",");
+          currentUserInfo.gender = ans.gender.map(e => {
+          	if(e === "male"){
+          		return "M";
+          	}
+          	else if(e === "female"){
+          		return "F";
+          	}
+          	else return "other"
+          }).join(",");
           currentUserInfo.contactInfo = ans.email;
-          currentUserInfo.sexualPreferences = ans.sex_prefs.join(",");
+          currentUserInfo.sexualPreferences = ans.sex_prefs.map(e => {
+          	if(e === "male"){
+          		return "M";
+          	}
+          	else if(e === "female"){
+          		return "F";
+          	}
+          	else return "other"
+          }).join(",");
           console.log(JSON.stringify(currentUserInfo));
           return 0;
         }
