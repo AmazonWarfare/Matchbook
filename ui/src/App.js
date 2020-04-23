@@ -157,7 +157,7 @@ class App extends Component {
         let qc_props ={
             nextQuestion: this.nextQuestion,
             giveRec: this.giveRec,
-            startup: this.questionIndex < startup_cards.length,
+            startup: this.questionIndex <= startup_cards.length,
             reset: this.reset
         };
 

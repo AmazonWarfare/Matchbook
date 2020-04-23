@@ -135,6 +135,10 @@ class ProfileForm extends Component {
                     text="Done"
                     onClick={this.nextQuestion}
                 />
+                <Button
+                    text="Skip"
+                    onClick={this.nextQuestion}
+                />
             </div>
         );
     }

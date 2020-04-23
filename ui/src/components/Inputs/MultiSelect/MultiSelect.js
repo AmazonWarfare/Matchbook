@@ -16,7 +16,7 @@ class MultiSelect extends Component {
 
     select(text) {
         this.setState(state => {
-            if(state.selected.includes(text)) {
+            if (state.selected.includes(text)) {
                 state.selected = state.selected.filter(elt => elt !== text);
             } else {
                 state.selected.push(text);
@@ -24,15 +24,16 @@ class MultiSelect extends Component {
             return state.selected
         });
     }
+
     renderOptions() {
         return (
             <div>
-                {this.props.options.map((text,i) => {
+                {this.props.options.map((text, i) => {
                         return <SelectOption
                             key={i}
                             text={text}
                             onClick={() => this.select(text)}
-                            class={this.state.selected.includes(text)  ? "option selected" : "option" }
+                            class={this.state.selected.includes(text) ? "option selected" : "option"}
                         />
                     }
                 )}
