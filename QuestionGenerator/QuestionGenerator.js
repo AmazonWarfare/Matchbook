@@ -68,6 +68,7 @@ function QuestionGenerator(){
     let lastSynopsisQuestion = false;
 
     let currentUserInfo = {};
+    let profileValid = false;
     
 
     let dbHelper = new DatabaseHelper();
@@ -98,6 +99,7 @@ function QuestionGenerator(){
         lastSynopsisQuestion = false;
 
         currentUserInfo = {};
+        profileValid = false;
 
 
     }
@@ -304,7 +306,11 @@ function QuestionGenerator(){
             return 0;
         }else if(typeof ans === 'object' && !Array.isArray(ans)){
         	console.log('User info received');
+        	profileValid = true;
           currentUserInfo.name = ans.name;
+          if(!ans.name){
+          	profileValid = false;
+          }
           currentUserInfo.gender = ans.gender.map(e => {
           	if(e === "male"){
           		return "M";
@@ -312,8 +318,13 @@ function QuestionGenerator(){
           	else if(e === "female"){
           		return "F";
           	}
-          	else return "other"
+          	else if(e === "other"){
+          		return "other";
+          	}
           }).join(",");
+          if(!currentUserInfo.gender){
+          	profileValid = false;
+          }
           currentUserInfo.contactInfo = ans.email;
           currentUserInfo.sexualPreferences = ans.sex_prefs.map(e => {
           	if(e === "male"){
@@ -324,6 +335,9 @@ function QuestionGenerator(){
           	}
           	else return "other"
           }).join(",");
+          if(!currentUserInfo.sexualPreferences){
+          	profileValid = false;
+          }
           console.log(JSON.stringify(currentUserInfo));
           return 0;
         }
@@ -398,43 +412,61 @@ function QuestionGenerator(){
             let desc = queryResponse.getSynopses(resultNum).synopsis;
             
             let matchText;
-            return new Promise((resolve, reject) => {
-            dbHelper.updateUserInformation(currentUserInfo).then((response) => {
-            	dbHelper.getUserInformation(currentUserInfo).then((userInfo) => {
-            		currentUserInfo = userInfo;
-            		dbHelper.getMatchingUsers(currentUserInfo).then((matchingUsers) => {
-            			if(matchingUsers.length === 0){
-			                matchText = "We couldn't find anyone matching your romantic preferences. Looks like you're bound to be lonely.";
-			            } else {
-			                let maxMatchingServices = [];
-			                let bestMatchUser = matchingUsers[0];
-			                for(let i = 0; i < matchingUsers.length; i++){
-			                    let user = matchingUsers[i];
-			                    let matchingServices = currentUserInfo.services.filter(value => user.services.includes(value));
-			                    if(matchingServices.length > maxMatchingServices.length){
-			                        maxMatchingServices = matchingServices;
-			                        bestMatchUser = user;
-			                    }
-			                }
-			                matchText = "We also think you may be romantically compatible with "
-			                            +bestMatchUser.name+". They match your sexual preferences "
-			                            +"and also enjoyed the following online services that you did: "
-			                            +maxMatchingServices.join(", ")
-			                            +". Here is their contact info: "
-			                            +bestMatchUser.contactInfo;
-			            }
-			            rec = {
-			                text: ["Based on your preferences, you might like: " + title +"("+link+"). Here is a description", desc, matchText],
-			                type: QUESTION_FORMATS.RECOMMENDATION
-			            };
-			            console.log(rec);
-			            resolve(rec);
-			           
-            		});
-            	});
-            });
-        });
-            
+            let recText=["We found you a match for a web service! : " + title +"("+link+"). Here is a description", desc];
+            if(profileValid){
+	            return new Promise((resolve, reject) => {
+	            dbHelper.updateUserInformation(currentUserInfo).then((response) => {
+	            	dbHelper.getUserInformation(currentUserInfo).then((userInfo) => {
+	            		currentUserInfo = userInfo;
+	            		dbHelper.getMatchingUsers(currentUserInfo).then((matchingUsers) => {
+	            			if(matchingUsers.length === 0){
+				                matchText = "However, we couldn't find anyone matching your romantic preferences. Please come back at a later time to see if your soulmate visited here.";
+				            } else {
+				                let maxMatchingServices = [];
+				                let bestMatchUser = matchingUsers[0];
+				                for(let i = 0; i < matchingUsers.length; i++){
+				                    let user = matchingUsers[i];
+				                    let matchingServices = currentUserInfo.services.filter(value => user.services.includes(value));
+				                    if(matchingServices.length > maxMatchingServices.length){
+				                        maxMatchingServices = matchingServices;
+				                        bestMatchUser = user;
+				                    }
+				                }
+
+				                if(maxMatchingServices.length > 0){
+				                	matchText = "We also found you a romantic match made in heaven: "
+				                            +bestMatchUser.name+". They match your sexual preferences "
+				                            +"and also enjoyed the following online services that you did: "
+				                            +maxMatchingServices.join(", ")
+				                            +". Here is their contact info: "
+				                            +bestMatchUser.contactInfo;
+				                } else {
+				                	matchText = "We also think you might be romantically compatible with "
+				                            +bestMatchUser.name+", but we're not certain. They match your sexual preferences "
+				                            +"but did not enjoy any of the online services that you did."
+				                            +" Here is their contact info anyway: "
+				                            +bestMatchUser.contactInfo;
+				                } 
+				                
+				            }
+				            recText.push(matchText);
+				            rec = {
+				                text: recText,
+				                type: QUESTION_FORMATS.RECOMMENDATION
+				            };
+				            console.log(rec);
+				            resolve(rec);
+				           
+	            		});
+	            	});
+	            });
+	        	});
+	        } else {
+	        	return new Promise((resolve, reject) => resolve({
+				                text: recText,
+				                type: QUESTION_FORMATS.RECOMMENDATION
+				            }))
+	        }
             
         } else {
             rec = {
